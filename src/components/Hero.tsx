@@ -66,7 +66,7 @@ const Hero = () => {
           <Button
             variant="outline"
             size="lg"
-            className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-300 animate-pulse-glow"
+            className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300 animate-pulse-glow"
             onClick={() =>
               document
                 .getElementById("systems")
