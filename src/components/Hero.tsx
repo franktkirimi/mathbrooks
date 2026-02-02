@@ -35,9 +35,28 @@ const FloatingCode = () => {
     const spans: HTMLSpanElement[] = [];
     let running = true;
 
+    // Zones that avoid the center content area
+    const pickPosition = () => {
+      const zone = Math.random();
+      if (zone < 0.25) {
+        // Top strip
+        return { left: Math.random() * 90 + 5, top: Math.random() * 18 + 2 };
+      } else if (zone < 0.5) {
+        // Bottom strip
+        return { left: Math.random() * 90 + 5, top: Math.random() * 18 + 80 };
+      } else if (zone < 0.75) {
+        // Left strip
+        return { left: Math.random() * 15 + 2, top: Math.random() * 60 + 20 };
+      } else {
+        // Right strip
+        return { left: Math.random() * 15 + 83, top: Math.random() * 60 + 20 };
+      }
+    };
+
     const spawnSnippet = () => {
       if (!running || !container) return;
 
+      const pos = pickPosition();
       const span = document.createElement("span");
       const snippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
       span.textContent = snippet;
@@ -49,8 +68,8 @@ const FloatingCode = () => {
         color: hsl(var(--primary));
         opacity: 0;
         pointer-events: none;
-        left: ${Math.random() * 80 + 10}%;
-        top: ${Math.random() * 80 + 10}%;
+        left: ${pos.left}%;
+        top: ${pos.top}%;
         animation: codeFloat ${6 + Math.random() * 4}s ease-in-out forwards;
       `;
 
