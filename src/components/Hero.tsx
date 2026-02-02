@@ -153,8 +153,9 @@ const Hero = () => {
 
         {/* Subtext — single line, light */}
         <p className="text-sm sm:text-base md:text-lg font-light text-muted-foreground max-w-2xl mx-auto mb-10 md:mb-14 animate-fade-in-up-delay-2">
-          MathBrooks builds intelligent systems and autonomous AI for industries
-          that power economies — from Africa to the world.
+          We create software solutions for industries like retail, construction,
+          finance, agriculture, mining, and enterprise operations. We also offer
+          customized AI-powered solutions.
         </p>
 
         {/* CTA — thin outline, subtle hover glow */}
