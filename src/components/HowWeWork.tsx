@@ -227,10 +227,10 @@ const FlowDiagram = () => {
 
       {/* ─── MOBILE / TABLET flow diagram (vertical) ─── */}
       <div className="lg:hidden">
-        <div className="relative pl-8">
+        <div className="relative pl-12">
           {/* Vertical connecting line */}
           <div
-            className="absolute left-[0.9375rem] top-3 bottom-3 w-px transition-all duration-1000"
+            className="absolute left-[1.1875rem] top-3 bottom-3 w-px transition-all duration-1000"
             style={{
               background: isVisible
                 ? "linear-gradient(to bottom, hsl(var(--primary) / 0.3), hsl(var(--primary) / 0.08))"
@@ -250,7 +250,7 @@ const FlowDiagram = () => {
                 }}
               >
                 {/* Node dot */}
-                <div className="absolute left-[-1.25rem] top-0.5 w-7 h-7 rounded-full border border-primary/20 flex items-center justify-center bg-background group-hover:border-primary/50 group-hover:shadow-[0_0_20px_hsl(var(--primary)_/_0.15)] transition-all duration-300">
+                <div className="absolute left-[-2.25rem] top-0.5 w-7 h-7 rounded-full border border-primary/20 flex items-center justify-center bg-background group-hover:border-primary/50 group-hover:shadow-[0_0_20px_hsl(var(--primary)_/_0.15)] transition-all duration-300">
                   <span className="font-display text-[0.5rem] tracking-wider text-primary/60 group-hover:text-primary transition-colors duration-300">
                     {step.number}
                   </span>
