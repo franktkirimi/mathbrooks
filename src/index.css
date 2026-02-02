@@ -243,3 +243,21 @@
     box-shadow: 0 0 30px hsl(217 91% 50% / 0.2);
   }
 }
+
+@keyframes breatheGrid {
+  0%, 100% {
+    opacity: var(--grid-opacity);
+  }
+  50% {
+    opacity: calc(var(--grid-opacity) * 3.5);
+  }
+}
+
+@keyframes breatheLines {
+  0%, 100% {
+    opacity: var(--line-opacity);
+  }
+  50% {
+    opacity: calc(var(--line-opacity) * 3);
+  }
+}

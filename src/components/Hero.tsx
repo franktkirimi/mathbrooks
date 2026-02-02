@@ -16,9 +16,9 @@ const Hero = () => {
         />
         {/* Grid schematic */}
         <div
-          className="absolute inset-0 transition-opacity duration-300"
+          className="absolute inset-0"
           style={{
-            opacity: "var(--grid-opacity)",
+            animation: "breatheGrid 8s ease-in-out infinite",
             backgroundImage: `
               linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
               linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
@@ -28,8 +28,8 @@ const Hero = () => {
         />
         {/* Diagonal line accents */}
         <svg
-          className="absolute inset-0 w-full h-full transition-opacity duration-300"
-          style={{ opacity: "var(--line-opacity)" }}
+          className="absolute inset-0 w-full h-full"
+          style={{ animation: "breatheLines 6s ease-in-out 2s infinite" }}
           xmlns="http://www.w3.org/2000/svg"
         >
           <line x1="0" y1="100%" x2="100%" y2="0" stroke="hsl(var(--primary))" strokeWidth="0.5" />
