@@ -1,10 +1,95 @@
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+
+const codeSnippets = [
+  "import torch",
+  "model = AutoModel.from_pretrained('mathbrooks-7b')",
+  "optimizer = torch.optim.AdamW(model.parameters(), lr=3e-5)",
+  "loss = criterion(outputs, labels)",
+  "predictions = model.generate(**inputs, max_new_tokens=512)",
+  "df = pd.read_csv('telemetry.csv')",
+  "pipeline = Pipeline([('scaler', StandardScaler()), ('clf', XGBClassifier())])",
+  "async def ingest(stream: AsyncIterator):",
+  "torch.distributed.init_process_group('nccl')",
+  "embeddings = encoder.encode(documents, batch_size=64)",
+  "yield from map(transform, batch)",
+  "cache.set(f'pred:{farm_id}', result, ttl=3600)",
+  "metrics = evaluate(y_true, y_pred, average='macro')",
+  "conn = asyncpg.connect(dsn=DATABASE_URL)",
+  "scheduler = CosineAnnealingLR(optimizer, T_max=100)",
+  "grads = torch.autograd.grad(loss, params)",
+  "with torch.cuda.amp.autocast():",
+  "response = await client.chat.completions.create(",
+  "np.random.seed(42)",
+  "for epoch in range(num_epochs):",
+];
+
+const FloatingCode = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const spans: HTMLSpanElement[] = [];
+    let running = true;
+
+    const spawnSnippet = () => {
+      if (!running || !container) return;
+
+      const span = document.createElement("span");
+      const snippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+      span.textContent = snippet;
+      span.style.cssText = `
+        position: absolute;
+        white-space: nowrap;
+        font-family: 'Courier New', monospace;
+        font-size: ${10 + Math.random() * 3}px;
+        color: hsl(var(--primary));
+        opacity: 0;
+        pointer-events: none;
+        left: ${Math.random() * 80 + 10}%;
+        top: ${Math.random() * 80 + 10}%;
+        animation: codeFloat ${6 + Math.random() * 4}s ease-in-out forwards;
+      `;
+
+      container.appendChild(span);
+      spans.push(span);
+
+      span.addEventListener("animationend", () => {
+        span.remove();
+        const idx = spans.indexOf(span);
+        if (idx > -1) spans.splice(idx, 1);
+      });
+
+      const next = 800 + Math.random() * 1500;
+      if (running) setTimeout(spawnSnippet, next);
+    };
+
+    // Stagger initial spawns
+    setTimeout(spawnSnippet, 500);
+    setTimeout(spawnSnippet, 1200);
+    setTimeout(spawnSnippet, 2000);
+
+    return () => {
+      running = false;
+      spans.forEach((s) => s.remove());
+    };
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+    />
+  );
+};
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
-      {/* Abstract line network background */}
+      {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Radial glow */}
         <div
@@ -14,7 +99,7 @@ const Hero = () => {
               "radial-gradient(ellipse 70% 50% at 50% 40%, hsl(var(--primary) / 0.06) 0%, transparent 70%)",
           }}
         />
-        {/* Grid schematic */}
+        {/* Breathing grid */}
         <div
           className="absolute inset-0"
           style={{
@@ -26,16 +111,8 @@ const Hero = () => {
             backgroundSize: "80px 80px",
           }}
         />
-        {/* Diagonal line accents */}
-        <svg
-          className="absolute inset-0 w-full h-full"
-          style={{ animation: "breatheLines 6s ease-in-out 2s infinite" }}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <line x1="0" y1="100%" x2="100%" y2="0" stroke="hsl(var(--primary))" strokeWidth="0.5" />
-          <line x1="20%" y1="100%" x2="80%" y2="0" stroke="hsl(var(--primary))" strokeWidth="0.5" />
-          <line x1="40%" y1="100%" x2="100%" y2="20%" stroke="hsl(var(--primary))" strokeWidth="0.3" />
-        </svg>
+        {/* Floating code snippets */}
+        <FloatingCode />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
