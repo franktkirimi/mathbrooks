@@ -39,14 +39,14 @@ const Contact = () => {
               </Button>
             </a>
 
-            <a href="mailto:hello@mathbrooks.com" className="w-full sm:w-auto">
+            <a href="mailto:cto@mathbrooks.com" className="w-full sm:w-auto">
               <Button
                 variant="outline"
                 size="lg"
                 className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-300 w-full sm:w-auto"
               >
                 <Mail className="w-4 h-4 mr-2" />
-                hello@mathbrooks.com
+                cto@mathbrooks.com
               </Button>
             </a>
 
