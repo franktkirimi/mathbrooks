@@ -32,7 +32,7 @@ const Contact = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-green-500/30 hover:border-green-500/60 hover:bg-green-500/5 text-green-400 transition-all duration-300 w-full sm:w-auto"
+                className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-green-500/30 hover:border-green-500/60 hover:bg-green-500/5 text-green-400 hover:text-green-300 transition-all duration-300 w-full sm:w-auto"
               >
                 <MessageCircle className="w-4 h-4 mr-2" />
                 WhatsApp Us
@@ -43,7 +43,7 @@ const Contact = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-300 w-full sm:w-auto"
+                className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300 w-full sm:w-auto"
               >
                 <Mail className="w-4 h-4 mr-2" />
                 cto@mathbrooks.com
@@ -54,7 +54,7 @@ const Contact = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-border/40 hover:border-foreground/20 hover:bg-foreground/5 transition-all duration-300 w-full sm:w-auto"
+                className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-border/40 hover:border-foreground/20 hover:bg-foreground/5 hover:text-foreground transition-all duration-300 w-full sm:w-auto"
               >
                 <Phone className="w-4 h-4 mr-2" />
                 +263 78 346 9023
