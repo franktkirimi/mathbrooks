@@ -1,4 +1,4 @@
-import { Activity, TrendingUp, Globe, Server } from "lucide-react";
+import { Activity, Globe, Server } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const stats = [
@@ -19,12 +19,6 @@ const stats = [
     value: "Production",
     label: "Systems in Development",
     detail: "Real infrastructure, not prototypes",
-  },
-  {
-    icon: TrendingUp,
-    value: "2025",
-    label: "Founded",
-    detail: "Built from day one to last decades",
   },
 ];
 
@@ -53,7 +47,7 @@ const Traction = () => {
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {stats.map((stat, index) => (
             <AnimatedSection key={stat.label} delay={index * 100}>
               <div className="card-glass card-hover rounded-lg p-6 md:p-8 text-center group h-full">
