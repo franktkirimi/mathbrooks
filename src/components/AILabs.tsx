@@ -24,7 +24,7 @@ const labs = [
 
 const AILabs = () => {
   return (
-    <section id="labs" className="py-[120px] md:py-[150px] px-6 relative">
+    <section id="labs" className="py-16 md:py-[120px] lg:py-[150px] px-6 relative">
       {/* Subtle accent gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -37,8 +37,8 @@ const AILabs = () => {
       <div className="relative max-w-6xl mx-auto">
         {/* Section header */}
         <AnimatedSection>
-          <div className="text-center mb-20">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
+          <div className="text-center mb-12 md:mb-20">
+            <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
               AI Labs
             </h2>
             <p className="text-base font-light text-muted-foreground mt-6 max-w-lg mx-auto">
@@ -52,7 +52,7 @@ const AILabs = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {labs.map((lab, index) => (
             <AnimatedSection key={lab.title} delay={index * 150}>
-              <div className="card-glass card-hover rounded-lg p-10 group relative overflow-hidden h-full">
+              <div className="card-glass card-hover rounded-lg p-6 md:p-10 group relative overflow-hidden h-full">
                 {/* Geometric accent triangle */}
                 <div
                   className="absolute top-0 right-0 w-24 h-24 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-500"

@@ -30,7 +30,7 @@ const stats = [
 
 const Traction = () => {
   return (
-    <section className="py-[120px] md:py-[150px] px-6 relative">
+    <section className="py-16 md:py-[120px] lg:py-[150px] px-6 relative">
       {/* Subtle accent gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -42,11 +42,11 @@ const Traction = () => {
 
       <div className="relative max-w-6xl mx-auto">
         <AnimatedSection>
-          <div className="text-center mb-20">
+          <div className="text-center mb-12 md:mb-20">
             <span className="font-display text-xs tracking-[0.3em] text-primary uppercase">
               Traction
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mt-4">
+            <h2 className="font-display text-2xl md:text-4xl font-bold mt-4">
               Where We Stand
             </h2>
             <div className="line-accent w-24 mx-auto mt-8" />
@@ -56,7 +56,7 @@ const Traction = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <AnimatedSection key={stat.label} delay={index * 100}>
-              <div className="card-glass card-hover rounded-lg p-8 text-center group h-full">
+              <div className="card-glass card-hover rounded-lg p-6 md:p-8 text-center group h-full">
                 <div className="mb-6 flex justify-center">
                   <div className="w-12 h-12 rounded-lg border border-border/50 flex items-center justify-center group-hover:border-primary/50 transition-colors duration-300">
                     <stat.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />

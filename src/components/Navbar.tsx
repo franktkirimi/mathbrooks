@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -12,6 +12,7 @@ const navItems = [
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { isDark, toggle } = useTheme();
 
   useEffect(() => {
@@ -20,11 +21,23 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
+        scrolled || mobileOpen
           ? "bg-background/80 backdrop-blur-md border-b border-border/20"
           : "bg-transparent"
       )}
@@ -36,13 +49,14 @@ const Navbar = () => {
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
+            setMobileOpen(false);
           }}
           className="font-display text-sm tracking-[0.2em] text-foreground hover:text-primary transition-colors duration-300"
         >
           MATHBROOKS
         </a>
 
-        {/* Nav links + theme toggle */}
+        {/* Desktop: Nav links + theme toggle */}
         <div className="hidden sm:flex items-center gap-8">
           {navItems.map((item) => (
             <a
@@ -75,8 +89,8 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile: just the toggle */}
-        <div className="sm:hidden">
+        {/* Mobile: hamburger + theme toggle */}
+        <div className="sm:hidden flex items-center gap-3">
           <button
             onClick={toggle}
             aria-label="Toggle theme"
@@ -88,8 +102,40 @@ const Navbar = () => {
               <Sun className="w-4 h-4 text-muted-foreground" />
             )}
           </button>
+          <button
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label="Toggle menu"
+            className="w-9 h-9 rounded-md border border-border/40 flex items-center justify-center hover:border-primary/30 transition-all duration-300"
+          >
+            {mobileOpen ? (
+              <X className="w-4 h-4 text-muted-foreground" />
+            ) : (
+              <Menu className="w-4 h-4 text-muted-foreground" />
+            )}
+          </button>
         </div>
       </nav>
+
+      {/* Mobile slide-down menu */}
+      <div
+        className={cn(
+          "sm:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-md border-b border-border/20",
+          mobileOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0 border-b-0"
+        )}
+      >
+        <div className="px-6 py-4 flex flex-col gap-1">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setMobileOpen(false)}
+              className="font-display text-sm tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors duration-300 uppercase py-3 border-b border-border/10 last:border-0"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
     </header>
   );
 };

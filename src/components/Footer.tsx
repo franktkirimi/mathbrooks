@@ -7,7 +7,7 @@ const navLinks = [
 
 const Footer = () => {
   return (
-    <footer className="py-12 px-6 border-t border-border/20">
+    <footer className="py-8 md:py-12 px-6 border-t border-border/20">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
@@ -16,7 +16,7 @@ const Footer = () => {
           </div>
 
           {/* Nav links */}
-          <div className="flex items-center gap-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}

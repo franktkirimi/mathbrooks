@@ -9,12 +9,12 @@ const principles = [
 
 const Principles = () => {
   return (
-    <section id="about" className="py-[120px] md:py-[150px] px-6">
+    <section id="about" className="py-16 md:py-[120px] lg:py-[150px] px-6">
       <div className="max-w-3xl mx-auto">
         {/* Section header */}
         <AnimatedSection>
           <div className="text-center mb-8">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
+            <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
               Why MathBrooks
             </h2>
             <div className="line-accent w-20 mx-auto mt-8" />
@@ -23,7 +23,7 @@ const Principles = () => {
 
         {/* Mission statement */}
         <AnimatedSection delay={100}>
-          <p className="text-center font-light text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto mb-16">
+          <p className="text-center font-light text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10 md:mb-16">
             MathBrooks is an engineering company based in Harare, Zimbabwe — building
             AI-driven systems that solve hard, real-world problems across Africa.
             We think in decades, build for scale, and ship what matters.

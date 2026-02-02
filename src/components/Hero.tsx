@@ -40,14 +40,14 @@ const Hero = () => {
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         {/* Brand mark */}
-        <div className="mb-16 animate-fade-in-up">
+        <div className="mb-8 md:mb-16 animate-fade-in-up">
           <span className="font-display text-xs tracking-[0.4em] text-muted-foreground uppercase">
             MathBrooks
           </span>
         </div>
 
         {/* Headline — large, uppercase, tight */}
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-bold uppercase leading-[1.1] tracking-tight mb-8 animate-fade-in-up-delay-1">
+        <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[4rem] font-bold uppercase leading-[1.1] tracking-tight mb-6 md:mb-8 animate-fade-in-up-delay-1">
           Engineering AI-Driven
           <br />
           <span className="text-gradient-accent glow-text">
@@ -56,7 +56,7 @@ const Hero = () => {
         </h1>
 
         {/* Subtext — single line, light */}
-        <p className="text-base md:text-lg font-light text-muted-foreground max-w-2xl mx-auto mb-14 animate-fade-in-up-delay-2">
+        <p className="text-sm sm:text-base md:text-lg font-light text-muted-foreground max-w-2xl mx-auto mb-10 md:mb-14 animate-fade-in-up-delay-2">
           MathBrooks builds intelligent systems and autonomous AI for industries
           that power economies — from Africa to the world.
         </p>
@@ -66,7 +66,7 @@ const Hero = () => {
           <Button
             variant="outline"
             size="lg"
-            className="font-display text-xs tracking-[0.15em] uppercase px-10 py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-300 animate-pulse-glow"
+            className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-300 animate-pulse-glow"
             onClick={() =>
               document
                 .getElementById("systems")

@@ -36,14 +36,14 @@ const milestones = [
 
 const Roadmap = () => {
   return (
-    <section id="roadmap" className="py-[120px] md:py-[150px] px-6">
+    <section id="roadmap" className="py-16 md:py-[120px] lg:py-[150px] px-6">
       <div className="max-w-4xl mx-auto">
         <AnimatedSection>
-          <div className="text-center mb-20">
+          <div className="text-center mb-12 md:mb-20">
             <span className="font-display text-xs tracking-[0.3em] text-primary uppercase">
               Vision
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mt-4">
+            <h2 className="font-display text-2xl md:text-4xl font-bold mt-4">
               The Road Ahead
             </h2>
             <div className="line-accent w-24 mx-auto mt-8" />
@@ -53,7 +53,7 @@ const Roadmap = () => {
         <div className="space-y-8">
           {milestones.map((milestone, index) => (
             <AnimatedSection key={milestone.phase} delay={index * 150} direction="left">
-              <div className="card-glass card-hover rounded-lg p-8 md:p-10 group relative overflow-hidden">
+              <div className="card-glass card-hover rounded-lg p-5 md:p-10 group relative overflow-hidden">
                 {/* Active indicator */}
                 {milestone.active && (
                   <div className="absolute top-0 left-0 w-1 h-full bg-primary rounded-full" />

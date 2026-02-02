@@ -280,7 +280,7 @@ const FlowDiagram = () => {
 /* ─── Main Section ─── */
 const HowWeWork = () => {
   return (
-    <section className="py-[120px] md:py-[150px] px-6 relative overflow-hidden">
+    <section className="py-16 md:py-[120px] lg:py-[150px] px-6 relative overflow-hidden">
       {/* Particle background */}
       <ParticleField />
 
@@ -288,14 +288,14 @@ const HowWeWork = () => {
         {/* Header */}
         <AnimatedSection>
           <div className="text-center mb-8">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
+            <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
               How We Work
             </h2>
           </div>
         </AnimatedSection>
 
         <AnimatedSection delay={100}>
-          <p className="text-center font-light text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-20">
+          <p className="text-center font-light text-muted-foreground text-sm md:text-lg leading-relaxed max-w-2xl mx-auto mb-12 md:mb-20">
             From idea to deployment, we engineer systems that scale and deliver impact.
           </p>
         </AnimatedSection>
@@ -307,7 +307,7 @@ const HowWeWork = () => {
 
         {/* CTA */}
         <AnimatedSection delay={400}>
-          <div className="text-center mt-20">
+          <div className="text-center mt-12 md:mt-20">
             <a
               href="https://wa.me/263783469023?text=Hi%20MathBrooks%2C%20I%27d%20like%20to%20request%20a%20consultation."
               target="_blank"
