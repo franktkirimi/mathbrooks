@@ -259,7 +259,7 @@ const FlowDiagram = () => {
                 {/* Content */}
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <step.icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+                    <step.icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors duration-300 hidden md:block" />
                     <h3 className="font-display text-[0.7rem] tracking-[0.15em] uppercase group-hover:text-foreground transition-colors duration-300">
                       {step.title}
                     </h3>
