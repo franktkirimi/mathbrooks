@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "./AnimatedSection";
+import ServiceModal from "./ServiceModal";
 
 const packages = [
   {
@@ -43,6 +45,14 @@ const packages = [
 ];
 
 const Packages = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [activePackage, setActivePackage] = useState<typeof packages[0] | null>(null);
+
+  const openModal = (pkg: typeof packages[0]) => {
+    setActivePackage(pkg);
+    setModalOpen(true);
+  };
+
   return (
     <section id="packages" className="py-16 md:py-[120px] lg:py-[150px] px-6">
       <div className="max-w-6xl mx-auto">
@@ -103,23 +113,32 @@ const Packages = () => {
                 </ul>
 
                 {/* CTA */}
-                <a href="#contact">
-                  <Button
-                    variant={pkg.featured ? "default" : "outline"}
-                    className={`w-full font-display text-xs tracking-[0.15em] uppercase ${
-                      pkg.featured
-                        ? ""
-                        : "border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
-                    } transition-all duration-300`}
-                  >
-                    {pkg.cta}
-                  </Button>
-                </a>
+                <Button
+                  variant={pkg.featured ? "default" : "outline"}
+                  onClick={() => openModal(pkg)}
+                  className={`w-full font-display text-xs tracking-[0.15em] uppercase ${
+                    pkg.featured
+                      ? ""
+                      : "border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
+                  } transition-all duration-300`}
+                >
+                  {pkg.cta}
+                </Button>
               </div>
             </AnimatedSection>
           ))}
         </div>
       </div>
+
+      {/* Package inquiry modal */}
+      {activePackage && (
+        <ServiceModal
+          open={modalOpen}
+          onOpenChange={setModalOpen}
+          serviceName={`${activePackage.name} (${activePackage.label})`}
+          serviceDescription={`For ${activePackage.audience}. Includes: ${activePackage.features.join(", ")}.`}
+        />
+      )}
     </section>
   );
 };
