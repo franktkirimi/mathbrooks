@@ -1,7 +1,7 @@
 const navLinks = [
-  { label: "Systems", href: "#systems" },
-  { label: "AI Labs", href: "#labs" },
-  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "How We Work", href: "#how-we-work" },
+  { label: "Packages", href: "#packages" },
   { label: "Contact", href: "#contact" },
 ];
 

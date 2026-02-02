@@ -144,34 +144,45 @@ const Hero = () => {
 
         {/* Headline — large, uppercase, tight */}
         <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[4rem] font-bold uppercase leading-[1.1] tracking-tight mb-6 md:mb-8 animate-fade-in-up-delay-1">
-          Simplifying Complex Problems
-          <br />
           <span className="text-gradient-accent glow-text">
-            with Intelligent Software
+            Building Intelligent Software
           </span>
+          <br />
+          to Simplify Complex Problems
         </h1>
 
         {/* Subtext — single line, light */}
         <p className="text-sm sm:text-base md:text-lg font-light text-muted-foreground max-w-2xl mx-auto mb-10 md:mb-14 animate-fade-in-up-delay-2">
-          We create software solutions for industries like retail, construction,
-          finance, agriculture, mining, and enterprise operations. We also offer
-          customized AI-powered solutions.
+          We design, build, and deploy custom software that automates operations
+          and solves real business problems.
         </p>
 
-        {/* CTA — thin outline, subtle hover glow */}
-        <div className="animate-fade-in-up-delay-3">
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up-delay-3">
           <Button
-            variant="outline"
             size="lg"
-            className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300 animate-pulse-glow"
+            className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 transition-all duration-300"
             onClick={() =>
               document
-                .getElementById("systems")
+                .getElementById("contact")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            Explore Our Vision
+            Start a Project
           </Button>
+          <a
+            href="https://wa.me/263783469023?text=Hi%20MathBrooks%2C%20I%27d%20like%20to%20request%20a%20consultation."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button
+              variant="outline"
+              size="lg"
+              className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300"
+            >
+              Request Consultation
+            </Button>
+          </a>
         </div>
       </div>
 

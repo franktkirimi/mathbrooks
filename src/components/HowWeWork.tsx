@@ -21,19 +21,19 @@ const steps = [
   {
     number: "03",
     icon: Code2,
-    title: "Development",
+    title: "Build",
     description: "Build software and AI with precision engineering",
   },
   {
     number: "04",
     icon: Rocket,
-    title: "Deployment",
+    title: "Deploy",
     description: "Integrate seamlessly into existing operations",
   },
   {
     number: "05",
     icon: Headphones,
-    title: "Ongoing Support",
+    title: "Support",
     description: "Maintain, monitor, and continuously evolve",
   },
 ];
@@ -280,7 +280,7 @@ const FlowDiagram = () => {
 /* ─── Main Section ─── */
 const HowWeWork = () => {
   return (
-    <section className="py-16 md:py-[120px] lg:py-[150px] px-6 relative overflow-hidden">
+    <section id="how-we-work" className="py-16 md:py-[120px] lg:py-[150px] px-6 relative overflow-hidden">
       {/* Particle background */}
       <ParticleField />
 

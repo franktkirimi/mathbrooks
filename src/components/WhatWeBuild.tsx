@@ -1,32 +1,30 @@
-import { Cpu, Database, Cloud, Workflow } from "lucide-react";
+import { Cpu, Workflow, Brain } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const features = [
   {
     icon: Cpu,
-    title: "Software Systems",
-    description: "Production-grade platforms built for reliability and throughput at scale",
-  },
-  {
-    icon: Database,
-    title: "AI Labs",
-    description: "Applied research turning models into real-world African solutions",
-  },
-  {
-    icon: Cloud,
-    title: "Digital Infrastructure",
-    description: "Scalable backends and cloud architecture for growing demands",
+    title: "Custom Software",
+    description:
+      "Tailored platforms and tools built for your specific business workflows, from internal dashboards to client-facing products.",
   },
   {
     icon: Workflow,
-    title: "Autonomous Platforms",
-    description: "Self-operating systems that reduce human bottlenecks",
+    title: "Automation",
+    description:
+      "Streamline repetitive processes with intelligent automation — reduce manual work, cut errors, and scale faster.",
+  },
+  {
+    icon: Brain,
+    title: "Applied AI",
+    description:
+      "Integrate machine learning and AI into your operations — from predictive analytics to natural language processing.",
   },
 ];
 
 const WhatWeBuild = () => {
   return (
-    <section id="systems" className="py-16 md:py-[120px] lg:py-[150px] px-6">
+    <section id="services" className="py-16 md:py-[120px] lg:py-[150px] px-6">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <AnimatedSection>
@@ -39,10 +37,10 @@ const WhatWeBuild = () => {
         </AnimatedSection>
 
         {/* Cards — horizontal grid, geometric layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <AnimatedSection key={feature.title} delay={index * 100}>
-              <div className="card-glass card-hover rounded-lg p-6 md:p-8 group h-full">
+              <div className="card-glass card-hover rounded-lg p-6 md:p-8 group h-full flex flex-col">
                 {/* Icon */}
                 <div className="mb-6">
                   <div className="w-11 h-11 rounded-md border border-border/40 flex items-center justify-center group-hover:border-primary/40 transition-colors duration-300">
@@ -56,9 +54,17 @@ const WhatWeBuild = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                <p className="text-sm font-light text-muted-foreground leading-relaxed mb-4">
                   {feature.description}
                 </p>
+
+                {/* CTA */}
+                <a
+                  href="#contact"
+                  className="mt-auto inline-flex items-center text-xs font-display tracking-wider uppercase text-primary/70 hover:text-primary transition-colors duration-300"
+                >
+                  Learn more →
+                </a>
               </div>
             </AnimatedSection>
           ))}

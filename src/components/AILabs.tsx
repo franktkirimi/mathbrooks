@@ -1,4 +1,5 @@
 import { Leaf, Mountain, UserCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import AnimatedSection from "./AnimatedSection";
 
 const labs = [
@@ -16,9 +17,9 @@ const labs = [
   },
   {
     icon: UserCircle,
-    title: "AI Employees",
+    title: "AI Managers",
     description:
-      "Autonomous digital managers for enterprise operations — reducing cost and increasing output for African businesses",
+      "Intelligent digital managers that coordinate teams, workflows, and enterprise operations — reducing overhead and driving output for African businesses",
   },
 ];
 
@@ -41,8 +42,9 @@ const AILabs = () => {
             <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
               AI Labs
             </h2>
-            <p className="text-base font-light text-muted-foreground mt-6 max-w-lg mx-auto">
-              Pioneering autonomous intelligence for industries that matter
+            <p className="text-base font-light text-muted-foreground mt-6 max-w-xl mx-auto">
+              Our research division exploring the next generation of intelligent
+              systems for African industries.
             </p>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>
@@ -80,6 +82,21 @@ const AILabs = () => {
             </AnimatedSection>
           ))}
         </div>
+
+        {/* Soft CTA */}
+        <AnimatedSection delay={500}>
+          <div className="text-center mt-12 md:mt-20">
+            <a href="#contact">
+              <Button
+                variant="outline"
+                size="lg"
+                className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300"
+              >
+                Stay Updated
+              </Button>
+            </a>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );

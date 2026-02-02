@@ -1,11 +1,9 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WhatWeBuild from "@/components/WhatWeBuild";
-import AILabs from "@/components/AILabs";
 import HowWeWork from "@/components/HowWeWork";
-import Traction from "@/components/Traction";
-import Roadmap from "@/components/Roadmap";
-import Principles from "@/components/Principles";
+import Packages from "@/components/Packages";
+import AILabs from "@/components/AILabs";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -16,10 +14,8 @@ const Index = () => {
       <Hero />
       <WhatWeBuild />
       <HowWeWork />
+      <Packages />
       <AILabs />
-      <Traction />
-      <Roadmap />
-      <Principles />
       <Contact />
       <Footer />
     </div>
