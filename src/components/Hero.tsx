@@ -144,10 +144,10 @@ const Hero = () => {
 
         {/* Headline — large, uppercase, tight */}
         <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[4rem] font-bold uppercase leading-[1.1] tracking-tight mb-6 md:mb-8 animate-fade-in-up-delay-1">
-          Engineering AI-Driven
+          Simplifying Complex Problems
           <br />
           <span className="text-gradient-accent glow-text">
-            Systems for Real-World Scale
+            with Intelligent Software
           </span>
         </h1>
 
