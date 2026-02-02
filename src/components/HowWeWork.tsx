@@ -227,10 +227,10 @@ const FlowDiagram = () => {
 
       {/* ─── MOBILE / TABLET flow diagram (vertical) ─── */}
       <div className="lg:hidden">
-        <div className="relative pl-10">
+        <div className="relative pl-8">
           {/* Vertical connecting line */}
           <div
-            className="absolute left-[1.125rem] top-4 bottom-4 w-px transition-all duration-1000"
+            className="absolute left-[0.9375rem] top-3 bottom-3 w-px transition-all duration-1000"
             style={{
               background: isVisible
                 ? "linear-gradient(to bottom, hsl(var(--primary) / 0.3), hsl(var(--primary) / 0.08))"
@@ -238,11 +238,11 @@ const FlowDiagram = () => {
             }}
           />
 
-          <div className="space-y-10">
+          <div className="space-y-5">
             {steps.map((step, index) => (
               <div
                 key={step.number}
-                className="relative flex items-start gap-6 group"
+                className="relative flex items-start gap-4 group"
                 style={{
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible ? "translateX(0)" : "translateX(-20px)",
@@ -250,21 +250,21 @@ const FlowDiagram = () => {
                 }}
               >
                 {/* Node dot */}
-                <div className="absolute left-[-1.5rem] top-1 w-9 h-9 rounded-full border border-primary/20 flex items-center justify-center bg-background group-hover:border-primary/50 group-hover:shadow-[0_0_20px_hsl(var(--primary)_/_0.15)] transition-all duration-300">
-                  <span className="font-display text-[0.55rem] tracking-wider text-primary/60 group-hover:text-primary transition-colors duration-300">
+                <div className="absolute left-[-1.25rem] top-0.5 w-7 h-7 rounded-full border border-primary/20 flex items-center justify-center bg-background group-hover:border-primary/50 group-hover:shadow-[0_0_20px_hsl(var(--primary)_/_0.15)] transition-all duration-300">
+                  <span className="font-display text-[0.5rem] tracking-wider text-primary/60 group-hover:text-primary transition-colors duration-300">
                     {step.number}
                   </span>
                 </div>
 
                 {/* Content */}
                 <div>
-                  <div className="flex items-center gap-3 mb-1.5">
-                    <step.icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
-                    <h3 className="font-display text-xs tracking-[0.15em] uppercase group-hover:text-foreground transition-colors duration-300">
+                  <div className="flex items-center gap-2 mb-1">
+                    <step.icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+                    <h3 className="font-display text-[0.7rem] tracking-[0.15em] uppercase group-hover:text-foreground transition-colors duration-300">
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                  <p className="text-xs font-light text-muted-foreground leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -316,7 +316,7 @@ const HowWeWork = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="font-display text-xs tracking-[0.15em] uppercase px-10 py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-300"
+                className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-300"
               >
                 Request a Consultation
               </Button>
