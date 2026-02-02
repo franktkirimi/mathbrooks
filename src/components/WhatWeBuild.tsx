@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Cpu, Workflow, Brain } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import ServiceModal from "./ServiceModal";
 
 const features = [
   {
@@ -23,6 +25,14 @@ const features = [
 ];
 
 const WhatWeBuild = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [activeService, setActiveService] = useState<typeof features[0] | null>(null);
+
+  const openModal = (feature: typeof features[0]) => {
+    setActiveService(feature);
+    setModalOpen(true);
+  };
+
   return (
     <section id="services" className="py-16 md:py-[120px] lg:py-[150px] px-6">
       <div className="max-w-6xl mx-auto">
@@ -59,17 +69,27 @@ const WhatWeBuild = () => {
                 </p>
 
                 {/* CTA */}
-                <a
-                  href="#packages"
-                  className="mt-auto inline-flex items-center text-xs font-display tracking-wider uppercase text-primary/70 hover:text-primary transition-colors duration-300"
+                <button
+                  onClick={() => openModal(feature)}
+                  className="mt-auto inline-flex items-center text-xs font-display tracking-wider uppercase text-primary/70 hover:text-primary transition-colors duration-300 cursor-pointer bg-transparent border-0 p-0"
                 >
                   Learn more →
-                </a>
+                </button>
               </div>
             </AnimatedSection>
           ))}
         </div>
       </div>
+
+      {/* Service inquiry modal */}
+      {activeService && (
+        <ServiceModal
+          open={modalOpen}
+          onOpenChange={setModalOpen}
+          serviceName={activeService.title}
+          serviceDescription={activeService.description}
+        />
+      )}
     </section>
   );
 };
