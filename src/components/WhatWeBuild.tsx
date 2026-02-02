@@ -60,7 +60,7 @@ const WhatWeBuild = () => {
 
                 {/* CTA */}
                 <a
-                  href="#contact"
+                  href="#packages"
                   className="mt-auto inline-flex items-center text-xs font-display tracking-wider uppercase text-primary/70 hover:text-primary transition-colors duration-300"
                 >
                   Learn more →
