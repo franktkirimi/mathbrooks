@@ -4,6 +4,7 @@ import WhatWeBuild from "@/components/WhatWeBuild";
 import HowWeWork from "@/components/HowWeWork";
 import Packages from "@/components/Packages";
 import AILabs from "@/components/AILabs";
+import Roadmap from "@/components/Roadmap";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -16,6 +17,7 @@ const Index = () => {
       <HowWeWork />
       <Packages />
       <AILabs />
+      <Roadmap />
       <Contact />
       <Footer />
     </div>
