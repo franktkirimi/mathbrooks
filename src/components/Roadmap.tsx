@@ -1,34 +1,31 @@
-import { Circle, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const milestones = [
   {
-    phase: "Now",
-    title: "Foundation",
+    title: "Core Systems & R&D",
     items: [
-      "Core software systems in production",
-      "AI Labs research underway",
-      "First enterprise pilots in Zimbabwe",
+      "Current: Core software systems fully operational in production.",
+      "Research: AI Labs actively exploring next-generation intelligence.",
+      "Enterprise Pilots: Initial deployments.",
     ],
     active: true,
   },
   {
-    phase: "2025 – 2026",
     title: "Scale",
     items: [
-      "Agriculture AI deployed to commercial farms",
-      "Mining intelligence platform live",
-      "AI Employee agents in enterprise use",
+      "Agriculture AI: Deployed on commercial farms, optimizing productivity.",
+      "Mining Intelligence: Platform live and delivering actionable insights.",
+      "Enterprise AI Agents: Employee-facing AI tools in active use.",
     ],
     active: false,
   },
   {
-    phase: "2027 – 2030",
-    title: "Expand",
+    title: "Expansion",
     items: [
-      "Operations across 5+ African countries",
-      "Autonomous platforms running at national scale",
-      "MathBrooks infrastructure as industry standard",
+      "Regional Operations: Across Africa and globally.",
+      "Autonomous Platforms: Running at national scale, enabling large-scale automation.",
+      "Industry Standard: MathBrooks infrastructure recognized as the benchmark across sectors.",
     ],
     active: false,
   },
@@ -55,7 +52,7 @@ const Roadmap = () => {
 
         <div className="space-y-8">
           {milestones.map((milestone, index) => (
-            <AnimatedSection key={milestone.phase} delay={index * 150} direction="left">
+            <AnimatedSection key={milestone.title} delay={index * 150} direction="left">
               <div className="card-glass card-hover rounded-lg p-6 md:p-10 group relative overflow-hidden">
                 {/* Active indicator */}
                 {milestone.active && (
@@ -63,21 +60,9 @@ const Roadmap = () => {
                 )}
 
                 <div className="flex flex-col md:flex-row md:items-start gap-6">
-                  {/* Phase label */}
+                  {/* Title */}
                   <div className="md:w-40 flex-shrink-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Circle
-                        className={`w-2.5 h-2.5 ${
-                          milestone.active
-                            ? "text-primary fill-primary"
-                            : "text-muted-foreground"
-                        }`}
-                      />
-                      <span className="font-display text-xs tracking-[0.2em] text-primary uppercase">
-                        {milestone.phase}
-                      </span>
-                    </div>
-                    <h3 className="font-display text-lg tracking-wide ml-[18px]">
+                    <h3 className="font-display text-lg tracking-wide">
                       {milestone.title}
                     </h3>
                   </div>
