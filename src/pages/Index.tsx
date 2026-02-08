@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WhatWeBuild from "@/components/WhatWeBuild";
 import HowWeWork from "@/components/HowWeWork";
+import OurProjects from "@/components/OurProjects";
 import Packages from "@/components/Packages";
 import AILabs from "@/components/AILabs";
 import Roadmap from "@/components/Roadmap";
@@ -15,6 +16,7 @@ const Index = () => {
       <Hero />
       <WhatWeBuild />
       <HowWeWork />
+      <OurProjects />
       <Packages />
       <AILabs />
       <Roadmap />
