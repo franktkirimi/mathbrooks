@@ -1,4 +1,3 @@
-import { ExternalLink } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const projects = [
@@ -75,13 +74,7 @@ const OurProjects = () => {
                   />
 
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-all duration-500 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                      <div className="w-10 h-10 rounded-full border border-foreground/20 bg-background/60 backdrop-blur-sm flex items-center justify-center">
-                        <ExternalLink className="w-4 h-4 text-foreground" />
-                      </div>
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-all duration-500" />
                 </div>
 
                 {/* Content */}

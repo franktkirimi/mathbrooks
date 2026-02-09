@@ -4,9 +4,11 @@ import WhatWeBuild from "@/components/WhatWeBuild";
 import HowWeWork from "@/components/HowWeWork";
 import OurProjects from "@/components/OurProjects";
 import TechStack from "@/components/TechStack";
+import Testimonials from "@/components/Testimonials";
 import Packages from "@/components/Packages";
 import AILabs from "@/components/AILabs";
 import Roadmap from "@/components/Roadmap";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -26,10 +28,12 @@ const Index = () => {
       <WhatWeBuild />
       <HowWeWork />
       <OurProjects />
+      <Testimonials />
       <TechStack />
       <Packages />
       <AILabs />
       <Roadmap />
+      <FAQ />
       <Contact />
       </main>
       <Footer />
