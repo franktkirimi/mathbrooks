@@ -64,7 +64,10 @@ const OurProjects = () => {
                 <div className="relative aspect-video overflow-hidden rounded-t-lg">
                   <img
                     src={project.image}
-                    alt={project.title}
+                    alt={`Screenshot of ${project.title} — ${project.description.slice(0, 80)}`}
+                    loading="lazy"
+                    width={600}
+                    height={338}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
 

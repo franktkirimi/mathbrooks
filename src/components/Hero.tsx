@@ -100,6 +100,7 @@ const FloatingCode = () => {
   return (
     <div
       ref={containerRef}
+      aria-hidden="true"
       className="absolute inset-0 overflow-hidden pointer-events-none"
     />
   );
@@ -109,7 +110,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
       {/* Background effects */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {/* Radial glow */}
         <div
           className="absolute inset-0"
