@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+
 const navLinks = [
   { label: "Services", href: "#services" },
   { label: "How We Work", href: "#how-we-work" },
+  { label: "AI Labs", href: "#ai-labs" },
   { label: "Packages", href: "#packages" },
   { label: "Contact", href: "#contact" },
 ];
@@ -26,11 +29,17 @@ const Footer = () => {
                 {link.label}
               </a>
             ))}
+            <Link
+              to="/privacy"
+              className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
+            >
+              Privacy Policy
+            </Link>
           </div>
 
           {/* Copyright */}
           <p className="text-sm font-light text-muted-foreground">
-            © {new Date().getFullYear()} MathBrooks
+            &copy; {new Date().getFullYear()} MathBrooks
           </p>
         </div>
       </div>

@@ -7,6 +7,7 @@ const packages = [
   {
     name: "Starter",
     label: "MVP",
+    price: "From $2,000",
     audience: "Startups & small teams",
     features: [
       "Core feature build",
@@ -19,6 +20,7 @@ const packages = [
   {
     name: "Professional",
     label: "Full Build + AI",
+    price: "From $8,000",
     audience: "Growing businesses",
     features: [
       "Full platform build",
@@ -32,6 +34,7 @@ const packages = [
   {
     name: "Enterprise",
     label: "Custom + Ongoing",
+    price: "Custom",
     audience: "Organisations at scale",
     features: [
       "Custom architecture",
@@ -94,8 +97,13 @@ const Packages = () => {
                   {pkg.label}
                 </span>
 
+                {/* Price */}
+                <p className="font-display text-2xl tracking-wide mt-4 mb-2 text-foreground">
+                  {pkg.price}
+                </p>
+
                 {/* Audience */}
-                <p className="text-sm font-light text-muted-foreground mt-4 mb-6">
+                <p className="text-sm font-light text-muted-foreground mb-6">
                   For: {pkg.audience}
                 </p>
 

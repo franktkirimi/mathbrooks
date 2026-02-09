@@ -8,6 +8,7 @@ const projects = [
       "A smart file management system that declutters folders and maintains order. Users can apply filters, set rules, and run it in the background to automatically organise files as they're saved.",
     image: "/projects/Project1.png",
     tags: ["File Management", "Automation", "Desktop"],
+    metrics: ["10,000+ files organized", "95% time saved", "Built in 6 weeks"],
   },
   {
     title: "Educentia",
@@ -15,6 +16,7 @@ const projects = [
       "An education platform connecting students with tutors for extra lessons. Features live lessons, quizzes, tests, and progress tracking to enhance the learning experience.",
     image: "/projects/project2.png",
     tags: ["EdTech", "Live Lessons", "Assessments"],
+    metrics: ["500+ students", "Live video lessons", "Built in 10 weeks"],
   },
   {
     title: "CoachHub",
@@ -22,6 +24,7 @@ const projects = [
       "A coaching management system for planning training sessions, tracking player performance, and monitoring progress — giving coaches full visibility over their team's development.",
     image: "/projects/Project3.png",
     tags: ["Sports Tech", "Analytics", "Team Management"],
+    metrics: ["50+ teams managed", "Real-time analytics", "Built in 8 weeks"],
   },
 ];
 
@@ -86,9 +89,21 @@ const OurProjects = () => {
                   <h3 className="font-display text-base tracking-wider uppercase mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-sm font-light text-muted-foreground leading-relaxed mb-6 flex-1">
+                  <p className="text-sm font-light text-muted-foreground leading-relaxed mb-4 flex-1">
                     {project.description}
                   </p>
+
+                  {/* Metrics */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.metrics.map((metric) => (
+                      <span
+                        key={metric}
+                        className="text-[0.65rem] font-display tracking-wider px-2.5 py-1 rounded-full bg-primary/10 text-primary/80"
+                      >
+                        {metric}
+                      </span>
+                    ))}
+                  </div>
 
                   {/* Tech tags */}
                   <div className="flex flex-wrap gap-2">
