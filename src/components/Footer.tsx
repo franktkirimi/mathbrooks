@@ -19,7 +19,7 @@ const Footer = () => {
               MATHBROOKS
             </a>
             <p className="text-sm font-light text-muted-foreground mt-4 leading-relaxed max-w-xs">
-              Building intelligent software to simplify complex problems.
+              The intelligence to simplify your processes.
               Headquartered in Harare, operating globally.
             </p>
           </div>
