@@ -1,38 +1,48 @@
-import { Quote } from "lucide-react";
+import { Zap, Shield, Users, Globe } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
-const testimonials = [
+const highlights = [
   {
-    quote:
-      "MathBrooks transformed how we manage our operations. The system they built cut our processing time by 70% and scaled with us as we grew.",
-    name: "David M.",
-    role: "Operations Director",
-    company: "Logistics Firm",
+    icon: Zap,
+    label: "Fast Delivery",
+    detail: "MVPs in weeks, not months",
   },
   {
-    quote:
-      "Their team delivered exactly what we needed — on time and within budget. The AI integration was seamless and our team adopted it immediately.",
-    name: "Sarah K.",
-    role: "Head of Technology",
-    company: "EdTech Startup",
+    icon: Shield,
+    label: "AI-First",
+    detail: "Intelligence built into every system",
   },
   {
-    quote:
-      "What impressed me most was their understanding of our industry. They didn't just build software — they solved our actual business problems.",
-    name: "James T.",
-    role: "Managing Director",
-    company: "Agricultural Enterprise",
+    icon: Users,
+    label: "Direct Access",
+    detail: "Work with the engineers, not middlemen",
+  },
+  {
+    icon: Globe,
+    label: "Global Reach",
+    detail: "Headquartered in Africa, operating worldwide",
   },
 ];
 
-const stats = [
-  { value: "20+", label: "Projects Delivered" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "6", label: "Industries Served" },
-  { value: "3", label: "Countries" },
+const values = [
+  {
+    title: "We Ship Fast Without Cutting Corners",
+    description:
+      "Our lean team means less overhead and faster decisions. You get a working product in weeks — built with clean architecture that scales.",
+  },
+  {
+    title: "Your Team Has Direct Access to Ours",
+    description:
+      "No account managers or ticket queues. You work directly with the engineers building your product via WhatsApp, Slack, or email.",
+  },
+  {
+    title: "AI Isn't an Add-On — It's Built In",
+    description:
+      "We don't bolt AI onto finished products. We design intelligent systems from day one — automation, predictions, and insights baked into the core.",
+  },
 ];
 
-const Testimonials = () => {
+const WhyWorkWithUs = () => {
   return (
     <section className="py-16 md:py-[120px] lg:py-[150px] px-6 relative">
       {/* Subtle accent gradient */}
@@ -45,16 +55,19 @@ const Testimonials = () => {
       />
 
       <div className="relative max-w-6xl mx-auto">
-        {/* Stats bar */}
+        {/* Highlights bar */}
         <AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-24">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2">
-                  {stat.value}
+            {highlights.map((item) => (
+              <div key={item.label} className="text-center group">
+                <div className="w-11 h-11 rounded-md border border-border/40 flex items-center justify-center mx-auto mb-3 group-hover:border-primary/40 transition-colors duration-300">
+                  <item.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
                 </div>
-                <div className="text-xs font-display tracking-wider uppercase text-muted-foreground">
-                  {stat.label}
+                <div className="font-display text-sm tracking-wider uppercase mb-1">
+                  {item.label}
+                </div>
+                <div className="text-xs font-light text-muted-foreground">
+                  {item.detail}
                 </div>
               </div>
             ))}
@@ -65,34 +78,29 @@ const Testimonials = () => {
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
             <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
-              What Our Clients Say
+              Why Work With Us
             </h2>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>
         </AnimatedSection>
 
-        {/* Testimonial cards */}
+        {/* Value proposition cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <AnimatedSection key={testimonial.name} delay={index * 150}>
+          {values.map((value, index) => (
+            <AnimatedSection key={value.title} delay={index * 150}>
               <div className="card-glass rounded-lg p-6 md:p-8 h-full flex flex-col relative group hover:border-primary/20 transition-colors duration-300">
-                {/* Quote icon */}
-                <Quote className="w-8 h-8 text-primary/20 mb-6 flex-shrink-0" />
-
-                {/* Quote text */}
-                <p className="text-sm font-light text-muted-foreground leading-relaxed mb-8 flex-1 italic">
-                  "{testimonial.quote}"
-                </p>
-
-                {/* Author */}
-                <div className="border-t border-border/20 pt-6">
-                  <div className="font-display text-sm tracking-wider uppercase">
-                    {testimonial.name}
-                  </div>
-                  <div className="text-xs font-light text-muted-foreground mt-1">
-                    {testimonial.role} — {testimonial.company}
-                  </div>
+                {/* Number accent */}
+                <div className="font-display text-4xl font-bold text-primary/10 mb-4">
+                  0{index + 1}
                 </div>
+
+                <h3 className="font-display text-sm tracking-wider uppercase mb-4">
+                  {value.title}
+                </h3>
+
+                <p className="text-sm font-light text-muted-foreground leading-relaxed flex-1">
+                  {value.description}
+                </p>
               </div>
             </AnimatedSection>
           ))}
@@ -102,4 +110,4 @@ const Testimonials = () => {
   );
 };
 
-export default Testimonials;
+export default WhyWorkWithUs;

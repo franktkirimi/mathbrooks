@@ -4,7 +4,7 @@ import WhatWeBuild from "@/components/WhatWeBuild";
 import HowWeWork from "@/components/HowWeWork";
 import OurProjects from "@/components/OurProjects";
 import TechStack from "@/components/TechStack";
-import Testimonials from "@/components/Testimonials";
+import WhyWorkWithUs from "@/components/Testimonials";
 import Packages from "@/components/Packages";
 import AILabs from "@/components/AILabs";
 import Roadmap from "@/components/Roadmap";
@@ -28,7 +28,7 @@ const Index = () => {
       <WhatWeBuild />
       <HowWeWork />
       <OurProjects />
-      <Testimonials />
+      <WhyWorkWithUs />
       <TechStack />
       <Packages />
       <AILabs />
