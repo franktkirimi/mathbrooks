@@ -1,0 +1,13 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="800" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#052E2B"/>
+      <stop offset="1" stop-color="#0F766E"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg2)"/>
+  <circle cx="400" cy="215" r="92" fill="#D7FFF8"/>
+  <path d="M225 600V510C225 406.723 308.723 323 412 323H388C491.277 323 575 406.723 575 510V600H225Z" fill="#D7FFF8"/>
+  <rect x="280" y="528" width="240" height="26" rx="13" fill="#9CEADF"/>
+  <text x="400" y="567" text-anchor="middle" fill="#B0FFF2" font-size="30" font-family="Arial, sans-serif">Profile Coming Soon</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="800" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1E3A8A"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg1)"/>
+  <circle cx="400" cy="220" r="95" fill="#DCE7FF"/>
+  <path d="M240 500C240 399.484 311.484 328 412 328H388C488.516 328 560 399.484 560 500V600H240V500Z" fill="#DCE7FF"/>
+  <text x="400" y="560" text-anchor="middle" fill="#BFD4FF" font-size="30" font-family="Arial, sans-serif">Photo Placeholder</text>
+</svg>
