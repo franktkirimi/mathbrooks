@@ -6,21 +6,15 @@ const teamMembers = [
     name: "Dr. Eng. D. Simango",
     role: "Chief Engineer",
     qualification: "PhD in Machine Learning and Robotics",
+    roleFocus:
+      "Leads system architecture and AI engineering standards, ensuring every platform is robust, scalable, and production-ready.",
   },
   {
     name: "Eytan Kirimi",
     role: "Product Development Lead",
     qualification: "Honors Degree in IT",
-  },
-  {
-    name: "Open Position",
-    role: "Senior Systems Engineer",
-    qualification: "Profile details will be updated soon",
-  },
-  {
-    name: "Open Position",
-    role: "AI Research Engineer",
-    qualification: "Profile details will be updated soon",
+    roleFocus:
+      "Owns product planning and execution, aligning user needs, business priorities, and delivery milestones across projects.",
   },
 ];
 
@@ -57,6 +51,10 @@ const Team = () => {
                     <span>{member.qualification}</span>
                   </div>
                 </div>
+                <p className="mt-5 text-sm font-light text-muted-foreground leading-relaxed">
+                  <span className="font-medium text-foreground/90">Role Focus:</span>{" "}
+                  {member.roleFocus}
+                </p>
               </article>
             </AnimatedSection>
           ))}
