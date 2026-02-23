@@ -1,29 +1,26 @@
 import { Briefcase, GraduationCap } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
-const FALLBACK_MEMBER_IMAGE = "/team/placeholder-member-1.svg";
-
 const teamMembers = [
   {
     name: "Dr. Eng. D. Simango",
     role: "Chief Engineer",
     qualification: "PhD in Machine Learning and Robotics",
-    image: "/team/dr-eng-simango.svg",
-    imageAlt: "Portrait of Dr. Eng. D. Simango",
+  },
+  {
+    name: "Eytan Kirimi",
+    role: "Product Development Lead",
+    qualification: "Honors Degree in IT",
   },
   {
     name: "Open Position",
     role: "Senior Systems Engineer",
     qualification: "Profile details will be updated soon",
-    image: "/team/placeholder-member-1.svg",
-    imageAlt: "Placeholder portrait for a future team member",
   },
   {
     name: "Open Position",
     role: "AI Research Engineer",
     qualification: "Profile details will be updated soon",
-    image: "/team/placeholder-member-2.svg",
-    imageAlt: "Placeholder portrait for a future team member",
   },
 ];
 
@@ -44,19 +41,6 @@ const Team = () => {
           {teamMembers.map((member, index) => (
             <AnimatedSection key={`${member.name}-${index}`} delay={index * 120}>
               <article className="card-glass rounded-lg p-6 md:p-8 h-full">
-                <div className="mb-5 overflow-hidden rounded-md border border-border/30 bg-secondary/20">
-                  <img
-                    src={member.image}
-                    alt={member.imageAlt}
-                    loading="lazy"
-                    className="w-full aspect-[4/3] object-cover"
-                    onError={(event) => {
-                      const target = event.currentTarget;
-                      target.onerror = null;
-                      target.src = FALLBACK_MEMBER_IMAGE;
-                    }}
-                  />
-                </div>
                 <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/80 mb-4">
                   Team Member
                 </p>
