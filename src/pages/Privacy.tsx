@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Privacy = () => {
+  usePageMeta({
+    title: "Privacy Policy | MathBrooks",
+    description:
+      "How MathBrooks handles inquiry data submitted through service forms, email, WhatsApp, and other direct contact channels.",
+    canonicalPath: "/privacy",
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-3xl mx-auto px-6 py-16 md:py-24">
@@ -17,7 +25,7 @@ const Privacy = () => {
           Privacy Policy
         </h1>
         <p className="text-sm font-light text-muted-foreground mb-12">
-          Last updated: February 2026
+          Last updated: March 16, 2026
         </p>
 
         <div className="space-y-10 text-sm font-light text-muted-foreground leading-relaxed">
@@ -26,10 +34,11 @@ const Privacy = () => {
               Information We Collect
             </h2>
             <p>
-              When you submit an inquiry through our contact form, we collect the
-              information you provide: your name, email address, company name, and
-              project description. We use this information solely to respond to
-              your inquiry and discuss potential projects.
+              When you submit an inquiry through our service inquiry forms, email us,
+              contact us on WhatsApp, or call us directly, we may collect the
+              information you provide such as your name, email address, company name,
+              service interest, and project description. We use this information only
+              to respond to your inquiry, assess fit, and discuss potential work.
             </p>
           </section>
 
@@ -39,8 +48,9 @@ const Privacy = () => {
             </h2>
             <ul className="list-disc list-inside space-y-2">
               <li>To respond to your inquiries and provide requested services</li>
-              <li>To communicate about projects and deliverables</li>
-              <li>To improve our website and services</li>
+              <li>To evaluate project fit and recommend next steps</li>
+              <li>To communicate about projects, proposals, and deliverables</li>
+              <li>To improve our website, positioning, and services</li>
             </ul>
           </section>
 
@@ -52,7 +62,7 @@ const Privacy = () => {
             <ul className="list-disc list-inside space-y-2">
               <li>
                 <strong className="text-foreground">Formspree</strong> — Processes
-                form submissions. Data is handled according to{" "}
+                inquiry form submissions. Data is handled according to{" "}
                 <a
                   href="https://formspree.io/legal/privacy-policy"
                   target="_blank"
@@ -87,9 +97,10 @@ const Privacy = () => {
               Data Retention
             </h2>
             <p>
-              Form submission data is retained only as long as necessary to respond
-              to your inquiry and for reasonable business purposes. You may request
-              deletion of your data at any time by contacting us.
+              Inquiry data is retained only as long as reasonably necessary to
+              respond to your request, assess fit, and support legitimate business
+              follow-up. You may request deletion of your data at any time by
+              contacting us.
             </p>
           </section>
 

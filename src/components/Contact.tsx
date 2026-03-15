@@ -15,8 +15,9 @@ const Contact = () => {
 
         <AnimatedSection delay={150}>
           <p className="font-light text-muted-foreground text-base md:text-lg leading-relaxed mb-10 md:mb-14 max-w-2xl mx-auto">
-            We partner with organisations solving hard problems at scale.
-            If that sounds like you, we'd like to hear from you.
+            Share the business problem, current workflow, and timeline. We respond
+            within 1 business day with the next best step: a quick call, follow-up
+            questions, or a written scope recommendation.
           </p>
         </AnimatedSection>
 
@@ -63,8 +64,38 @@ const Contact = () => {
           </div>
         </AnimatedSection>
 
-        {/* Location */}
         <AnimatedSection delay={450}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 md:mb-14 text-left">
+            {[
+              {
+                title: "1. Share context",
+                description:
+                  "Tell us what is slowing the business down, what you have today, and what outcome matters most.",
+              },
+              {
+                title: "2. We review quickly",
+                description:
+                  "We review for technical complexity, delivery risk, and whether software or AI is the right lever.",
+              },
+              {
+                title: "3. Get next steps",
+                description:
+                  "You get a clear recommendation instead of a generic sales reply.",
+              },
+            ].map((step) => (
+              <div key={step.title} className="card-glass rounded-lg p-5">
+                <h3 className="font-display text-xs tracking-[0.15em] uppercase mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay={600}>
           <div className="flex items-center justify-center gap-2 text-sm font-light text-muted-foreground">
             <MapPin className="w-4 h-4 text-primary/60" />
             <span>Harare, Zimbabwe — Operating Globally</span>

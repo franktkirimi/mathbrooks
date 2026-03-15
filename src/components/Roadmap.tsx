@@ -3,29 +3,29 @@ import AnimatedSection from "./AnimatedSection";
 
 const milestones = [
   {
-    title: "Core Systems & R&D",
+    title: "Now",
     items: [
-      "Current: Core software systems fully operational in production.",
-      "Research: AI Labs actively exploring next-generation intelligence.",
-      "Enterprise Pilots: Initial deployments.",
+      "Custom software delivery for operations-heavy businesses.",
+      "Discovery and pilot work for applied AI where it can clearly reduce manual effort.",
+      "Post-launch support for systems that need to keep improving after release.",
     ],
     active: true,
   },
   {
-    title: "Scale",
+    title: "Next",
     items: [
-      "Agriculture AI: Deployed on commercial farms, optimizing productivity.",
-      "Mining Intelligence: Platform live and delivering actionable insights.",
-      "Enterprise AI Agents: Employee-facing AI tools in active use.",
+      "Reusable components for agriculture, mining, and operational analytics use cases.",
+      "More internal copilots and workflow tools tied to measurable business outcomes.",
+      "Stronger reporting and data products built around client KPIs.",
     ],
     active: false,
   },
   {
-    title: "Expansion",
+    title: "Long Term",
     items: [
-      "Regional Operations: Across Africa and globally.",
-      "Autonomous Platforms: Running at national scale, enabling large-scale automation.",
-      "Industry Standard: MathBrooks infrastructure recognized as the benchmark across sectors.",
+      "Regional partnerships with operators and sector specialists across Africa and beyond.",
+      "Repeatable IP developed from successful engagements rather than speculative R&D.",
+      "Selective long-horizon research only where it strengthens client delivery.",
     ],
     active: false,
   },
@@ -38,13 +38,14 @@ const Roadmap = () => {
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
             <span className="font-display text-xs tracking-[0.3em] text-primary uppercase">
-              Vision
+              Direction
             </span>
             <p className="text-base font-light text-muted-foreground mt-3 max-w-xl mx-auto">
-              To simplify earth's most complex problems through intelligent systems
+              Where we are focusing the business so delivery stays grounded in real
+              client value.
             </p>
             <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide mt-8">
-              The Road Ahead
+              Strategic Focus
             </h2>
             <div className="line-accent w-24 mx-auto mt-8" />
           </div>

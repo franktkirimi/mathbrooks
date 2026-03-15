@@ -6,43 +6,46 @@ import ServiceModal from "./ServiceModal";
 const packages = [
   {
     name: "Starter",
-    label: "MVP",
-    price: "From $2,000",
-    audience: "Startups & small teams",
+    label: "Scoped MVP",
+    engagement: "Discovery-led pilot",
+    timeline: "Typical timeline: 4-6 weeks",
+    audience: "Teams validating a workflow, internal tool, or early product",
     features: [
+      "Business workflow review",
       "Core feature build",
-      "Responsive design",
-      "Basic deployment",
+      "Deployment-ready handoff",
     ],
-    cta: "Get Started",
+    cta: "Discuss Starter Scope",
     featured: false,
   },
   {
     name: "Professional",
-    label: "Full Build + AI",
-    price: "From $8,000",
-    audience: "Growing businesses",
+    label: "Product Build + AI",
+    engagement: "End-to-end delivery",
+    timeline: "Typical timeline: 8-12 weeks",
+    audience: "Growing businesses turning manual operations into software",
     features: [
       "Full platform build",
-      "AI/ML integration",
+      "Automation and AI integration",
       "Cloud infrastructure",
       "3-month support",
     ],
-    cta: "Start Building",
+    cta: "Plan the Build",
     featured: true,
   },
   {
     name: "Enterprise",
     label: "Custom + Ongoing",
-    price: "Custom",
-    audience: "Organisations at scale",
+    engagement: "Strategic partnership",
+    timeline: "Roadmap scoped to business priorities",
+    audience: "Organisations with complex systems, multiple stakeholders, or AI strategy needs",
     features: [
       "Custom architecture",
       "Dedicated team",
-      "AI strategy",
-      "Ongoing partnership",
+      "AI and systems strategy",
+      "Long-term delivery support",
     ],
-    cta: "Contact Us",
+    cta: "Request a Proposal",
     featured: false,
   },
 ];
@@ -97,9 +100,11 @@ const Packages = () => {
                   {pkg.label}
                 </span>
 
-                {/* Price */}
                 <p className="font-display text-2xl tracking-wide mt-4 mb-2 text-foreground">
-                  {pkg.price}
+                  {pkg.engagement}
+                </p>
+                <p className="text-xs font-light uppercase tracking-[0.12em] text-primary/70 mb-2">
+                  {pkg.timeline}
                 </p>
 
                 {/* Audience */}
@@ -136,6 +141,14 @@ const Packages = () => {
             </AnimatedSection>
           ))}
         </div>
+
+        <AnimatedSection delay={450}>
+          <p className="text-center text-sm font-light text-muted-foreground max-w-3xl mx-auto mt-8 leading-relaxed">
+            Every engagement is scoped around business goals, technical risk, delivery
+            constraints, and support needs. If a fixed package is the wrong fit, we
+            recommend a custom route instead of forcing a template.
+          </p>
+        </AnimatedSection>
       </div>
 
       {/* Package inquiry modal */}

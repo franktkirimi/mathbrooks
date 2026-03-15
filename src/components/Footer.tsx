@@ -55,19 +55,27 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2.5">
               <li>
+                <Link
+                  to="/services"
+                  className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
+                >
+                  Services Overview
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/work"
+                  className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
+                >
+                  Selected Work
+                </Link>
+              </li>
+              <li>
                 <a
                   href="#faq"
                   className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
                 >
                   FAQ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#labs"
-                  className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
-                >
-                  AI Labs
                 </a>
               </li>
               <li>

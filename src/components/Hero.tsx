@@ -154,8 +154,8 @@ const Hero = () => {
 
         {/* Subtext — single line, light */}
         <p className="text-sm sm:text-base md:text-lg font-light text-muted-foreground max-w-2xl mx-auto mb-10 md:mb-14 animate-fade-in-up-delay-2">
-          We design, build, and deploy custom software that automates operations
-          and solves real business problems.
+          We partner with operations-heavy teams to design, build, and deploy custom
+          software, automation, and applied AI that solve real business problems.
         </p>
 
         {/* CTAs */}
@@ -169,7 +169,7 @@ const Hero = () => {
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            Start a Project
+            Discuss Your Project
           </Button>
           <a
             href="https://wa.me/263783469023?text=Hi%20MathBrooks%2C%20I%27d%20like%20to%20request%20a%20consultation."

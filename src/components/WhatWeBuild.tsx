@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Cpu, Workflow, Brain } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import ServiceModal from "./ServiceModal";
@@ -79,6 +80,17 @@ const WhatWeBuild = () => {
             </AnimatedSection>
           ))}
         </div>
+
+        <AnimatedSection delay={350}>
+          <div className="text-center mt-10">
+            <Link
+              to="/services"
+              className="font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+            >
+              View full services overview
+            </Link>
+          </div>
+        </AnimatedSection>
       </div>
 
       {/* Service inquiry modal */}

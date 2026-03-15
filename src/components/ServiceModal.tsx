@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { getFormspreeId, hasFormspreeConfig } from "@/lib/forms";
 
 interface ServiceModalProps {
   open: boolean;
@@ -21,14 +22,13 @@ interface ServiceModalProps {
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID || "xyzformid";
-
 const ServiceModal = ({
   open,
   onOpenChange,
   serviceName,
   serviceDescription,
 }: ServiceModalProps) => {
+  const formspreeConfigured = hasFormspreeConfig();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
@@ -50,11 +50,15 @@ const ServiceModal = ({
 
   const handleSubmit = async () => {
     if (!name.trim() || !email.trim()) return;
+    if (!formspreeConfigured) {
+      setStatus("error");
+      return;
+    }
 
     setStatus("submitting");
 
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch(`https://formspree.io/f/${getFormspreeId()}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
@@ -86,6 +90,9 @@ const ServiceModal = ({
   };
 
   const isValid = name.trim().length > 0 && email.trim().length > 0;
+  const errorMessage = formspreeConfigured
+    ? "Something went wrong. Please try again or use WhatsApp."
+    : "Online submission is temporarily unavailable. Please use WhatsApp or email.";
 
   if (status === "success") {
     return (
@@ -97,7 +104,8 @@ const ServiceModal = ({
               Thank You
             </h3>
             <p className="text-sm font-light text-muted-foreground leading-relaxed max-w-xs">
-              Your inquiry has been submitted. We'll get back to you within 24 hours.
+              Your inquiry has been submitted. We will reply within 1 business day with
+              next steps.
             </p>
             <Button
               onClick={() => handleClose(false)}
@@ -126,7 +134,7 @@ const ServiceModal = ({
         {status === "error" && (
           <div className="flex items-center gap-2 text-sm text-red-400 bg-red-400/10 rounded-md px-3 py-2">
             <AlertCircle className="w-4 h-4 shrink-0" />
-            Something went wrong. Please try again or use WhatsApp.
+            {errorMessage}
           </div>
         )}
 
@@ -187,14 +195,26 @@ const ServiceModal = ({
           </div>
         </div>
 
+        <p className="text-xs font-light text-muted-foreground leading-relaxed">
+          Share the business problem, current workflow, and timeline. We use this to
+          decide whether a quick scoping call or a written follow-up is the best next
+          step.
+        </p>
+        {!formspreeConfigured && (
+          <p className="text-xs font-light text-amber-300/90 leading-relaxed">
+            Online submission is temporarily unavailable. Use WhatsApp or email for
+            the fastest response.
+          </p>
+        )}
+
         <div className="flex flex-col sm:flex-row gap-3 pt-2">
           <Button
             onClick={handleSubmit}
-            disabled={!isValid || status === "submitting"}
+            disabled={!isValid || status === "submitting" || !formspreeConfigured}
             className="flex-1 font-display text-xs tracking-[0.1em] uppercase"
           >
             <Send className="w-3.5 h-3.5 mr-2" />
-            {status === "submitting" ? "Sending..." : "Submit"}
+            {status === "submitting" ? "Sending..." : "Submit Inquiry"}
           </Button>
           <Button
             variant="outline"

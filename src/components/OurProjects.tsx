@@ -1,29 +1,36 @@
+import { Link } from "react-router-dom";
 import AnimatedSection from "./AnimatedSection";
 
 const projects = [
   {
     title: "OrderFile",
-    description:
-      "A smart file management system that declutters folders and maintains order. Users can apply filters, set rules, and run it in the background to automatically organise files as they're saved.",
+    businessNeed:
+      "Teams needed a reliable way to keep high-volume shared folders usable as files piled up.",
+    delivered:
+      "A rule-based file management system that sorts, filters, and maintains structure automatically in the background.",
     image: "/projects/Project1.png",
     tags: ["File Management", "Automation", "Desktop"],
-    metrics: ["10,000+ files organized", "95% time saved", "Built in 6 weeks"],
+    outcomes: ["10,000+ files organized", "95% time saved", "Built in 6 weeks"],
   },
   {
     title: "Educentia",
-    description:
-      "An education platform connecting students with tutors for extra lessons. Features live lessons, quizzes, tests, and progress tracking to enhance the learning experience.",
+    businessNeed:
+      "Students and tutors needed one place to manage lessons, assessments, and progress without fragmented tools.",
+    delivered:
+      "An education platform for live lessons, quizzes, tests, and progress tracking across the learning journey.",
     image: "/projects/project2.png",
     tags: ["EdTech", "Live Lessons", "Assessments"],
-    metrics: ["500+ students", "Live video lessons", "Built in 10 weeks"],
+    outcomes: ["500+ students", "Live video lessons", "Built in 10 weeks"],
   },
   {
     title: "CoachHub",
-    description:
-      "A coaching management system for planning training sessions, tracking player performance, and monitoring progress — giving coaches full visibility over their team's development.",
+    businessNeed:
+      "Coaches needed operational visibility across sessions, players, and performance trends.",
+    delivered:
+      "A coaching management system for planning training, tracking performance, and monitoring player development over time.",
     image: "/projects/Project3.png",
     tags: ["Sports Tech", "Analytics", "Team Management"],
-    metrics: ["50+ teams managed", "Real-time analytics", "Built in 8 weeks"],
+    outcomes: ["50+ teams managed", "Real-time analytics", "Built in 8 weeks"],
   },
 ];
 
@@ -47,11 +54,11 @@ const OurProjects = () => {
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
             <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
-              Our Projects
+              Selected Work
             </h2>
             <p className="text-base font-light text-muted-foreground mt-6 max-w-xl mx-auto">
-              A selection of systems we've designed, built, and deployed for
-              clients across industries.
+              Representative engagements and product builds across workflow
+              automation, education, and operational visibility.
             </p>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>
@@ -66,7 +73,7 @@ const OurProjects = () => {
                 <div className="relative aspect-video overflow-hidden rounded-t-lg">
                   <img
                     src={project.image}
-                    alt={`Screenshot of ${project.title} — ${project.description.slice(0, 80)}`}
+                    alt={`Screenshot of ${project.title} — ${project.delivered.slice(0, 80)}`}
                     loading="lazy"
                     width={600}
                     height={338}
@@ -82,13 +89,28 @@ const OurProjects = () => {
                   <h3 className="font-display text-base tracking-wider uppercase mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-sm font-light text-muted-foreground leading-relaxed mb-4 flex-1">
-                    {project.description}
-                  </p>
+                  <div className="space-y-4 mb-4 flex-1">
+                    <div>
+                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
+                        Business Need
+                      </p>
+                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                        {project.businessNeed}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
+                        Delivered
+                      </p>
+                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                        {project.delivered}
+                      </p>
+                    </div>
+                  </div>
 
                   {/* Metrics */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.metrics.map((metric) => (
+                    {project.outcomes.map((metric) => (
                       <span
                         key={metric}
                         className="text-[0.65rem] font-display tracking-wider px-2.5 py-1 rounded-full bg-primary/10 text-primary/80"
@@ -114,6 +136,27 @@ const OurProjects = () => {
             </AnimatedSection>
           ))}
         </div>
+
+        <AnimatedSection delay={500}>
+          <div className="text-center mt-12 md:mt-16">
+            <Link
+              to="/work"
+              className="inline-block mb-5 font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+            >
+              Browse selected work
+            </Link>
+            <p className="text-sm font-light text-muted-foreground mb-5 max-w-2xl mx-auto leading-relaxed">
+              If you want a walkthrough of work relevant to your industry or delivery
+              stage, reach out and we will point you to the closest fit.
+            </p>
+            <a
+              href="#contact"
+              className="font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+            >
+              Request a relevant walkthrough
+            </a>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );
