@@ -817,9 +817,6 @@ const Zifa = () => {
               <Send className="w-3.5 h-3.5 mr-2" />
               {status === "submitting" ? "Submitting…" : "Submit Requirements"}
             </Button>
-            <p className="text-xs font-light text-gray-500 text-center mt-3">
-              Responses go directly to the MathBrooks development team — cto@mathbrooks.com
-            </p>
           </AnimatedSection>
 
         </form>
