@@ -315,10 +315,10 @@ const Zifa = () => {
 
   if (status === "success") {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center px-6">
+      <div className="light min-h-screen bg-background flex items-center justify-center px-6">
         <AnimatedSection>
           <div className="card-glass rounded-lg p-10 max-w-md w-full text-center space-y-6">
-            <CheckCircle className="w-12 h-12 text-green-400 mx-auto" />
+            <CheckCircle className="w-12 h-12 text-green-500 mx-auto" />
             <div className="space-y-2">
               <h2 className="font-display text-base tracking-wider uppercase">Submitted</h2>
               <p className="text-sm font-light text-muted-foreground leading-relaxed">
@@ -335,21 +335,50 @@ const Zifa = () => {
   const isValid = cName.trim().length > 0 && cEmail.trim().length > 0;
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-3xl mx-auto px-6 py-16 md:py-20">
+    <div className="light min-h-screen bg-background relative overflow-x-hidden">
+
+      {/* ── Football background animation ── */}
+      <style>{`
+        @keyframes zifaBall1 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33%  { transform: translateY(-35px) rotate(130deg); }
+          66%  { transform: translateY(18px) rotate(250deg); }
+        }
+        @keyframes zifaBall2 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50%  { transform: translateY(-45px) rotate(180deg); }
+        }
+        @keyframes zifaBall3 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          25%  { transform: translateY(22px) rotate(90deg); }
+          75%  { transform: translateY(-25px) rotate(270deg); }
+        }
+        .zb1 { animation: zifaBall1 14s ease-in-out infinite; }
+        .zb2 { animation: zifaBall2 18s ease-in-out infinite; }
+        .zb3 { animation: zifaBall3 11s ease-in-out infinite; }
+        .zb4 { animation: zifaBall1 16s ease-in-out infinite reverse; }
+        .zb5 { animation: zifaBall2 20s ease-in-out infinite reverse; }
+        .zb6 { animation: zifaBall3 13s ease-in-out infinite; }
+      `}</style>
+      <div className="fixed inset-0 pointer-events-none select-none" aria-hidden="true">
+        <span className="zb1 absolute text-[7rem] opacity-[0.07] top-[8%]  left-[3%]">⚽</span>
+        <span className="zb2 absolute text-[10rem] opacity-[0.05] top-[55%] right-[5%]">⚽</span>
+        <span className="zb3 absolute text-[5rem] opacity-[0.08] top-[30%] right-[10%]">⚽</span>
+        <span className="zb4 absolute text-[8rem] opacity-[0.05] top-[72%] left-[18%]">⚽</span>
+        <span className="zb5 absolute text-[4rem] opacity-[0.09] top-[18%] right-[30%]">⚽</span>
+        <span className="zb6 absolute text-[6rem] opacity-[0.06] top-[85%] right-[40%]">⚽</span>
+      </div>
+
+      <div className="relative max-w-3xl mx-auto px-6 py-16 md:py-20">
 
         <AnimatedSection>
           <div className="mb-10">
-            <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
-              ZIFA × MathBrooks
-            </p>
             <h1 className="font-display text-2xl md:text-3xl font-bold uppercase tracking-wide leading-tight mb-3">
-              Football Management System
+              ZIFA Requirements Form
             </h1>
             <p className="text-sm font-light text-muted-foreground leading-relaxed max-w-xl">
-              Requirements & information request. Complete all sections and submit —
-              this gives the development team everything needed to configure the system
-              to ZIFA's operational requirements.
+              Complete all sections and submit — this gives the development team everything
+              needed to configure the system to ZIFA's operational requirements.
             </p>
           </div>
         </AnimatedSection>
