@@ -52,14 +52,14 @@ const SectionHeader = ({ num, title }: { num: string; title: string }) => (
 );
 
 const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
-  <div className="flex items-center justify-between gap-4 py-3 border-b border-gray-100 last:border-0 min-h-[46px]">
+  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 py-3 border-b border-gray-100 last:border-0">
     <span className="text-sm font-light text-gray-800 leading-snug">{label}</span>
-    {children}
+    <div className="shrink-0">{children}</div>
   </div>
 );
 
 const selectCls =
-  "h-9 rounded border border-gray-300 bg-white px-2 text-xs font-light text-gray-900 focus:outline-none focus:border-primary/60 transition-colors min-w-[185px]";
+  "h-9 rounded border border-gray-300 bg-white px-2 text-xs font-light text-gray-900 focus:outline-none focus:border-primary/60 transition-colors w-full sm:w-[185px]";
 
 const inputCls = "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-primary/60";
 const labelCls = "text-xs font-display tracking-wider uppercase text-gray-500";
@@ -456,7 +456,7 @@ const Zifa = () => {
           <AnimatedSection delay={100}>
             <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="03" title="National Administrative Structure" />
-              <div className="grid grid-cols-2 gap-4 mb-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
                 <div className="space-y-1.5">
                   <Label className={labelCls}>
                     Total Regions / Provinces
