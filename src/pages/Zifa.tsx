@@ -111,6 +111,15 @@ const Zifa = () => {
     matchResultSubmission: "",
     matchReportApproval: "",
   });
+  const [approvingOther, setAO] = useState({
+    playerRegistration: "",
+    localTransfers: "",
+    internationalTransfers: "",
+    clubRegistration: "",
+    competitionEntry: "",
+    matchResultSubmission: "",
+    matchReportApproval: "",
+  });
 
   // §3 — Admin structure
   const [totalRegions, setTotalRegions] = useState("");
@@ -152,6 +161,13 @@ const Zifa = () => {
   // §7 — Competition management
   const [fixtureEntry, setFixtureEntry] = useState("");
   const [matchResp, setMatchResp] = useState({
+    scoreline: "",
+    yellowCards: "",
+    redCards: "",
+    lineup: "",
+    matchReport: "",
+  });
+  const [matchRespOther, setMRO] = useState({
     scoreline: "",
     yellowCards: "",
     redCards: "",
@@ -221,13 +237,13 @@ const Zifa = () => {
       "Respondent Title": cTitle,
       "Respondent Email": cEmail,
       // §2
-      "Approving: Player Registration": approving.playerRegistration,
-      "Approving: Local Transfers": approving.localTransfers,
-      "Approving: International Transfers": approving.internationalTransfers,
-      "Approving: Club Registration": approving.clubRegistration,
-      "Approving: Competition Entry": approving.competitionEntry,
-      "Approving: Match Result Submission": approving.matchResultSubmission,
-      "Approving: Match Report Approval": approving.matchReportApproval,
+      "Approving: Player Registration": approving.playerRegistration === "Other" ? `Other — ${approvingOther.playerRegistration}` : approving.playerRegistration,
+      "Approving: Local Transfers": approving.localTransfers === "Other" ? `Other — ${approvingOther.localTransfers}` : approving.localTransfers,
+      "Approving: International Transfers": approving.internationalTransfers === "Other" ? `Other — ${approvingOther.internationalTransfers}` : approving.internationalTransfers,
+      "Approving: Club Registration": approving.clubRegistration === "Other" ? `Other — ${approvingOther.clubRegistration}` : approving.clubRegistration,
+      "Approving: Competition Entry": approving.competitionEntry === "Other" ? `Other — ${approvingOther.competitionEntry}` : approving.competitionEntry,
+      "Approving: Match Result Submission": approving.matchResultSubmission === "Other" ? `Other — ${approvingOther.matchResultSubmission}` : approving.matchResultSubmission,
+      "Approving: Match Report Approval": approving.matchReportApproval === "Other" ? `Other — ${approvingOther.matchReportApproval}` : approving.matchReportApproval,
       // §3
       "Total Regions / Provinces": totalRegions,
       "Total Area Zones": totalZones,
@@ -257,11 +273,11 @@ const Zifa = () => {
       "Verify: Other": verifOther,
       // §7
       "Fixture Entry Responsibility": fixtureEntry,
-      "Match Responsible: Scoreline": matchResp.scoreline,
-      "Match Responsible: Yellow Cards": matchResp.yellowCards,
-      "Match Responsible: Red Cards": matchResp.redCards,
-      "Match Responsible: Lineup": matchResp.lineup,
-      "Match Responsible: Match Report": matchResp.matchReport,
+      "Match Responsible: Scoreline": matchResp.scoreline === "Other" ? `Other — ${matchRespOther.scoreline}` : matchResp.scoreline,
+      "Match Responsible: Yellow Cards": matchResp.yellowCards === "Other" ? `Other — ${matchRespOther.yellowCards}` : matchResp.yellowCards,
+      "Match Responsible: Red Cards": matchResp.redCards === "Other" ? `Other — ${matchRespOther.redCards}` : matchResp.redCards,
+      "Match Responsible: Lineup": matchResp.lineup === "Other" ? `Other — ${matchRespOther.lineup}` : matchResp.lineup,
+      "Match Responsible: Match Report": matchResp.matchReport === "Other" ? `Other — ${matchRespOther.matchReport}` : matchResp.matchReport,
       // §8
       "Match Data: Team Lineups": yn(matchData.teamLineups),
       "Match Data: Substitutions": yn(matchData.substitutions),
@@ -438,16 +454,28 @@ const Zifa = () => {
                   ["matchReportApproval", "Match report approval"],
                 ] as [keyof typeof approving, string][]
               ).map(([key, label]) => (
-                <Row key={key} label={label}>
-                  <select
-                    value={approving[key]}
-                    onChange={(e) => setA((p) => ({ ...p, [key]: e.target.value }))}
-                    className={selectCls}
-                  >
-                    <option value="">Select…</option>
-                    {AUTHORITY.map((o) => <option key={o} value={o}>{o}</option>)}
-                  </select>
-                </Row>
+                <div key={key}>
+                  <Row label={label}>
+                    <select
+                      value={approving[key]}
+                      onChange={(e) => setA((p) => ({ ...p, [key]: e.target.value }))}
+                      className={selectCls}
+                    >
+                      <option value="">Select…</option>
+                      {AUTHORITY.map((o) => <option key={o} value={o}>{o}</option>)}
+                    </select>
+                  </Row>
+                  {approving[key] === "Other" && (
+                    <div className="pb-3 border-b border-gray-100">
+                      <Input
+                        value={approvingOther[key]}
+                        onChange={(e) => setAO((p) => ({ ...p, [key]: e.target.value }))}
+                        placeholder="Please specify…"
+                        className={`${inputCls} mt-1`}
+                      />
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </AnimatedSection>
@@ -619,16 +647,28 @@ const Zifa = () => {
                   ["matchReport", "Match report"],
                 ] as [keyof typeof matchResp, string][]
               ).map(([key, label]) => (
-                <Row key={key} label={label}>
-                  <select
-                    value={matchResp[key]}
-                    onChange={(e) => setMatchResp((p) => ({ ...p, [key]: e.target.value }))}
-                    className={selectCls}
-                  >
-                    <option value="">Select…</option>
-                    {RESPONSIBLE.map((r) => <option key={r} value={r}>{r}</option>)}
-                  </select>
-                </Row>
+                <div key={key}>
+                  <Row label={label}>
+                    <select
+                      value={matchResp[key]}
+                      onChange={(e) => setMatchResp((p) => ({ ...p, [key]: e.target.value }))}
+                      className={selectCls}
+                    >
+                      <option value="">Select…</option>
+                      {RESPONSIBLE.map((r) => <option key={r} value={r}>{r}</option>)}
+                    </select>
+                  </Row>
+                  {matchResp[key] === "Other" && (
+                    <div className="pb-3 border-b border-gray-100">
+                      <Input
+                        value={matchRespOther[key]}
+                        onChange={(e) => setMRO((p) => ({ ...p, [key]: e.target.value }))}
+                        placeholder="Please specify…"
+                        className={`${inputCls} mt-1`}
+                      />
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </AnimatedSection>
