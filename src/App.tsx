@@ -8,6 +8,8 @@ import Privacy from "./pages/Privacy";
 import Services from "./pages/Services";
 import Work from "./pages/Work";
 import NotFound from "./pages/NotFound";
+import Clients from "./pages/Clients";
+import Zifa from "./pages/Zifa";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/work" element={<Work />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/zifa" element={<Zifa />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
