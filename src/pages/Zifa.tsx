@@ -42,7 +42,11 @@ const YesNo = ({ value, onChange }: { value: YN; onChange: (v: boolean) => void 
 
 const SectionHeader = ({ num, title }: { num: string; title: string }) => (
   <div className="flex items-center gap-3 mb-5 pb-3 border-b border-gray-200">
-    <span className="font-display text-xs tracking-[0.2em] text-primary">{num}</span>
+    {num !== "—" ? (
+      <span className="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/15 border border-primary/30 font-display text-[10px] tracking-widest text-primary">{num}</span>
+    ) : (
+      <span className="shrink-0 w-1 h-5 rounded-full bg-primary/40 block" />
+    )}
     <h2 className="font-display text-sm tracking-wider uppercase text-black">{title}</h2>
   </div>
 );
@@ -363,21 +367,25 @@ const Zifa = () => {
         .zb6 { animation: zifaBall3 13s ease-in-out infinite; }
       `}</style>
       <div className="fixed inset-0 pointer-events-none select-none" aria-hidden="true">
-        <span className="zb1 absolute text-[7rem] opacity-[0.07] top-[8%]  left-[3%]">⚽</span>
-        <span className="zb2 absolute text-[10rem] opacity-[0.05] top-[55%] right-[5%]">⚽</span>
-        <span className="zb3 absolute text-[5rem] opacity-[0.08] top-[30%] right-[10%]">⚽</span>
-        <span className="zb4 absolute text-[8rem] opacity-[0.05] top-[72%] left-[18%]">⚽</span>
-        <span className="zb5 absolute text-[4rem] opacity-[0.09] top-[18%] right-[30%]">⚽</span>
-        <span className="zb6 absolute text-[6rem] opacity-[0.06] top-[85%] right-[40%]">⚽</span>
+        <span className="zb1 absolute text-[7rem] opacity-[0.13] top-[8%]  left-[3%]">⚽</span>
+        <span className="zb2 absolute text-[10rem] opacity-[0.10] top-[55%] right-[5%]">⚽</span>
+        <span className="zb3 absolute text-[5rem] opacity-[0.14] top-[30%] right-[10%]">⚽</span>
+        <span className="zb4 absolute text-[8rem] opacity-[0.09] top-[72%] left-[18%]">⚽</span>
+        <span className="zb5 absolute text-[4rem] opacity-[0.15] top-[18%] right-[30%]">⚽</span>
+        <span className="zb6 absolute text-[6rem] opacity-[0.11] top-[85%] right-[40%]">⚽</span>
       </div>
 
       <div className="relative max-w-3xl mx-auto px-6 py-16 md:py-20">
 
         <AnimatedSection>
           <div className="mb-10">
-            <h1 className="font-display text-2xl md:text-3xl font-bold uppercase tracking-wide leading-tight mb-3 text-black">
+            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-3 py-1 mb-4">
+              <span className="text-[10px] font-display tracking-[0.2em] uppercase text-primary">MathBrooks × ZIFA</span>
+            </div>
+            <h1 className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide leading-tight mb-3 text-black">
               ZIFA Requirements Form
             </h1>
+            <div className="w-12 h-0.5 bg-primary mb-4" />
             <p className="text-sm font-light text-gray-600 leading-relaxed max-w-xl">
               Complete all sections and submit — this gives the development team everything
               needed to configure the system to ZIFA's operational requirements.
@@ -389,7 +397,7 @@ const Zifa = () => {
 
           {/* ── Contact ── */}
           <AnimatedSection delay={60}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="—" title="Your Details" />
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1.5">
@@ -414,7 +422,7 @@ const Zifa = () => {
 
           {/* ── §2 Approving Authority ── */}
           <AnimatedSection delay={80}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="02" title="Governance — Approving Authority" />
               <p className={descCls}>
                 For each action, select which authority is responsible for approval.
@@ -446,7 +454,7 @@ const Zifa = () => {
 
           {/* ── §3 Admin Structure ── */}
           <AnimatedSection delay={100}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="03" title="National Administrative Structure" />
               <div className="grid grid-cols-2 gap-4 mb-5">
                 <div className="space-y-1.5">
@@ -479,7 +487,7 @@ const Zifa = () => {
 
           {/* ── §4 User Roles ── */}
           <AnimatedSection delay={120}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="04" title="User Roles & Access Levels" />
               <p className={descCls}>
                 Confirm which roles should exist in the system.
@@ -515,7 +523,7 @@ const Zifa = () => {
 
           {/* ── §5 Player Docs ── */}
           <AnimatedSection delay={140}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="05" title="Player Registration — Required Documents" />
               <p className={descCls}>
                 Select all documents required when registering a player.
@@ -551,7 +559,7 @@ const Zifa = () => {
 
           {/* ── §6 Identity Verification ── */}
           <AnimatedSection delay={160}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="06" title="Player Identity Verification" />
               <p className={descCls}>
                 Confirm which verification methods are required.
@@ -576,7 +584,7 @@ const Zifa = () => {
 
           {/* ── §7 Competition Management ── */}
           <AnimatedSection delay={180}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="07" title="Competition Management" />
               <div className="mb-6 space-y-2">
                 <Label className={labelCls}>
@@ -627,7 +635,7 @@ const Zifa = () => {
 
           {/* ── §8 Match Data Fields ── */}
           <AnimatedSection delay={200}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="08" title="Match Data Fields" />
               <p className={descCls}>
                 Should the system capture each of the following?
@@ -657,7 +665,7 @@ const Zifa = () => {
 
           {/* ── §9 Coach Records ── */}
           <AnimatedSection delay={220}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="09" title="Coach & Staff Records" />
               <p className={descCls}>
                 Should the system maintain historical records for the following?
@@ -679,7 +687,7 @@ const Zifa = () => {
 
           {/* ── §10 Youth & Grassroots ── */}
           <AnimatedSection delay={240}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="10" title="Youth & Grassroots Access" />
               <p className={descCls}>
                 Check each permission that should apply to each entity type.
@@ -725,7 +733,7 @@ const Zifa = () => {
 
           {/* ── §11 Gender Inclusivity ── */}
           <AnimatedSection delay={260}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="11" title="Gender Inclusivity" />
               <p className={descCls}>
                 Select which competition levels should support male and / or female competitions.
@@ -766,7 +774,7 @@ const Zifa = () => {
 
           {/* ── §12 FIFA Alignment ── */}
           <AnimatedSection delay={280}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="12" title="FIFA System Alignment" />
               <div className="space-y-1.5 mb-5">
                 <Label className={labelCls}>
@@ -788,7 +796,7 @@ const Zifa = () => {
 
           {/* ── Additional Notes ── */}
           <AnimatedSection delay={300}>
-            <div className="card-glass rounded-lg p-6 md:p-8">
+            <div className="card-glass rounded-lg p-6 md:p-8 border-l-2 border-primary/30">
               <SectionHeader num="—" title="Additional Notes" />
               <Textarea
                 value={notes}
