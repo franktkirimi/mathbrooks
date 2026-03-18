@@ -21,7 +21,7 @@ const YesNo = ({ value, onChange }: { value: YN; onChange: (v: boolean) => void 
       className={`px-3 py-1 text-xs font-display tracking-wider uppercase rounded border transition-colors duration-200 ${
         value === true
           ? "bg-primary/20 text-primary border-primary/50"
-          : "border-border/40 text-muted-foreground hover:border-primary/40"
+          : "border-gray-300 text-gray-600 hover:border-primary/60"
       }`}
     >
       Yes
@@ -32,7 +32,7 @@ const YesNo = ({ value, onChange }: { value: YN; onChange: (v: boolean) => void 
       className={`px-3 py-1 text-xs font-display tracking-wider uppercase rounded border transition-colors duration-200 ${
         value === false
           ? "bg-red-400/10 text-red-400 border-red-400/40"
-          : "border-border/40 text-muted-foreground hover:border-red-400/30"
+          : "border-gray-300 text-gray-600 hover:border-red-400/60"
       }`}
     >
       No
@@ -41,23 +41,25 @@ const YesNo = ({ value, onChange }: { value: YN; onChange: (v: boolean) => void 
 );
 
 const SectionHeader = ({ num, title }: { num: string; title: string }) => (
-  <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border/30">
+  <div className="flex items-center gap-3 mb-5 pb-3 border-b border-gray-200">
     <span className="font-display text-xs tracking-[0.2em] text-primary">{num}</span>
-    <h2 className="font-display text-sm tracking-wider uppercase">{title}</h2>
+    <h2 className="font-display text-sm tracking-wider uppercase text-black">{title}</h2>
   </div>
 );
 
 const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
-  <div className="flex items-center justify-between gap-4 py-3 border-b border-border/15 last:border-0 min-h-[46px]">
-    <span className="text-sm font-light text-foreground leading-snug">{label}</span>
+  <div className="flex items-center justify-between gap-4 py-3 border-b border-gray-100 last:border-0 min-h-[46px]">
+    <span className="text-sm font-light text-gray-800 leading-snug">{label}</span>
     {children}
   </div>
 );
 
 const selectCls =
-  "h-9 rounded border border-border/40 bg-background/50 px-2 text-xs font-light text-foreground focus:outline-none focus:border-primary/40 transition-colors min-w-[185px]";
+  "h-9 rounded border border-gray-300 bg-white px-2 text-xs font-light text-gray-900 focus:outline-none focus:border-primary/60 transition-colors min-w-[185px]";
 
-const inputCls = "bg-background/50 border-border/40 focus:border-primary/40";
+const inputCls = "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-primary/60";
+const labelCls = "text-xs font-display tracking-wider uppercase text-gray-500";
+const descCls = "text-xs font-light text-gray-600 mb-5";
 
 const AUTHORITY = [
   "ZIFA Headquarters",
@@ -373,10 +375,10 @@ const Zifa = () => {
 
         <AnimatedSection>
           <div className="mb-10">
-            <h1 className="font-display text-2xl md:text-3xl font-bold uppercase tracking-wide leading-tight mb-3">
+            <h1 className="font-display text-2xl md:text-3xl font-bold uppercase tracking-wide leading-tight mb-3 text-black">
               ZIFA Requirements Form
             </h1>
-            <p className="text-sm font-light text-muted-foreground leading-relaxed max-w-xl">
+            <p className="text-sm font-light text-gray-600 leading-relaxed max-w-xl">
               Complete all sections and submit — this gives the development team everything
               needed to configure the system to ZIFA's operational requirements.
             </p>
@@ -391,17 +393,17 @@ const Zifa = () => {
               <SectionHeader num="—" title="Your Details" />
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1.5">
-                  <Label htmlFor="c-name" className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                  <Label htmlFor="c-name" className={labelCls}>
                     Name <span className="text-red-400">*</span>
                   </Label>
                   <Input id="c-name" value={cName} onChange={(e) => setCName(e.target.value)} placeholder="Full name" required className={inputCls} />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="c-title" className="text-xs font-display tracking-wider uppercase text-muted-foreground">Title / Role</Label>
+                  <Label htmlFor="c-title" className={labelCls}>Title / Role</Label>
                   <Input id="c-title" value={cTitle} onChange={(e) => setCTitle(e.target.value)} placeholder="e.g. General Secretary" className={inputCls} />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="c-email" className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                  <Label htmlFor="c-email" className={labelCls}>
                     Email <span className="text-red-400">*</span>
                   </Label>
                   <Input id="c-email" type="email" value={cEmail} onChange={(e) => setCEmail(e.target.value)} placeholder="you@zifa.co.zw" required className={inputCls} />
@@ -414,7 +416,7 @@ const Zifa = () => {
           <AnimatedSection delay={80}>
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="02" title="Governance — Approving Authority" />
-              <p className="text-xs font-light text-muted-foreground mb-5">
+              <p className={descCls}>
                 For each action, select which authority is responsible for approval.
               </p>
               {(
@@ -448,13 +450,13 @@ const Zifa = () => {
               <SectionHeader num="03" title="National Administrative Structure" />
               <div className="grid grid-cols-2 gap-4 mb-5">
                 <div className="space-y-1.5">
-                  <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                  <Label className={labelCls}>
                     Total Regions / Provinces
                   </Label>
                   <Input type="number" min="0" value={totalRegions} onChange={(e) => setTotalRegions(e.target.value)} placeholder="e.g. 10" className={inputCls} />
                 </div>
                 <div className="space-y-1.5">
-                  <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                  <Label className={labelCls}>
                     Total Area Zones
                   </Label>
                   <Input type="number" min="0" value={totalZones} onChange={(e) => setTotalZones(e.target.value)} placeholder="e.g. 42" className={inputCls} />
@@ -467,7 +469,7 @@ const Zifa = () => {
                 <YesNo value={zonesAuthority} onChange={setZonesAuthority} />
               </Row>
               <div className="mt-4 space-y-1.5">
-                <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                <Label className={labelCls}>
                   Corrections to hierarchy (if any)
                 </Label>
                 <Input value={adminCorrections} onChange={(e) => setAdminCorrections(e.target.value)} placeholder="e.g. Rename 'Area Zone' to 'District'" className={inputCls} />
@@ -479,7 +481,7 @@ const Zifa = () => {
           <AnimatedSection delay={120}>
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="04" title="User Roles & Access Levels" />
-              <p className="text-xs font-light text-muted-foreground mb-5">
+              <p className={descCls}>
                 Confirm which roles should exist in the system.
               </p>
               {(
@@ -497,13 +499,13 @@ const Zifa = () => {
                 <div key={key} className="flex items-center justify-between gap-4 py-3 border-b border-border/15 last:border-0">
                   <div>
                     <p className="text-sm font-light text-foreground">{label}</p>
-                    <p className="text-xs text-muted-foreground font-light">{desc}</p>
+                    <p className="text-xs text-gray-500 font-light">{desc}</p>
                   </div>
                   <YesNo value={roles[key]} onChange={(v) => setRoles((p) => ({ ...p, [key]: v }))} />
                 </div>
               ))}
               <div className="mt-4 space-y-1.5">
-                <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                <Label className={labelCls}>
                   Additional roles needed
                 </Label>
                 <Input value={additionalRoles} onChange={(e) => setAdditionalRoles(e.target.value)} placeholder="e.g. Medical Officer, Media Officer…" className={inputCls} />
@@ -515,7 +517,7 @@ const Zifa = () => {
           <AnimatedSection delay={140}>
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="05" title="Player Registration — Required Documents" />
-              <p className="text-xs font-light text-muted-foreground mb-5">
+              <p className={descCls}>
                 Select all documents required when registering a player.
               </p>
               <div className="space-y-3">
@@ -534,11 +536,11 @@ const Zifa = () => {
                       onChange={(e) => setPlayerDocs((p) => ({ ...p, [key]: e.target.checked }))}
                       className="w-4 h-4 rounded border-border/40 accent-primary cursor-pointer"
                     />
-                    <span className="text-sm font-light text-foreground group-hover:text-primary transition-colors">{label}</span>
+                    <span className="text-sm font-light text-gray-800 group-hover:text-primary transition-colors">{label}</span>
                   </label>
                 ))}
                 <div className="space-y-1.5 pt-1">
-                  <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                  <Label className={labelCls}>
                     Other documents
                   </Label>
                   <Input value={playerDocsOther} onChange={(e) => setPlayerDocsOther(e.target.value)} placeholder="Any additional required documents…" className={inputCls} />
@@ -551,7 +553,7 @@ const Zifa = () => {
           <AnimatedSection delay={160}>
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="06" title="Player Identity Verification" />
-              <p className="text-xs font-light text-muted-foreground mb-5">
+              <p className={descCls}>
                 Confirm which verification methods are required.
               </p>
               <Row label="National ID number — mandatory check">
@@ -564,7 +566,7 @@ const Zifa = () => {
                 <YesNo value={verif.duplicateDetection} onChange={(v) => setVerif((p) => ({ ...p, duplicateDetection: v }))} />
               </Row>
               <div className="mt-4 space-y-1.5">
-                <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                <Label className={labelCls}>
                   Other verification methods
                 </Label>
                 <Input value={verifOther} onChange={(e) => setVerifOther(e.target.value)} placeholder="e.g. Biometric check…" className={inputCls} />
@@ -577,7 +579,7 @@ const Zifa = () => {
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="07" title="Competition Management" />
               <div className="mb-6 space-y-2">
-                <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                <Label className={labelCls}>
                   Who enters fixtures into the system?
                 </Label>
                 <div className="flex gap-2 flex-wrap pt-1">
@@ -589,7 +591,7 @@ const Zifa = () => {
                       className={`px-3 py-1.5 text-xs font-display tracking-wider uppercase rounded border transition-colors duration-200 ${
                         fixtureEntry === opt
                           ? "bg-primary/20 text-primary border-primary/50"
-                          : "border-border/40 text-muted-foreground hover:border-primary/40"
+                          : "border-gray-300 text-gray-600 hover:border-primary/60"
                       }`}
                     >
                       {opt}
@@ -597,7 +599,7 @@ const Zifa = () => {
                   ))}
                 </div>
               </div>
-              <p className="text-xs font-display tracking-wider uppercase text-muted-foreground mb-2">
+              <p className="text-xs font-display tracking-wider uppercase text-gray-500 mb-2">
                 Who submits each match data item?
               </p>
               {(
@@ -627,7 +629,7 @@ const Zifa = () => {
           <AnimatedSection delay={200}>
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="08" title="Match Data Fields" />
-              <p className="text-xs font-light text-muted-foreground mb-5">
+              <p className={descCls}>
                 Should the system capture each of the following?
               </p>
               {(
@@ -647,7 +649,7 @@ const Zifa = () => {
                 </Row>
               ))}
               <div className="mt-4 space-y-1.5">
-                <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">Notes</Label>
+                <Label className={labelCls}>Notes</Label>
                 <Input value={matchDataNotes} onChange={(e) => setMatchDataNotes(e.target.value)} placeholder="Any additional match data requirements…" className={inputCls} />
               </div>
             </div>
@@ -657,7 +659,7 @@ const Zifa = () => {
           <AnimatedSection delay={220}>
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="09" title="Coach & Staff Records" />
-              <p className="text-xs font-light text-muted-foreground mb-5">
+              <p className={descCls}>
                 Should the system maintain historical records for the following?
               </p>
               <Row label="Coaching qualifications">
@@ -679,17 +681,17 @@ const Zifa = () => {
           <AnimatedSection delay={240}>
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="10" title="Youth & Grassroots Access" />
-              <p className="text-xs font-light text-muted-foreground mb-5">
+              <p className={descCls}>
                 Check each permission that should apply to each entity type.
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border/30">
-                      <th className="text-left font-display text-xs tracking-wider uppercase text-muted-foreground pb-3 pr-4 font-normal">Entity</th>
-                      <th className="text-center font-display text-xs tracking-wider uppercase text-muted-foreground pb-3 px-4 font-normal">Register Players</th>
-                      <th className="text-center font-display text-xs tracking-wider uppercase text-muted-foreground pb-3 px-4 font-normal">Enter Competitions</th>
-                      <th className="text-center font-display text-xs tracking-wider uppercase text-muted-foreground pb-3 px-4 font-normal">Maintain Records</th>
+                      <th className="text-left font-display text-xs tracking-wider uppercase text-gray-500 pb-3 pr-4 font-normal">Entity</th>
+                      <th className="text-center font-display text-xs tracking-wider uppercase text-gray-500 pb-3 px-4 font-normal">Register Players</th>
+                      <th className="text-center font-display text-xs tracking-wider uppercase text-gray-500 pb-3 px-4 font-normal">Enter Competitions</th>
+                      <th className="text-center font-display text-xs tracking-wider uppercase text-gray-500 pb-3 px-4 font-normal">Maintain Records</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -702,7 +704,7 @@ const Zifa = () => {
                       ] as [string, keyof typeof youth, keyof typeof youth, keyof typeof youth][]
                     ).map(([label, k1, k2, k3]) => (
                       <tr key={label} className="border-b border-border/10 last:border-0">
-                        <td className="py-3 pr-4 font-light text-foreground">{label}</td>
+                        <td className="py-3 pr-4 font-light text-gray-900">{label}</td>
                         {[k1, k2, k3].map((k) => (
                           <td key={k} className="text-center py-3 px-4">
                             <input
@@ -725,16 +727,16 @@ const Zifa = () => {
           <AnimatedSection delay={260}>
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="11" title="Gender Inclusivity" />
-              <p className="text-xs font-light text-muted-foreground mb-5">
+              <p className={descCls}>
                 Select which competition levels should support male and / or female competitions.
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border/30">
-                      <th className="text-left font-display text-xs tracking-wider uppercase text-muted-foreground pb-3 pr-4 font-normal">Competition Level</th>
-                      <th className="text-center font-display text-xs tracking-wider uppercase text-muted-foreground pb-3 px-8 font-normal">Male</th>
-                      <th className="text-center font-display text-xs tracking-wider uppercase text-muted-foreground pb-3 px-8 font-normal">Female</th>
+                      <th className="text-left font-display text-xs tracking-wider uppercase text-gray-500 pb-3 pr-4 font-normal">Competition Level</th>
+                      <th className="text-center font-display text-xs tracking-wider uppercase text-gray-500 pb-3 px-8 font-normal">Male</th>
+                      <th className="text-center font-display text-xs tracking-wider uppercase text-gray-500 pb-3 px-8 font-normal">Female</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -747,7 +749,7 @@ const Zifa = () => {
                       ] as [string, keyof typeof gender, keyof typeof gender][]
                     ).map(([label, male, female]) => (
                       <tr key={label} className="border-b border-border/10 last:border-0">
-                        <td className="py-3 pr-4 font-light text-foreground">{label}</td>
+                        <td className="py-3 pr-4 font-light text-gray-900">{label}</td>
                         <td className="text-center py-3 px-8">
                           <input type="checkbox" checked={gender[male]} onChange={(e) => setGender((p) => ({ ...p, [male]: e.target.checked }))} className="w-4 h-4 rounded border-border/40 accent-primary cursor-pointer" />
                         </td>
@@ -767,7 +769,7 @@ const Zifa = () => {
             <div className="card-glass rounded-lg p-6 md:p-8">
               <SectionHeader num="12" title="FIFA System Alignment" />
               <div className="space-y-1.5 mb-5">
-                <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                <Label className={labelCls}>
                   FIFA Connect identifier currently in use
                 </Label>
                 <Input value={fifaId} onChange={(e) => setFifaId(e.target.value)} placeholder="e.g. ZIM-001" className={inputCls} />
@@ -776,7 +778,7 @@ const Zifa = () => {
                 <YesNo value={fifaSync} onChange={setFifaSync} />
               </Row>
               <div className="mt-4 space-y-1.5">
-                <Label className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                <Label className={labelCls}>
                   Additional FIFA data compliance requirements
                 </Label>
                 <Input value={fifaNotes} onChange={(e) => setFifaNotes(e.target.value)} placeholder="Any specific compliance notes…" className={inputCls} />
@@ -815,7 +817,7 @@ const Zifa = () => {
               <Send className="w-3.5 h-3.5 mr-2" />
               {status === "submitting" ? "Submitting…" : "Submit Requirements"}
             </Button>
-            <p className="text-xs font-light text-muted-foreground text-center mt-3">
+            <p className="text-xs font-light text-gray-500 text-center mt-3">
               Responses go directly to the MathBrooks development team — cto@mathbrooks.com
             </p>
           </AnimatedSection>
