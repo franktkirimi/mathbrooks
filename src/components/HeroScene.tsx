@@ -98,11 +98,11 @@ const HeroScene = () => {
 
     // Animate
     let rafId: number;
-    const clock = new THREE.Clock();
+    const startTime = performance.now();
 
     const animate = () => {
       rafId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
+      const t = (performance.now() - startTime) / 1000;
 
       // Slow base rotation
       group.rotation.y = t * 0.04;
