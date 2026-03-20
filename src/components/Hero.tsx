@@ -1,224 +1,172 @@
-import { useEffect, useRef } from "react";
+import { useRef, lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
-const codeSnippets = [
-  "import torch",
-  "model = AutoModel.from_pretrained('mathbrooks-7b')",
-  "optimizer = torch.optim.AdamW(model.parameters(), lr=3e-5)",
-  "loss = criterion(outputs, labels)",
-  "predictions = model.generate(**inputs, max_new_tokens=512)",
-  "df = pd.read_csv('telemetry.csv')",
-  "pipeline = Pipeline([('scaler', StandardScaler()), ('clf', XGBClassifier())])",
-  "async def ingest(stream: AsyncIterator):",
-  "torch.distributed.init_process_group('nccl')",
-  "embeddings = encoder.encode(documents, batch_size=64)",
-  "yield from map(transform, batch)",
-  "cache.set(f'pred:{farm_id}', result, ttl=3600)",
-  "metrics = evaluate(y_true, y_pred, average='macro')",
-  "conn = asyncpg.connect(dsn=DATABASE_URL)",
-  "scheduler = CosineAnnealingLR(optimizer, T_max=100)",
-  "grads = torch.autograd.grad(loss, params)",
-  "with torch.cuda.amp.autocast():",
-  "response = await client.chat.completions.create(",
-  "np.random.seed(42)",
-  "for epoch in range(num_epochs):",
-];
+const HeroScene = lazy(() => import("./HeroScene"));
 
-const FloatingCode = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+// Magnetic wrapper — button drifts slightly toward cursor
+const Magnetic = ({ children }: { children: React.ReactNode }) => {
+  const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * 0.38;
+    const y = (e.clientY - rect.top - rect.height / 2) * 0.38;
+    el.style.transform = `translate(${x}px, ${y}px)`;
+  };
 
-    const spans: HTMLSpanElement[] = [];
-    let running = true;
-
-    // Zones that avoid the center content area
-    const pickPosition = () => {
-      const zone = Math.random();
-      if (zone < 0.25) {
-        // Top strip
-        return { left: Math.random() * 90 + 5, top: Math.random() * 18 + 2 };
-      } else if (zone < 0.5) {
-        // Bottom strip
-        return { left: Math.random() * 90 + 5, top: Math.random() * 18 + 80 };
-      } else if (zone < 0.75) {
-        // Left strip
-        return { left: Math.random() * 15 + 2, top: Math.random() * 60 + 20 };
-      } else {
-        // Right strip
-        return { left: Math.random() * 15 + 83, top: Math.random() * 60 + 20 };
-      }
-    };
-
-    const spawnSnippet = () => {
-      if (!running || !container) return;
-
-      const pos = pickPosition();
-      const span = document.createElement("span");
-      const snippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-      span.textContent = snippet;
-      span.style.cssText = `
-        position: absolute;
-        white-space: nowrap;
-        font-family: 'Courier New', monospace;
-        font-size: ${10 + Math.random() * 3}px;
-        color: hsl(var(--primary));
-        opacity: 0;
-        pointer-events: none;
-        left: ${pos.left}%;
-        top: ${pos.top}%;
-        animation: codeFloat ${6 + Math.random() * 4}s ease-in-out forwards;
-      `;
-
-      container.appendChild(span);
-      spans.push(span);
-
-      span.addEventListener("animationend", () => {
-        span.remove();
-        const idx = spans.indexOf(span);
-        if (idx > -1) spans.splice(idx, 1);
-      });
-
-      const next = 800 + Math.random() * 1500;
-      if (running) setTimeout(spawnSnippet, next);
-    };
-
-    // Stagger initial spawns
-    setTimeout(spawnSnippet, 500);
-    setTimeout(spawnSnippet, 1200);
-    setTimeout(spawnSnippet, 2000);
-
-    return () => {
-      running = false;
-      spans.forEach((s) => s.remove());
-    };
-  }, []);
+  const handleMouseLeave = () => {
+    if (ref.current) ref.current.style.transform = "translate(0, 0)";
+  };
 
   return (
     <div
-      ref={containerRef}
-      aria-hidden="true"
-      className="absolute inset-0 overflow-hidden pointer-events-none"
-    />
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transition: "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+        display: "inline-block",
+      }}
+    >
+      {children}
+    </div>
   );
 };
+
+const line1 = ["The", "Intelligence", "to", "Simplify"];
+const line2 = ["Your", "Processes"];
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Animated orb 1 — top left */}
-        <div
-          style={{
-            position: "absolute",
-            width: "65vw",
-            height: "65vw",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, hsl(var(--primary) / 0.13) 0%, transparent 70%)",
-            top: "-25%",
-            left: "-15%",
-            animation: "orbFloat1 22s ease-in-out infinite",
-            filter: "blur(50px)",
-          }}
-        />
-        {/* Animated orb 2 — bottom right */}
-        <div
-          style={{
-            position: "absolute",
-            width: "55vw",
-            height: "55vw",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, hsl(var(--primary) / 0.09) 0%, transparent 70%)",
-            bottom: "-20%",
-            right: "-10%",
-            animation: "orbFloat2 28s ease-in-out infinite",
-            filter: "blur(60px)",
-          }}
-        />
-        {/* Center radial glow */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 40% at 50% 45%, hsl(var(--primary) / 0.05) 0%, transparent 70%)",
-          }}
-        />
-        {/* Breathing grid */}
-        <div
-          className="absolute inset-0"
-          style={{
-            animation: "breatheGrid 8s ease-in-out infinite",
-            backgroundImage: `
-              linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
-              linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
-            `,
-            backgroundSize: "80px 80px",
-          }}
-        />
-        {/* Floating code snippets */}
-        <FloatingCode />
-      </div>
+      {/* Three.js neural network — lazy loaded, doesn't block paint */}
+      <Suspense fallback={null}>
+        <HeroScene />
+      </Suspense>
+
+      {/* Subtle grid overlay */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          animation: "breatheGrid 8s ease-in-out infinite",
+          backgroundImage: `
+            linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
+          `,
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      {/* Soft vignette so text stays readable */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, hsl(var(--background) / 0.6) 100%)",
+        }}
+      />
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         {/* Brand mark */}
-        <div className="mb-8 md:mb-16 animate-fade-in-up">
+        <div
+          className="mb-8 md:mb-14"
+          style={{ animation: "fadeInUp 0.8s ease-out both" }}
+        >
           <span className="font-display text-xs tracking-[0.4em] text-muted-foreground uppercase">
             MathBrooks
           </span>
         </div>
 
-        {/* Headline — large, uppercase, tight */}
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] xl:text-[7.5rem] font-bold uppercase leading-[0.95] tracking-tight mb-6 md:mb-10 animate-fade-in-up-delay-1">
-          <span className="text-gradient-accent glow-text">
-            The Intelligence to Simplify
-          </span>
-          <br />
-          Your Processes
+        {/* Headline — cinematic word reveal */}
+        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] xl:text-[7.5rem] font-bold uppercase leading-[0.95] tracking-tight mb-6 md:mb-10">
+          {/* Line 1 — gradient accent */}
+          <div className="flex flex-wrap justify-center gap-x-[0.22em]">
+            {line1.map((word, i) => (
+              <div key={word} style={{ overflow: "hidden" }}>
+                <span
+                  className="inline-block text-gradient-accent glow-text"
+                  style={{
+                    animation: `wordReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.15 + i * 0.11}s both`,
+                  }}
+                >
+                  {word}
+                </span>
+              </div>
+            ))}
+          </div>
+          {/* Line 2 — white */}
+          <div className="flex flex-wrap justify-center gap-x-[0.22em] mt-[0.05em]">
+            {line2.map((word, i) => (
+              <div key={word} style={{ overflow: "hidden" }}>
+                <span
+                  className="inline-block"
+                  style={{
+                    animation: `wordReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.58 + i * 0.11}s both`,
+                  }}
+                >
+                  {word}
+                </span>
+              </div>
+            ))}
+          </div>
         </h1>
 
-        {/* Subtext — single line, light */}
-        <p className="text-sm sm:text-base md:text-lg font-light text-muted-foreground max-w-2xl mx-auto mb-10 md:mb-14 animate-fade-in-up-delay-2">
-          We partner with operations-heavy teams to design, build, and deploy custom
-          software, automation, and applied AI that solve real business problems.
+        {/* Subtext */}
+        <p
+          className="text-sm sm:text-base md:text-lg font-light text-muted-foreground max-w-2xl mx-auto mb-10 md:mb-14"
+          style={{ animation: "fadeInUp 0.8s ease-out 0.9s both" }}
+        >
+          We partner with operations-heavy teams to design, build, and deploy
+          custom software, automation, and applied AI that solve real business
+          problems.
         </p>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up-delay-3">
-          <Button
-            size="lg"
-            className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 transition-all duration-300"
-            onClick={() =>
-              document
-                .getElementById("contact")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            Discuss Your Project
-          </Button>
-          <a
-            href="https://wa.me/263783469023?text=Hi%20MathBrooks%2C%20I%27d%20like%20to%20request%20a%20consultation."
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        {/* CTAs — magnetic */}
+        <div
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          style={{ animation: "fadeInUp 0.8s ease-out 1.1s both" }}
+        >
+          <Magnetic>
             <Button
-              variant="outline"
               size="lg"
-              className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300"
+              className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 transition-all duration-300"
+              onClick={() =>
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
             >
-              Request Consultation
+              Discuss Your Project
             </Button>
-          </a>
+          </Magnetic>
+          <Magnetic>
+            <a
+              href="https://wa.me/263783469023?text=Hi%20MathBrooks%2C%20I%27d%20like%20to%20request%20a%20consultation."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                variant="outline"
+                size="lg"
+                className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300"
+              >
+                Request Consultation
+              </Button>
+            </a>
+          </Magnetic>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+      <div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce"
+        style={{ animation: "fadeInUp 0.8s ease-out 1.4s both" }}
+      >
         <ChevronDown className="w-5 h-5 text-muted-foreground/60" />
       </div>
     </section>

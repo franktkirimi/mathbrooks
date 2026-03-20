@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ScrollProgress from "@/components/ScrollProgress";
 import CursorGlow from "@/components/CursorGlow";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import WhatWeBuild from "@/components/WhatWeBuild";
 import HowWeWork from "@/components/HowWeWork";
 import OurProjects from "@/components/OurProjects";
@@ -15,6 +16,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  useSmoothScroll();
   return (
     <div className="min-h-screen bg-background">
       <ScrollProgress />
