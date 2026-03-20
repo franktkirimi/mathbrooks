@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import AnimatedSection from "./AnimatedSection";
+import InteractiveCard from "./InteractiveCard";
+import TextScramble from "./TextScramble";
 
 const projects = [
   {
@@ -40,7 +42,6 @@ const OurProjects = () => {
       id="projects"
       className="py-16 md:py-[120px] lg:py-[150px] px-6 relative"
     >
-      {/* Subtle accent gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -50,11 +51,10 @@ const OurProjects = () => {
       />
 
       <div className="relative max-w-6xl mx-auto">
-        {/* Section header */}
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
-            <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
-              Selected Work
+            <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
+              <TextScramble text="Selected Work" />
             </h2>
             <p className="text-base font-light text-muted-foreground mt-6 max-w-xl mx-auto">
               Representative engagements and product builds across workflow
@@ -64,23 +64,20 @@ const OurProjects = () => {
           </div>
         </AnimatedSection>
 
-        {/* Project cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <AnimatedSection key={project.title} delay={index * 150}>
-              <div className="card-glass card-hover rounded-lg group relative overflow-hidden h-full flex flex-col">
-                {/* Image / Screenshot area */}
+              <InteractiveCard className="rounded-lg group h-full flex flex-col">
+                {/* Image */}
                 <div className="relative aspect-video overflow-hidden rounded-t-lg">
                   <img
                     src={project.image}
-                    alt={`Screenshot of ${project.title} — ${project.delivered.slice(0, 80)}`}
+                    alt={`Screenshot of ${project.title}`}
                     loading="lazy"
                     width={600}
                     height={338}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-
-                  {/* Hover overlay */}
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-all duration-500" />
                 </div>
 
@@ -120,7 +117,7 @@ const OurProjects = () => {
                     ))}
                   </div>
 
-                  {/* Tech tags */}
+                  {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
@@ -132,7 +129,7 @@ const OurProjects = () => {
                     ))}
                   </div>
                 </div>
-              </div>
+              </InteractiveCard>
             </AnimatedSection>
           ))}
         </div>

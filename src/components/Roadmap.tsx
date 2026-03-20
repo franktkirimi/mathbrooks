@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import TextScramble from "./TextScramble";
 
 const milestones = [
   {
@@ -44,8 +45,8 @@ const Roadmap = () => {
               Where we are focusing the business so delivery stays grounded in real
               client value.
             </p>
-            <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide mt-8">
-              Strategic Focus
+            <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide mt-8">
+              <TextScramble text="Strategic Focus" />
             </h2>
             <div className="line-accent w-24 mx-auto mt-8" />
           </div>

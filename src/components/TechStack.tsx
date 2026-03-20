@@ -1,44 +1,58 @@
 import AnimatedSection from "./AnimatedSection";
 
-const technologies = [
-  "React",
-  "Python",
-  "TypeScript",
-  "AWS",
-  "Vercel",
-  "OpenAI",
-  "PostgreSQL",
-  "TensorFlow",
+const row1 = [
+  "React", "Python", "TypeScript", "AWS", "Vercel",
+  "OpenAI", "PostgreSQL", "TensorFlow", "Docker", "Next.js",
 ];
 
-const TechStack = () => {
-  return (
-    <section className="py-16 md:py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <AnimatedSection>
-          <div className="text-center mb-10">
-            <h2 className="font-display text-lg md:text-xl tracking-[0.2em] uppercase text-muted-foreground">
-              Built With
-            </h2>
-            <p className="text-sm font-light text-muted-foreground mt-3 max-w-md mx-auto">
-              The tools and platforms powering our solutions.
-            </p>
-          </div>
+const row2 = [
+  "FastAPI", "Redis", "Kubernetes", "Supabase", "LangChain",
+  "Tailwind", "Node.js", "PyTorch", "GraphQL", "Prisma",
+];
 
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
-            {technologies.map((tech) => (
-              <span
-                key={tech}
-                className="font-display text-xs md:text-sm tracking-[0.15em] uppercase text-muted-foreground/60 hover:text-primary/80 transition-colors duration-300"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </AnimatedSection>
+const MarqueeRow = ({
+  items,
+  reverse = false,
+}: {
+  items: string[];
+  reverse?: boolean;
+}) => (
+  <div className="relative overflow-hidden group">
+    {/* Fade edges */}
+    <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+    <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+
+    <div
+      className={`flex gap-12 whitespace-nowrap ${
+        reverse ? "animate-marquee-reverse" : "animate-marquee"
+      } group-hover:[animation-play-state:paused]`}
+    >
+      {[...items, ...items].map((item, i) => (
+        <span
+          key={`${item}-${i}`}
+          className="font-display text-lg md:text-2xl tracking-[0.15em] uppercase text-muted-foreground/20 hover:text-primary/60 transition-colors duration-500 cursor-default select-none"
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+  </div>
+);
+
+const TechStack = () => (
+  <section className="py-16 md:py-24 overflow-hidden">
+    <AnimatedSection>
+      <div className="text-center mb-10">
+        <h2 className="font-display text-lg md:text-xl tracking-[0.2em] uppercase text-muted-foreground">
+          Built With
+        </h2>
       </div>
-    </section>
-  );
-};
+    </AnimatedSection>
+    <div className="space-y-6">
+      <MarqueeRow items={row1} />
+      <MarqueeRow items={row2} reverse />
+    </div>
+  </section>
+);
 
 export default TechStack;

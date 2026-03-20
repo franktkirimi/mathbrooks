@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import AnimatedSection from "./AnimatedSection";
+import TextScramble from "./TextScramble";
 
 const faqs = [
   {
@@ -45,8 +46,8 @@ const FAQ = () => {
         {/* Section header */}
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
-            <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
-              Frequently Asked Questions
+            <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
+              <TextScramble text="Frequently Asked Questions" />
             </h2>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>

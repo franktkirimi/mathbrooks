@@ -3,6 +3,7 @@ import { Search, PenTool, Code2, Rocket, Headphones } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import AnimatedSection from "./AnimatedSection";
+import TextScramble from "./TextScramble";
 
 /* ─── Steps data ─── */
 const steps = [
@@ -289,8 +290,8 @@ const HowWeWork = () => {
         {/* Header */}
         <AnimatedSection>
           <div className="text-center mb-8">
-            <h2 className="font-display text-2xl md:text-4xl lg:text-[2.75rem] font-bold uppercase tracking-wide">
-              How We Work
+            <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
+              <TextScramble text="How We Work" />
             </h2>
           </div>
         </AnimatedSection>
