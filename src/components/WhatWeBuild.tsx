@@ -12,21 +12,18 @@ const features = [
     title: "Custom Software",
     description:
       "Tailored platforms and tools built for your specific business workflows, from internal dashboards to client-facing products.",
-    span: "md:col-span-2 lg:col-span-1 lg:row-span-2",
   },
   {
     icon: Workflow,
     title: "Automation",
     description:
       "Streamline repetitive processes with intelligent automation — reduce manual work, cut errors, and scale faster.",
-    span: "",
   },
   {
     icon: Brain,
     title: "Applied AI",
     description:
       "Integrate machine learning and AI into your operations — from predictive analytics to natural language processing.",
-    span: "",
   },
 ];
 
@@ -52,9 +49,9 @@ const WhatWeBuild = () => {
         </AnimatedSection>
 
         {/* Bento-style grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 auto-rows-fr">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
-            <AnimatedSection key={feature.title} delay={index * 120} className={feature.span}>
+            <AnimatedSection key={feature.title} delay={index * 120}>
               <InteractiveCard className="rounded-lg p-6 md:p-10 group h-full flex flex-col">
                 <div className="mb-8">
                   <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center group-hover:border-primary/40 transition-colors duration-300">

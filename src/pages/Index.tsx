@@ -18,7 +18,7 @@ import Footer from "@/components/Footer";
 const Index = () => {
   useSmoothScroll();
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <ScrollProgress />
       <CursorGlow />
       {/* Skip to content link for keyboard/screen reader users */}

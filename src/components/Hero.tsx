@@ -83,7 +83,7 @@ const Hero = () => {
         </div>
 
         {/* Headline — cinematic word reveal */}
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] xl:text-[7.5rem] font-bold uppercase leading-[0.95] tracking-tight mb-6 md:mb-10">
+        <h1 className="font-display text-[2rem] sm:text-5xl md:text-7xl lg:text-[6rem] xl:text-[7.5rem] font-bold uppercase leading-[0.95] tracking-tight mb-6 md:mb-10">
           {/* Line 1 — gradient accent */}
           <div className="flex flex-wrap justify-center gap-x-[0.22em]">
             {line1.map((word, i) => (
