@@ -160,12 +160,13 @@
 
   .card-hover {
     @apply transition-all duration-500 ease-out;
+    position: relative;
   }
 
   .card-hover:hover {
-    @apply border-primary/30;
-    box-shadow: var(--glow-primary);
-    transform: translateY(-4px);
+    @apply border-primary/40;
+    box-shadow: var(--glow-primary-strong), inset 0 1px 0 hsl(var(--primary) / 0.08);
+    transform: translateY(-6px);
   }
 
   .glow-text {
@@ -254,6 +255,18 @@
   50% {
     opacity: calc(var(--grid-opacity) * 3.5);
   }
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.04); }
+  66% { transform: translate(-25px, 20px) scale(0.97); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-35px, 25px) scale(1.03); }
+  66% { transform: translate(30px, -20px) scale(0.98); }
 }
 
 @keyframes codeFloat {

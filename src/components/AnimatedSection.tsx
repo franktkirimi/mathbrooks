@@ -18,23 +18,26 @@ const AnimatedSection = ({
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>();
 
   const directionStyles = {
-    up: "translate-y-12",
-    down: "-translate-y-12",
-    left: "translate-x-12",
-    right: "-translate-x-12",
+    up: "translate-y-16",
+    down: "-translate-y-16",
+    left: "translate-x-16",
+    right: "-translate-x-16",
   };
 
   return (
     <div
       ref={ref}
       className={cn(
-        "transition-all duration-700 ease-out",
-        isVisible 
-          ? "opacity-100 translate-x-0 translate-y-0" 
+        "transition-all duration-700",
+        isVisible
+          ? "opacity-100 translate-x-0 translate-y-0"
           : `opacity-0 ${directionStyles[direction]}`,
         className
       )}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{
+        transitionDelay: `${delay}ms`,
+        transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+      }}
     >
       {children}
     </div>

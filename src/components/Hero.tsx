@@ -111,12 +111,42 @@ const Hero = () => {
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Radial glow */}
+        {/* Animated orb 1 — top left */}
+        <div
+          style={{
+            position: "absolute",
+            width: "65vw",
+            height: "65vw",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, hsl(var(--primary) / 0.13) 0%, transparent 70%)",
+            top: "-25%",
+            left: "-15%",
+            animation: "orbFloat1 22s ease-in-out infinite",
+            filter: "blur(50px)",
+          }}
+        />
+        {/* Animated orb 2 — bottom right */}
+        <div
+          style={{
+            position: "absolute",
+            width: "55vw",
+            height: "55vw",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, hsl(var(--primary) / 0.09) 0%, transparent 70%)",
+            bottom: "-20%",
+            right: "-10%",
+            animation: "orbFloat2 28s ease-in-out infinite",
+            filter: "blur(60px)",
+          }}
+        />
+        {/* Center radial glow */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 50% 40%, hsl(var(--primary) / 0.06) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 40% at 50% 45%, hsl(var(--primary) / 0.05) 0%, transparent 70%)",
           }}
         />
         {/* Breathing grid */}
@@ -144,7 +174,7 @@ const Hero = () => {
         </div>
 
         {/* Headline — large, uppercase, tight */}
-        <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[4rem] font-bold uppercase leading-[1.1] tracking-tight mb-6 md:mb-8 animate-fade-in-up-delay-1">
+        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] xl:text-[7.5rem] font-bold uppercase leading-[0.95] tracking-tight mb-6 md:mb-10 animate-fade-in-up-delay-1">
           <span className="text-gradient-accent glow-text">
             The Intelligence to Simplify
           </span>
