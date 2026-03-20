@@ -10,10 +10,12 @@ import Work from "./pages/Work";
 import NotFound from "./pages/NotFound";
 import Clients from "./pages/Clients";
 import Zifa from "./pages/Zifa";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const queryClient = new QueryClient();
 
 const App = () => (
+  <ErrorBoundary>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -32,6 +34,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 export default App;
