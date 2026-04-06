@@ -1,110 +1,142 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
+import PageHero from "@/components/site/PageHero";
+import SiteLayout from "@/components/site/SiteLayout";
+import { caseStudies } from "@/content/siteContent";
 import { usePageMeta } from "@/hooks/usePageMeta";
-
-const workItems = [
-  {
-    title: "OrderFile",
-    sector: "Workflow Automation",
-    businessNeed:
-      "High-volume folders become unmanageable quickly when teams rely on manual filing and inconsistent naming.",
-    delivered:
-      "A desktop workflow that applies rules automatically so files stay organised as they are created and saved.",
-    outcomes: ["10,000+ files organized", "95% time saved", "Built in 6 weeks"],
-  },
-  {
-    title: "Educentia",
-    sector: "Education Technology",
-    businessNeed:
-      "Students and tutors needed one system for lessons, assessments, and progress visibility.",
-    delivered:
-      "A connected platform for live learning, quizzes, tests, and progress tracking in one experience.",
-    outcomes: ["500+ students", "Live video lessons", "Built in 10 weeks"],
-  },
-  {
-    title: "CoachHub",
-    sector: "Operational Analytics",
-    businessNeed:
-      "Coaches needed clearer visibility across training plans, player performance, and development progress.",
-    delivered:
-      "A coaching management platform that supports planning, performance tracking, and ongoing progress review.",
-    outcomes: ["50+ teams managed", "Real-time analytics", "Built in 8 weeks"],
-  },
-];
 
 const Work = () => {
   usePageMeta({
-    title: "Selected Work | MathBrooks",
+    title: "Case Studies | MathBrooks",
     description:
-      "Representative MathBrooks work across workflow automation, education technology, and operational analytics.",
+      "Representative MathBrooks case studies across workflow automation, education technology, and operational analytics.",
     canonicalPath: "/work",
   });
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300 mb-12"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Home
-        </Link>
-
-        <AnimatedSection>
-          <div className="max-w-3xl">
-            <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Selected Work
+    <SiteLayout>
+      <PageHero
+        eyebrow="Case Studies"
+        title="Representative delivery across operations, product, and visibility"
+        description="These case studies show the kind of problems MathBrooks tends to solve: workflow friction, fragmented operations, and teams that need clearer systems and decision-making visibility."
+        actions={(
+          <>
+            <Link to="/book-demo">
+              <Button size="lg" className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6">
+                Discuss a Similar Problem
+              </Button>
+            </Link>
+            <Link to="/services">
+              <Button
+                variant="outline"
+                size="lg"
+                className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
+              >
+                See Services
+              </Button>
+            </Link>
+          </>
+        )}
+        sideContent={(
+          <div className="space-y-3">
+            <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70">
+              What to expect
             </p>
-            <h1 className="font-display text-3xl md:text-5xl lg:text-[3.5rem] font-bold uppercase tracking-wide leading-tight mb-6">
-              Representative Delivery Across Product and Operations
-            </h1>
-            <p className="text-base md:text-lg font-light text-muted-foreground leading-relaxed max-w-2xl">
-              These summaries show the kind of business problems we tend to work on:
-              workflow friction, fragmented operations, and teams that need clearer
-              visibility through software.
-            </p>
+            {[
+              "Clear business problem framing",
+              "What MathBrooks actually built",
+              "Technology used and measured result",
+            ].map((item) => (
+              <div key={item} className="rounded-xl border border-border/20 bg-background/40 px-4 py-3 text-sm font-light text-muted-foreground">
+                {item}
+              </div>
+            ))}
           </div>
-        </AnimatedSection>
+        )}
+      />
 
-        <div className="space-y-6 mt-12 md:mt-16">
-          {workItems.map((item, index) => (
-            <AnimatedSection key={item.title} delay={index * 120}>
-              <article className="card-glass rounded-lg p-6 md:p-8">
-                <div className="flex flex-col md:flex-row md:items-start gap-6">
-                  <div className="md:w-48 flex-shrink-0">
-                    <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-3">
-                      {item.sector}
-                    </p>
-                    <h2 className="font-display text-xl tracking-wide">{item.title}</h2>
+      <section className="px-6 pb-20 md:pb-28">
+        <div className="max-w-6xl mx-auto space-y-8">
+          {caseStudies.map((item, index) => (
+            <AnimatedSection key={item.slug} delay={index * 120}>
+              <article className="card-glass rounded-2xl overflow-hidden">
+                <div className="grid gap-0 lg:grid-cols-[minmax(280px,0.85fr)_minmax(0,1.15fr)]">
+                  <div className="relative min-h-[240px] lg:min-h-full border-b lg:border-b-0 lg:border-r border-border/20">
+                    <img
+                      src={item.image}
+                      alt={`Screenshot of ${item.title}`}
+                      loading="lazy"
+                      width={800}
+                      height={520}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+                    <div className="absolute left-6 bottom-6 right-6">
+                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/80 mb-2">
+                        {item.sector}
+                      </p>
+                      <h2 className="font-display text-2xl uppercase tracking-wide text-foreground">
+                        {item.title}
+                      </h2>
+                      <p className="text-sm font-light text-muted-foreground mt-3 leading-relaxed">
+                        {item.summary}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex-1 space-y-5">
+
+                  <div className="p-6 md:p-8 space-y-6">
                     <div>
                       <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
-                        Business Need
+                        Business Problem
                       </p>
                       <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                        {item.businessNeed}
+                        {item.businessProblem}
                       </p>
                     </div>
+
                     <div>
                       <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
-                        Delivered
+                        What MathBrooks Built
                       </p>
                       <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                        {item.delivered}
+                        {item.solution}
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {item.outcomes.map((outcome) => (
-                        <span
-                          key={outcome}
-                          className="text-[0.65rem] font-display tracking-wider px-2.5 py-1 rounded-full bg-primary/10 text-primary/80"
-                        >
-                          {outcome}
-                        </span>
-                      ))}
+
+                    <div>
+                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
+                        Technology Used
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {item.technology.map((tech) => (
+                          <span
+                            key={tech}
+                            className="text-[0.65rem] font-display tracking-wider uppercase px-3 py-1 rounded-full border border-border/30 text-muted-foreground"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
+                        Measured Result
+                      </p>
+                      <p className="text-sm font-light text-muted-foreground leading-relaxed mb-4">
+                        {item.result}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {item.metrics.map((metric) => (
+                          <span
+                            key={metric}
+                            className="text-[0.65rem] font-display tracking-wider px-2.5 py-1 rounded-full bg-primary/10 text-primary/80"
+                          >
+                            {metric}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -112,23 +144,8 @@ const Work = () => {
             </AnimatedSection>
           ))}
         </div>
-
-        <AnimatedSection delay={360}>
-          <div className="text-center mt-12 md:mt-16">
-            <p className="text-sm font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-5">
-              If you want to discuss a similar operational problem, start with the
-              contact section and we can point you to the most relevant approach.
-            </p>
-            <a
-              href="/#contact"
-              className="font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
-            >
-              Start the conversation
-            </a>
-          </div>
-        </AnimatedSection>
-      </div>
-    </div>
+      </section>
+    </SiteLayout>
   );
 };
 

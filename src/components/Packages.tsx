@@ -66,9 +66,17 @@ const Packages = () => {
       <div className="max-w-6xl mx-auto">
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
+            <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
+              Custom Delivery
+            </p>
             <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
-              <TextScramble text="Packages" />
+              <TextScramble text="Engagement Paths" />
             </h2>
+            <p className="text-base font-light text-muted-foreground mt-6 max-w-2xl mx-auto leading-relaxed">
+              Use these as starting points for custom software, automation, and AI
+              work. Exact scope still depends on workflow complexity, delivery risk,
+              and rollout needs.
+            </p>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>
         </AnimatedSection>

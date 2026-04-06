@@ -1,36 +1,32 @@
-import Navbar from "@/components/Navbar";
+import AILabs from "@/components/AILabs";
+import Contact from "@/components/Contact";
+import FAQ from "@/components/FAQ";
 import Hero from "@/components/Hero";
-import ScrollProgress from "@/components/ScrollProgress";
-import CursorGlow from "@/components/CursorGlow";
-import { useSmoothScroll } from "@/hooks/useSmoothScroll";
-import WhatWeBuild from "@/components/WhatWeBuild";
 import HowWeWork from "@/components/HowWeWork";
 import OurProjects from "@/components/OurProjects";
+import Packages from "@/components/Packages";
+import ProductsHighlight from "@/components/ProductsHighlight";
+import Roadmap from "@/components/Roadmap";
 import TechStack from "@/components/TechStack";
 import WhyWorkWithUs from "@/components/Testimonials";
-import Packages from "@/components/Packages";
-import AILabs from "@/components/AILabs";
-import Roadmap from "@/components/Roadmap";
-import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import WhatWeBuild from "@/components/WhatWeBuild";
+import SiteLayout from "@/components/site/SiteLayout";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 const Index = () => {
   useSmoothScroll();
+  usePageMeta({
+    title: "MathBrooks | Run Your Business Better. Built for Africa.",
+    description:
+      "MathBrooks builds custom software, business platforms, and applied AI systems for operations-heavy businesses across Zimbabwe and beyond.",
+    canonicalPath: "/",
+  });
+
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
-      <ScrollProgress />
-      <CursorGlow />
-      {/* Skip to content link for keyboard/screen reader users */}
-      <a
-        href="#services"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:text-sm focus:font-display focus:tracking-wider focus:uppercase"
-      >
-        Skip to content
-      </a>
-      <Navbar />
-      <main>
+    <SiteLayout>
       <Hero />
+      <ProductsHighlight />
       <WhatWeBuild />
       <HowWeWork />
       <OurProjects />
@@ -41,9 +37,7 @@ const Index = () => {
       <Roadmap />
       <FAQ />
       <Contact />
-      </main>
-      <Footer />
-    </div>
+    </SiteLayout>
   );
 };
 

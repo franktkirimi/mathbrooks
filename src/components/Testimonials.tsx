@@ -11,8 +11,8 @@ const highlights = [
   },
   {
     icon: Shield,
-    label: "AI-First",
-    detail: "Intelligence built into every system",
+    label: "Governed AI",
+    detail: "Approvals, evals, and fallback paths built in",
   },
   {
     icon: Users,
@@ -41,6 +41,11 @@ const values = [
     title: "AI Isn't an Add-On — It's Built In",
     description:
       "We don't bolt AI onto finished products. We design intelligent systems from day one — automation, predictions, and insights baked into the core.",
+  },
+  {
+    title: "Governance Is Part of the Build",
+    description:
+      "For automation, agents, and AI-assisted workflows, we design around approvals, observability, evaluation, and fallback paths so production systems stay accountable.",
   },
 ];
 
@@ -86,7 +91,7 @@ const WhyWorkWithUs = () => {
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
           {values.map((value, index) => (
             <AnimatedSection key={value.title} delay={index * 150}>
               <InteractiveCard className="rounded-lg p-6 md:p-8 h-full flex flex-col">

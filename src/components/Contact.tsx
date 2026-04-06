@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Mail, Phone, MessageCircle, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "./AnimatedSection";
@@ -25,6 +26,15 @@ const Contact = () => {
         {/* Contact buttons */}
         <AnimatedSection delay={300}>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-10 md:mb-14">
+            <Link to="/book-demo" className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 w-full sm:w-auto"
+              >
+                Book a Discovery Call
+              </Button>
+            </Link>
+
             <a
               href="https://wa.me/263783469023"
               target="_blank"
@@ -79,9 +89,9 @@ const Contact = () => {
                   "We review for technical complexity, delivery risk, and whether software or AI is the right lever.",
               },
               {
-                title: "3. Get next steps",
+                title: "3. Book the right next step",
                 description:
-                  "You get a clear recommendation instead of a generic sales reply.",
+                  "You get a demo, a scoping call, or a written recommendation instead of a generic sales reply.",
               },
             ].map((step) => (
               <div key={step.title} className="card-glass rounded-lg p-5">

@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Brain, Cpu, Workflow } from "lucide-react";
+import {
+  Bot,
+  Brain,
+  Cpu,
+  PhoneCall,
+  ShieldCheck,
+  Workflow,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
+import PageHero from "@/components/site/PageHero";
+import SiteLayout from "@/components/site/SiteLayout";
+import { operatingModel, serviceAssurance } from "@/content/siteContent";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const services = [
@@ -40,47 +51,88 @@ const services = [
       "Clear path from pilot to production",
     ],
   },
+  {
+    icon: Bot,
+    title: "Agentic Systems",
+    buyer: "For teams that need AI to act across tools, approvals, and operating procedures",
+    description:
+      "We build agent workflows that connect to your systems, complete bounded tasks, and stay inside human approval paths where risk matters.",
+    outcomes: [
+      "Tool-connected agents instead of standalone demos",
+      "Approval gates and task boundaries defined up front",
+      "Operational fit reviewed before rollout",
+    ],
+  },
+  {
+    icon: PhoneCall,
+    title: "Voice & Phone Automation",
+    buyer: "For teams where faster intake, routing, and response handling creates immediate operational value",
+    description:
+      "We design real-time voice and phone flows for support, intake, scheduling, routing, and other time-sensitive interactions.",
+    outcomes: [
+      "Voice flows mapped to real process handoffs",
+      "Fast escalation paths to humans when needed",
+      "Built for measurable time savings and response quality",
+    ],
+  },
 ];
 
 const Services = () => {
   usePageMeta({
     title: "Services | MathBrooks",
     description:
-      "MathBrooks provides custom software development, workflow automation, and applied AI for operations-heavy businesses.",
+      "MathBrooks provides custom software, workflow automation, applied AI, agentic systems, and voice automation for operations-heavy businesses.",
     canonicalPath: "/services",
   });
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300 mb-12"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Home
-        </Link>
-
-        <AnimatedSection>
-          <div className="max-w-3xl">
-            <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Services
+    <SiteLayout>
+      <PageHero
+        eyebrow="Services"
+        title="Custom software, automation, and AI built around real operations"
+        description="MathBrooks services cover the workflows that are too specific for a standard product. The goal is not to sell complexity. It is to remove friction, improve visibility, and ship something the team can actually use."
+        actions={(
+          <>
+            <Link to="/book-demo">
+              <Button size="lg" className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6">
+                Discuss a Project
+              </Button>
+            </Link>
+            <Link to="/products">
+              <Button
+                variant="outline"
+                size="lg"
+                className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
+              >
+                See Product Modules
+              </Button>
+            </Link>
+          </>
+        )}
+        sideContent={(
+          <div className="space-y-3">
+            <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70">
+              Delivery Standards
             </p>
-            <h1 className="font-display text-3xl md:text-5xl lg:text-[3.5rem] font-bold uppercase tracking-wide leading-tight mb-6">
-              Software, Automation, and AI Built Around Real Operations
-            </h1>
-            <p className="text-base md:text-lg font-light text-muted-foreground leading-relaxed max-w-2xl">
-              We scope work around business bottlenecks, delivery risk, and the
-              systems you already have. The goal is not to sell complexity. It is to
-              remove friction and ship something the team can actually use.
-            </p>
+            {serviceAssurance.map((item) => (
+              <div key={item.title} className="rounded-xl border border-border/20 bg-background/40 p-4">
+                <h2 className="font-display text-xs tracking-[0.15em] uppercase mb-2">
+                  {item.title}
+                </h2>
+                <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                  {item.detail}
+                </p>
+              </div>
+            ))}
           </div>
-        </AnimatedSection>
+        )}
+      />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-12 md:mt-16">
+      <section className="px-6 pb-16 md:pb-24">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {services.map((service, index) => (
             <AnimatedSection key={service.title} delay={index * 120}>
-              <article className="card-glass rounded-lg p-6 md:p-8 h-full">
+              <article className="card-glass rounded-2xl p-6 md:p-8 h-full">
                 <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center mb-6">
                   <service.icon className="w-5 h-5 text-primary" />
                 </div>
@@ -105,27 +157,57 @@ const Services = () => {
             </AnimatedSection>
           ))}
         </div>
+      </section>
 
-        <AnimatedSection delay={360}>
-          <div className="card-glass rounded-lg p-6 md:p-8 mt-12 md:mt-16">
-            <h2 className="font-display text-base tracking-wider uppercase mb-4">
-              How Engagements Start
-            </h2>
-            <p className="text-sm font-light text-muted-foreground leading-relaxed max-w-3xl">
-              Most work starts with a short discovery conversation, followed by a
-              recommendation on scope, risks, and the most sensible delivery path. If
-              the right answer is not custom software, we say so early.
-            </p>
-            <a
-              href="/#contact"
-              className="inline-block mt-6 font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
-            >
-              Discuss a project
-            </a>
-          </div>
-        </AnimatedSection>
-      </div>
-    </div>
+      <section className="px-6 pb-20 md:pb-28">
+        <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <AnimatedSection>
+            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
+              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
+                How engagements start
+              </p>
+              <p className="text-sm font-light text-muted-foreground leading-relaxed mb-5">
+                Most work starts with a short discovery conversation, followed by a recommendation on scope, risks, and the most sensible delivery path. If the right answer is not custom software, we say so early.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {[
+                  "Share the business problem and current workflow.",
+                  "We review delivery risk, constraints, and product fit.",
+                  "You get a clear recommendation on the next step.",
+                ].map((step) => (
+                  <div key={step} className="rounded-xl border border-border/20 bg-background/40 p-4 text-sm font-light text-muted-foreground">
+                    {step}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={120}>
+            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
+              <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center mb-6">
+                <ShieldCheck className="w-5 h-5 text-primary" />
+              </div>
+              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
+                Delivery discipline
+              </p>
+              <div className="space-y-4">
+                {operatingModel.map((item) => (
+                  <div key={item.title} className="border-b border-border/20 pb-4 last:border-b-0 last:pb-0">
+                    <h2 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
+                      {item.title}
+                    </h2>
+                    <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                      {item.detail}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </SiteLayout>
   );
 };
 

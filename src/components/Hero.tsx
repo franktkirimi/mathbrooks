@@ -1,24 +1,27 @@
-import { useRef, lazy, Suspense } from "react";
-import { Button } from "@/components/ui/button";
+import { lazy, Suspense, useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { businessPillars } from "@/content/siteContent";
 
 const HeroScene = lazy(() => import("./HeroScene"));
 
-// Magnetic wrapper — button drifts slightly toward cursor
 const Magnetic = ({ children }: { children: React.ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) * 0.38;
-    const y = (e.clientY - rect.top - rect.height / 2) * 0.38;
-    el.style.transform = `translate(${x}px, ${y}px)`;
+  const handleMouseMove = (event: React.MouseEvent) => {
+    const element = ref.current;
+    if (!element) return;
+    const rect = element.getBoundingClientRect();
+    const x = (event.clientX - rect.left - rect.width / 2) * 0.38;
+    const y = (event.clientY - rect.top - rect.height / 2) * 0.38;
+    element.style.transform = `translate(${x}px, ${y}px)`;
   };
 
   const handleMouseLeave = () => {
-    if (ref.current) ref.current.style.transform = "translate(0, 0)";
+    if (ref.current) {
+      ref.current.style.transform = "translate(0, 0)";
+    }
   };
 
   return (
@@ -36,18 +39,16 @@ const Magnetic = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const line1 = ["The", "Intelligence", "to", "Simplify"];
-const line2 = ["Your", "Processes"];
+const line1 = ["Run", "Your", "Business"];
+const line2 = ["Built", "For", "Africa"];
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
-      {/* Three.js neural network — lazy loaded, doesn't block paint */}
       <Suspense fallback={null}>
         <HeroScene />
       </Suspense>
 
-      {/* Subtle grid overlay */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -61,7 +62,6 @@ const Hero = () => {
         }}
       />
 
-      {/* Soft vignette so text stays readable */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -72,26 +72,20 @@ const Hero = () => {
       />
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
-        {/* Brand mark */}
-        <div
-          className="mb-8 md:mb-14"
-          style={{ animation: "fadeInUp 0.8s ease-out both" }}
-        >
+        <div className="mb-8 md:mb-14" style={{ animation: "fadeInUp 0.8s ease-out both" }}>
           <span className="font-display text-xs tracking-[0.4em] text-muted-foreground uppercase">
-            MathBrooks
+            MathBrooks · Harare, Zimbabwe
           </span>
         </div>
 
-        {/* Headline — cinematic word reveal */}
         <h1 className="font-display text-[2rem] sm:text-5xl md:text-7xl lg:text-[6rem] xl:text-[7.5rem] font-bold uppercase leading-[0.95] tracking-tight mb-6 md:mb-10">
-          {/* Line 1 — gradient accent */}
           <div className="flex flex-wrap justify-center gap-x-[0.22em]">
-            {line1.map((word, i) => (
+            {line1.map((word, index) => (
               <div key={word} style={{ overflow: "hidden" }}>
                 <span
                   className="inline-block text-gradient-accent glow-text"
                   style={{
-                    animation: `wordReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.15 + i * 0.11}s both`,
+                    animation: `wordReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.15 + index * 0.11}s both`,
                   }}
                 >
                   {word}
@@ -99,14 +93,13 @@ const Hero = () => {
               </div>
             ))}
           </div>
-          {/* Line 2 — white */}
           <div className="flex flex-wrap justify-center gap-x-[0.22em] mt-[0.05em]">
-            {line2.map((word, i) => (
+            {line2.map((word, index) => (
               <div key={word} style={{ overflow: "hidden" }}>
                 <span
                   className="inline-block"
                   style={{
-                    animation: `wordReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.58 + i * 0.11}s both`,
+                    animation: `wordReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.58 + index * 0.11}s both`,
                   }}
                 >
                   {word}
@@ -116,53 +109,63 @@ const Hero = () => {
           </div>
         </h1>
 
-        {/* Subtext */}
         <p
-          className="text-sm sm:text-base md:text-lg font-light text-muted-foreground max-w-2xl mx-auto mb-10 md:mb-14"
+          className="text-sm sm:text-base md:text-lg font-light text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-10"
           style={{ animation: "fadeInUp 0.8s ease-out 0.9s both" }}
         >
-          We partner with operations-heavy teams to design, build, and deploy
-          custom software, automation, and applied AI that solve real business
-          problems.
+          Custom software, business platforms, and applied AI systems for operations-heavy businesses across Zimbabwe and beyond.
         </p>
 
-        {/* CTAs — magnetic */}
+        <div
+          className="flex flex-wrap items-center justify-center gap-3 mb-10 md:mb-14"
+          style={{ animation: "fadeInUp 0.8s ease-out 1s both" }}
+        >
+          {businessPillars.map((pillar, index) => (
+            <span
+              key={pillar}
+              className="font-display text-[0.6rem] tracking-[0.18em] uppercase px-3 py-1.5 rounded-full border border-primary/30 text-primary/70"
+              style={{ animationDelay: `${1 + index * 0.08}s` }}
+            >
+              {pillar}
+            </span>
+          ))}
+        </div>
+
         <div
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          style={{ animation: "fadeInUp 0.8s ease-out 1.1s both" }}
+          style={{ animation: "fadeInUp 0.8s ease-out 1.15s both" }}
         >
           <Magnetic>
-            <Button
-              size="lg"
-              className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 transition-all duration-300"
-              onClick={() =>
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              Discuss Your Project
-            </Button>
+            <Link to="/products">
+              <Button
+                size="lg"
+                className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 transition-all duration-300"
+              >
+                Explore Products
+              </Button>
+            </Link>
           </Magnetic>
           <Magnetic>
-            <a
-              href="https://wa.me/263783469023?text=Hi%20MathBrooks%2C%20I%27d%20like%20to%20request%20a%20consultation."
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link to="/book-demo">
               <Button
                 variant="outline"
                 size="lg"
                 className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300"
               >
-                Request Consultation
+                Book a Demo
               </Button>
-            </a>
+            </Link>
           </Magnetic>
         </div>
+
+        <p
+          className="text-xs sm:text-sm font-light text-muted-foreground max-w-2xl mx-auto mt-6"
+          style={{ animation: "fadeInUp 0.8s ease-out 1.25s both" }}
+        >
+          Products for CRM, HR &amp; Payroll, Projects, and Analytics. Custom services for unique workflows, automation, and AI.
+        </p>
       </div>
 
-      {/* Scroll indicator */}
       <div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce"
         style={{ animation: "fadeInUp 0.8s ease-out 1.4s both" }}

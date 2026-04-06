@@ -28,3 +28,7 @@ npm run build
 ```sh
 npm test
 ```
+
+## Operations
+
+- Internal Vercel admin note: [docs/vercel-admin-checklist.md](docs/vercel-admin-checklist.md)

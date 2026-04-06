@@ -1,4 +1,5 @@
 import { Leaf, Mountain, UserCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "./AnimatedSection";
 import InteractiveCard from "./InteractiveCard";
@@ -9,19 +10,19 @@ const labs = [
     icon: Leaf,
     title: "AI for Agriculture",
     description:
-      "Autonomous crop intelligence and predictive decision systems for smallholder and commercial farms across Southern Africa",
+      "Autonomous crop intelligence and predictive decision systems for smallholder and commercial farms across Southern Africa.",
   },
   {
     icon: Mountain,
     title: "AI for Mining",
     description:
-      "Operational optimization and safety monitoring built for Africa's mining sector",
+      "Operational optimization and safety monitoring built for Africa's mining sector.",
   },
   {
     icon: UserCircle,
     title: "AI Managers",
     description:
-      "Intelligent digital managers that coordinate teams, workflows, and enterprise operations — reducing overhead and driving output for African businesses",
+      "Intelligent digital managers that coordinate teams, workflows, and enterprise operations while keeping human approvals where they matter.",
   },
 ];
 
@@ -43,8 +44,7 @@ const AILabs = () => {
               <TextScramble text="AI Labs" />
             </h2>
             <p className="text-base font-light text-muted-foreground mt-6 max-w-xl mx-auto">
-              Our research division exploring the next generation of intelligent
-              systems for African industries.
+              Research and product exploration for intelligent systems that can create practical value in African industries.
             </p>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>
@@ -54,11 +54,10 @@ const AILabs = () => {
           {labs.map((lab, index) => (
             <AnimatedSection key={lab.title} delay={index * 150}>
               <InteractiveCard className="rounded-lg p-6 md:p-10 group h-full">
-                {/* Geometric accent */}
                 <div
                   className="absolute top-0 right-0 w-24 h-24 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-500 z-0"
                   style={{
-                    background: `linear-gradient(135deg, hsl(var(--primary)) 0%, transparent 70%)`,
+                    background: "linear-gradient(135deg, hsl(var(--primary)) 0%, transparent 70%)",
                     clipPath: "polygon(100% 0, 100% 100%, 0 0)",
                   }}
                 />
@@ -81,16 +80,21 @@ const AILabs = () => {
         </div>
 
         <AnimatedSection delay={500}>
-          <div className="text-center mt-12 md:mt-20">
-            <a href="#contact">
+          <div className="text-center mt-12 md:mt-20 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link to="/ai-labs">
               <Button
                 variant="outline"
                 size="lg"
                 className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300"
               >
-                Get in Touch
+                Explore AI Labs
               </Button>
-            </a>
+            </Link>
+            <Link to="/book-demo">
+              <Button size="lg" className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6">
+                Discuss an AI Idea
+              </Button>
+            </Link>
           </div>
         </AnimatedSection>
       </div>

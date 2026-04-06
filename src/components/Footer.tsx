@@ -1,99 +1,93 @@
 import { Link } from "react-router-dom";
 
+const productLinks = [
+  { label: "CRM", href: "/products/crm" },
+  { label: "HR & Payroll", href: "/products/hr" },
+  { label: "Projects", href: "/products/projects" },
+  { label: "Analytics", href: "/products/analytics" },
+];
+
+const companyLinks = [
+  { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/work" },
+  { label: "AI Labs", href: "/ai-labs" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "About", href: "/about" },
+  { label: "Resources", href: "/blog" },
+  { label: "Privacy Policy", href: "/privacy" },
+];
+
 const Footer = () => {
   return (
     <footer className="pt-12 md:pt-16 pb-8 px-6 border-t border-border/20">
       <div className="max-w-6xl mx-auto">
-        {/* Main footer grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+            <Link
+              to="/"
               className="font-display text-sm tracking-[0.2em] text-foreground hover:text-primary transition-colors duration-300"
             >
               MATHBROOKS
-            </a>
+            </Link>
             <p className="text-sm font-light text-muted-foreground mt-4 leading-relaxed max-w-xs">
-              The intelligence to simplify your processes.
-              Headquartered in Harare, operating globally.
+              Software, business platforms, and applied AI built in Harare for businesses that need practical operating systems.
             </p>
+            <Link
+              to="/book-demo"
+              className="inline-flex mt-5 font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+            >
+              Book a Demo
+            </Link>
           </div>
 
-          {/* Navigation */}
           <div>
-            <h4 className="font-display text-xs tracking-[0.15em] uppercase text-foreground mb-4">
-              Company
-            </h4>
+            <h2 className="font-display text-xs tracking-[0.15em] uppercase text-foreground mb-4">
+              Products
+            </h2>
             <ul className="space-y-2.5">
-              {[
-                { label: "Services", href: "#services" },
-                { label: "How We Work", href: "#how-we-work" },
-                { label: "Projects", href: "#projects" },
-                { label: "Packages", href: "#packages" },
-              ].map((link) => (
+              <li>
+                <Link
+                  to="/products"
+                  className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
+                >
+                  All Products
+                </Link>
+              </li>
+              {productLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Resources */}
           <div>
-            <h4 className="font-display text-xs tracking-[0.15em] uppercase text-foreground mb-4">
-              Resources
-            </h4>
+            <h2 className="font-display text-xs tracking-[0.15em] uppercase text-foreground mb-4">
+              Company
+            </h2>
             <ul className="space-y-2.5">
-              <li>
-                <Link
-                  to="/services"
-                  className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
-                >
-                  Services Overview
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/work"
-                  className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
-                >
-                  Selected Work
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="#faq"
-                  className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
-                >
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <Link
-                  to="/privacy"
-                  className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
+              {companyLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="font-display text-xs tracking-[0.15em] uppercase text-foreground mb-4">
-              Get in Touch
-            </h4>
+            <h2 className="font-display text-xs tracking-[0.15em] uppercase text-foreground mb-4">
+              Contact
+            </h2>
             <ul className="space-y-2.5">
               <li>
                 <a
@@ -121,43 +115,19 @@ const Footer = () => {
                   +263 78 346 9023
                 </a>
               </li>
+              <li className="text-sm font-light text-muted-foreground pt-2">
+                Harare, Zimbabwe
+              </li>
             </ul>
-
-            {/* Social links */}
-            <div className="flex items-center gap-4 mt-5">
-              <a
-                href="https://linkedin.com/company/mathbrooks"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
-<a
-                href="https://x.com/MathBrooks"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-                className="text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="border-t border-border/20 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs font-light text-muted-foreground">
             &copy; {new Date().getFullYear()} MathBrooks. All rights reserved.
           </p>
           <p className="text-xs font-light text-muted-foreground">
-            Harare, Zimbabwe — Operating Globally
+            Built for practical operations across Africa and beyond.
           </p>
         </div>
       </div>

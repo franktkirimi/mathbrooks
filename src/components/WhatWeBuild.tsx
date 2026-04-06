@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Cpu, Workflow, Brain } from "lucide-react";
+import { Bot, Brain, Cpu, PhoneCall, Workflow } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import InteractiveCard from "./InteractiveCard";
 import TextScramble from "./TextScramble";
@@ -25,6 +25,18 @@ const features = [
     description:
       "Integrate machine learning and AI into your operations — from predictive analytics to natural language processing.",
   },
+  {
+    icon: Bot,
+    title: "Agentic Systems",
+    description:
+      "Tool-connected AI agents that work inside real approvals, workflows, and business rules instead of isolated demos.",
+  },
+  {
+    icon: PhoneCall,
+    title: "Voice & Phone Automation",
+    description:
+      "Real-time voice and phone workflows for intake, support, routing, and internal operations where speed matters.",
+  },
 ];
 
 const WhatWeBuild = () => {
@@ -41,15 +53,23 @@ const WhatWeBuild = () => {
       <div className="max-w-6xl mx-auto">
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
+            <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
+              Custom Delivery
+            </p>
             <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
-              <TextScramble text="What We Build" />
+              <TextScramble text="Services For Unique Workflows" />
             </h2>
+            <p className="text-base font-light text-muted-foreground mt-6 max-w-2xl mx-auto leading-relaxed">
+              These are the bespoke MathBrooks services. Use them when the business
+              needs more than a standard product module: new systems, integrations,
+              automation, or AI embedded into the actual workflow.
+            </p>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>
         </AnimatedSection>
 
         {/* Bento-style grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {features.map((feature, index) => (
             <AnimatedSection key={feature.title} delay={index * 120}>
               <InteractiveCard className="rounded-lg p-6 md:p-10 group h-full flex flex-col">

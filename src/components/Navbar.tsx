@@ -1,77 +1,151 @@
-import { useState, useEffect } from "react";
-import { Sun, Moon, Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
+import { cn } from "@/lib/utils";
 
-const navItems = [
-  { label: "Services", href: "#services" },
-  { label: "How We Work", href: "#how-we-work" },
-  { label: "Projects", href: "#projects" },
-  { label: "Packages", href: "#packages" },
-  { label: "AI Labs", href: "#labs" },
-  { label: "Contact", href: "#contact" },
+const productLinks = [
+  { label: "All Products", href: "/products" },
+  { label: "CRM", href: "/products/crm" },
+  { label: "HR & Payroll", href: "/products/hr" },
+  { label: "Projects", href: "/products/projects" },
+  { label: "Analytics", href: "/products/analytics" },
+];
+
+const mainNav = [
+  { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/work" },
+  { label: "AI Labs", href: "/ai-labs" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "About", href: "/about" },
+  { label: "Resources", href: "/blog" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
   const { isDark, toggle } = useTheme();
+  const location = useLocation();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 32);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDesktopDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setMobileProductsOpen(false);
+    setDesktopDropdownOpen(false);
+  }, [location.pathname]);
+
+  const productsActive = location.pathname === "/products" || location.pathname.startsWith("/products/");
 
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled || mobileOpen
-          ? "bg-background/80 backdrop-blur-md border-b border-border/20"
+          ? "bg-background/85 backdrop-blur-md border-b border-border/20"
           : "bg-transparent"
       )}
     >
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            setMobileOpen(false);
-          }}
+        <Link
+          to="/"
           className="font-display text-sm tracking-[0.2em] text-foreground hover:text-primary transition-colors duration-300"
         >
           MATHBROOKS
-        </a>
+        </Link>
 
-        {/* Desktop: Nav links + theme toggle */}
-        <div className="hidden sm:flex items-center gap-8">
-          {navItems.map((item) => (
-            <a
+        <div className="hidden lg:flex items-center gap-6">
+          <div ref={dropdownRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setDesktopDropdownOpen((current) => !current)}
+              className={cn(
+                "flex items-center gap-1 font-display text-[0.65rem] tracking-[0.15em] uppercase transition-colors duration-300",
+                productsActive || desktopDropdownOpen
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              )}
+            >
+              Products
+              <ChevronDown
+                className={cn(
+                  "w-3 h-3 transition-transform duration-200",
+                  desktopDropdownOpen ? "rotate-180" : ""
+                )}
+              />
+            </button>
+
+            {desktopDropdownOpen ? (
+              <div className="absolute top-full left-0 mt-3 w-52 rounded-xl border border-border/30 bg-background/95 backdrop-blur-md shadow-xl py-2">
+                {productLinks.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    onClick={() => setDesktopDropdownOpen(false)}
+                    className={cn(
+                      "block px-4 py-2.5 font-display text-[0.65rem] tracking-[0.15em] uppercase transition-colors duration-200",
+                      location.pathname === item.href
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-primary",
+                      item.href === "/products" ? "border-b border-border/20 mb-1" : ""
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          {mainNav.map((item) => (
+            <Link
               key={item.href}
-              href={item.href}
-              className="font-display text-[0.65rem] tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors duration-300 uppercase"
+              to={item.href}
+              className={cn(
+                "font-display text-[0.65rem] tracking-[0.15em] uppercase transition-colors duration-300",
+                location.pathname === item.href
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              )}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
 
-          {/* Theme toggle */}
+          <Link
+            to="/book-demo"
+            className="font-display text-[0.65rem] tracking-[0.15em] uppercase px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300"
+          >
+            Book Demo
+          </Link>
+
           <button
+            type="button"
             onClick={toggle}
             aria-label="Toggle theme"
             className="relative w-12 h-6 rounded-full border border-border/40 bg-secondary/50 hover:border-primary/30 transition-all duration-300 flex items-center px-1"
@@ -91,9 +165,9 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile: hamburger + theme toggle */}
-        <div className="sm:hidden flex items-center gap-3">
+        <div className="lg:hidden flex items-center gap-3">
           <button
+            type="button"
             onClick={toggle}
             aria-label="Toggle theme"
             className="w-9 h-9 rounded-md border border-border/40 flex items-center justify-center hover:border-primary/30 transition-all duration-300"
@@ -105,7 +179,8 @@ const Navbar = () => {
             )}
           </button>
           <button
-            onClick={() => setMobileOpen((v) => !v)}
+            type="button"
+            onClick={() => setMobileOpen((current) => !current)}
             aria-label="Toggle menu"
             className="w-9 h-9 rounded-md border border-border/40 flex items-center justify-center hover:border-primary/30 transition-all duration-300"
           >
@@ -118,24 +193,67 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile slide-down menu */}
       <div
         className={cn(
-          "sm:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-md border-b border-border/20",
-          mobileOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0 border-b-0"
+          "lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-md border-b border-border/20",
+          mobileOpen ? "max-h-[80vh] opacity-100 overflow-y-auto" : "max-h-0 opacity-0 border-b-0"
         )}
       >
         <div className="px-6 py-4 flex flex-col gap-1">
-          {navItems.map((item) => (
-            <a
+          <button
+            type="button"
+            onClick={() => setMobileProductsOpen((current) => !current)}
+            className="flex items-center justify-between font-display text-sm tracking-[0.15em] uppercase py-3 border-b border-border/10 w-full text-left text-muted-foreground hover:text-primary transition-colors duration-300"
+          >
+            Products
+            <ChevronDown
+              className={cn(
+                "w-3 h-3 transition-transform duration-200",
+                mobileProductsOpen ? "rotate-180 text-primary" : ""
+              )}
+            />
+          </button>
+
+          {mobileProductsOpen ? (
+            <div className="pl-4 flex flex-col gap-1 pb-2 border-b border-border/10">
+              {productLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={cn(
+                    "font-display text-xs tracking-[0.15em] uppercase py-2 transition-colors duration-300",
+                    location.pathname === item.href
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-primary"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          ) : null}
+
+          {mainNav.map((item) => (
+            <Link
               key={item.href}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className="font-display text-sm tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors duration-300 uppercase py-3 border-b border-border/10 last:border-0"
+              to={item.href}
+              className={cn(
+                "font-display text-sm tracking-[0.15em] uppercase py-3 border-b border-border/10 transition-colors duration-300",
+                location.pathname === item.href
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              )}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
+
+          <Link
+            to="/book-demo"
+            className="mt-3 inline-flex items-center justify-center rounded-md bg-primary px-4 py-3 font-display text-xs tracking-[0.15em] uppercase text-primary-foreground hover:bg-primary/90 transition-colors duration-300"
+          >
+            Book Demo
+          </Link>
         </div>
       </div>
     </header>
