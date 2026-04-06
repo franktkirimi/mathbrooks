@@ -75,7 +75,7 @@ const Hero = () => {
       />
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
-        <h1 className="font-display text-[2.4rem] sm:text-6xl md:text-7xl lg:text-[5.9rem] xl:text-[6.8rem] font-bold uppercase leading-[0.94] tracking-tight mb-6 md:mb-10 mt-16 md:mt-0">
+        <h1 className="font-display text-[1.9rem] sm:text-5xl md:text-6xl lg:text-[4.8rem] xl:text-[5.5rem] font-bold uppercase leading-[0.94] tracking-tight mb-6 md:mb-10 mt-16 md:mt-0">
           {heroLines.map((line, lineIndex) => (
             <div
               key={line.join("-")}
