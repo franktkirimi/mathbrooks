@@ -17,6 +17,7 @@ const productLinks = [
 ];
 
 const mainNav = [
+  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/work" },
   { label: "AI Labs", href: "/ai-labs" },
