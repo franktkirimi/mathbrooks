@@ -18,6 +18,20 @@ const ProductDetail = () => {
       product?.summary ??
       "MathBrooks business platforms for CRM, HR and payroll, projects, and analytics.",
     canonicalPath: product ? `/products/${product.slug}` : "/products",
+    keywords: product
+      ? [product.shortName, `${product.shortName} software`, "business platform Africa", "MathBrooks"]
+      : ["business software Africa", "MathBrooks products"],
+    structuredData: product
+      ? {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: product.name,
+          applicationCategory: "BusinessApplication",
+          description: product.summary,
+          operatingSystem: "Web",
+          url: `https://www.mathbrooks.com/products/${product.slug}`,
+        }
+      : undefined,
   });
 
   if (!product) {
@@ -46,6 +60,12 @@ const ProductDetail = () => {
               >
                 See Pricing
               </Button>
+            </Link>
+            <Link
+              to="/start-trial"
+              className="inline-flex items-center font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+            >
+              Start Free Trial
             </Link>
           </>
         )}

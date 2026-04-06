@@ -83,6 +83,12 @@ const Services = () => {
     description:
       "MathBrooks provides custom software, workflow automation, applied AI, agentic systems, and voice automation for operations-heavy businesses.",
     canonicalPath: "/services",
+    keywords: [
+      "custom software Zimbabwe",
+      "workflow automation Africa",
+      "applied AI services",
+      "voice automation business",
+    ],
   });
 
   return (

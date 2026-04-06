@@ -164,6 +164,13 @@ const Hero = () => {
         >
           Products for CRM, HR &amp; Payroll, Projects, and Analytics. Custom services for unique workflows, automation, and AI.
         </p>
+        <Link
+          to="/start-trial"
+          className="inline-flex mt-4 font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+          style={{ animation: "fadeInUp 0.8s ease-out 1.3s both" }}
+        >
+          Start Free Trial
+        </Link>
       </div>
 
       <div

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
 import PageHero from "@/components/site/PageHero";
 import SiteLayout from "@/components/site/SiteLayout";
-import { resourceTopics } from "@/content/siteContent";
+import { blogPosts } from "@/content/siteContent";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Blog = () => {
@@ -12,6 +12,22 @@ const Blog = () => {
     description:
       "Practical MathBrooks resources on payroll, CRM, workflow automation, and AI for African businesses.",
     canonicalPath: "/blog",
+    keywords: [
+      "Zimbabwe business software blog",
+      "CRM advice Africa",
+      "payroll software Zimbabwe",
+      "workflow automation resources",
+      "applied AI business articles",
+    ],
+    ogType: "website",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      name: "MathBrooks Resources",
+      description:
+        "Practical articles on payroll, CRM, operations, automation, and applied AI for African businesses.",
+      url: "https://www.mathbrooks.com/blog",
+    },
   });
 
   return (
@@ -47,25 +63,32 @@ const Blog = () => {
 
       <section className="px-6 pb-20 md:pb-28">
         <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2">
-          {resourceTopics.map((topic, index) => (
-            <AnimatedSection key={topic.title} delay={index * 120}>
+          {blogPosts.map((post, index) => (
+            <AnimatedSection key={post.slug} delay={index * 120}>
               <article className="card-glass rounded-2xl p-6 md:p-8 h-full">
                 <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
-                  {topic.category}
+                  {post.category}
                 </p>
                 <h2 className="font-display text-xl uppercase tracking-wide leading-tight mb-4">
-                  {topic.title}
+                  {post.title}
                 </h2>
                 <p className="text-sm font-light text-muted-foreground leading-relaxed mb-6">
-                  {topic.description}
+                  {post.excerpt}
                 </p>
-                <div className="space-y-3">
-                  {topic.bullets.map((bullet) => (
-                    <div key={bullet} className="rounded-xl border border-border/20 bg-background/40 px-4 py-3 text-sm font-light text-muted-foreground">
-                      {bullet}
-                    </div>
-                  ))}
+                <div className="flex items-center justify-between gap-4 mb-6">
+                  <span className="text-xs font-light uppercase tracking-[0.12em] text-primary/80">
+                    {post.readTime}
+                  </span>
+                  <span className="text-xs font-light text-muted-foreground">
+                    {post.publishedOn}
+                  </span>
                 </div>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+                >
+                  Read article
+                </Link>
               </article>
             </AnimatedSection>
           ))}

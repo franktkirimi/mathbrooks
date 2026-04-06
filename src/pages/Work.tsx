@@ -12,6 +12,12 @@ const Work = () => {
     description:
       "Representative MathBrooks case studies across workflow automation, education technology, and operational analytics.",
     canonicalPath: "/work",
+    keywords: [
+      "software case studies Africa",
+      "workflow automation examples",
+      "education platform case study",
+      "analytics platform case study",
+    ],
   });
 
   return (

@@ -88,6 +88,30 @@ export type ResourceEntry = {
   bullets: string[];
 };
 
+export type LeadershipProfile = {
+  name: string;
+  role: string;
+  qualification: string;
+  roleFocus: string;
+};
+
+export type BlogSection = {
+  heading: string;
+  paragraphs: string[];
+};
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  excerpt: string;
+  publishedOn: string;
+  readTime: string;
+  keywords: string[];
+  sections: BlogSection[];
+};
+
 export const businessPillars = [
   "Custom Software Development",
   "Business Platforms",
@@ -648,5 +672,228 @@ export const serviceAssurance = [
     title: "Direct access to builders",
     icon: Cpu,
     detail: "You work close to the people designing the system, which speeds decisions and avoids translation loss.",
+  },
+];
+
+export const leadershipProfiles: LeadershipProfile[] = [
+  {
+    name: "Dr. Eng. D. Simango",
+    role: "Chief Engineer",
+    qualification: "PhD in Machine Learning and Robotics",
+    roleFocus:
+      "Leads architecture and AI engineering standards, making sure platforms stay robust, scalable, and production-ready.",
+  },
+  {
+    name: "Eytan Kirimi",
+    role: "Product Development Lead",
+    qualification: "Honors Degree in IT",
+    roleFocus:
+      "Owns product planning and execution, aligning user needs, business priorities, and delivery milestones across projects.",
+  },
+];
+
+export const proofHighlights = [
+  {
+    label: "Representative delivery outcomes",
+    value: "10,000+ files organized",
+  },
+  {
+    label: "Education product scale",
+    value: "500+ students supported",
+  },
+  {
+    label: "Operational visibility",
+    value: "50+ teams managed",
+  },
+];
+
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "how-zimbabwean-businesses-can-tighten-payroll-operations",
+    title: "How Zimbabwean businesses can tighten payroll operations without overbuying software",
+    category: "HR & Payroll",
+    description:
+      "A practical guide to payroll controls, leave workflows, and statutory readiness for growing teams in Zimbabwe.",
+    excerpt:
+      "Payroll usually becomes painful before it becomes strategic. This guide covers the controls Zimbabwean businesses should tighten first so payroll stays predictable as headcount grows.",
+    publishedOn: "2026-04-06",
+    readTime: "6 min read",
+    keywords: [
+      "Zimbabwe payroll software",
+      "ZIMRA payroll workflow",
+      "NSSA compliance systems",
+      "HR software Zimbabwe",
+    ],
+    sections: [
+      {
+        heading: "Why payroll starts breaking before leaders notice",
+        paragraphs: [
+          "Most payroll problems do not begin with tax calculations. They begin with weak process discipline. Leave updates arrive late, allowance changes live in chat threads, approvals are verbal, and one person ends up carrying the entire monthly run in their head.",
+          "That works while the team is small. It fails once headcount increases, more managers get involved, or finance needs cleaner records for review. The result is avoidable corrections, delayed payslips, and a compliance process that always feels one step behind.",
+        ],
+      },
+      {
+        heading: "The controls worth fixing first",
+        paragraphs: [
+          "Start with the inputs that create downstream errors: employee records, salary changes, allowances, deductions, leave, and exit dates. If those move through informal channels, payroll will stay fragile no matter how good the spreadsheet or software looks on the surface.",
+          "The next layer is approval discipline. A business needs to know who can request a change, who approves it, when it becomes effective, and where that decision is recorded. That single improvement often removes more payroll risk than chasing new formulas or reporting layouts.",
+        ],
+      },
+      {
+        heading: "What software should handle",
+        paragraphs: [
+          "Software should not just calculate. It should create a clean operating path: maintain employee records, capture leave, route changes for approval, flag exceptions, and preserve an audit trail when something changes after the cut-off.",
+          "For Zimbabwean teams, that also means supporting the statutory workflow around ZIMRA and NSSA readiness. The exact tax logic matters, but the operating model around it matters just as much. A business needs confidence that payroll inputs are complete before the run starts.",
+        ],
+      },
+      {
+        heading: "What growing businesses should avoid",
+        paragraphs: [
+          "Do not buy an oversized HR suite just because payroll has become inconvenient. Many teams need better operating discipline and a clearer payroll workspace, not a giant platform that introduces extra complexity before the basics are under control.",
+          "A strong first step is software that makes the monthly run cleaner, keeps employee records current, and reduces exception handling. Once that foundation is stable, the business can extend into broader HR workflows, analytics, and management reporting.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "simple-crm-for-owner-led-sales-teams",
+    title: "A simple CRM setup for owner-led sales teams",
+    category: "CRM",
+    description:
+      "How to move customer follow-up out of scattered chat threads and into one disciplined process.",
+    excerpt:
+      "If the founder still knows the pipeline better than the system does, the business has a sales visibility problem. This guide explains the simplest CRM setup that fixes that without adding unnecessary process debt.",
+    publishedOn: "2026-04-06",
+    readTime: "5 min read",
+    keywords: [
+      "CRM for small business Africa",
+      "sales pipeline software Zimbabwe",
+      "owner led CRM process",
+      "WhatsApp CRM workflow",
+    ],
+    sections: [
+      {
+        heading: "The real issue is not missing software",
+        paragraphs: [
+          "Owner-led sales teams often assume they need a CRM when the real issue is follow-up discipline. Leads arrive through WhatsApp, referrals, email, and calls. Quotations get sent, but nobody consistently records the next step, expected decision date, or account status.",
+          "That means the founder becomes the reporting layer. They remember which lead is serious, which customer needs a follow-up, and which proposal is stuck. The business then looks busier than it is because activity is high but visibility is low.",
+        ],
+      },
+      {
+        heading: "The minimum CRM structure that works",
+        paragraphs: [
+          "A useful CRM for this kind of team does four things well: stores clean customer records, tracks pipeline stage, assigns an owner, and forces a next action. Without those four, the business still relies on memory.",
+          "Everything else is secondary at the start. Fancy automations and deep dashboards can come later. The first win is simple: nobody should finish a customer interaction without the system showing what happens next and who owns it.",
+        ],
+      },
+      {
+        heading: "Why WhatsApp and phone habits matter",
+        paragraphs: [
+          "In Zimbabwe and across much of the region, customer relationships do not live in web forms alone. Sales activity often happens in voice notes, calls, and WhatsApp conversations. A CRM that ignores that operating reality will be underused immediately.",
+          "The right setup respects the channel mix. Teams should be able to log calls, record customer context, and create follow-up tasks quickly enough that the system supports the habit instead of slowing it down.",
+        ],
+      },
+      {
+        heading: "When to add reporting and automation",
+        paragraphs: [
+          "Once the pipeline is being updated consistently, reporting becomes useful. Leaders can see stage conversion, dormant accounts, late follow-ups, and which deals have gone quiet without being chased manually.",
+          "Automation only becomes valuable once the team is already using the workflow. At that point, reminders, quote follow-up prompts, and reporting summaries start saving time instead of automating confusion.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "where-automation-actually-saves-admin-time",
+    title: "Where automation actually saves admin time",
+    category: "Operations",
+    description:
+      "The workflows most worth automating first, and the traps that create brittle process debt.",
+    excerpt:
+      "Automation is most valuable when it removes repeated friction from an already understood workflow. This guide explains where to start and where businesses usually waste effort.",
+    publishedOn: "2026-04-06",
+    readTime: "6 min read",
+    keywords: [
+      "workflow automation Africa",
+      "business automation Zimbabwe",
+      "admin process automation",
+      "operations automation systems",
+    ],
+    sections: [
+      {
+        heading: "Automation works best on repeated friction",
+        paragraphs: [
+          "The best automation targets are usually not dramatic. They are repeated administrative steps that slow people down every week: routing approvals, moving information between systems, sending reminders, assembling routine reports, or updating status after a trigger event.",
+          "When those steps are clear, automation saves time quickly. When the workflow is still ambiguous, automation just hard-codes the confusion and makes future changes harder.",
+        ],
+      },
+      {
+        heading: "Three workflows that usually pay back first",
+        paragraphs: [
+          "Approval routing is often the fastest win. If requests arrive through chat or email and nobody is sure whose turn it is, software can create immediate visibility and remove a large amount of back-and-forth.",
+          "The next strong candidates are data handoffs and recurring reporting. If staff repeatedly copy the same information between systems or rebuild the same status view every week, that is the kind of work automation should take over.",
+        ],
+      },
+      {
+        heading: "What creates brittle process debt",
+        paragraphs: [
+          "The biggest mistake is automating before the business agrees on the rule. If the team still debates who approves what, what counts as complete, or which exceptions are allowed, the automation will keep breaking because the process itself is unsettled.",
+          "Another common mistake is building silent automation with no reporting. If an automated step fails and nobody can see it, the business ends up with more operational risk than before. Visibility and fallback paths are part of the solution, not optional extras.",
+        ],
+      },
+      {
+        heading: "How to choose the first automation project",
+        paragraphs: [
+          "Choose the workflow that is both frequent and already understood. It should involve enough repetition to matter, enough structure to automate, and enough pain that the team will notice the improvement quickly.",
+          "That usually means starting small, proving the value, and then extending into adjacent steps. Businesses get far better returns from one well-designed operational workflow than from ten scattered automations nobody fully owns.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ai-tools-african-businesses-can-actually-use",
+    title: "AI tools African businesses can actually use",
+    category: "Applied AI",
+    description:
+      "A grounded look at copilots, classification, voice workflows, and agentic systems with business value.",
+    excerpt:
+      "Most businesses do not need AI for everything. They need it where it improves speed, quality, or visibility inside a real workflow. This article explains where AI tends to earn its place.",
+    publishedOn: "2026-04-06",
+    readTime: "7 min read",
+    keywords: [
+      "AI tools for African business",
+      "applied AI Zimbabwe",
+      "agentic systems operations",
+      "voice automation business",
+    ],
+    sections: [
+      {
+        heading: "The useful question is not whether to use AI",
+        paragraphs: [
+          "The useful question is where AI improves a workflow enough to justify the complexity. For most businesses, the best applications are narrow and practical: summarising information, classifying records, drafting structured outputs, supporting decisions, or handling first-line intake before a human steps in.",
+          "That is very different from buying into a vague story about transformation. AI has to earn its place by reducing friction or improving response quality in work that already matters.",
+        ],
+      },
+      {
+        heading: "Copilots, classification, and guided support",
+        paragraphs: [
+          "A strong starting point is internal support. Teams often lose time searching for policies, summarising notes, or turning raw information into a usable answer. A well-scoped copilot can make that faster without pretending to replace decision-makers.",
+          "Classification is another practical use case. If the business handles large volumes of documents, requests, or incoming messages, AI can help sort and route work before staff take over. That kind of support is usually easier to govern than fully autonomous actions.",
+        ],
+      },
+      {
+        heading: "Where voice and agents start to matter",
+        paragraphs: [
+          "Voice workflows become valuable when speed matters at the first point of contact. Intake, routing, support triage, and scheduling are all strong candidates if the business already understands the handoff between automated and human handling.",
+          "Agentic systems become useful when software needs to work across tools, approvals, and bounded tasks. The important word is bounded. Agents should operate inside clear task definitions, approval rules, and reporting paths, especially where customers, payroll, finance, or compliance are involved.",
+        ],
+      },
+      {
+        heading: "What responsible rollout looks like",
+        paragraphs: [
+          "The businesses getting value from AI do not treat governance as optional. They define where AI can act, where humans must approve, how quality is evaluated, and what happens when the system is uncertain or fails.",
+          "That is why the best AI work today still looks like disciplined systems design. It is not about adding a model everywhere. It is about placing intelligence where the business already has a defined workflow and a measurable reason to improve it.",
+        ],
+      },
+    ],
   },
 ];

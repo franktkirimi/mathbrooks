@@ -13,6 +13,12 @@ const AILabsPage = () => {
     description:
       "MathBrooks AI Labs explores practical applied AI for agriculture, mining, and operational agent systems in African business contexts.",
     canonicalPath: "/ai-labs",
+    keywords: [
+      "AI labs Africa",
+      "applied AI Zimbabwe",
+      "agentic systems operations",
+      "AI for agriculture Africa",
+    ],
   });
 
   return (

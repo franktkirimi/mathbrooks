@@ -13,6 +13,12 @@ const Products = () => {
     description:
       "Explore MathBrooks business platforms for CRM, HR and payroll, projects, and analytics built for African operations.",
     canonicalPath: "/products",
+    keywords: [
+      "CRM software Africa",
+      "HR payroll software Zimbabwe",
+      "project management software Africa",
+      "analytics platform business",
+    ],
   });
 
   return (
@@ -37,6 +43,12 @@ const Products = () => {
               >
                 View Pricing
               </Button>
+            </Link>
+            <Link
+              to="/start-trial"
+              className="inline-flex items-center font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+            >
+              Start Free Trial
             </Link>
           </>
         )}

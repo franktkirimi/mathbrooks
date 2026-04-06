@@ -3,6 +3,7 @@ import CursorGlow from "@/components/CursorGlow";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
+import WhatsAppWidget from "./WhatsAppWidget";
 
 type SiteLayoutProps = {
   children: ReactNode;
@@ -21,6 +22,7 @@ const SiteLayout = ({ children }: SiteLayoutProps) => {
       </a>
       <Navbar />
       <main id="main-content">{children}</main>
+      <WhatsAppWidget />
       <Footer />
     </div>
   );

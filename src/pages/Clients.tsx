@@ -47,19 +47,35 @@ const timelines = [
 const Clients = () => {
   const location = useLocation();
   const isBookDemo = location.pathname === "/book-demo" || location.pathname === "/contact";
-  const canonicalPath = isBookDemo ? "/book-demo" : "/clients";
-  const pageLabel = isBookDemo ? "Book Demo" : "Client Intake";
-  const pageTitle = isBookDemo
+  const isStartTrial = location.pathname === "/start-trial";
+  const canonicalPath = isStartTrial
+    ? "/start-trial"
+    : isBookDemo
+      ? "/book-demo"
+      : "/clients";
+  const pageLabel = isStartTrial ? "Start Free Trial" : isBookDemo ? "Book Demo" : "Client Intake";
+  const pageTitle = isStartTrial
+    ? "Request guided trial access for a MathBrooks product"
+    : isBookDemo
     ? "Share the workflow and we will recommend the right next step"
     : "Tell us about your project";
-  const pageDescription = isBookDemo
+  const pageDescription = isStartTrial
+    ? "Use this form to request guided trial access for CRM or HR & Payroll. MathBrooks will confirm fit, onboarding details, and the fastest path to trial."
+    : isBookDemo
     ? "This is not a generic sales form. Share the workflow, business problem, and timeline. MathBrooks replies within 1 business day with the most sensible next step."
     : "Fill in as much as you know. We use this to prepare before we talk so the first conversation is about solutions, not background.";
 
   usePageMeta({
-    title: isBookDemo ? "Book Demo | MathBrooks" : "Client Intake | MathBrooks",
+    title: isStartTrial
+      ? "Start Free Trial | MathBrooks"
+      : isBookDemo
+        ? "Book Demo | MathBrooks"
+        : "Client Intake | MathBrooks",
     description: pageDescription,
     canonicalPath,
+    keywords: isStartTrial
+      ? ["free trial CRM", "free trial HR payroll", "business software trial Africa"]
+      : ["book software demo", "client intake software project", "MathBrooks contact"],
   });
 
   const formspreeConfigured = hasFormspreeConfig();
@@ -101,7 +117,11 @@ const Clients = () => {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          _subject: isBookDemo ? "New Demo Request — MathBrooks" : "New Client Intake — MathBrooks",
+          _subject: isStartTrial
+            ? "New Trial Request — MathBrooks"
+            : isBookDemo
+              ? "New Demo Request — MathBrooks"
+              : "New Client Intake — MathBrooks",
           name,
           email,
           company,
@@ -126,8 +146,10 @@ const Clients = () => {
     window.open(`https://wa.me/263783469023?text=${text}`, "_blank");
   };
 
-  const successTitle = isBookDemo ? "Request Received" : "Received";
-  const successMessage = isBookDemo
+  const successTitle = isStartTrial ? "Trial Request Received" : isBookDemo ? "Request Received" : "Received";
+  const successMessage = isStartTrial
+    ? "Thanks. We will review your request and get back to you within 1 business day with trial-fit details, onboarding steps, and the fastest route to access."
+    : isBookDemo
     ? "Thanks. We will review your details and get back to you within 1 business day with the best next step: demo, scoping call, or follow-up questions."
     : "Thanks for reaching out. We will review your details and get back to you within 1 business day with next steps.";
 
@@ -193,7 +215,9 @@ const Clients = () => {
                     </p>
                     <div className="grid gap-3">
                       {[
-                        "Product demos for CRM, HR & Payroll, Projects, and Analytics",
+                        isStartTrial
+                          ? "Guided product trials for CRM and HR & Payroll"
+                          : "Product demos for CRM, HR & Payroll, Projects, and Analytics",
                         "Scoping calls for custom software, automation, and AI",
                         "Practical advice on what to build first",
                       ].map((item) => (

@@ -28,6 +28,18 @@ const Pricing = () => {
     description:
       "MathBrooks pricing for CRM, HR and payroll, and custom software engagements. Clear monthly and annual plans plus onboarding notes.",
     canonicalPath: "/pricing",
+    keywords: [
+      "CRM pricing Africa",
+      "HR payroll pricing Zimbabwe",
+      "software pricing MathBrooks",
+      "business software pricing",
+    ],
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "OfferCatalog",
+      name: "MathBrooks Pricing",
+      url: "https://www.mathbrooks.com/pricing",
+    },
   });
 
   return (
@@ -51,6 +63,12 @@ const Pricing = () => {
               >
                 Talk Custom Scope
               </Button>
+            </Link>
+            <Link
+              to="/start-trial"
+              className="inline-flex items-center font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+            >
+              Start Free Trial
             </Link>
           </>
         )}

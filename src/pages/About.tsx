@@ -4,7 +4,13 @@ import AnimatedSection from "@/components/AnimatedSection";
 import WhyWorkWithUs from "@/components/Testimonials";
 import PageHero from "@/components/site/PageHero";
 import SiteLayout from "@/components/site/SiteLayout";
-import { businessPillars, operatingModel, trustSignals } from "@/content/siteContent";
+import {
+  businessPillars,
+  leadershipProfiles,
+  operatingModel,
+  proofHighlights,
+  trustSignals,
+} from "@/content/siteContent";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const About = () => {
@@ -13,6 +19,12 @@ const About = () => {
     description:
       "Learn how MathBrooks builds practical software, business platforms, and applied AI from Harare for operations-heavy teams.",
     canonicalPath: "/about",
+    keywords: [
+      "software company Zimbabwe",
+      "Harare software developers",
+      "applied AI Africa",
+      "business platforms Africa",
+    ],
   });
 
   return (
@@ -94,6 +106,77 @@ const About = () => {
               </div>
             </div>
           </AnimatedSection>
+        </div>
+      </section>
+
+      <section className="px-6 pb-16 md:pb-24">
+        <div className="max-w-6xl mx-auto">
+          <AnimatedSection>
+            <div className="mb-8 md:mb-12 max-w-3xl">
+              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                Leadership
+              </p>
+              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-3">
+                Small enough to stay close to the work
+              </h2>
+              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                MathBrooks stays intentionally close to architecture, product thinking, and delivery. That means clients work with the people shaping the system, not a handoff chain.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {leadershipProfiles.map((profile, index) => (
+              <AnimatedSection key={profile.name} delay={index * 120}>
+                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
+                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                    {profile.role}
+                  </p>
+                  <h3 className="font-display text-xl uppercase tracking-wide mb-2">
+                    {profile.name}
+                  </h3>
+                  <p className="text-sm font-light text-muted-foreground mb-4">
+                    {profile.qualification}
+                  </p>
+                  <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                    {profile.roleFocus}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-16 md:pb-24">
+        <div className="max-w-6xl mx-auto">
+          <AnimatedSection>
+            <div className="mb-8 md:mb-12 max-w-3xl">
+              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                Proof
+              </p>
+              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-3">
+                Credibility comes from delivery, not slogans
+              </h2>
+              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                MathBrooks is still selective about what it takes on. The clearest proof is the work already shipped and the operational outcomes clients cared about.
+              </p>
+            </div>
+          </AnimatedSection>
+          <div className="grid gap-6 md:grid-cols-3">
+            {proofHighlights.map((item, index) => (
+              <AnimatedSection key={item.label} delay={index * 120}>
+                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
+                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                    {item.label}
+                  </p>
+                  <p className="font-display text-2xl md:text-3xl uppercase tracking-wide">
+                    {item.value}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 

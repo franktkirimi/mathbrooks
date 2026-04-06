@@ -21,6 +21,12 @@ const Index = () => {
     description:
       "MathBrooks builds custom software, business platforms, and applied AI systems for operations-heavy businesses across Zimbabwe and beyond.",
     canonicalPath: "/",
+    keywords: [
+      "software company Zimbabwe",
+      "business platforms Africa",
+      "custom software Harare",
+      "applied AI systems",
+    ],
   });
 
   return (
