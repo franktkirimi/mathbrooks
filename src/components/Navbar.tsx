@@ -17,7 +17,6 @@ const productLinks = [
 ];
 
 const mainNav = [
-  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/work" },
   { label: "AI Labs", href: "/ai-labs" },
@@ -85,6 +84,18 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden lg:flex items-center gap-4">
+          <Link
+            to="/"
+            className={cn(
+              "font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300",
+              location.pathname === "/"
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary"
+            )}
+          >
+            Home
+          </Link>
+
           <div ref={dropdownRef} className="relative">
             <button
               type="button"
@@ -205,6 +216,18 @@ const Navbar = () => {
         )}
       >
         <div className="px-6 py-4 flex flex-col gap-1">
+          <Link
+            to="/"
+            className={cn(
+              "font-display text-sm tracking-[0.15em] uppercase py-3 border-b border-border/10 transition-colors duration-300",
+              location.pathname === "/"
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary"
+            )}
+          >
+            Home
+          </Link>
+
           <button
             type="button"
             onClick={() => setMobileProductsOpen((current) => !current)}
