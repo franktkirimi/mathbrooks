@@ -8,8 +8,12 @@ const productLinks = [
   { label: "All Products", href: "/products" },
   { label: "CRM", href: "/products/crm" },
   { label: "HR & Payroll", href: "/products/hr" },
+  { label: "Accounting", href: "/products/accounting" },
+  { label: "Inventory", href: "/products/inventory" },
   { label: "Projects", href: "/products/projects" },
+  { label: "Automation", href: "/products/automation" },
   { label: "Analytics", href: "/products/analytics" },
+  { label: "AI Assistant", href: "/products/ai-assistant" },
 ];
 
 const mainNav = [
@@ -101,7 +105,7 @@ const Navbar = () => {
             </button>
 
             {desktopDropdownOpen ? (
-              <div className="absolute top-full left-0 mt-3 w-52 rounded-xl border border-border/30 bg-background/95 backdrop-blur-md shadow-xl py-2">
+              <div className="absolute top-full left-0 mt-3 w-60 rounded-xl border border-border/30 bg-background/95 backdrop-blur-md shadow-xl py-2">
                 {productLinks.map((item) => (
                   <Link
                     key={item.href}

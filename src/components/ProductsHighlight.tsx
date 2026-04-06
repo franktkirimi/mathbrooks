@@ -18,6 +18,7 @@ const platforms = [
   {
     icon: Users,
     title: "CRM",
+    price: "Starting from $65/mo",
     description:
       "Manage leads, customers, and deals in one place.",
     href: "/products/crm",
@@ -25,6 +26,7 @@ const platforms = [
   {
     icon: FolderKanban,
     title: "HR & Payroll",
+    price: "Starting from $85/mo",
     description:
       "Manage employees, payroll, and compliance workflows.",
     href: "/products/hr",
@@ -32,20 +34,23 @@ const platforms = [
   {
     icon: CreditCard,
     title: "Accounting",
+    price: "Starting from $45/mo",
     description:
       "Track revenue, invoices, and cash movement with clarity.",
-    href: "/products",
+    href: "/products/accounting",
   },
   {
     icon: Boxes,
     title: "Inventory",
+    price: "Starting from $55/mo",
     description:
       "Keep stock, purchasing, and reorder visibility in one layer.",
-    href: "/products",
+    href: "/products/inventory",
   },
   {
     icon: Workflow,
     title: "Projects",
+    price: "Starting from $60/mo",
     description:
       "Organize initiatives, delivery work, and task ownership.",
     href: "/products/projects",
@@ -53,13 +58,15 @@ const platforms = [
   {
     icon: Sparkles,
     title: "Automation",
+    price: "Starting from $35/mo",
     description:
       "Route approvals, reminders, and handoffs automatically.",
-    href: "/services",
+    href: "/products/automation",
   },
   {
     icon: TrendingUp,
     title: "Analytics",
+    price: "Starting from $50/mo",
     description:
       "Turn operational data into dashboards, alerts, and reports.",
     href: "/products/analytics",
@@ -67,9 +74,10 @@ const platforms = [
   {
     icon: Bot,
     title: "AI Assistant",
+    price: "Starting from $15/mo",
     description:
       "Ask questions about your business data and get answers fast.",
-    href: "/ai-labs",
+    href: "/products/ai-assistant",
   },
 ];
 
@@ -116,12 +124,18 @@ const ProductsHighlight = () => {
                     {platform.title}
                   </h3>
 
+                  <div className="mb-4 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5">
+                    <span className="text-[0.62rem] font-display tracking-[0.18em] uppercase text-primary/80">
+                      {platform.price}
+                    </span>
+                  </div>
+
                   <p className="text-sm font-light text-muted-foreground leading-relaxed flex-1">
                     {platform.description}
                   </p>
 
                   <div className="mt-6 flex items-center gap-1 text-xs font-display tracking-wider uppercase text-primary/60 group-hover:text-primary transition-colors duration-300">
-                    Learn more
+                    Get Started
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
                   </div>
                 </div>

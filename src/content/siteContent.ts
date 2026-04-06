@@ -1,11 +1,14 @@
 import {
   BarChart3,
   Bot,
+  Boxes,
   Brain,
+  CreditCard,
   Cpu,
   FolderKanban,
   PhoneCall,
   ShieldCheck,
+  Sparkles,
   TrendingUp,
   Users,
   Workflow,
@@ -248,6 +251,70 @@ export const products: ProductEntry[] = [
     proofPoints: ["ZIMRA and NSSA workflow support", "Leave approvals", "Payroll exceptions", "Employee record history"],
   },
   {
+    slug: "accounting",
+    name: "MathBrooks Accounting",
+    shortName: "Accounting",
+    category: "Business Platforms",
+    tagline: "Revenue, invoicing, and cash visibility in one finance workspace.",
+    audience: "Finance teams and business owners who need cleaner invoice control, collections visibility, and simpler management reporting.",
+    summary:
+      "An accounting and finance operations module for businesses that need better invoice tracking, clearer cash visibility, and cleaner reporting without a bloated ERP rollout.",
+    problem:
+      "Revenue, invoicing, expenses, and collections often live across spreadsheets, inboxes, and isolated tools. That slows decision-making and makes overdue exposure harder to control.",
+    localFit:
+      "Built for businesses balancing practical finance operations, collections follow-up, and management reporting in Zimbabwean and regional operating contexts.",
+    accent: "22 90% 58%",
+    icon: CreditCard,
+    metrics: [
+      { label: "Revenue This Month", value: "$48.2k" },
+      { label: "Overdue Invoices", value: "$6.4k" },
+      { label: "Gross Margin", value: "29%" },
+    ],
+    panels: [
+      {
+        title: "Invoicing Workspace",
+        items: ["Draft invoice", "Sent", "Overdue", "Paid and reconciled"],
+      },
+      {
+        title: "Cash and Collections",
+        items: ["Aging summary", "Follow-up queue", "Receipts log", "Weekly finance view"],
+      },
+    ],
+    features: [
+      {
+        title: "Invoice lifecycle visibility",
+        detail: "Track each invoice from creation to payment with cleaner ownership and status visibility.",
+      },
+      {
+        title: "Collections that can be prioritised",
+        detail: "See overdue accounts, aging exposure, and the next collection actions without rebuilding reports manually.",
+      },
+      {
+        title: "Cash and performance signals",
+        detail: "Give management a simple view of revenue movement, overdue exposure, and margin direction.",
+      },
+      {
+        title: "Connected finance operations",
+        detail: "Connect invoicing and collections into CRM, analytics, or broader business workflows where needed.",
+      },
+    ],
+    useCases: [
+      {
+        title: "Service businesses",
+        detail: "Manage quotations, invoices, collections, and account follow-up more cleanly.",
+      },
+      {
+        title: "Growing finance teams",
+        detail: "Move core finance operations out of fragmented spreadsheets and inbox threads.",
+      },
+      {
+        title: "Owner-led businesses",
+        detail: "Create finance visibility before the founder becomes the reporting bottleneck.",
+      },
+    ],
+    proofPoints: ["Invoice tracking", "Collections queues", "Cash visibility", "Finance dashboards"],
+  },
+  {
     slug: "projects",
     name: "MathBrooks Projects",
     shortName: "Projects",
@@ -312,6 +379,70 @@ export const products: ProductEntry[] = [
     proofPoints: ["Portfolio dashboards", "Blocked-task alerts", "Approval queues", "Status reporting"],
   },
   {
+    slug: "inventory",
+    name: "MathBrooks Inventory",
+    shortName: "Inventory",
+    category: "Business Platforms",
+    tagline: "Stock, purchasing, and reorder visibility for businesses that cannot afford blind spots.",
+    audience: "Retail, distribution, and operations teams that need clearer stock control and purchasing visibility.",
+    summary:
+      "An inventory and procurement module for businesses that need better stock visibility, cleaner reorder discipline, and faster operational awareness around purchasing risk.",
+    problem:
+      "Inventory problems usually appear late. Teams discover shortages after delivery has already slowed down, purchasing decisions are reactive, and management lacks a clean view of stock pressure.",
+    localFit:
+      "Useful for businesses handling mixed product movement, practical purchasing workflows, and supplier coordination across local operating realities.",
+    accent: "197 81% 55%",
+    icon: Boxes,
+    metrics: [
+      { label: "Items Tracked", value: "468" },
+      { label: "Low Stock Alerts", value: "11" },
+      { label: "Reorders Pending", value: "05" },
+    ],
+    panels: [
+      {
+        title: "Stock Overview",
+        items: ["In stock", "Low stock", "Awaiting reorder", "Reserved"],
+      },
+      {
+        title: "Procurement Workspace",
+        items: ["Supplier queue", "Purchase requests", "Receipts log", "Restock priorities"],
+      },
+    ],
+    features: [
+      {
+        title: "Stock visibility before shortages hurt delivery",
+        detail: "Track quantities, movement, and reorder pressure early enough to act with confidence.",
+      },
+      {
+        title: "Procurement tied to operational need",
+        detail: "Give purchasing teams a clear queue of what needs to be ordered and why.",
+      },
+      {
+        title: "Alerts for low stock and replenishment risk",
+        detail: "Surface products that need action before teams are forced into reactive buying.",
+      },
+      {
+        title: "Management visibility on stock health",
+        detail: "Make inventory exposure clear in day-to-day operations and review meetings.",
+      },
+    ],
+    useCases: [
+      {
+        title: "Retail and distribution teams",
+        detail: "Maintain stock visibility across moving products, reorder points, and supplier coordination.",
+      },
+      {
+        title: "Operations-heavy businesses",
+        detail: "Monitor consumables, inputs, and replenishment workflows that affect delivery quality.",
+      },
+      {
+        title: "Procurement teams",
+        detail: "Prioritise purchasing actions based on actual operational pressure rather than guesswork.",
+      },
+    ],
+    proofPoints: ["Low-stock alerts", "Purchase queues", "Supplier workflows", "Stock dashboards"],
+  },
+  {
     slug: "analytics",
     name: "MathBrooks Analytics",
     shortName: "Analytics",
@@ -374,6 +505,134 @@ export const products: ProductEntry[] = [
       },
     ],
     proofPoints: ["Executive dashboards", "Automated reporting", "Operational alerts", "Cross-system analytics"],
+  },
+  {
+    slug: "automation",
+    name: "MathBrooks Automation",
+    shortName: "Automation",
+    category: "Business Platforms",
+    tagline: "Workflow routing, reminders, and operational handoffs that keep work moving.",
+    audience: "Teams dealing with repeated approvals, admin workflows, and status handoffs that create avoidable drag.",
+    summary:
+      "An automation module for businesses that need repeated workflows to move faster, more reliably, and with better visibility than email chains and chat reminders can provide.",
+    problem:
+      "Repeated business processes often depend on manual chasing. Requests sit in inboxes, approvals are delayed, and no one has a clean view of where work is stalled.",
+    localFit:
+      "Built for practical operational workflows where approvals, reminders, and handoffs still depend on human teams, not fully autonomous systems.",
+    accent: "39 96% 60%",
+    icon: Sparkles,
+    metrics: [
+      { label: "Active Workflows", value: "12" },
+      { label: "Hours Saved", value: "14/wk" },
+      { label: "Success Rate", value: "99.2%" },
+    ],
+    panels: [
+      {
+        title: "Automation Console",
+        items: ["Approval routes", "Escalations", "Scheduled summaries", "Fallback actions"],
+      },
+      {
+        title: "Workflow Signals",
+        items: ["Pending review", "Completed today", "Exceptions", "Next scheduled run"],
+      },
+    ],
+    features: [
+      {
+        title: "Approvals that move through the right path",
+        detail: "Route recurring requests through owners, escalation rules, and fallback paths that teams can trust.",
+      },
+      {
+        title: "Reminders and handoffs that do not depend on memory",
+        detail: "Automate status movement, reminders, and repetitive notifications in operational workflows.",
+      },
+      {
+        title: "Visibility over what automation is doing",
+        detail: "Keep workflows observable so the business can see what succeeded, what failed, and what still needs review.",
+      },
+      {
+        title: "Governed automation by design",
+        detail: "Use rule-based automation where it saves time without hiding risk or removing accountability.",
+      },
+    ],
+    useCases: [
+      {
+        title: "Approval-heavy teams",
+        detail: "Reduce delays in finance, HR, operations, or procurement requests.",
+      },
+      {
+        title: "Operations management",
+        detail: "Automate routine handoffs and reporting steps that slow day-to-day execution.",
+      },
+      {
+        title: "Growing businesses",
+        detail: "Standardise repetitive workflows before manual coordination becomes expensive.",
+      },
+    ],
+    proofPoints: ["Approval routing", "Escalation rules", "Workflow observability", "Automated summaries"],
+  },
+  {
+    slug: "ai-assistant",
+    name: "MathBrooks AI Assistant",
+    shortName: "AI Assistant",
+    category: "Applied AI Systems",
+    tagline: "A governed business intelligence layer for asking questions across your operations.",
+    audience: "Leaders and operating teams that need quicker answers across CRM, finance, HR, inventory, or project data.",
+    summary:
+      "An AI assistant module that lets teams ask business questions in plain language and get structured answers grounded in connected business data.",
+    problem:
+      "Teams often know the answer exists somewhere, but finding it takes too long because the data is spread across tools, reports, and operational systems.",
+    localFit:
+      "Designed for practical business use where teams need fast answers, clear source context, and human oversight where decisions carry operational risk.",
+    accent: "273 78% 69%",
+    icon: Bot,
+    metrics: [
+      { label: "Query Templates", value: "24" },
+      { label: "Connected Sources", value: "06" },
+      { label: "Review Queue", value: "03" },
+    ],
+    panels: [
+      {
+        title: "Assistant Workspace",
+        items: ["Business questions", "Suggested prompts", "Saved views", "Review history"],
+      },
+      {
+        title: "Evidence and Governance",
+        items: ["Source references", "Confidence flags", "Approval path", "Escalation queue"],
+      },
+    ],
+    features: [
+      {
+        title: "Plain-language business questions",
+        detail: "Ask about sales, invoices, stock, staffing, or operations without building a custom report first.",
+      },
+      {
+        title: "Structured answers tied to source context",
+        detail: "Return usable summaries while keeping the underlying business signal visible to the team.",
+      },
+      {
+        title: "Governed assistant behavior",
+        detail: "Keep the AI layer inside review paths where actions or answers affect customers, payroll, finance, or compliance.",
+      },
+      {
+        title: "Connected intelligence across the platform",
+        detail: "Use the assistant as a layer on top of CRM, finance, projects, inventory, or analytics workflows.",
+      },
+    ],
+    useCases: [
+      {
+        title: "Management reporting",
+        detail: "Answer recurring operating questions without waiting for a manually rebuilt report.",
+      },
+      {
+        title: "Operations support",
+        detail: "Give teams faster access to the information they need to act during the day.",
+      },
+      {
+        title: "Executive visibility",
+        detail: "Use the assistant to summarise business signals before reviews and decision meetings.",
+      },
+    ],
+    proofPoints: ["Natural-language queries", "Source-aware answers", "Review workflows", "Cross-platform intelligence"],
   },
 ];
 

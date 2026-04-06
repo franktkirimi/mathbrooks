@@ -1,16 +1,9 @@
 import { lazy, Suspense } from "react";
-import AILabs from "@/components/AILabs";
 import Contact from "@/components/Contact";
-import FAQ from "@/components/FAQ";
 import Hero from "@/components/Hero";
-import HowWeWork from "@/components/HowWeWork";
 import OurProjects from "@/components/OurProjects";
-import Packages from "@/components/Packages";
 import ProductsHighlight from "@/components/ProductsHighlight";
-import Roadmap from "@/components/Roadmap";
-import TechStack from "@/components/TechStack";
 import WhyWorkWithUs from "@/components/Testimonials";
-import WhatWeBuild from "@/components/WhatWeBuild";
 import SiteLayout from "@/components/site/SiteLayout";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
@@ -43,15 +36,8 @@ const Index = () => {
       <Suspense fallback={null}>
         <ScrollProductReveal />
       </Suspense>
-      <WhatWeBuild />
       <OurProjects />
       <WhyWorkWithUs />
-      <HowWeWork />
-      <TechStack />
-      <Packages />
-      <AILabs />
-      <Roadmap />
-      <FAQ />
       <Contact />
     </SiteLayout>
   );

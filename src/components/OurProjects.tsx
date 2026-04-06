@@ -149,12 +149,12 @@ const OurProjects = () => {
               If you want a walkthrough of work relevant to your industry or delivery
               stage, reach out and we will point you to the closest fit.
             </p>
-            <a
-              href="#contact"
+            <Link
+              to="/book-demo"
               className="font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
             >
               Request a relevant walkthrough
-            </a>
+            </Link>
           </div>
         </AnimatedSection>
       </div>

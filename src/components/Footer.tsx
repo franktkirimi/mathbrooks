@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 const productLinks = [
   { label: "CRM", href: "/products/crm" },
   { label: "HR & Payroll", href: "/products/hr" },
+  { label: "Accounting", href: "/products/accounting" },
+  { label: "Inventory", href: "/products/inventory" },
   { label: "Projects", href: "/products/projects" },
+  { label: "Automation", href: "/products/automation" },
   { label: "Analytics", href: "/products/analytics" },
+  { label: "AI Assistant", href: "/products/ai-assistant" },
 ];
 
 const companyLinks = [

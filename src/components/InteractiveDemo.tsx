@@ -125,11 +125,11 @@ const InteractiveDemo = () => {
               </div>
 
               <div className="mt-4 rounded-[1.5rem] border border-border/30 bg-white/[0.02] px-4 py-3">
-                <p className="text-[0.6rem] font-display tracking-[0.2em] uppercase text-white/55">
-                  Feature {String(activeIndex + 1).padStart(2, "0")}
+                <p className="text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                  Platform module {String(activeIndex + 1).padStart(2, "0")}
                 </p>
                 <p className="mt-1 text-sm font-light text-muted-foreground">
-                  Calm, selective motion. No clutter.
+                  Each module uses the same operating surface, adjusted to the workflow.
                 </p>
               </div>
             </div>

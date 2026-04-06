@@ -214,10 +214,10 @@ const Clients = () => {
                       Teams evaluating a new platform, replacing manual workflows, or deciding whether the next step should be a product deployment, custom software, or AI-enabled process improvement.
                     </p>
                     <div className="grid gap-3">
-                      {[
-                        isStartTrial
+                        {[
+                          isStartTrial
                           ? "Guided product trials for CRM and HR & Payroll"
-                          : "Product demos for CRM, HR & Payroll, Projects, and Analytics",
+                          : "Product demos for CRM, HR & Payroll, Accounting, Inventory, Projects, Automation, Analytics, and AI Assistant",
                         "Scoping calls for custom software, automation, and AI",
                         "Practical advice on what to build first",
                       ].map((item) => (

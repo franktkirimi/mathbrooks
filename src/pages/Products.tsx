@@ -11,11 +11,14 @@ const Products = () => {
   usePageMeta({
     title: "Products | MathBrooks",
     description:
-      "Explore MathBrooks business platforms for CRM, HR and payroll, projects, and analytics built for African operations.",
+      "Explore MathBrooks business platforms for CRM, HR and payroll, accounting, inventory, projects, automation, analytics, and AI assistant workflows.",
     canonicalPath: "/products",
     keywords: [
       "CRM software Africa",
       "HR payroll software Zimbabwe",
+      "accounting software Africa",
+      "inventory software Africa",
+      "automation platform business",
       "project management software Africa",
       "analytics platform business",
     ],
@@ -26,7 +29,7 @@ const Products = () => {
       <PageHero
         eyebrow="Products"
         title="Business platforms for the workflows growing teams repeat every week"
-        description="MathBrooks products cover CRM, HR and payroll, projects, and analytics. Each one is designed to remove operational drag quickly, then extend cleanly as your business gets more complex."
+        description="MathBrooks products cover CRM, HR and payroll, accounting, inventory, projects, automation, analytics, and AI assistant workflows. Each one is designed to remove operational drag quickly, then extend cleanly as the business gets more complex."
         chips={businessPillars}
         actions={(
           <>

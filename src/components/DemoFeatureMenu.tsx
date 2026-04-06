@@ -28,18 +28,24 @@ const DemoFeatureMenu = ({ features, activeFeature, onSelect }: DemoFeatureMenuP
             whileTap={{ scale: 0.985 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
             className={cn(
-              "group w-full rounded-2xl border px-4 py-4 text-left transition-all duration-300",
+              "group relative w-full rounded-2xl border px-4 py-4 text-left transition-all duration-300",
               active
-                ? "border-primary/30 bg-white/[0.05] shadow-[0_0_0_1px_hsl(var(--primary)/0.12)]"
+                ? "border-primary/25 bg-white/[0.05] shadow-[0_0_0_1px_hsl(var(--primary)/0.1)]"
                 : "border-border/30 bg-transparent hover:border-white/15 hover:bg-white/[0.03]"
             )}
           >
+            <span
+              className={cn(
+                "absolute left-0 top-4 bottom-4 w-px rounded-full transition-all duration-300",
+                active ? "bg-primary/70" : "bg-transparent"
+              )}
+            />
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-display text-[0.6rem] tracking-[0.22em] uppercase text-white/45">
+                <p className="text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/40">
                   {String(feature.screen).toUpperCase()}
                 </p>
-                <h3 className="mt-1 font-display text-sm md:text-base uppercase tracking-wide text-white">
+                <h3 className="mt-1 text-sm md:text-base font-medium tracking-[0.02em] text-white">
                   {feature.title}
                 </h3>
                 <p className="mt-2 text-sm font-light leading-relaxed text-muted-foreground">

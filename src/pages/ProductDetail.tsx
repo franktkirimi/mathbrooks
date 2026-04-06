@@ -16,7 +16,7 @@ const ProductDetail = () => {
     title: product ? `${product.shortName} | MathBrooks` : "Product | MathBrooks",
     description:
       product?.summary ??
-      "MathBrooks business platforms for CRM, HR and payroll, projects, and analytics.",
+      "MathBrooks business platforms for CRM, finance, HR, inventory, projects, automation, analytics, and AI assistant workflows.",
     canonicalPath: product ? `/products/${product.slug}` : "/products",
     keywords: product
       ? [product.shortName, `${product.shortName} software`, "business platform Africa", "MathBrooks"]
