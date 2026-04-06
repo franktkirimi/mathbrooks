@@ -480,7 +480,7 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
               ))}
             </div>
 
-            <div className="grid gap-4 xl:grid-cols-[240px_minmax(0,1fr)]">
+            <div className="grid gap-4 xl:grid-cols-[220px_minmax(0,1fr)] 2xl:grid-cols-[240px_minmax(0,1fr)]">
               <aside className="space-y-4">
                 <motion.div
                   layout
@@ -520,10 +520,10 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                 </div>
               </aside>
 
-              <div className="space-y-4">
+              <div className="min-w-0 space-y-4">
                 <motion.div
                   layout
-                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5"
+                  className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <div>
@@ -539,8 +539,8 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                     </span>
                   </div>
 
-                  <div className="grid gap-4 xl:grid-cols-[minmax(0,1.12fr)_minmax(250px,0.88fr)]">
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.12fr)_minmax(280px,0.88fr)]">
+                    <div className="min-w-0 rounded-2xl border border-white/10 bg-black/20 p-4">
                       <div className="mb-4 flex items-center justify-between">
                         <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
                           Activity board
@@ -555,9 +555,9 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.22, delay: index * 0.05 }}
-                            className="rounded-2xl border border-white/10 bg-white/[0.03] p-4"
+                            className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-4"
                           >
-                            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                            <div className="flex flex-col gap-3">
                               <div className="min-w-0">
                                 <p className="text-base font-medium text-white">{row.title}</p>
                                 <p className="mt-1 text-sm font-light leading-6 text-white/55">
@@ -566,7 +566,7 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                               </div>
                               <span
                                 className={cn(
-                                  "inline-flex shrink-0 items-center rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.14em]",
+                                  "inline-flex w-fit shrink-0 items-center rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.14em]",
                                   statusToneClass[row.tone ?? "default"]
                                 )}
                               >
@@ -578,9 +578,9 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                       </div>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="min-w-0 space-y-4">
                       {feature.screen === "ai" ? (
-                        <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                        <div className="min-w-0 rounded-2xl border border-white/10 bg-black/20 p-4">
                           <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
                             Example queries
                           </p>
@@ -620,7 +620,7 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.22 }}
-                          className="rounded-2xl border border-white/10 bg-black/20 p-4"
+                          className="min-w-0 rounded-2xl border border-white/10 bg-black/20 p-4"
                         >
                           <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
                             {content.insight.eyebrow}
@@ -644,7 +644,7 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                         </motion.div>
                       )}
 
-                      <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                      <div className="min-w-0 rounded-2xl border border-white/10 bg-black/20 p-4">
                         <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
                           Signals
                         </p>
