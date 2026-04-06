@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   BarChart3,
@@ -427,11 +427,22 @@ const statusToneClass: Record<NonNullable<DemoRow["tone"]>, string> = {
   warning: "border-amber-400/20 bg-amber-400/10 text-amber-200",
 };
 
-const shellTabs = ["Overview", "Activity", "Signals"];
+type DemoTab = "overview" | "activity" | "signals";
+
+const shellTabs: { id: DemoTab; label: string }[] = [
+  { id: "overview", label: "Overview" },
+  { id: "activity", label: "Activity" },
+  { id: "signals", label: "Signals" },
+];
 
 const DemoScreen = ({ feature }: DemoScreenProps) => {
   const content = screenContent[feature.screen];
   const Icon = iconMap[feature.screen];
+  const [activeTab, setActiveTab] = useState<DemoTab>("overview");
+
+  useEffect(() => {
+    setActiveTab("overview");
+  }, [feature.screen]);
 
   return (
     <div className="rounded-[1.75rem] border border-border/40 bg-slate-950/90 p-4 shadow-[0_28px_100px_rgba(0,0,0,0.38)]">
@@ -444,12 +455,12 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="overflow-hidden rounded-[1.3rem] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02]"
         >
-          <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 md:px-5">
             <div>
               <p className="text-[0.62rem] font-medium uppercase tracking-[0.22em] text-primary/70">
                 Live Preview
               </p>
-              <h3 className="mt-1 text-base font-medium tracking-[0.04em] text-white">
+              <h3 className="mt-1 text-xl font-medium tracking-[0.02em] text-white md:text-[1.75rem]">
                 {content.title}
               </h3>
             </div>
@@ -464,83 +475,89 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
           </div>
 
           <div className="p-4 md:p-5">
-            <div className="mb-4 flex flex-wrap gap-2">
-              {shellTabs.map((tab, index) => (
-                <div
-                  key={tab}
-                  className={cn(
-                    "rounded-full border px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.16em]",
-                    index === 0
-                      ? "border-primary/20 bg-primary/10 text-primary/80"
-                      : "border-white/10 bg-white/[0.03] text-white/45"
-                  )}
-                >
-                  {tab}
-                </div>
-              ))}
+            <div className="mb-5 flex flex-wrap gap-2">
+              {shellTabs.map((tab) => {
+                const active = activeTab === tab.id;
+
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setActiveTab(tab.id)}
+                    className={cn(
+                      "rounded-full border px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.16em] transition-all duration-300",
+                      active
+                        ? "border-primary/35 bg-primary/15 text-white shadow-[0_0_0_1px_hsl(var(--primary)/0.08)]"
+                        : "border-white/10 bg-white/[0.03] text-white/45 hover:text-white/70"
+                    )}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
             </div>
 
-            <div className="grid gap-4 xl:grid-cols-[220px_minmax(0,1fr)] 2xl:grid-cols-[240px_minmax(0,1fr)]">
-              <aside className="space-y-4">
+            <AnimatePresence mode="wait">
+              {activeTab === "overview" ? (
                 <motion.div
-                  layout
-                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-4"
+                  key="overview"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                  className="grid gap-4 xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)_minmax(0,0.96fr)]"
                 >
-                  <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
-                    Summary
-                  </p>
-                  <p className="mt-3 text-[0.95rem] font-light leading-7 text-white/78">
-                    {content.description}
-                  </p>
-                </motion.div>
-
-                <div className="space-y-3">
-                  {content.panels.map((panel, index) => (
-                    <motion.div
-                      key={panel.label}
-                      layout
-                      initial={{ opacity: 0, y: 14 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.22, delay: index * 0.05 }}
-                      className="rounded-2xl border border-white/10 bg-black/20 px-4 py-4"
-                    >
-                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.18em] text-white/45">
-                        {panel.label}
-                      </p>
-                      <p className="mt-3 text-4xl font-light tracking-[-0.03em] text-white">
-                        {panel.value}
-                      </p>
-                      {panel.detail ? (
-                        <p className="mt-2 text-xs font-light leading-5 text-white/45">
-                          {panel.detail}
-                        </p>
-                      ) : null}
-                    </motion.div>
-                  ))}
-                </div>
-              </aside>
-
-              <div className="min-w-0 space-y-4">
-                <motion.div
-                  layout
-                  className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5"
-                >
-                  <div className="mb-4 flex items-center justify-between">
-                    <div>
+                  <div className="space-y-4">
+                    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
                       <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
-                        Workspace
+                        Summary
                       </p>
-                      <p className="mt-1 text-sm font-light text-white/45">
-                        Current operational view
+                      <p className="mt-3 text-sm font-light leading-7 text-white/78">
+                        {content.description}
                       </p>
                     </div>
-                    <span className="rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-primary/80">
-                      Active
-                    </span>
+
+                    <div className="grid gap-3">
+                      {content.panels.map((panel, index) => (
+                        <motion.div
+                          key={panel.label}
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.22, delay: index * 0.04 }}
+                          className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5"
+                        >
+                          <p className="text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/40">
+                            {panel.label}
+                          </p>
+                          <p className="mt-3 text-3xl font-light tracking-[-0.03em] text-white md:text-[2.9rem]">
+                            {panel.value}
+                          </p>
+                          {panel.detail ? (
+                            <p className="mt-2 text-sm font-light leading-6 text-white/45">
+                              {panel.detail}
+                            </p>
+                          ) : null}
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="grid gap-4 2xl:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)]">
-                    <div className="min-w-0 rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+                    <div className="mb-4 flex items-center justify-between">
+                      <div>
+                        <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                          Workspace
+                        </p>
+                        <p className="mt-1 text-sm font-light text-white/45">
+                          Current operational view
+                        </p>
+                      </div>
+                      <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-emerald-200">
+                        Active
+                      </span>
+                    </div>
+
+                    <div className="border-t border-white/10 pt-4">
                       <div className="mb-4 flex items-center justify-between">
                         <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
                           Activity board
@@ -555,11 +572,13 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.22, delay: index * 0.05 }}
-                            className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-4"
+                            className="rounded-2xl border border-white/10 bg-black/20 p-4"
                           >
                             <div className="flex flex-col gap-3">
                               <div className="min-w-0">
-                                <p className="text-base font-medium text-white">{row.title}</p>
+                                <p className="text-[1rem] font-medium text-white md:text-[1.05rem]">
+                                  {row.title}
+                                </p>
                                 <p className="mt-1 text-sm font-light leading-6 text-white/55">
                                   {row.detail}
                                 </p>
@@ -577,127 +596,236 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                         ))}
                       </div>
                     </div>
+                  </div>
 
-                    <div className="min-w-0 space-y-4">
-                      {feature.screen === "ai" ? (
-                        <div className="min-w-0 rounded-2xl border border-white/10 bg-black/20 p-4">
-                          <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
-                            Example queries
-                          </p>
-                          <div className="mt-4 space-y-3">
-                            {[
-                              "What were our best selling products last month?",
-                              "Which invoices are overdue?",
-                              "Which customers generated the most revenue?",
-                            ].map((query, index) => (
+                  <div className="space-y-4">
+                    <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/70">
+                        {content.insight.eyebrow}
+                      </p>
+                      <h4 className="mt-2 text-[1.2rem] font-medium leading-tight text-white md:text-[1.35rem]">
+                        {content.insight.title}
+                      </h4>
+                      <p className="mt-3 text-sm font-light leading-6 text-white/62">
+                        {content.insight.body}
+                      </p>
+                      <div className="mt-4 space-y-2.5">
+                        {content.insight.bullets.map((item) => (
+                          <div
+                            key={item}
+                            className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3"
+                          >
+                            <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/75" />
+                            <span className="text-sm font-light leading-6 text-white/72">
+                              {item}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                        Signals
+                      </p>
+                      <div className="mt-4 space-y-4">
+                        {content.signals.map((signal, index) => (
+                          <motion.div
+                            key={signal.label}
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.22, delay: index * 0.04 }}
+                          >
+                            <div className="mb-2 flex items-center justify-between gap-3">
+                              <span className="text-sm font-light text-white/62">
+                                {signal.label}
+                              </span>
+                              <span className="text-sm font-medium text-white/88">
+                                {signal.value}
+                              </span>
+                            </div>
+                            <div className="h-2 rounded-full bg-white/[0.05]">
                               <motion.div
-                                key={query}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.2, delay: index * 0.06 }}
-                                className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3 text-sm font-light leading-6 text-white/72"
-                              >
-                                {query}
-                              </motion.div>
-                            ))}
-                            <motion.div
-                              initial={{ opacity: 0, y: 12 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.24, delay: 0.18 }}
-                              className="rounded-xl border border-primary/15 bg-primary/5 px-4 py-4"
-                            >
-                              <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/75">
-                                Simulated answer
-                              </p>
-                              <p className="mt-2 text-sm font-light leading-6 text-white/82">
-                                Last month, three repeat clients generated the highest revenue. Two invoice batches are overdue, and the leading account is 14% ahead of the next tier.
-                              </p>
-                            </motion.div>
-                          </div>
-                        </div>
-                      ) : (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.22 }}
-                          className="min-w-0 rounded-2xl border border-white/10 bg-black/20 p-4"
-                        >
-                          <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
-                            {content.insight.eyebrow}
-                          </p>
-                          <h4
-                            className={cn(
-                              "mt-2 font-medium leading-tight text-white",
-                              feature.screen === "hr"
-                                ? "text-base md:text-[1.05rem]"
-                                : "text-lg"
-                            )}
-                          >
-                            {content.insight.title}
-                          </h4>
-                          <p
-                            className={cn(
-                              "mt-3 font-light leading-6 text-white/62",
-                              feature.screen === "hr" ? "text-[0.9rem]" : "text-sm"
-                            )}
-                          >
-                            {content.insight.body}
-                          </p>
-                          <div className="mt-4 space-y-2">
-                            {content.insight.bullets.map((item) => (
-                              <div
-                                key={item}
-                                className={cn(
-                                  "rounded-xl border border-white/10 bg-white/[0.03] font-light text-white/70",
-                                  feature.screen === "hr"
-                                    ? "px-3 py-2.5 text-[0.9rem] leading-5"
-                                    : "px-3 py-3 text-sm leading-6"
-                                )}
-                              >
-                                {item}
-                              </div>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-
-                      <div className="min-w-0 rounded-2xl border border-white/10 bg-black/20 p-4">
-                        <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
-                          Signals
-                        </p>
-                        <div className="mt-4 space-y-3">
-                          {content.signals.map((signal, index) => (
-                            <motion.div
-                              key={signal.label}
-                              initial={{ opacity: 0, x: 10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.22, delay: index * 0.04 }}
-                            >
-                              <div className="mb-2 flex items-center justify-between gap-3">
-                                <span className="text-sm font-light text-white/62">
-                                  {signal.label}
-                                </span>
-                                <span className="text-sm font-medium text-white/88">
-                                  {signal.value}
-                                </span>
-                              </div>
-                              <div className="h-2 rounded-full bg-white/[0.05]">
-                                <motion.div
-                                  initial={{ width: 0 }}
-                                  animate={{ width: `${signal.strength}%` }}
-                                  transition={{ duration: 0.45, delay: 0.06 + index * 0.05 }}
-                                  className="h-full rounded-full bg-gradient-to-r from-primary/60 via-primary to-primary/55"
-                                />
-                              </div>
-                            </motion.div>
-                          ))}
-                        </div>
+                                initial={{ width: 0 }}
+                                animate={{ width: `${signal.strength}%` }}
+                                transition={{ duration: 0.45, delay: 0.06 + index * 0.05 }}
+                                className="h-full rounded-full bg-gradient-to-r from-primary/60 via-primary to-primary/55"
+                              />
+                            </div>
+                          </motion.div>
+                        ))}
                       </div>
                     </div>
                   </div>
                 </motion.div>
-              </div>
-            </div>
+              ) : activeTab === "activity" ? (
+                <motion.div
+                  key="activity"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                  className="grid gap-4 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]"
+                >
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+                    <div className="mb-4 flex items-center justify-between">
+                      <div>
+                        <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                          Activity board
+                        </p>
+                        <p className="mt-1 text-sm font-light text-white/45">
+                          Current operational view
+                        </p>
+                      </div>
+                      <span className="rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-primary/80">
+                        Active
+                      </span>
+                    </div>
+
+                    <div className="space-y-3">
+                      {content.rows.map((row, index) => (
+                        <motion.div
+                          key={row.title}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.22, delay: index * 0.05 }}
+                          className="rounded-2xl border border-white/10 bg-black/20 p-4"
+                        >
+                          <p className="text-[1rem] font-medium text-white md:text-[1.05rem]">
+                            {row.title}
+                          </p>
+                          <p className="mt-1 text-sm font-light leading-6 text-white/55">
+                            {row.detail}
+                          </p>
+                          <span
+                            className={cn(
+                              "mt-3 inline-flex w-fit shrink-0 items-center rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.14em]",
+                              statusToneClass[row.tone ?? "default"]
+                            )}
+                          >
+                            {row.status}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/70">
+                        {content.insight.eyebrow}
+                      </p>
+                      <h4 className="mt-2 text-[1.2rem] font-medium leading-tight text-white md:text-[1.35rem]">
+                        {content.insight.title}
+                      </h4>
+                      <p className="mt-3 text-sm font-light leading-6 text-white/62">
+                        {content.insight.body}
+                      </p>
+                    </div>
+
+                    <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                        Signals
+                      </p>
+                      <div className="mt-4 space-y-4">
+                        {content.signals.map((signal, index) => (
+                          <motion.div
+                            key={signal.label}
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.22, delay: index * 0.04 }}
+                          >
+                            <div className="mb-2 flex items-center justify-between gap-3">
+                              <span className="text-sm font-light text-white/62">
+                                {signal.label}
+                              </span>
+                              <span className="text-sm font-medium text-white/88">
+                                {signal.value}
+                              </span>
+                            </div>
+                            <div className="h-2 rounded-full bg-white/[0.05]">
+                              <motion.div
+                                initial={{ width: 0 }}
+                                animate={{ width: `${signal.strength}%` }}
+                                transition={{ duration: 0.45, delay: 0.06 + index * 0.05 }}
+                                className="h-full rounded-full bg-gradient-to-r from-primary/60 via-primary to-primary/55"
+                              />
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="signals"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                  className="grid gap-4 xl:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)]"
+                >
+                  <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                    <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                      Signals
+                    </p>
+                    <div className="mt-4 space-y-4">
+                      {content.signals.map((signal, index) => (
+                        <motion.div
+                          key={signal.label}
+                          initial={{ opacity: 0, x: 10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.22, delay: index * 0.04 }}
+                        >
+                          <div className="mb-2 flex items-center justify-between gap-3">
+                            <span className="text-sm font-light text-white/62">
+                              {signal.label}
+                            </span>
+                            <span className="text-sm font-medium text-white/88">
+                              {signal.value}
+                            </span>
+                          </div>
+                          <div className="h-2 rounded-full bg-white/[0.05]">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: `${signal.strength}%` }}
+                              transition={{ duration: 0.45, delay: 0.06 + index * 0.05 }}
+                              className="h-full rounded-full bg-gradient-to-r from-primary/60 via-primary to-primary/55"
+                            />
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+                    <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/70">
+                      {content.insight.eyebrow}
+                    </p>
+                    <h4 className="mt-2 text-[1.2rem] font-medium leading-tight text-white md:text-[1.35rem]">
+                      {content.insight.title}
+                    </h4>
+                    <p className="mt-3 text-sm font-light leading-6 text-white/62">
+                      {content.insight.body}
+                    </p>
+                    <div className="mt-4 space-y-2.5">
+                      {content.insight.bullets.map((item) => (
+                        <div
+                          key={item}
+                          className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3"
+                        >
+                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/75" />
+                          <span className="text-sm font-light leading-6 text-white/72">
+                            {item}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
       </AnimatePresence>

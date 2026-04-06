@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { cn } from "@/lib/utils";
 import DemoFeatureMenu, { type DemoFeature } from "./DemoFeatureMenu";
@@ -52,11 +52,6 @@ const tabs = demoFeatures.map((feature) => feature.screen);
 const InteractiveDemo = () => {
   const [activeFeature, setActiveFeature] = useState<DemoFeature>(demoFeatures[0]);
 
-  const activeIndex = useMemo(
-    () => demoFeatures.findIndex((feature) => feature.screen === activeFeature.screen),
-    [activeFeature.screen]
-  );
-
   return (
     <section className="relative px-6 py-20 md:py-28 overflow-hidden">
       <div
@@ -68,7 +63,7 @@ const InteractiveDemo = () => {
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         <AnimatedSection>
           <div className="max-w-3xl mb-10 md:mb-14">
             <p className="font-display text-xs tracking-[0.3em] uppercase text-primary/70 mb-4">
@@ -83,7 +78,7 @@ const InteractiveDemo = () => {
           </div>
         </AnimatedSection>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(260px,0.68fr)_minmax(0,1.32fr)]">
+        <div className="grid gap-6 lg:grid-cols-[minmax(260px,280px)_minmax(0,1fr)] xl:grid-cols-[minmax(280px,300px)_minmax(0,1fr)]">
           <AnimatedSection>
             <div className="lg:sticky lg:top-[120px]">
               <div className="hidden md:block">
@@ -124,14 +119,6 @@ const InteractiveDemo = () => {
                 </div>
               </div>
 
-              <div className="mt-4 rounded-[1.5rem] border border-border/30 bg-white/[0.02] px-4 py-3">
-                <p className="text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/45">
-                  Platform module {String(activeIndex + 1).padStart(2, "0")}
-                </p>
-                <p className="mt-1 text-sm font-light text-muted-foreground">
-                  Each module uses the same operating surface, adjusted to the workflow.
-                </p>
-              </div>
             </div>
           </AnimatedSection>
 
