@@ -83,13 +83,13 @@ const Navbar = () => {
           MATHBROOKS
         </Link>
 
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-4">
           <div ref={dropdownRef} className="relative">
             <button
               type="button"
               onClick={() => setDesktopDropdownOpen((current) => !current)}
               className={cn(
-                "flex items-center gap-1 font-display text-[0.65rem] tracking-[0.15em] uppercase transition-colors duration-300",
+                "flex items-center gap-1 font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300",
                 productsActive || desktopDropdownOpen
                   ? "text-primary"
                   : "text-muted-foreground hover:text-primary"
@@ -112,7 +112,7 @@ const Navbar = () => {
                     to={item.href}
                     onClick={() => setDesktopDropdownOpen(false)}
                     className={cn(
-                      "block px-4 py-2.5 font-display text-[0.65rem] tracking-[0.15em] uppercase transition-colors duration-200",
+                      "block px-4 py-2.5 font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-200",
                       location.pathname === item.href
                         ? "text-primary"
                         : "text-muted-foreground hover:text-primary",
@@ -131,7 +131,7 @@ const Navbar = () => {
               key={item.href}
               to={item.href}
               className={cn(
-                "font-display text-[0.65rem] tracking-[0.15em] uppercase transition-colors duration-300",
+                "font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300",
                 location.pathname === item.href
                   ? "text-primary"
                   : "text-muted-foreground hover:text-primary"
@@ -143,7 +143,7 @@ const Navbar = () => {
 
           <Link
             to="/book-demo"
-            className="font-display text-[0.65rem] tracking-[0.15em] uppercase px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300"
+            className="font-display text-[0.65rem] tracking-[0.08em] uppercase px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300 whitespace-nowrap"
           >
             Start Demo
           </Link>

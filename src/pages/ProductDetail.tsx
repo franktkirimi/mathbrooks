@@ -38,6 +38,11 @@ const ProductDetail = () => {
     return <NotFound />;
   }
 
+  const demoPath = `/book-demo?product=${product.slug}`;
+  const pricingPath = `/pricing#${product.slug}`;
+  const tertiaryPath = product.trialAvailable ? `/start-trial?product=${product.slug}` : "/services";
+  const tertiaryLabel = product.trialAvailable ? "Start Guided Trial" : "Extend With Services";
+
   return (
     <SiteLayout>
       <PageHero
@@ -47,25 +52,25 @@ const ProductDetail = () => {
         chips={product.proofPoints}
         actions={(
           <>
-            <Link to="/book-demo">
+            <Link to={demoPath}>
               <Button size="lg" className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6">
                 Book a Demo
               </Button>
             </Link>
-            <Link to="/pricing">
+            <Link to={pricingPath}>
               <Button
                 variant="outline"
                 size="lg"
                 className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
               >
-                See Pricing
+                See Plans
               </Button>
             </Link>
             <Link
-              to="/start-trial"
+              to={tertiaryPath}
               className="inline-flex items-center font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
             >
-              Start Free Trial
+              {tertiaryLabel}
             </Link>
           </>
         )}
@@ -88,6 +93,19 @@ const ProductDetail = () => {
               </h2>
               <p className="text-sm font-light text-muted-foreground leading-relaxed">
                 {product.localFit}
+              </p>
+            </div>
+            <div className="rounded-xl border border-border/20 bg-background/40 p-4">
+              <h2 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
+                Commercial model
+              </h2>
+              <p className="font-display text-lg text-foreground mb-2">
+                Starting from {product.startingPrice.replace(" / ", " per ")}
+              </p>
+              <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                {product.trialAvailable
+                  ? "Guided trial access is available before rollout if the workflow is a fit."
+                  : "Rollout is handled through demo, onboarding, and the plan that matches your operating complexity."}
               </p>
             </div>
           </div>
@@ -212,7 +230,7 @@ const ProductDetail = () => {
                     Customise the Workflow
                   </Button>
                 </Link>
-                <Link to="/book-demo">
+                <Link to={demoPath}>
                   <Button className="font-display text-xs tracking-[0.15em] uppercase">
                     Talk to MathBrooks
                   </Button>

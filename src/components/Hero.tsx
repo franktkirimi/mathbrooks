@@ -75,13 +75,7 @@ const Hero = () => {
       />
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
-        <div className="mb-8 md:mb-14" style={{ animation: "fadeInUp 0.8s ease-out both" }}>
-          <span className="font-display text-xs tracking-[0.4em] text-muted-foreground uppercase">
-            MathBrooks · Harare, Zimbabwe
-          </span>
-        </div>
-
-        <h1 className="font-display text-[2.4rem] sm:text-6xl md:text-7xl lg:text-[5.9rem] xl:text-[6.8rem] font-bold uppercase leading-[0.94] tracking-tight mb-6 md:mb-10">
+        <h1 className="font-display text-[2.4rem] sm:text-6xl md:text-7xl lg:text-[5.9rem] xl:text-[6.8rem] font-bold uppercase leading-[0.94] tracking-tight mb-6 md:mb-10 mt-16 md:mt-0">
           {heroLines.map((line, lineIndex) => (
             <div
               key={line.join("-")}
@@ -111,13 +105,13 @@ const Hero = () => {
         </p>
 
         <div
-          className="flex flex-wrap items-center justify-center gap-3 mb-10 md:mb-14"
+          className="flex flex-wrap items-center justify-center gap-2 mb-10 md:mb-14"
           style={{ animation: "fadeInUp 0.8s ease-out 1s both" }}
         >
           {businessPillars.map((pillar, index) => (
             <span
               key={pillar}
-              className="font-display text-[0.6rem] tracking-[0.18em] uppercase px-3 py-1.5 rounded-full border border-primary/30 text-primary/70"
+              className="font-display text-[0.6rem] tracking-[0.15em] uppercase px-3 py-1.5 rounded-full border border-primary/30 text-primary/70 whitespace-nowrap"
               style={{ animationDelay: `${1 + index * 0.08}s` }}
             >
               {pillar}
@@ -151,13 +145,6 @@ const Hero = () => {
             </Link>
           </Magnetic>
         </div>
-
-        <p
-          className="text-xs sm:text-sm font-light text-muted-foreground max-w-2xl mx-auto mt-6"
-          style={{ animation: "fadeInUp 0.8s ease-out 1.25s both" }}
-        >
-          Business infrastructure across CRM, finance, HR, operations, analytics, and AI.
-        </p>
       </div>
 
       <div

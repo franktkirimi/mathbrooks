@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import ProductsHighlight from "@/components/ProductsHighlight";
+import ProductCatalog from "@/components/ProductCatalog";
 import AnimatedSection from "@/components/AnimatedSection";
 import PageHero from "@/components/site/PageHero";
 import SiteLayout from "@/components/site/SiteLayout";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { businessPillars, complianceSignals, deliveryPrinciples, operatingModel } from "@/content/siteContent";
+import { complianceSignals, operatingModel, productFamilies } from "@/content/siteContent";
 
 const Products = () => {
   usePageMeta({
@@ -28,9 +28,9 @@ const Products = () => {
     <SiteLayout>
       <PageHero
         eyebrow="Products"
-        title="Business platforms for the workflows growing teams repeat every week"
-        description="MathBrooks products cover CRM, HR and payroll, accounting, inventory, projects, automation, analytics, and AI assistant workflows. Each one is designed to remove operational drag quickly, then extend cleanly as the business gets more complex."
-        chips={businessPillars}
+        title="Product modules for the workflows that create the most operational drag"
+        description="MathBrooks products cover CRM, HR and payroll, accounting, inventory, projects, automation, analytics, and AI assistant workflows. Start with the module that fixes the current bottleneck, then connect more as the business needs tighter control."
+        chips={productFamilies.map((family) => family.title)}
         actions={(
           <>
             <Link to="/book-demo">
@@ -47,21 +47,34 @@ const Products = () => {
                 View Pricing
               </Button>
             </Link>
-            <Link
-              to="/start-trial"
+            <a
+              href="#product-catalog"
               className="inline-flex items-center font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
             >
-              Start Free Trial
-            </Link>
+              Compare Modules
+            </a>
           </>
         )}
         sideContent={(
           <div className="space-y-4">
             <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70">
-              Platform Model
+              How To Choose
             </p>
             <div className="space-y-3">
-              {deliveryPrinciples.map((item) => (
+              {[
+                {
+                  title: "Start where work is currently slowing down",
+                  detail: "Use the products page to match the module to the bottleneck first: sales follow-up, payroll, invoicing, stock visibility, project control, automation, reporting, or AI-assisted analysis.",
+                },
+                {
+                  title: "Use pricing for repeatable rollouts",
+                  detail: "Every product has a pricing track. CRM and HR also support guided trial access before full rollout.",
+                },
+                {
+                  title: "Extend later if the workflow gets more complex",
+                  detail: "Products can connect into custom software, automation, analytics, or AI work when the business needs a broader operating system.",
+                },
+              ].map((item) => (
                 <div key={item.title} className="rounded-xl border border-border/30 bg-background/40 p-4">
                   <h2 className="font-display text-xs tracking-[0.15em] uppercase mb-2">
                     {item.title}
@@ -76,7 +89,7 @@ const Products = () => {
         )}
       />
 
-      <ProductsHighlight />
+      <ProductCatalog />
 
       <section className="px-6 pb-16 md:pb-24">
         <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">

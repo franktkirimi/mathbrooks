@@ -3,9 +3,12 @@
   "configurations": [
     {
       "name": "mathbrooks-dev",
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "/usr/local/bin/npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 8080
+      "port": 8080,
+      "env": {
+        "PATH": "/usr/local/bin:/Users/admin/.nvm/versions/node/v24.11.1/bin:/usr/bin:/bin"
+      }
     }
   ]
 }

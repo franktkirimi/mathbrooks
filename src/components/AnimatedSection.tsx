@@ -35,8 +35,10 @@ const AnimatedSection = ({
         className
       )}
       style={{
-        transitionDelay: `${delay}ms`,
+        transitionDelay: isVisible ? `${delay}ms` : "0ms",
         transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+        // Fallback: never stay invisible longer than 1.5s after mount
+        willChange: "opacity, transform",
       }}
     >
       {children}

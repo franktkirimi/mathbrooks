@@ -20,6 +20,16 @@ export type ProductMetric = {
   value: string;
 };
 
+export type ProductSlug =
+  | "crm"
+  | "hr"
+  | "accounting"
+  | "projects"
+  | "inventory"
+  | "analytics"
+  | "automation"
+  | "ai-assistant";
+
 export type ProductPanel = {
   title: string;
   items: string[];
@@ -36,15 +46,19 @@ export type ProductUseCase = {
 };
 
 export type ProductEntry = {
-  slug: string;
+  slug: ProductSlug;
   name: string;
   shortName: string;
   category: string;
+  family: string;
   tagline: string;
   audience: string;
   summary: string;
+  overview: string;
   problem: string;
   localFit: string;
+  startingPrice: string;
+  trialAvailable: boolean;
   accent: string;
   icon: LucideIcon;
   metrics: ProductMetric[];
@@ -52,6 +66,12 @@ export type ProductEntry = {
   features: ProductFeature[];
   useCases: ProductUseCase[];
   proofPoints: string[];
+};
+
+export type ProductFamily = {
+  title: string;
+  description: string;
+  slugs: ProductSlug[];
 };
 
 export type ServiceEntry = {
@@ -127,14 +147,18 @@ export const products: ProductEntry[] = [
     name: "MathBrooks CRM",
     shortName: "CRM",
     category: "Business Platforms",
+    family: "Sales & Customer Operations",
     tagline: "Pipeline visibility, follow-up discipline, and customer history in one place.",
     audience: "Service businesses, distributors, and teams managing leads by phone, WhatsApp, and email.",
     summary:
       "A practical CRM for businesses that need better follow-up, cleaner customer records, and a clearer sales pipeline without enterprise software overhead.",
+    overview: "Manage leads, customers, and deals in one place.",
     problem:
       "Many growing teams lose context between first contact, quotation, delivery, and repeat business. Leads sit in inboxes, follow-ups depend on memory, and nobody has one trusted view of the account.",
     localFit:
       "Designed for teams that sell through relationships, referrals, phone calls, and WhatsApp, not only through web forms.",
+    startingPrice: "$65 / month",
+    trialAvailable: true,
     accent: "217 91% 60%",
     icon: Users,
     metrics: [
@@ -191,14 +215,18 @@ export const products: ProductEntry[] = [
     name: "MathBrooks HR & Payroll",
     shortName: "HR & Payroll",
     category: "Business Platforms",
+    family: "People & Payroll",
     tagline: "Payroll, leave, and compliance workflows built for Zimbabwean operations.",
     audience: "Businesses that need fewer payroll errors, clearer staff records, and better compliance readiness.",
     summary:
       "An HR and payroll platform that keeps employee records, payroll runs, approvals, and statutory reporting aligned in one operating system.",
+    overview: "Manage employees, payroll, and compliance workflows.",
     problem:
       "Payroll and HR administration often live across spreadsheets, email threads, and ad hoc approvals. That makes errors more likely, slows reporting, and creates compliance exposure when the business grows.",
     localFit:
       "Built with practical Zimbabwean payroll realities in mind, including ZIMRA, NSSA, leave administration, and auditable staff records.",
+    startingPrice: "$85 / month",
+    trialAvailable: true,
     accent: "151 73% 45%",
     icon: FolderKanban,
     metrics: [
@@ -255,14 +283,18 @@ export const products: ProductEntry[] = [
     name: "MathBrooks Accounting",
     shortName: "Accounting",
     category: "Business Platforms",
+    family: "Finance & Cash Control",
     tagline: "Revenue, invoicing, and cash visibility in one finance workspace.",
     audience: "Finance teams and business owners who need cleaner invoice control, collections visibility, and simpler management reporting.",
     summary:
       "An accounting and finance operations module for businesses that need better invoice tracking, clearer cash visibility, and cleaner reporting without a bloated ERP rollout.",
+    overview: "Track revenue, invoices, and cash movement with clarity.",
     problem:
       "Revenue, invoicing, expenses, and collections often live across spreadsheets, inboxes, and isolated tools. That slows decision-making and makes overdue exposure harder to control.",
     localFit:
       "Built for businesses balancing practical finance operations, collections follow-up, and management reporting in Zimbabwean and regional operating contexts.",
+    startingPrice: "$45 / month",
+    trialAvailable: false,
     accent: "22 90% 58%",
     icon: CreditCard,
     metrics: [
@@ -319,14 +351,18 @@ export const products: ProductEntry[] = [
     name: "MathBrooks Projects",
     shortName: "Projects",
     category: "Business Platforms",
+    family: "Delivery & Execution",
     tagline: "One operating view for delivery, approvals, and project health.",
     audience: "Teams running client work, internal delivery, field operations, or multi-step approvals.",
     summary:
       "A project operations platform for teams that need task visibility, delivery discipline, and a cleaner handoff between planning and execution.",
+    overview: "Organize initiatives, delivery work, and task ownership.",
     problem:
       "Projects slip when responsibilities are unclear, approvals stall in chat threads, and management has no simple view of what is blocked, late, or at risk.",
     localFit:
       "Useful for agencies, professional services, implementation teams, and operational departments that coordinate work across chat, phone, and in-person decisions.",
+    startingPrice: "$60 / month",
+    trialAvailable: false,
     accent: "28 89% 60%",
     icon: BarChart3,
     metrics: [
@@ -383,14 +419,18 @@ export const products: ProductEntry[] = [
     name: "MathBrooks Inventory",
     shortName: "Inventory",
     category: "Business Platforms",
+    family: "Operations & Inventory",
     tagline: "Stock, purchasing, and reorder visibility for businesses that cannot afford blind spots.",
     audience: "Retail, distribution, and operations teams that need clearer stock control and purchasing visibility.",
     summary:
       "An inventory and procurement module for businesses that need better stock visibility, cleaner reorder discipline, and faster operational awareness around purchasing risk.",
+    overview: "Keep stock, purchasing, and reorder visibility in one layer.",
     problem:
       "Inventory problems usually appear late. Teams discover shortages after delivery has already slowed down, purchasing decisions are reactive, and management lacks a clean view of stock pressure.",
     localFit:
       "Useful for businesses handling mixed product movement, practical purchasing workflows, and supplier coordination across local operating realities.",
+    startingPrice: "$55 / month",
+    trialAvailable: false,
     accent: "197 81% 55%",
     icon: Boxes,
     metrics: [
@@ -447,14 +487,18 @@ export const products: ProductEntry[] = [
     name: "MathBrooks Analytics",
     shortName: "Analytics",
     category: "Business Platforms",
+    family: "Visibility & Reporting",
     tagline: "Dashboards, alerts, and reporting shaped around real operating questions.",
     audience: "Leaders who need one place to understand sales, operations, workforce, or project performance.",
     summary:
       "A practical analytics layer that turns scattered operational data into dashboards, alerts, and management reporting that teams actually use.",
+    overview: "Turn operational data into dashboards, alerts, and reports.",
     problem:
       "Important numbers usually exist, but they live across different tools and manual reports. That means decisions are slower, meetings are less productive, and issues are discovered too late.",
     localFit:
       "Built for managers who need fast visibility across real operations, not a generic BI setup that requires a specialist to interpret every chart.",
+    startingPrice: "$50 / month",
+    trialAvailable: false,
     accent: "262 83% 68%",
     icon: TrendingUp,
     metrics: [
@@ -511,14 +555,18 @@ export const products: ProductEntry[] = [
     name: "MathBrooks Automation",
     shortName: "Automation",
     category: "Business Platforms",
+    family: "Workflow Automation",
     tagline: "Workflow routing, reminders, and operational handoffs that keep work moving.",
     audience: "Teams dealing with repeated approvals, admin workflows, and status handoffs that create avoidable drag.",
     summary:
       "An automation module for businesses that need repeated workflows to move faster, more reliably, and with better visibility than email chains and chat reminders can provide.",
+    overview: "Route approvals, reminders, and handoffs automatically.",
     problem:
       "Repeated business processes often depend on manual chasing. Requests sit in inboxes, approvals are delayed, and no one has a clean view of where work is stalled.",
     localFit:
       "Built for practical operational workflows where approvals, reminders, and handoffs still depend on human teams, not fully autonomous systems.",
+    startingPrice: "$35 / month",
+    trialAvailable: false,
     accent: "39 96% 60%",
     icon: Sparkles,
     metrics: [
@@ -575,14 +623,18 @@ export const products: ProductEntry[] = [
     name: "MathBrooks AI Assistant",
     shortName: "AI Assistant",
     category: "Applied AI Systems",
+    family: "Applied Intelligence",
     tagline: "A governed business intelligence layer for asking questions across your operations.",
     audience: "Leaders and operating teams that need quicker answers across CRM, finance, HR, inventory, or project data.",
     summary:
       "An AI assistant module that lets teams ask business questions in plain language and get structured answers grounded in connected business data.",
+    overview: "Ask questions about your business data and get answers fast.",
     problem:
       "Teams often know the answer exists somewhere, but finding it takes too long because the data is spread across tools, reports, and operational systems.",
     localFit:
       "Designed for practical business use where teams need fast answers, clear source context, and human oversight where decisions carry operational risk.",
+    startingPrice: "$15 / month",
+    trialAvailable: false,
     accent: "273 78% 69%",
     icon: Bot,
     metrics: [
@@ -688,6 +740,34 @@ export const trustSignals = [
   },
 ];
 
+export const productFamilies: ProductFamily[] = [
+  {
+    title: "Sales & Customer Operations",
+    description: "For businesses that need cleaner lead handling, follow-up discipline, and better customer context.",
+    slugs: ["crm"],
+  },
+  {
+    title: "People & Payroll",
+    description: "For teams that need staff records, approvals, and payroll administration to stay clean and auditable.",
+    slugs: ["hr"],
+  },
+  {
+    title: "Finance & Operational Control",
+    description: "For teams that need better visibility over money, stock, and the operational pressure around them.",
+    slugs: ["accounting", "inventory"],
+  },
+  {
+    title: "Delivery & Workflow Execution",
+    description: "For organizations that need work to move through tasks, approvals, and handoffs without drift.",
+    slugs: ["projects", "automation"],
+  },
+  {
+    title: "Visibility & Intelligence",
+    description: "For leadership teams that need clearer reporting and faster answers across the business.",
+    slugs: ["analytics", "ai-assistant"],
+  },
+];
+
 export const caseStudies: CaseStudyEntry[] = [
   {
     slug: "orderfile",
@@ -736,7 +816,7 @@ export const caseStudies: CaseStudyEntry[] = [
   },
 ];
 
-export const productPricing = {
+export const productPricing: Record<ProductSlug, PricingPlan[]> = {
   crm: [
     {
       name: "Starter",
@@ -778,7 +858,7 @@ export const productPricing = {
         "Integration planning",
       ],
     },
-  ] satisfies PricingPlan[],
+  ],
   hr: [
     {
       name: "Core",
@@ -820,12 +900,265 @@ export const productPricing = {
         "Priority support and integration planning",
       ],
     },
-  ] satisfies PricingPlan[],
+  ],
+  accounting: [
+    {
+      name: "Starter",
+      audience: "Up to 3 finance users",
+      monthly: "$45 / month",
+      annual: "$456 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Invoice tracking",
+        "Basic collections visibility",
+        "Cash movement dashboard",
+        "Email support",
+      ],
+    },
+    {
+      name: "Operations",
+      audience: "Up to 8 finance or ops users",
+      monthly: "$120 / month",
+      annual: "$1,224 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Everything in Starter",
+        "Collections queues and aging views",
+        "Team workflow ownership",
+        "Onboarding support",
+      ],
+      featured: true,
+    },
+    {
+      name: "Control+",
+      audience: "Multi-team finance operations",
+      monthly: "$260 / month",
+      annual: "$2,652 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Advanced finance workflow tailoring",
+        "Management reporting views",
+        "Priority support",
+        "Integration planning",
+      ],
+    },
+  ],
+  projects: [
+    {
+      name: "Starter",
+      audience: "Up to 10 active projects",
+      monthly: "$60 / month",
+      annual: "$612 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Task boards and ownership",
+        "Project status views",
+        "Basic milestone tracking",
+        "Email support",
+      ],
+    },
+    {
+      name: "Delivery",
+      audience: "Client or internal delivery teams",
+      monthly: "$145 / month",
+      annual: "$1,476 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Everything in Starter",
+        "Approval workflows",
+        "Portfolio reporting",
+        "Onboarding assistance",
+      ],
+      featured: true,
+    },
+    {
+      name: "Portfolio+",
+      audience: "Multi-team delivery environments",
+      monthly: "$290 / month",
+      annual: "$2,958 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Advanced delivery workflows",
+        "Custom status models",
+        "Priority support",
+        "Integration planning",
+      ],
+    },
+  ],
+  inventory: [
+    {
+      name: "Starter",
+      audience: "Single-site stock control",
+      monthly: "$55 / month",
+      annual: "$564 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Inventory records",
+        "Low-stock alerts",
+        "Basic procurement queue",
+        "Email support",
+      ],
+    },
+    {
+      name: "Operations",
+      audience: "Retail or distribution teams",
+      monthly: "$135 / month",
+      annual: "$1,380 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Everything in Starter",
+        "Supplier workflows",
+        "Reorder prioritisation",
+        "Onboarding support",
+      ],
+      featured: true,
+    },
+    {
+      name: "Multi-Site",
+      audience: "Multi-branch or higher-volume operations",
+      monthly: "$285 / month",
+      annual: "$2,904 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Advanced stock movement views",
+        "Broader procurement controls",
+        "Priority support",
+        "Integration planning",
+      ],
+    },
+  ],
+  analytics: [
+    {
+      name: "Starter",
+      audience: "One management dashboard",
+      monthly: "$50 / month",
+      annual: "$504 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Core dashboard setup",
+        "Weekly reporting views",
+        "Basic alerts",
+        "Email support",
+      ],
+    },
+    {
+      name: "Management",
+      audience: "Cross-functional reporting teams",
+      monthly: "$125 / month",
+      annual: "$1,272 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Everything in Starter",
+        "Cross-system dashboards",
+        "Operational alerting",
+        "Onboarding assistance",
+      ],
+      featured: true,
+    },
+    {
+      name: "Executive+",
+      audience: "Leadership reporting across teams",
+      monthly: "$260 / month",
+      annual: "$2,652 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Advanced reporting design",
+        "Priority support",
+        "Expanded analytics planning",
+        "Integration support",
+      ],
+    },
+  ],
+  automation: [
+    {
+      name: "Starter",
+      audience: "1 to 3 recurring workflows",
+      monthly: "$35 / month",
+      annual: "$360 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Workflow routing",
+        "Basic reminders and escalations",
+        "Execution logs",
+        "Email support",
+      ],
+    },
+    {
+      name: "Workflow",
+      audience: "Operational teams standardising approvals",
+      monthly: "$95 / month",
+      annual: "$972 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Everything in Starter",
+        "Escalation rules",
+        "Approval path design",
+        "Onboarding assistance",
+      ],
+      featured: true,
+    },
+    {
+      name: "Operations+",
+      audience: "Higher-volume workflow environments",
+      monthly: "$220 / month",
+      annual: "$2,244 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Advanced workflow orchestration",
+        "Priority support",
+        "Fallback design support",
+        "Integration planning",
+      ],
+    },
+  ],
+  "ai-assistant": [
+    {
+      name: "Starter",
+      audience: "Up to 3 internal users",
+      monthly: "$15 / month",
+      annual: "$156 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Saved business queries",
+        "Prompt templates",
+        "Basic source references",
+        "Email support",
+      ],
+    },
+    {
+      name: "Team",
+      audience: "Cross-functional operating teams",
+      monthly: "$55 / month",
+      annual: "$564 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Everything in Starter",
+        "Shared query workspace",
+        "Governance controls",
+        "Onboarding assistance",
+      ],
+      featured: true,
+    },
+    {
+      name: "Governed",
+      audience: "Businesses with higher-risk workflows",
+      monthly: "$145 / month",
+      annual: "$1,476 / year",
+      note: "Save about 15% with annual billing.",
+      includes: [
+        "Approval paths for answers and actions",
+        "Priority support",
+        "Expanded source coverage planning",
+        "Implementation guidance",
+      ],
+    },
+  ],
 };
 
 export const pricingNotes = [
   "Implementation, data migration, and custom integrations are scoped separately so product pricing stays clear.",
   "Billing can be monthly or annual in USD. Local bank transfer support can be arranged for Zimbabwean clients.",
+  "Guided trial access is available for CRM and HR & Payroll. Other modules start with a demo and onboarding-led rollout path.",
   "Annual plans are best for teams standardising operations and reducing admin churn across the year.",
 ];
 

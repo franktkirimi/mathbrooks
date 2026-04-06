@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
   AlertCircle,
@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { products } from "@/content/siteContent";
 import { getFormspreeId, hasFormspreeConfig } from "@/lib/forms";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -53,7 +54,7 @@ const Clients = () => {
     : isBookDemo
       ? "/book-demo"
       : "/clients";
-  const pageLabel = isStartTrial ? "Start Free Trial" : isBookDemo ? "Book Demo" : "Client Intake";
+  const pageLabel = isStartTrial ? "Start Guided Trial" : isBookDemo ? "Book Demo" : "Client Intake";
   const pageTitle = isStartTrial
     ? "Request guided trial access for a MathBrooks product"
     : isBookDemo
@@ -64,10 +65,22 @@ const Clients = () => {
     : isBookDemo
     ? "This is not a generic sales form. Share the workflow, business problem, and timeline. MathBrooks replies within 1 business day with the most sensible next step."
     : "Fill in as much as you know. We use this to prepare before we talk so the first conversation is about solutions, not background.";
+  const searchParams = new URLSearchParams(location.search);
+  const selectedProductEntry = products.find((entry) => entry.slug === searchParams.get("product"));
+  const initialProduct = selectedProductEntry?.shortName ?? "";
+  const initialPlan = searchParams.get("plan") ?? "";
+  const initialProjectType = selectedProductEntry ? "Business Platform Deployment" : "";
+  const initialDescription = isStartTrial
+    ? initialProduct
+      ? `We want guided trial access for ${initialProduct}${initialPlan ? ` on the ${initialPlan} plan` : ""}.`
+      : ""
+    : initialProduct
+      ? `We want to discuss ${initialProduct}${initialPlan ? ` on the ${initialPlan} plan` : ""}.`
+      : "";
 
   usePageMeta({
     title: isStartTrial
-      ? "Start Free Trial | MathBrooks"
+      ? "Start Guided Trial | MathBrooks"
       : isBookDemo
         ? "Book Demo | MathBrooks"
         : "Client Intake | MathBrooks",
@@ -84,11 +97,20 @@ const Clients = () => {
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [phone, setPhone] = useState("");
-  const [projectType, setProjectType] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(initialProduct);
+  const [selectedPlan, setSelectedPlan] = useState(initialPlan);
+  const [projectType, setProjectType] = useState(initialProjectType);
   const [budget, setBudget] = useState("");
   const [timeline, setTimeline] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(initialDescription);
   const [status, setStatus] = useState<FormStatus>("idle");
+
+  useEffect(() => {
+    setSelectedProduct(initialProduct);
+    setSelectedPlan(initialPlan);
+    setProjectType(initialProjectType);
+    setDescription(initialDescription);
+  }, [initialDescription, initialPlan, initialProduct, initialProjectType]);
 
   const isValid = name.trim().length > 0 && email.trim().length > 0 && description.trim().length > 0;
 
@@ -97,10 +119,12 @@ const Clients = () => {
     setEmail("");
     setCompany("");
     setPhone("");
-    setProjectType("");
+    setSelectedProduct(initialProduct);
+    setSelectedPlan(initialPlan);
+    setProjectType(initialProjectType);
     setBudget("");
     setTimeline("");
-    setDescription("");
+    setDescription(initialDescription);
     setStatus("idle");
   };
 
@@ -126,6 +150,8 @@ const Clients = () => {
           email,
           company,
           phone,
+          product_interest: selectedProduct,
+          plan_interest: selectedPlan,
           project_type: projectType,
           budget,
           timeline,
@@ -141,12 +167,12 @@ const Clients = () => {
 
   const handleWhatsApp = () => {
     const text = encodeURIComponent(
-      `Hi MathBrooks, I'd like to discuss a project.\n\nName: ${name}\nCompany: ${company}\nProject: ${projectType}\n\n${description}`
+      `Hi MathBrooks, I'd like to discuss a project.\n\nName: ${name}\nCompany: ${company}\nProduct: ${selectedProduct}\nPlan: ${selectedPlan}\nProject: ${projectType}\n\n${description}`
     );
     window.open(`https://wa.me/263783469023?text=${text}`, "_blank");
   };
 
-  const successTitle = isStartTrial ? "Trial Request Received" : isBookDemo ? "Request Received" : "Received";
+  const successTitle = isStartTrial ? "Guided Trial Request Received" : isBookDemo ? "Request Received" : "Received";
   const successMessage = isStartTrial
     ? "Thanks. We will review your request and get back to you within 1 business day with trial-fit details, onboarding steps, and the fastest route to access."
     : isBookDemo
@@ -303,6 +329,35 @@ const Clients = () => {
                       />
                     </div>
                   </div>
+
+                  {selectedProduct ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="selected-product" className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                          Product
+                        </Label>
+                        <Input
+                          id="selected-product"
+                          value={selectedProduct}
+                          readOnly
+                          className="bg-background/30 border-border/30 text-muted-foreground"
+                        />
+                      </div>
+                      {selectedPlan ? (
+                        <div className="space-y-2">
+                          <Label htmlFor="selected-plan" className="text-xs font-display tracking-wider uppercase text-muted-foreground">
+                            Plan
+                          </Label>
+                          <Input
+                            id="selected-plan"
+                            value={selectedPlan}
+                            readOnly
+                            className="bg-background/30 border-border/30 text-muted-foreground"
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
 
                   <div className="space-y-2">
                     <Label htmlFor="project-type" className="text-xs font-display tracking-wider uppercase text-muted-foreground">
