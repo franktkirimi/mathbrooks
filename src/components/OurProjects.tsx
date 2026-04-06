@@ -53,12 +53,15 @@ const OurProjects = () => {
       <div className="relative max-w-6xl mx-auto">
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
+            <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
+              Case Studies
+            </p>
             <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
-              <TextScramble text="Selected Work" />
+              <TextScramble text="Real systems solving real operational problems" />
             </h2>
             <p className="text-base font-light text-muted-foreground mt-6 max-w-xl mx-auto">
-              Representative engagements and product builds across workflow
-              automation, education, and operational visibility.
+              Representative delivery across workflow automation, operational visibility,
+              and business infrastructure for teams that need better execution.
             </p>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>

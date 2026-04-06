@@ -141,7 +141,7 @@ const Navbar = () => {
             to="/book-demo"
             className="font-display text-[0.65rem] tracking-[0.15em] uppercase px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300"
           >
-            Book Demo
+            Start Demo
           </Link>
 
           <button
@@ -252,7 +252,7 @@ const Navbar = () => {
             to="/book-demo"
             className="mt-3 inline-flex items-center justify-center rounded-md bg-primary px-4 py-3 font-display text-xs tracking-[0.15em] uppercase text-primary-foreground hover:bg-primary/90 transition-colors duration-300"
           >
-            Book Demo
+            Start Demo
           </Link>
         </div>
       </div>

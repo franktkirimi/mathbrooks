@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import AILabs from "@/components/AILabs";
 import Contact from "@/components/Contact";
 import FAQ from "@/components/FAQ";
@@ -14,12 +15,15 @@ import SiteLayout from "@/components/site/SiteLayout";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
+const InteractiveDemo = lazy(() => import("@/components/InteractiveDemo"));
+const ScrollProductReveal = lazy(() => import("@/components/ScrollProductReveal"));
+
 const Index = () => {
   useSmoothScroll();
   usePageMeta({
     title: "MathBrooks | Run Your Business Better. Built for Africa.",
     description:
-      "MathBrooks builds custom software, business platforms, and applied AI systems for operations-heavy businesses across Zimbabwe and beyond.",
+      "CRM, finance, HR, operations and AI - software built for modern African companies.",
     canonicalPath: "/",
     keywords: [
       "software company Zimbabwe",
@@ -33,10 +37,16 @@ const Index = () => {
     <SiteLayout>
       <Hero />
       <ProductsHighlight />
+      <Suspense fallback={null}>
+        <InteractiveDemo />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ScrollProductReveal />
+      </Suspense>
       <WhatWeBuild />
-      <HowWeWork />
       <OurProjects />
       <WhyWorkWithUs />
+      <HowWeWork />
       <TechStack />
       <Packages />
       <AILabs />

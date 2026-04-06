@@ -39,8 +39,11 @@ const Magnetic = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const line1 = ["Run", "Your", "Business"];
-const line2 = ["Built", "For", "Africa"];
+const heroLines = [
+  ["Run", "your", "business"],
+  ["on", "systems", "that"],
+  ["actually", "work"],
+];
 
 const Hero = () => {
   return (
@@ -78,42 +81,33 @@ const Hero = () => {
           </span>
         </div>
 
-        <h1 className="font-display text-[2rem] sm:text-5xl md:text-7xl lg:text-[6rem] xl:text-[7.5rem] font-bold uppercase leading-[0.95] tracking-tight mb-6 md:mb-10">
-          <div className="flex flex-wrap justify-center gap-x-[0.22em]">
-            {line1.map((word, index) => (
-              <div key={word} style={{ overflow: "hidden" }}>
-                <span
-                  className="inline-block text-gradient-accent glow-text"
-                  style={{
-                    animation: `wordReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.15 + index * 0.11}s both`,
-                  }}
-                >
-                  {word}
-                </span>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-wrap justify-center gap-x-[0.22em] mt-[0.05em]">
-            {line2.map((word, index) => (
-              <div key={word} style={{ overflow: "hidden" }}>
-                <span
-                  className="inline-block"
-                  style={{
-                    animation: `wordReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.58 + index * 0.11}s both`,
-                  }}
-                >
-                  {word}
-                </span>
-              </div>
-            ))}
-          </div>
+        <h1 className="font-display text-[2.4rem] sm:text-6xl md:text-7xl lg:text-[5.9rem] xl:text-[6.8rem] font-bold uppercase leading-[0.94] tracking-tight mb-6 md:mb-10">
+          {heroLines.map((line, lineIndex) => (
+            <div
+              key={line.join("-")}
+              className={`flex flex-wrap justify-center gap-x-[0.22em] ${lineIndex > 0 ? "mt-[0.05em]" : ""}`}
+            >
+              {line.map((word, index) => (
+                <div key={word} style={{ overflow: "hidden" }}>
+                  <span
+                    className={`inline-block ${lineIndex === 0 ? "text-gradient-accent glow-text" : ""}`}
+                    style={{
+                      animation: `wordReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.15 + (lineIndex * 0.32) + index * 0.11}s both`,
+                    }}
+                  >
+                    {word}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ))}
         </h1>
 
         <p
           className="text-sm sm:text-base md:text-lg font-light text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-10"
           style={{ animation: "fadeInUp 0.8s ease-out 0.9s both" }}
         >
-          Custom software, business platforms, and applied AI systems for operations-heavy businesses across Zimbabwe and beyond.
+          CRM, finance, HR, operations and AI - software built for modern African companies.
         </p>
 
         <div
@@ -136,23 +130,23 @@ const Hero = () => {
           style={{ animation: "fadeInUp 0.8s ease-out 1.15s both" }}
         >
           <Magnetic>
-            <Link to="/products">
+            <Link to="/book-demo">
               <Button
                 size="lg"
                 className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 transition-all duration-300"
               >
-                Explore Products
+                Start a Demo
               </Button>
             </Link>
           </Magnetic>
           <Magnetic>
-            <Link to="/book-demo">
+            <Link to="/products">
               <Button
                 variant="outline"
                 size="lg"
                 className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300"
               >
-                Book a Demo
+                See the Platform
               </Button>
             </Link>
           </Magnetic>
@@ -162,15 +156,8 @@ const Hero = () => {
           className="text-xs sm:text-sm font-light text-muted-foreground max-w-2xl mx-auto mt-6"
           style={{ animation: "fadeInUp 0.8s ease-out 1.25s both" }}
         >
-          Products for CRM, HR &amp; Payroll, Projects, and Analytics. Custom services for unique workflows, automation, and AI.
+          Business infrastructure across CRM, finance, HR, operations, analytics, and AI.
         </p>
-        <Link
-          to="/start-trial"
-          className="inline-flex mt-4 font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
-          style={{ animation: "fadeInUp 0.8s ease-out 1.3s both" }}
-        >
-          Start Free Trial
-        </Link>
       </div>
 
       <div

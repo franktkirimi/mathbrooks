@@ -6,46 +6,46 @@ import TextScramble from "./TextScramble";
 const highlights = [
   {
     icon: Zap,
-    label: "Fast Delivery",
-    detail: "MVPs in weeks, not months",
+    label: "Engineering",
+    detail: "Modern architecture designed to scale cleanly",
   },
   {
     icon: Shield,
-    label: "Governed AI",
-    detail: "Approvals, evals, and fallback paths built in",
+    label: "Security",
+    detail: "Governance, approvals, and data protection built in",
   },
   {
     icon: Users,
-    label: "Direct Access",
-    detail: "Work with the engineers, not middlemen",
+    label: "Reliability",
+    detail: "Systems designed for real operating pressure",
   },
   {
     icon: Globe,
-    label: "Global Reach",
-    detail: "Headquartered in Africa, operating worldwide",
+    label: "Built in Africa",
+    detail: "Grounded in local business realities, usable globally",
   },
 ];
 
 const values = [
   {
-    title: "We Ship Fast Without Cutting Corners",
+    title: "Serious Engineering Standards",
     description:
-      "Our lean team means less overhead and faster decisions. You get a working product in weeks — built with clean architecture that scales.",
+      "Products and custom systems are built with a modular architecture so the platform can handle growth, integrations, and change without becoming brittle.",
   },
   {
-    title: "Your Team Has Direct Access to Ours",
+    title: "Security And Permissions Matter",
     description:
-      "No account managers or ticket queues. You work directly with the engineers building your product via WhatsApp, Slack, or email.",
+      "Data access, approvals, and auditability are treated as part of the product surface, not last-minute enterprise add-ons.",
   },
   {
-    title: "AI Isn't an Add-On — It's Built In",
+    title: "Reliability Over Demo Theatre",
     description:
-      "We don't bolt AI onto finished products. We design intelligent systems from day one — automation, predictions, and insights baked into the core.",
+      "The standard is not a flashy prototype. The standard is software that helps teams run operations consistently under real workload and reporting pressure.",
   },
   {
-    title: "Governance Is Part of the Build",
+    title: "Direct Technical Accountability",
     description:
-      "For automation, agents, and AI-assisted workflows, we design around approvals, observability, evaluation, and fallback paths so production systems stay accountable.",
+      "Clients work close to the people shaping the system, which keeps decisions grounded and reduces translation loss between product thinking and implementation.",
   },
 ];
 
@@ -85,7 +85,7 @@ const WhyWorkWithUs = () => {
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
             <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
-              <TextScramble text="Why Work With Us" />
+              <TextScramble text="Serious Software Infrastructure" />
             </h2>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>

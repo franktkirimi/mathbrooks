@@ -10,7 +10,7 @@ const Contact = () => {
       <div className="max-w-4xl mx-auto text-center">
         <AnimatedSection>
           <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide mb-6">
-            <TextScramble text="Let's Build Together" />
+            <TextScramble text="Ready to run your business on better systems?" />
           </h2>
           <div className="line-accent w-20 mx-auto mt-8 mb-12" />
         </AnimatedSection>
@@ -31,7 +31,7 @@ const Contact = () => {
                 size="lg"
                 className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 w-full sm:w-auto"
               >
-                Book a Discovery Call
+                Start a Demo
               </Button>
             </Link>
 
@@ -47,7 +47,7 @@ const Contact = () => {
                 className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-green-500/30 hover:border-green-500/60 hover:bg-green-500/5 text-green-400 hover:text-green-300 transition-all duration-300 w-full sm:w-auto"
               >
                 <MessageCircle className="w-4 h-4 mr-2" />
-                WhatsApp Us
+                Talk to Us
               </Button>
             </a>
 

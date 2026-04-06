@@ -36,7 +36,7 @@ const Footer = () => {
               to="/book-demo"
               className="inline-flex mt-5 font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
             >
-              Book a Demo
+              Start Demo
             </Link>
           </div>
 

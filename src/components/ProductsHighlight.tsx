@@ -1,4 +1,15 @@
-import { ArrowRight, BarChart3, FolderKanban, TrendingUp, Users } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  Bot,
+  Boxes,
+  CreditCard,
+  FolderKanban,
+  Sparkles,
+  TrendingUp,
+  Users,
+  Workflow,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import AnimatedSection from "./AnimatedSection";
 import TextScramble from "./TextScramble";
@@ -7,34 +18,58 @@ const platforms = [
   {
     icon: Users,
     title: "CRM",
-    subtitle: "Customer Relationships",
     description:
-      "Track leads, manage clients, and follow up on deals without juggling spreadsheets or missing the next step.",
+      "Manage leads, customers, and deals in one place.",
     href: "/products/crm",
   },
   {
     icon: FolderKanban,
     title: "HR & Payroll",
-    subtitle: "People & Compliance",
     description:
-      "Run payroll, manage leave, and stay NSSA and ZIMRA ready with workflows built for Zimbabwean operations.",
+      "Manage employees, payroll, and compliance workflows.",
     href: "/products/hr",
   },
   {
-    icon: BarChart3,
-    title: "Projects",
-    subtitle: "Delivery & Tasks",
+    icon: CreditCard,
+    title: "Accounting",
     description:
-      "Plan work, assign tasks, and track delivery across teams with one clear view of what is moving and what is stuck.",
+      "Track revenue, invoices, and cash movement with clarity.",
+    href: "/products",
+  },
+  {
+    icon: Boxes,
+    title: "Inventory",
+    description:
+      "Keep stock, purchasing, and reorder visibility in one layer.",
+    href: "/products",
+  },
+  {
+    icon: Workflow,
+    title: "Projects",
+    description:
+      "Organize initiatives, delivery work, and task ownership.",
     href: "/products/projects",
+  },
+  {
+    icon: Sparkles,
+    title: "Automation",
+    description:
+      "Route approvals, reminders, and handoffs automatically.",
+    href: "/services",
   },
   {
     icon: TrendingUp,
     title: "Analytics",
-    subtitle: "Business Intelligence",
     description:
-      "Turn business data into decisions with dashboards, reports, and alerts shaped around the way your operation actually runs.",
+      "Turn operational data into dashboards, alerts, and reports.",
     href: "/products/analytics",
+  },
+  {
+    icon: Bot,
+    title: "AI Assistant",
+    description:
+      "Ask questions about your business data and get answers fast.",
+    href: "/ai-labs",
   },
 ];
 
@@ -53,33 +88,33 @@ const ProductsHighlight = () => {
         <AnimatedSection>
           <div className="text-center mb-12 md:mb-20">
             <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Business Platforms
+              Platform Overview
             </p>
             <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
-              <TextScramble text="Product Modules You Can Deploy Faster" />
+              <TextScramble text="Everything your business needs to run properly" />
             </h2>
             <p className="text-base font-light text-muted-foreground mt-6 max-w-2xl mx-auto leading-relaxed">
-              These are the repeatable modules in the MathBrooks platform: CRM, HR &amp; Payroll, Projects, and Analytics. They help teams move faster than a full custom build while staying ready for future extensions.
+              CRM, finance, HR, inventory, projects, automation, analytics, and AI. The platform is designed to give growing businesses one operational system instead of disconnected tools.
             </p>
             <div className="line-accent w-20 mx-auto mt-8" />
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
           {platforms.map((platform, index) => (
             <AnimatedSection key={platform.title} delay={index * 100}>
               <Link to={platform.href} className="group block h-full">
-                <div className="card-glass rounded-lg p-6 md:p-8 h-full flex flex-col transition-all duration-300 group-hover:border-primary/30">
+                <div className="card-glass relative rounded-lg p-6 md:p-8 h-full flex flex-col transition-all duration-300 group-hover:border-primary/30 group-hover:-translate-y-1">
+                  <div className="absolute inset-x-6 top-0 h-px overflow-hidden">
+                    <div className="h-full w-24 -translate-x-24 bg-gradient-to-r from-transparent via-primary/70 to-transparent opacity-0 transition-all duration-500 group-hover:translate-x-[320%] group-hover:opacity-100" />
+                  </div>
                   <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center mb-6 group-hover:border-primary/40 group-hover:shadow-[0_0_20px_hsl(var(--primary)_/_0.15)] transition-all duration-300">
                     <platform.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
                   </div>
 
-                  <h3 className="font-display text-base tracking-wider uppercase mb-1">
+                  <h3 className="font-display text-base tracking-wider uppercase mb-4">
                     {platform.title}
                   </h3>
-                  <p className="font-display text-[0.6rem] tracking-[0.15em] uppercase text-primary/60 mb-4">
-                    {platform.subtitle}
-                  </p>
 
                   <p className="text-sm font-light text-muted-foreground leading-relaxed flex-1">
                     {platform.description}
