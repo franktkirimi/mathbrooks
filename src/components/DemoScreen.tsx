@@ -116,19 +116,19 @@ const screenContent: Record<DemoFeature["screen"], DemoContent> = {
     rows: [
       {
         title: "Payroll review",
-        detail: "Two allowance changes still need finance sign-off before cutoff.",
+        detail: "Two allowance changes still need finance sign-off.",
         status: "2 exceptions",
         tone: "warning",
       },
       {
         title: "NSSA file",
-        detail: "Prepared and waiting for submission in the current cycle.",
+        detail: "Prepared and waiting for submission this cycle.",
         status: "Prepared",
         tone: "positive",
       },
       {
         title: "Bank export",
-        detail: "Payroll batch is queued once final approvals are cleared.",
+        detail: "Payroll batch is queued once approvals clear.",
         status: "Queued",
       },
     ],
@@ -141,11 +141,11 @@ const screenContent: Record<DemoFeature["screen"], DemoContent> = {
       eyebrow: "Operations note",
       title: "Payroll becomes a workflow, not a monthly scramble.",
       body:
-        "The platform keeps records, approvals, and statutory prep visible early enough for the team to fix issues before they become payroll errors.",
+        "The platform keeps records, approvals, and statutory prep visible early enough to resolve issues before payroll errors appear.",
       bullets: [
-        "Audit trail on changes and approvals",
-        "Local payroll realities remain visible",
-        "Management gets a clean operating picture",
+        "Audit trail stays clear",
+        "Local payroll realities stay visible",
+        "Management gets a cleaner operating picture",
       ],
     },
   },
@@ -539,7 +539,7 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                     </span>
                   </div>
 
-                  <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.12fr)_minmax(280px,0.88fr)]">
+                  <div className="grid gap-4 2xl:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)]">
                     <div className="min-w-0 rounded-2xl border border-white/10 bg-black/20 p-4">
                       <div className="mb-4 flex items-center justify-between">
                         <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
@@ -625,17 +625,34 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                           <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
                             {content.insight.eyebrow}
                           </p>
-                          <h4 className="mt-2 text-lg font-medium leading-tight text-white">
+                          <h4
+                            className={cn(
+                              "mt-2 font-medium leading-tight text-white",
+                              feature.screen === "hr"
+                                ? "text-base md:text-[1.05rem]"
+                                : "text-lg"
+                            )}
+                          >
                             {content.insight.title}
                           </h4>
-                          <p className="mt-3 text-sm font-light leading-6 text-white/62">
+                          <p
+                            className={cn(
+                              "mt-3 font-light leading-6 text-white/62",
+                              feature.screen === "hr" ? "text-[0.9rem]" : "text-sm"
+                            )}
+                          >
                             {content.insight.body}
                           </p>
                           <div className="mt-4 space-y-2">
                             {content.insight.bullets.map((item) => (
                               <div
                                 key={item}
-                                className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3 text-sm font-light leading-6 text-white/70"
+                                className={cn(
+                                  "rounded-xl border border-white/10 bg-white/[0.03] font-light text-white/70",
+                                  feature.screen === "hr"
+                                    ? "px-3 py-2.5 text-[0.9rem] leading-5"
+                                    : "px-3 py-3 text-sm leading-6"
+                                )}
                               >
                                 {item}
                               </div>

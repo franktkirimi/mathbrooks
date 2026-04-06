@@ -83,7 +83,7 @@ const InteractiveDemo = () => {
           </div>
         </AnimatedSection>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(280px,0.78fr)_minmax(0,1.22fr)]">
+        <div className="grid gap-6 lg:grid-cols-[minmax(260px,0.68fr)_minmax(0,1.32fr)]">
           <AnimatedSection>
             <div className="lg:sticky lg:top-[120px]">
               <div className="hidden md:block">
