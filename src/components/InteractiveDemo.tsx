@@ -79,7 +79,7 @@ const InteractiveDemo = () => {
         </AnimatedSection>
 
         <div className="grid gap-6 lg:grid-cols-[minmax(260px,280px)_minmax(0,1fr)] xl:grid-cols-[minmax(280px,300px)_minmax(0,1fr)]">
-          <AnimatedSection>
+          <AnimatedSection className="min-w-0">
             <div className="lg:sticky lg:top-[120px]">
               <div className="hidden md:block">
                 <DemoFeatureMenu
@@ -89,8 +89,8 @@ const InteractiveDemo = () => {
                 />
               </div>
 
-              <div className="md:hidden rounded-[1.5rem] border border-border/60 bg-card/80 p-3">
-                <div className="flex gap-2 overflow-x-auto pb-1">
+              <div className="md:hidden overflow-hidden rounded-[1.5rem] border border-border/60 bg-card/80 p-3">
+                <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
                   {tabs.map((tab) => {
                     const feature = demoFeatures.find((item) => item.screen === tab) as DemoFeature;
                     const active = feature.screen === activeFeature.screen;
@@ -122,7 +122,7 @@ const InteractiveDemo = () => {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={120}>
+          <AnimatedSection delay={120} className="min-w-0">
             <DemoScreen feature={activeFeature} />
           </AnimatedSection>
         </div>
