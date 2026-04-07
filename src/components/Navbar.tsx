@@ -75,7 +75,7 @@ const Navbar = () => {
           : "bg-transparent"
       )}
     >
-      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <nav className="mx-auto grid h-16 w-full max-w-[1800px] grid-cols-[auto,minmax(0,1fr),auto] items-center px-6 lg:px-10">
         <Link
           to="/"
           className="font-display text-sm tracking-[0.2em] text-foreground hover:text-primary transition-colors duration-300"
@@ -83,11 +83,11 @@ const Navbar = () => {
           MATHBROOKS
         </Link>
 
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center justify-center gap-7 xl:gap-9 min-w-0">
           <Link
             to="/"
             className={cn(
-              "font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300",
+              "font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300 whitespace-nowrap",
               location.pathname === "/"
                 ? "text-primary"
                 : "text-muted-foreground hover:text-primary"
@@ -101,7 +101,7 @@ const Navbar = () => {
               type="button"
               onClick={() => setDesktopDropdownOpen((current) => !current)}
               className={cn(
-                "flex items-center gap-1 font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300",
+                "flex items-center gap-1 font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300 whitespace-nowrap",
                 productsActive || desktopDropdownOpen
                   ? "text-primary"
                   : "text-muted-foreground hover:text-primary"
@@ -143,7 +143,7 @@ const Navbar = () => {
               key={item.href}
               to={item.href}
               className={cn(
-                "font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300",
+                "font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300 whitespace-nowrap",
                 location.pathname === item.href
                   ? "text-primary"
                   : "text-muted-foreground hover:text-primary"
@@ -152,7 +152,9 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
+        </div>
 
+        <div className="hidden lg:flex items-center justify-end gap-4 ml-6">
           <Link
             to="/book-demo"
             className="font-display text-[0.65rem] tracking-[0.08em] uppercase px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300 whitespace-nowrap"
@@ -181,7 +183,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="lg:hidden flex items-center gap-3">
+        <div className="lg:hidden col-start-3 flex items-center gap-3 justify-self-end">
           <button
             type="button"
             onClick={toggle}
