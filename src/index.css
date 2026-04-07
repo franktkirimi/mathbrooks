@@ -12,22 +12,23 @@
 @layer base {
   /* ─── Dark theme (default) ─── */
   :root {
+    color-scheme: dark;
     --background: 220 18% 4%;
     --foreground: 220 14% 94%;
 
-    --card: 220 18% 6%;
+    --card: 220 18% 7%;
     --card-foreground: 220 14% 94%;
 
-    --popover: 220 18% 6%;
+    --popover: 220 18% 7%;
     --popover-foreground: 220 14% 94%;
 
     --primary: 217 91% 60%;
     --primary-foreground: 220 18% 4%;
 
-    --secondary: 220 18% 12%;
+    --secondary: 220 18% 11%;
     --secondary-foreground: 220 14% 94%;
 
-    --muted: 220 18% 15%;
+    --muted: 220 18% 14%;
     --muted-foreground: 220 12% 50%;
 
     --accent: 217 91% 60%;
@@ -36,8 +37,8 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 220 14% 94%;
 
-    --border: 220 18% 14%;
-    --input: 220 18% 14%;
+    --border: 220 18% 16%;
+    --input: 220 18% 16%;
     --ring: 217 91% 60%;
 
     --radius: 0.5rem;
@@ -67,22 +68,23 @@
 
   /* ─── Light theme ─── */
   .light {
-    --background: 0 0% 100%;
-    --foreground: 220 18% 4%;
+    color-scheme: light;
+    --background: 220 20% 98%;
+    --foreground: 220 18% 6%;
 
-    --card: 220 14% 97%;
-    --card-foreground: 220 18% 4%;
+    --card: 220 14% 99%;
+    --card-foreground: 220 18% 6%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 18% 4%;
+    --popover: 220 14% 99%;
+    --popover-foreground: 220 18% 6%;
 
     --primary: 217 91% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14% 94%;
-    --secondary-foreground: 220 18% 15%;
+    --secondary: 220 14% 95%;
+    --secondary-foreground: 220 18% 14%;
 
-    --muted: 220 14% 94%;
+    --muted: 220 14% 95%;
     --muted-foreground: 220 10% 40%;
 
     --accent: 217 91% 50%;
@@ -91,16 +93,16 @@
     --destructive: 0 84% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 14% 88%;
-    --input: 220 14% 88%;
+    --border: 220 14% 86%;
+    --input: 220 14% 86%;
     --ring: 217 91% 50%;
 
     --glow-primary: 0 0 40px hsl(217 91% 50% / 0.12);
     --glow-primary-strong: 0 0 60px hsl(217 91% 50% / 0.2);
     --particle-color: 217, 91%, 50%;
     --particle-alpha: 0.08;
-    --grid-opacity: 0.04;
-    --line-opacity: 0.06;
+    --grid-opacity: 0.03;
+    --line-opacity: 0.05;
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 220 18% 4%;
@@ -127,6 +129,7 @@
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
     font-weight: 300;
+    accent-color: hsl(var(--primary));
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
     overscroll-behavior: none;

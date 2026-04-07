@@ -422,9 +422,9 @@ const screenContent: Record<DemoFeature["screen"], DemoContent> = {
 };
 
 const statusToneClass: Record<NonNullable<DemoRow["tone"]>, string> = {
-  default: "border-white/10 bg-white/[0.04] text-white/80",
-  positive: "border-emerald-400/20 bg-emerald-400/10 text-emerald-200",
-  warning: "border-amber-400/20 bg-amber-400/10 text-amber-200",
+  default: "border-border/60 bg-background/70 text-foreground/80",
+  positive: "border-emerald-500/20 bg-emerald-500/10 text-emerald-600",
+  warning: "border-amber-500/20 bg-amber-500/10 text-amber-600",
 };
 
 type DemoTab = "overview" | "activity" | "signals";
@@ -445,7 +445,7 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
   }, [feature.screen]);
 
   return (
-    <div className="rounded-[1.75rem] border border-border/40 bg-slate-950/90 p-4 shadow-[0_28px_100px_rgba(0,0,0,0.38)]">
+    <div className="rounded-[1.75rem] border border-border/60 bg-card/85 p-4 shadow-[0_28px_100px_rgba(15,23,42,0.22)]">
       <AnimatePresence mode="wait">
         <motion.div
           key={feature.screen}
@@ -453,23 +453,23 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="overflow-hidden rounded-[1.3rem] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02]"
+          className="overflow-hidden rounded-[1.3rem] border border-border/60 bg-gradient-to-b from-background/65 to-card/80"
         >
-          <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 md:px-5">
+          <div className="flex items-center justify-between border-b border-border/60 px-4 py-3 md:px-5">
             <div>
               <p className="text-[0.62rem] font-medium uppercase tracking-[0.22em] text-primary/70">
                 Live Preview
               </p>
-              <h3 className="mt-1 text-xl font-medium tracking-[0.02em] text-white md:text-[1.75rem]">
+              <h3 className="mt-1 text-xl font-medium tracking-[0.02em] text-foreground md:text-[1.75rem]">
                 {content.title}
               </h3>
             </div>
             <div className="flex items-center gap-3">
-              <div className="hidden rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-white/55 sm:block">
+              <div className="hidden rounded-full border border-border/60 bg-background/70 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-muted-foreground sm:block">
                 {content.navLabel}
               </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
-                <Icon className="h-4.5 w-4.5 text-white/80" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-border/60 bg-background/70">
+                <Icon className="h-4.5 w-4.5 text-foreground/80" />
               </div>
             </div>
           </div>
@@ -487,8 +487,8 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                     className={cn(
                       "rounded-full border px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.16em] transition-all duration-300",
                       active
-                        ? "border-primary/35 bg-primary/15 text-white shadow-[0_0_0_1px_hsl(var(--primary)/0.08)]"
-                        : "border-white/10 bg-white/[0.03] text-white/45 hover:text-white/70"
+                        ? "border-primary/35 bg-primary/10 text-primary shadow-[0_0_0_1px_hsl(var(--primary)/0.08)]"
+                        : "border-border/60 bg-background/60 text-muted-foreground hover:text-foreground"
                     )}
                   >
                     {tab.label}
@@ -508,11 +508,11 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                   className="grid gap-4 xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)_minmax(0,0.96fr)]"
                 >
                   <div className="space-y-4">
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
-                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                    <div className="rounded-2xl border border-border/60 bg-background/70 p-4 md:p-5">
+                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-muted-foreground/70">
                         Summary
                       </p>
-                      <p className="mt-3 text-sm font-light leading-7 text-white/78">
+                      <p className="mt-3 text-sm font-light leading-7 text-foreground/80">
                         {content.description}
                       </p>
                     </div>
@@ -524,16 +524,16 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                           initial={{ opacity: 0, y: 12 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.22, delay: index * 0.04 }}
-                          className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5"
+                          className="rounded-2xl border border-border/60 bg-secondary/35 p-4 md:p-5"
                         >
-                          <p className="text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/40">
+                          <p className="text-[0.62rem] font-medium uppercase tracking-[0.2em] text-muted-foreground/70">
                             {panel.label}
                           </p>
-                          <p className="mt-3 text-3xl font-light tracking-[-0.03em] text-white md:text-[2.9rem]">
+                          <p className="mt-3 text-3xl font-light tracking-[-0.03em] text-foreground md:text-[2.9rem]">
                             {panel.value}
                           </p>
                           {panel.detail ? (
-                            <p className="mt-2 text-sm font-light leading-6 text-white/45">
+                            <p className="mt-2 text-sm font-light leading-6 text-muted-foreground">
                               {panel.detail}
                             </p>
                           ) : null}
@@ -542,27 +542,27 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                     </div>
                   </div>
 
-                  <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+                  <div className="min-w-0 rounded-2xl border border-border/60 bg-background/70 p-4 md:p-5">
                     <div className="mb-4 flex items-center justify-between">
                       <div>
-                        <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                        <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-muted-foreground/70">
                           Workspace
                         </p>
-                        <p className="mt-1 text-sm font-light text-white/45">
+                        <p className="mt-1 text-sm font-light text-muted-foreground">
                           Current operational view
                         </p>
                       </div>
-                      <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-emerald-200">
+                      <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-emerald-600">
                         Active
                       </span>
                     </div>
 
-                    <div className="border-t border-white/10 pt-4">
+                    <div className="border-t border-border/60 pt-4">
                       <div className="mb-4 flex items-center justify-between">
-                        <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                        <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-muted-foreground/70">
                           Activity board
                         </p>
-                        <span className="text-xs font-light text-white/35">Updated today</span>
+                        <span className="text-xs font-light text-muted-foreground/70">Updated today</span>
                       </div>
 
                       <div className="space-y-3">
@@ -572,14 +572,14 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.22, delay: index * 0.05 }}
-                            className="rounded-2xl border border-white/10 bg-black/20 p-4"
+                            className="rounded-2xl border border-border/60 bg-background/65 p-4"
                           >
                             <div className="flex flex-col gap-3">
                               <div className="min-w-0">
-                                <p className="text-[1rem] font-medium text-white md:text-[1.05rem]">
+                                <p className="text-[1rem] font-medium text-foreground md:text-[1.05rem]">
                                   {row.title}
                                 </p>
-                                <p className="mt-1 text-sm font-light leading-6 text-white/55">
+                                <p className="mt-1 text-sm font-light leading-6 text-muted-foreground">
                                   {row.detail}
                                 </p>
                               </div>
@@ -599,24 +599,24 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                    <div className="rounded-2xl border border-border/60 bg-secondary/35 p-4 md:p-5">
                       <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/70">
                         {content.insight.eyebrow}
                       </p>
-                      <h4 className="mt-2 text-[1.2rem] font-medium leading-tight text-white md:text-[1.35rem]">
+                      <h4 className="mt-2 text-[1.2rem] font-medium leading-tight text-foreground md:text-[1.35rem]">
                         {content.insight.title}
                       </h4>
-                      <p className="mt-3 text-sm font-light leading-6 text-white/62">
+                      <p className="mt-3 text-sm font-light leading-6 text-muted-foreground">
                         {content.insight.body}
                       </p>
                       <div className="mt-4 space-y-2.5">
                         {content.insight.bullets.map((item) => (
                           <div
                             key={item}
-                            className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3"
+                            className="flex gap-3 rounded-xl border border-border/60 bg-background/70 px-3 py-3"
                           >
                             <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/75" />
-                            <span className="text-sm font-light leading-6 text-white/72">
+                            <span className="text-sm font-light leading-6 text-foreground/80">
                               {item}
                             </span>
                           </div>
@@ -624,8 +624,8 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                       </div>
                     </div>
 
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
-                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                    <div className="rounded-2xl border border-border/60 bg-background/70 p-4 md:p-5">
+                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-muted-foreground/70">
                         Signals
                       </p>
                       <div className="mt-4 space-y-4">
@@ -637,19 +637,19 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                             transition={{ duration: 0.22, delay: index * 0.04 }}
                           >
                             <div className="mb-2 flex items-center justify-between gap-3">
-                              <span className="text-sm font-light text-white/62">
+                              <span className="text-sm font-light text-muted-foreground">
                                 {signal.label}
                               </span>
-                              <span className="text-sm font-medium text-white/88">
+                              <span className="text-sm font-medium text-foreground">
                                 {signal.value}
                               </span>
                             </div>
-                            <div className="h-2 rounded-full bg-white/[0.05]">
+                            <div className="h-2 rounded-full bg-border/35">
                               <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${signal.strength}%` }}
                                 transition={{ duration: 0.45, delay: 0.06 + index * 0.05 }}
-                                className="h-full rounded-full bg-gradient-to-r from-primary/60 via-primary to-primary/55"
+                                className="h-full rounded-full bg-gradient-to-r from-primary/70 via-primary to-primary/60"
                               />
                             </div>
                           </motion.div>
@@ -667,17 +667,17 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                   transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
                   className="grid gap-4 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]"
                 >
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+                  <div className="rounded-2xl border border-border/60 bg-background/70 p-4 md:p-5">
                     <div className="mb-4 flex items-center justify-between">
                       <div>
-                        <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                        <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-muted-foreground/70">
                           Activity board
                         </p>
-                        <p className="mt-1 text-sm font-light text-white/45">
+                        <p className="mt-1 text-sm font-light text-muted-foreground">
                           Current operational view
                         </p>
                       </div>
-                      <span className="rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-primary/80">
+                      <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-primary/80">
                         Active
                       </span>
                     </div>
@@ -689,12 +689,12 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.22, delay: index * 0.05 }}
-                          className="rounded-2xl border border-white/10 bg-black/20 p-4"
+                          className="rounded-2xl border border-border/60 bg-background/65 p-4"
                         >
-                          <p className="text-[1rem] font-medium text-white md:text-[1.05rem]">
+                          <p className="text-[1rem] font-medium text-foreground md:text-[1.05rem]">
                             {row.title}
                           </p>
-                          <p className="mt-1 text-sm font-light leading-6 text-white/55">
+                          <p className="mt-1 text-sm font-light leading-6 text-muted-foreground">
                             {row.detail}
                           </p>
                           <span
@@ -711,20 +711,20 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                    <div className="rounded-2xl border border-border/60 bg-secondary/35 p-4 md:p-5">
                       <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/70">
                         {content.insight.eyebrow}
                       </p>
-                      <h4 className="mt-2 text-[1.2rem] font-medium leading-tight text-white md:text-[1.35rem]">
+                      <h4 className="mt-2 text-[1.2rem] font-medium leading-tight text-foreground md:text-[1.35rem]">
                         {content.insight.title}
                       </h4>
-                      <p className="mt-3 text-sm font-light leading-6 text-white/62">
+                      <p className="mt-3 text-sm font-light leading-6 text-muted-foreground">
                         {content.insight.body}
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
-                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                    <div className="rounded-2xl border border-border/60 bg-background/70 p-4 md:p-5">
+                      <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-muted-foreground/70">
                         Signals
                       </p>
                       <div className="mt-4 space-y-4">
@@ -732,23 +732,23 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                           <motion.div
                             key={signal.label}
                             initial={{ opacity: 0, x: 10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.22, delay: index * 0.04 }}
-                          >
-                            <div className="mb-2 flex items-center justify-between gap-3">
-                              <span className="text-sm font-light text-white/62">
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.22, delay: index * 0.04 }}
+                        >
+                          <div className="mb-2 flex items-center justify-between gap-3">
+                              <span className="text-sm font-light text-muted-foreground">
                                 {signal.label}
                               </span>
-                              <span className="text-sm font-medium text-white/88">
+                              <span className="text-sm font-medium text-foreground">
                                 {signal.value}
                               </span>
                             </div>
-                            <div className="h-2 rounded-full bg-white/[0.05]">
+                            <div className="h-2 rounded-full bg-border/35">
                               <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${signal.strength}%` }}
                                 transition={{ duration: 0.45, delay: 0.06 + index * 0.05 }}
-                                className="h-full rounded-full bg-gradient-to-r from-primary/60 via-primary to-primary/55"
+                                className="h-full rounded-full bg-gradient-to-r from-primary/70 via-primary to-primary/60"
                               />
                             </div>
                           </motion.div>
@@ -766,8 +766,8 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                   transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
                   className="grid gap-4 xl:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)]"
                 >
-                  <div className="rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
-                    <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/45">
+                  <div className="rounded-2xl border border-border/60 bg-background/70 p-4 md:p-5">
+                    <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-muted-foreground/70">
                       Signals
                     </p>
                     <div className="mt-4 space-y-4">
@@ -779,19 +779,19 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                           transition={{ duration: 0.22, delay: index * 0.04 }}
                         >
                           <div className="mb-2 flex items-center justify-between gap-3">
-                            <span className="text-sm font-light text-white/62">
+                            <span className="text-sm font-light text-muted-foreground">
                               {signal.label}
                             </span>
-                            <span className="text-sm font-medium text-white/88">
+                            <span className="text-sm font-medium text-foreground">
                               {signal.value}
                             </span>
                           </div>
-                          <div className="h-2 rounded-full bg-white/[0.05]">
+                          <div className="h-2 rounded-full bg-border/35">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${signal.strength}%` }}
                               transition={{ duration: 0.45, delay: 0.06 + index * 0.05 }}
-                              className="h-full rounded-full bg-gradient-to-r from-primary/60 via-primary to-primary/55"
+                              className="h-full rounded-full bg-gradient-to-r from-primary/70 via-primary to-primary/60"
                             />
                           </div>
                         </motion.div>
@@ -799,24 +799,24 @@ const DemoScreen = ({ feature }: DemoScreenProps) => {
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+                  <div className="rounded-2xl border border-border/60 bg-secondary/35 p-4 md:p-5">
                     <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/70">
                       {content.insight.eyebrow}
                     </p>
-                    <h4 className="mt-2 text-[1.2rem] font-medium leading-tight text-white md:text-[1.35rem]">
+                    <h4 className="mt-2 text-[1.2rem] font-medium leading-tight text-foreground md:text-[1.35rem]">
                       {content.insight.title}
                     </h4>
-                    <p className="mt-3 text-sm font-light leading-6 text-white/62">
+                    <p className="mt-3 text-sm font-light leading-6 text-muted-foreground">
                       {content.insight.body}
                     </p>
                     <div className="mt-4 space-y-2.5">
                       {content.insight.bullets.map((item) => (
                         <div
                           key={item}
-                          className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3"
+                          className="flex gap-3 rounded-xl border border-border/60 bg-background/70 px-3 py-3"
                         >
                           <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/75" />
-                          <span className="text-sm font-light leading-6 text-white/72">
+                          <span className="text-sm font-light leading-6 text-foreground/80">
                             {item}
                           </span>
                         </div>

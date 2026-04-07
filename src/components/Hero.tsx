@@ -126,7 +126,7 @@ const Hero = () => {
         </div>
 
         <div
-          className="rounded-[1.85rem] border border-white/10 bg-background/80 p-4 md:p-5 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-md"
+          className="rounded-[1.85rem] border border-border/60 bg-card/85 p-4 md:p-5 shadow-[0_24px_80px_rgba(15,23,42,0.18)] backdrop-blur-md"
           style={{ animation: "fadeInUp 0.8s ease-out 0.4s both" }}
         >
           <div className="flex items-center justify-between gap-4 px-2 pb-4">
@@ -138,27 +138,27 @@ const Hero = () => {
                 The modules that make the suite real.
               </p>
             </div>
-            <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] sm:flex">
+            <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-background/70 sm:flex">
               <ArrowRight className="h-4 w-4 text-muted-foreground" />
             </div>
           </div>
 
-          <div className="divide-y divide-white/10">
+          <div className="divide-y divide-border/60">
             {featuredApps.map((product) => (
               <Link
                 key={product.slug}
                 to={`/products/${product.slug}`}
-                className="group flex items-center gap-4 rounded-2xl px-2 py-4 transition-colors duration-300 hover:bg-white/[0.03]"
+                className="group flex items-center gap-4 rounded-2xl px-2 py-4 transition-colors duration-300 hover:bg-background/60"
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-background/70">
                   <product.icon className="h-5 w-5 text-primary/80 transition-colors duration-300 group-hover:text-primary" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-display text-base tracking-[0.01em] text-white">
+                    <h3 className="font-display text-base tracking-[0.01em] text-foreground">
                       {product.shortName}
                     </h3>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-white/35 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white/70" />
+                    <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-foreground" />
                   </div>
                   <p className="mt-1 max-w-[24rem] text-sm font-light leading-5 text-muted-foreground">
                     {product.overview}
@@ -168,7 +168,7 @@ const Hero = () => {
             ))}
           </div>
 
-          <div className="mt-3 border-t border-white/10 px-2 pt-4">
+          <div className="mt-3 border-t border-border/60 px-2 pt-4">
             <Link
               to="/products"
               className="flex items-center justify-between font-display text-xs tracking-[0.16em] uppercase text-primary/80 transition-colors duration-300 hover:text-primary"

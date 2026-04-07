@@ -175,7 +175,7 @@ const ScrollProductReveal = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 45%), linear-gradient(180deg, rgba(11,15,25,0.85) 0%, rgba(11,15,25,1) 70%)",
+            "radial-gradient(circle at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 45%), hsl(var(--background))",
         }}
       />
 
@@ -195,9 +195,9 @@ const ScrollProductReveal = () => {
         <div className="grid gap-10 lg:grid-cols-[minmax(320px,0.95fr)_minmax(0,1.05fr)] lg:items-start">
           <div className="lg:sticky lg:top-[120px]">
             <div
-              className="relative rounded-[1.75rem] border border-border/40 bg-slate-950/90 p-4 md:p-5 shadow-[0_24px_100px_rgba(0,0,0,0.35)]"
+              className="relative rounded-[1.75rem] border border-border/60 bg-card/85 p-4 md:p-5 shadow-[0_24px_100px_rgba(15,23,42,0.22)]"
               style={{
-                boxShadow: `0 0 0 1px hsl(${activeData.accent} / 0.12), 0 32px 100px rgba(0,0,0,0.45)`,
+                boxShadow: `0 0 0 1px hsl(${activeData.accent} / 0.12), 0 32px 100px rgba(15,23,42,0.22)`,
               }}
             >
               <AnimatePresence mode="wait">
@@ -207,62 +207,62 @@ const ScrollProductReveal = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                  className="rounded-[1.3rem] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.015] overflow-hidden"
+                  className="overflow-hidden rounded-[1.3rem] border border-border/60 bg-gradient-to-b from-background/65 to-card/80"
                 >
-                  <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                  <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
                     <div>
                       <p className="font-display text-[0.6rem] tracking-[0.22em] uppercase text-primary/70">
                         {activeData.summary}
                       </p>
-                      <h3 className="mt-1 font-display text-sm tracking-[0.18em] uppercase text-white">
+                      <h3 className="mt-1 font-display text-sm tracking-[0.18em] uppercase text-foreground">
                         MathBrooks Platform
                       </h3>
                     </div>
                     <div className="flex gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/5" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-foreground/20" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-foreground/12" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-foreground/8" />
                     </div>
                   </div>
 
                   <div className="p-4 md:p-5">
                     <motion.div
                       layout
-                      className="rounded-2xl border border-white/10 p-4 md:p-5"
+                      className="rounded-2xl border border-border/60 p-4 md:p-5"
                       style={{
-                        background: `linear-gradient(180deg, hsl(${activeData.accent} / 0.16), rgba(255,255,255,0.03))`,
+                        background: `linear-gradient(180deg, hsl(${activeData.accent} / 0.16), hsl(var(--background) / 0.7))`,
                       }}
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div>
-                          <p className="text-[0.65rem] font-display tracking-[0.2em] uppercase text-white/65">
+                          <p className="text-[0.65rem] font-display tracking-[0.2em] uppercase text-muted-foreground/70">
                             Active module
                           </p>
-                          <h4 className="mt-2 font-display text-xl uppercase tracking-wide text-white">
+                          <h4 className="mt-2 font-display text-xl uppercase tracking-wide text-foreground">
                             {activeData.title}
                           </h4>
-                          <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-white/78">
+                          <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-muted-foreground">
                             {activeData.description}
                           </p>
                         </div>
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05]">
-                          <activeData.icon className="h-5 w-5 text-white/80" />
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-background/70">
+                          <activeData.icon className="h-5 w-5 text-foreground/80" />
                         </div>
                       </div>
 
-                      <div className="mt-5 grid grid-cols-3 gap-3">
+                      <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
                         {activeData.metrics.map((metric, index) => (
                           <motion.div
                             key={metric.label}
                             initial={{ opacity: 0, y: 12 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.2, delay: index * 0.05 }}
-                            className="rounded-xl border border-white/10 bg-black/20 px-3 py-3"
+                            className="rounded-xl border border-border/60 bg-background/65 px-3 py-3"
                           >
-                            <p className="text-[0.6rem] font-display tracking-[0.18em] uppercase text-white/55">
+                            <p className="text-[0.6rem] font-display tracking-[0.18em] uppercase text-muted-foreground/70">
                               {metric.label}
                             </p>
-                            <p className="mt-2 text-lg font-display text-white">
+                            <p className="mt-2 text-lg font-display text-foreground">
                               {metric.value}
                             </p>
                           </motion.div>
@@ -276,18 +276,18 @@ const ScrollProductReveal = () => {
                             initial={{ opacity: 0, y: 14 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.22, delay: index * 0.05 }}
-                            className="rounded-xl border border-white/10 bg-black/20 p-4"
+                            className="rounded-xl border border-border/60 bg-background/65 p-4"
                           >
                             <div className="flex items-center gap-2">
                               <span
                                 className="h-2.5 w-2.5 rounded-full"
                                 style={{ backgroundColor: `hsl(${activeData.accent})` }}
                               />
-                              <p className="text-[0.65rem] font-display tracking-[0.18em] uppercase text-white/65">
+                              <p className="text-[0.65rem] font-display tracking-[0.18em] uppercase text-muted-foreground/70">
                                 {card.title}
                               </p>
                             </div>
-                            <p className="mt-3 text-sm font-light leading-relaxed text-white/76">
+                            <p className="mt-3 text-sm font-light leading-relaxed text-muted-foreground">
                               {card.detail}
                             </p>
                           </motion.div>
@@ -296,33 +296,33 @@ const ScrollProductReveal = () => {
                     </motion.div>
 
                     <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-                      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                      <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
                         <div className="flex items-center justify-between">
-                          <p className="text-[0.6rem] font-display tracking-[0.2em] uppercase text-white/55">
+                          <p className="text-[0.6rem] font-display tracking-[0.2em] uppercase text-muted-foreground/70">
                             Activity
                           </p>
-                          <ArrowRight className="h-3 w-3 text-white/35" />
+                          <ArrowRight className="h-3 w-3 text-muted-foreground/60" />
                         </div>
                         <div className="mt-4 space-y-3">
                           {activeData.rows.map((row, index) => (
                             <motion.div
                               key={row.label}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.2, delay: index * 0.05 }}
-                              className="flex items-center justify-between gap-3"
-                            >
-                              <span className="text-sm font-light text-white/72">
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.05 }}
+                            className="flex items-center justify-between gap-3"
+                          >
+                              <span className="text-sm font-light text-muted-foreground">
                                 {row.label}
                               </span>
                               <span
                                 className={cn(
                                   "text-sm font-medium",
                                   row.tone === "positive"
-                                    ? "text-emerald-300"
+                                    ? "text-emerald-600"
                                     : row.tone === "warning"
-                                      ? "text-amber-300"
-                                      : "text-white"
+                                      ? "text-amber-600"
+                                      : "text-foreground"
                                 )}
                               >
                                 {row.value}
@@ -332,13 +332,13 @@ const ScrollProductReveal = () => {
                         </div>
                       </div>
 
-                      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                        <p className="text-[0.6rem] font-display tracking-[0.2em] uppercase text-white/55">
+                      <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
+                        <p className="text-[0.6rem] font-display tracking-[0.2em] uppercase text-muted-foreground/70">
                           Weekly trend
                         </p>
                         <div className="mt-4 flex h-24 items-end gap-2">
                           {[42, 54, 38, 68, 56, 78, 64].map((height, index) => (
-                            <div key={index} className="flex-1 rounded-t-lg bg-white/5">
+                            <div key={index} className="flex-1 rounded-t-lg bg-border/35">
                               <motion.div
                                 initial={{ height: 0, opacity: 0.5 }}
                                 animate={{ height: `${height}%`, opacity: 1 }}
@@ -352,7 +352,7 @@ const ScrollProductReveal = () => {
                             </div>
                           ))}
                         </div>
-                        <p className="mt-3 text-xs font-light text-white/50">
+                        <p className="mt-3 text-xs font-light text-muted-foreground/70">
                           Calm, high-visibility signals without noise.
                         </p>
                       </div>
@@ -377,7 +377,7 @@ const ScrollProductReveal = () => {
                   className={cn(
                     "group rounded-[1.5rem] border px-5 py-6 md:px-6 md:py-7 transition-all duration-500",
                     isActive
-                      ? "border-white/12 bg-white/[0.04] shadow-[0_0_0_1px_rgba(255,255,255,0.04)]"
+                      ? "border-border/60 bg-background/45 shadow-[0_0_0_1px_hsl(var(--primary)/0.06)]"
                       : "border-border/30 bg-transparent"
                   )}
                   style={{
@@ -391,7 +391,7 @@ const ScrollProductReveal = () => {
                       className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500"
                       style={{
                         borderColor: isActive ? `hsl(${step.accent} / 0.35)` : "hsl(var(--border) / 0.5)",
-                        backgroundColor: isActive ? `hsl(${step.accent} / 0.08)` : "rgba(255,255,255,0.02)",
+                        backgroundColor: isActive ? `hsl(${step.accent} / 0.08)` : "hsl(var(--background) / 0.7)",
                       }}
                     >
                       <step.icon
@@ -401,10 +401,10 @@ const ScrollProductReveal = () => {
                     </div>
 
                     <div className="flex-1">
-                      <p className="font-display text-[0.6rem] tracking-[0.22em] uppercase text-white/45">
+                      <p className="font-display text-[0.6rem] tracking-[0.22em] uppercase text-muted-foreground/70">
                         {step.eyebrow}
                       </p>
-                      <h3 className="mt-1 font-display text-lg md:text-xl uppercase tracking-wide text-white">
+                      <h3 className="mt-1 font-display text-lg md:text-xl uppercase tracking-wide text-foreground">
                         {step.title}
                       </h3>
                     </div>

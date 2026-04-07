@@ -59,7 +59,7 @@ const InteractiveDemo = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 40%), linear-gradient(180deg, rgba(11,15,25,0.98) 0%, rgba(11,15,25,1) 100%)",
+            "radial-gradient(circle at 50% 0%, hsl(var(--primary) / 0.07) 0%, transparent 40%), hsl(var(--background))",
         }}
       />
 
@@ -89,7 +89,7 @@ const InteractiveDemo = () => {
                 />
               </div>
 
-              <div className="md:hidden rounded-[1.5rem] border border-border/40 bg-white/[0.03] p-3">
+              <div className="md:hidden rounded-[1.5rem] border border-border/60 bg-card/80 p-3">
                 <div className="flex gap-2 overflow-x-auto pb-1">
                   {tabs.map((tab) => {
                     const feature = demoFeatures.find((item) => item.screen === tab) as DemoFeature;
@@ -103,8 +103,8 @@ const InteractiveDemo = () => {
                         className={cn(
                           "shrink-0 rounded-full border px-4 py-2 text-xs font-display uppercase tracking-[0.16em] transition-all duration-300",
                           active
-                            ? "border-primary/35 bg-primary/10 text-white"
-                            : "border-border/30 bg-transparent text-white/55"
+                            ? "border-primary/35 bg-primary/10 text-primary"
+                            : "border-border/60 bg-transparent text-muted-foreground"
                         )}
                       >
                         {feature.title}
