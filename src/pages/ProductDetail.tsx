@@ -42,6 +42,24 @@ const ProductDetail = () => {
   const pricingPath = `/pricing#${product.slug}`;
   const tertiaryPath = product.trialAvailable ? `/start-trial?product=${product.slug}` : "/services";
   const tertiaryLabel = product.trialAvailable ? "Start Guided Trial" : "Extend With Services";
+  const commercialModelCopy = product.trialAvailable
+    ? "Guided trial access is available before rollout."
+    : "Rollout is handled through demo, onboarding, and the plan that matches your workflow.";
+  const heroMetrics = product.metrics.slice(0, 3);
+  const supportBlocks = [
+    {
+      label: "Who it helps",
+      detail: product.audience,
+    },
+    {
+      label: "Local fit",
+      detail: product.localFit,
+    },
+    {
+      label: "Commercial model",
+      detail: commercialModelCopy,
+    },
+  ];
 
   return (
     <SiteLayout>
@@ -75,38 +93,45 @@ const ProductDetail = () => {
           </>
         )}
         sideContent={(
-          <div className="space-y-4">
-            <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70">
-              Best Fit
-            </p>
-            <div className="rounded-xl border border-border/20 bg-background/40 p-4">
-              <h2 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
-                Who it helps
-              </h2>
-              <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                {product.audience}
-              </p>
+          <div className="space-y-5">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="font-display text-[0.62rem] tracking-[0.24em] uppercase text-primary/70">
+                  Best Fit
+                </p>
+                <h2 className="mt-1 font-display text-lg tracking-[0.08em] uppercase text-foreground">
+                  {product.family}
+                </h2>
+              </div>
+              <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[0.62rem] font-display tracking-[0.16em] uppercase text-primary/80">
+                {product.shortName}
+              </span>
             </div>
-            <div className="rounded-xl border border-border/20 bg-background/40 p-4">
-              <h2 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
-                Local fit
-              </h2>
-              <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                {product.localFit}
-              </p>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {heroMetrics.map((metric) => (
+                <div key={metric.label} className="rounded-xl border border-border/60 bg-background/60 p-3">
+                  <p className="text-[0.58rem] font-display tracking-[0.16em] uppercase text-muted-foreground">
+                    {metric.label}
+                  </p>
+                  <p className="mt-2 font-display text-sm tracking-[0.04em] text-foreground">
+                    {metric.value}
+                  </p>
+                </div>
+              ))}
             </div>
-            <div className="rounded-xl border border-border/20 bg-background/40 p-4">
-              <h2 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
-                Commercial model
-              </h2>
-              <p className="font-display text-lg text-foreground mb-2">
-                Starting from {product.startingPrice.replace(" / ", " per ")}
-              </p>
-              <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                {product.trialAvailable
-                  ? "Guided trial access is available before rollout if the workflow is a fit."
-                  : "Rollout is handled through demo, onboarding, and the plan that matches your operating complexity."}
-              </p>
+
+            <div className="space-y-3">
+              {supportBlocks.map((block) => (
+                <div key={block.label} className="rounded-xl border border-border/60 bg-background/50 p-4">
+                  <h3 className="font-display text-[0.65rem] tracking-[0.18em] uppercase text-primary/70">
+                    {block.label}
+                  </h3>
+                  <p className="mt-2 text-sm font-light leading-relaxed text-muted-foreground">
+                    {block.detail}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         )}
@@ -114,6 +139,33 @@ const ProductDetail = () => {
 
       <section className="px-6 pb-16 md:pb-24">
         <div className="max-w-6xl mx-auto">
+          <AnimatedSection>
+            <div className="mb-6 md:mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.72fr)] lg:items-end">
+              <div className="max-w-3xl">
+                <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                  Product Surface
+                </p>
+                <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide leading-[1.02]">
+                  A clearer operating view for {product.shortName}
+                </h2>
+                <p className="mt-5 max-w-2xl text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                  The mockup is arranged to show the operational signals first, then the supporting detail. It keeps the page readable on desktop and compact on mobile.
+                </p>
+              </div>
+
+              <div className="card-glass rounded-2xl p-5 md:p-6">
+                <p className="font-display text-[0.62rem] tracking-[0.24em] uppercase text-primary/70">
+                  Starting From
+                </p>
+                <p className="mt-2 font-display text-2xl text-foreground">
+                  {product.startingPrice}
+                </p>
+                <p className="mt-3 text-sm font-light leading-relaxed text-muted-foreground">
+                  {product.trialAvailable ? "Guided trial access before rollout." : "Demo-led rollout with implementation support."}
+                </p>
+              </div>
+            </div>
+          </AnimatedSection>
           <AnimatedSection>
             <ProductMockup
               accent={product.accent}
@@ -126,7 +178,22 @@ const ProductDetail = () => {
       </section>
 
       <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-2">
+        <div className="max-w-6xl mx-auto">
+          <AnimatedSection>
+            <div className="mb-8 max-w-3xl md:mb-12">
+              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                Why It Works
+              </p>
+              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide">
+                Cleaner execution starts with a clearer operating view
+              </h2>
+              <p className="mt-4 text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                The layout gives the problem, the fit, and the proof points enough separation to read quickly without losing context.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
           <AnimatedSection>
             <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
               <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
@@ -137,35 +204,65 @@ const ProductDetail = () => {
               </p>
             </div>
           </AnimatedSection>
-          <AnimatedSection delay={120}>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Why This Product Works
-              </p>
-              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                {product.tagline} The goal is not feature overload. It is cleaner execution, clearer visibility, and a faster path from admin work to business action.
-              </p>
+            <div className="space-y-6">
+              <AnimatedSection delay={120}>
+                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
+                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
+                    Why This Product Works
+                  </p>
+                  <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                    {product.tagline} The goal is not feature overload. It is cleaner execution, clearer visibility, and a faster path from admin work to business action.
+                  </p>
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection delay={180}>
+                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
+                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
+                    Proof Points
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {product.proofPoints.map((point) => (
+                      <span
+                        key={point}
+                        className="rounded-full border border-border/30 bg-background/40 px-3 py-1.5 text-xs font-display tracking-[0.14em] uppercase text-muted-foreground"
+                      >
+                        {point}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </AnimatedSection>
             </div>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
 
       <section className="px-6 pb-16 md:pb-24">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="mb-8 md:mb-12">
+            <div className="mb-8 max-w-3xl md:mb-12">
               <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
                 Feature Breakdown
               </p>
               <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide">
                 What teams actually use day to day
               </h2>
+              <p className="mt-4 text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                Each module focuses on the parts of the workflow that need clarity most: ownership, status, timing, and the next action.
+              </p>
             </div>
           </AnimatedSection>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             {product.features.map((feature, index) => (
               <AnimatedSection key={feature.title} delay={index * 120}>
-                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
+                <div className="group card-glass rounded-2xl p-6 md:p-7 h-full transition-all duration-300 hover:border-primary/30 hover:-translate-y-1">
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className="font-display text-[0.6rem] tracking-[0.22em] uppercase text-primary/70">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className="h-px flex-1 bg-border/40" />
+                  </div>
                   <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-3">
                     {feature.title}
                   </h3>
@@ -186,9 +283,9 @@ const ProductDetail = () => {
               <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
                 Use Cases
               </p>
-              <div className="space-y-4">
+              <div className="grid gap-4 md:grid-cols-3">
                 {product.useCases.map((useCase) => (
-                  <div key={useCase.title} className="border-b border-border/20 pb-4 last:border-b-0 last:pb-0">
+                  <div key={useCase.title} className="rounded-xl border border-border/30 bg-background/40 p-4">
                     <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
                       {useCase.title}
                     </h3>
