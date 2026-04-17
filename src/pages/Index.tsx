@@ -6,13 +6,11 @@ import ProductsHighlight from "@/components/ProductsHighlight";
 import WhyWorkWithUs from "@/components/Testimonials";
 import SiteLayout from "@/components/site/SiteLayout";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 const InteractiveDemo = lazy(() => import("@/components/InteractiveDemo"));
 const ScrollProductReveal = lazy(() => import("@/components/ScrollProductReveal"));
 
 const Index = () => {
-  useSmoothScroll();
   usePageMeta({
     title: "MathBrooks | Run Your Business Better. Built for Africa.",
     description:
