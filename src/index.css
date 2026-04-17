@@ -123,7 +123,6 @@
   html {
     font-size: 16px;
     scroll-behavior: smooth;
-    overscroll-behavior: none;
     overflow-x: hidden;
   }
 
@@ -135,7 +134,7 @@
     accent-color: hsl(var(--primary));
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
-    overscroll-behavior: none;
+    overflow-y: auto;
   }
 
   .light body {
@@ -143,7 +142,6 @@
       radial-gradient(circle at 12% 12%, hsl(207 100% 92% / 0.7) 0%, transparent 24%),
       radial-gradient(circle at 88% 8%, hsl(192 68% 92% / 0.55) 0%, transparent 22%),
       linear-gradient(180deg, hsl(var(--background)) 0%, hsl(210 34% 96%) 100%);
-    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
