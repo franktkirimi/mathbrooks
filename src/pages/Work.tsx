@@ -44,31 +44,61 @@ const Work = () => {
             </Link>
           </>
         )}
-        sideContent={(
-          <div className="space-y-3">
-            <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70">
-              What to expect
-            </p>
-            {[
-              "Clear business problem framing",
-              "What MathBrooks actually built",
-              "Technology used and measured result",
-            ].map((item) => (
-              <div key={item} className="rounded-xl border border-border/20 bg-background/40 px-4 py-3 text-sm font-light text-muted-foreground">
-                {item}
-              </div>
-            ))}
-          </div>
-        )}
       />
 
+      <section className="px-6 pb-16 md:pb-24">
+        <div className="max-w-6xl mx-auto">
+          <AnimatedSection>
+            <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                What These Show
+              </p>
+              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
+                Each case study follows the same clear structure
+              </h2>
+              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                The goal is to make the delivery path easy to read: the business problem, the system that was built, the tools used, and the outcome the client cared about.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: "Problem first",
+                detail: "The case study starts with the operational friction that made the work necessary.",
+              },
+              {
+                title: "Build clearly explained",
+                detail: "The solution is described in plain business and systems language, not feature noise.",
+              },
+              {
+                title: "Outcome stays visible",
+                detail: "Technology and measured results are shown as part of the delivery story, not decoration.",
+              },
+            ].map((item, index) => (
+              <AnimatedSection key={item.title} delay={index * 100}>
+                <div className="card-glass rounded-3xl p-6 md:p-8 h-full min-h-[14rem]">
+                  <h3 className="font-display text-base md:text-lg uppercase tracking-wide mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                    {item.detail}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="px-6 pb-20 md:pb-28">
-        <div className="max-w-6xl mx-auto space-y-8">
+        <div className="max-w-6xl mx-auto space-y-6">
           {caseStudies.map((item, index) => (
             <AnimatedSection key={item.slug} delay={index * 120}>
-              <article className="card-glass rounded-2xl overflow-hidden">
-                <div className="grid gap-0 lg:grid-cols-[minmax(280px,0.85fr)_minmax(0,1.15fr)]">
-                  <div className="relative min-h-[240px] lg:min-h-full border-b lg:border-b-0 lg:border-r border-border/20">
+              <article className="card-glass rounded-3xl p-6 md:p-8 lg:p-10">
+                <div className="grid gap-6 lg:grid-cols-2 lg:items-stretch">
+                  <div className="relative min-h-[280px] rounded-2xl overflow-hidden border border-border/20">
                     <img
                       src={item.image}
                       alt={`Screenshot of ${item.title}`}
@@ -78,7 +108,7 @@ const Work = () => {
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
-                    <div className="absolute left-6 bottom-6 right-6">
+                    <div className="absolute inset-x-0 bottom-0 p-6">
                       <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/80 mb-2">
                         {item.sector}
                       </p>
@@ -91,59 +121,72 @@ const Work = () => {
                     </div>
                   </div>
 
-                  <div className="p-6 md:p-8 space-y-6">
+                  <div className="rounded-2xl border border-border/20 bg-background/25 p-6 md:p-8 h-full flex flex-col justify-between">
                     <div>
-                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
-                        Business Problem
+                      <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                        Delivery Summary
                       </p>
-                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                        {item.businessProblem}
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
-                        What MathBrooks Built
-                      </p>
-                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                        {item.solution}
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
-                        Technology Used
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {item.technology.map((tech) => (
-                          <span
-                            key={tech}
-                            className="text-[0.65rem] font-display tracking-wider uppercase px-3 py-1 rounded-full border border-border/30 text-muted-foreground"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
-                        Measured Result
-                      </p>
-                      <p className="text-sm font-light text-muted-foreground leading-relaxed mb-4">
+                      <h3 className="font-display text-lg md:text-xl uppercase tracking-wide mb-3">
+                        What changed operationally
+                      </h3>
+                      <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
                         {item.result}
                       </p>
-                      <div className="flex flex-wrap gap-2">
-                        {item.metrics.map((metric) => (
-                          <span
-                            key={metric}
-                            className="text-[0.65rem] font-display tracking-wider px-2.5 py-1 rounded-full bg-primary/10 text-primary/80"
-                          >
-                            {metric}
-                          </span>
-                        ))}
-                      </div>
                     </div>
+
+                    <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                      {item.metrics.map((metric) => (
+                        <div
+                          key={metric}
+                          className="rounded-2xl border border-border/20 bg-background/35 px-4 py-4 text-sm font-light text-muted-foreground text-center"
+                        >
+                          {metric}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 grid gap-6 lg:grid-cols-2">
+                  <div className="rounded-2xl border border-border/20 bg-background/25 p-6 md:p-7 h-full">
+                    <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                      Business Problem
+                    </p>
+                    <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                      {item.businessProblem}
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-border/20 bg-background/25 p-6 md:p-7 h-full">
+                    <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                      What MathBrooks Built
+                    </p>
+                    <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                      {item.solution}
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-border/20 bg-background/25 p-6 md:p-7 h-full">
+                    <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                      Technology Used
+                    </p>
+                    <ul className="space-y-3">
+                      {item.technology.map((tech) => (
+                        <li key={tech} className="text-sm md:text-base font-light text-muted-foreground flex items-start gap-2">
+                          <span className="text-primary/60 mt-0.5">—</span>
+                          <span>{tech}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="rounded-2xl border border-border/20 bg-background/25 p-6 md:p-7 h-full">
+                    <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                      Outcome
+                    </p>
+                    <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                      {item.summary}
+                    </p>
                   </div>
                 </div>
               </article>

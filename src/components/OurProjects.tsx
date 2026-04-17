@@ -46,20 +46,20 @@ const OurProjects = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(217 91% 60% / 0.03) 0%, transparent 60%)",
+            "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(var(--primary) / 0.03) 0%, transparent 60%)",
         }}
       />
 
       <div className="relative max-w-6xl mx-auto">
         <AnimatedSection>
-          <div className="text-center mb-12 md:mb-20">
+          <div className="text-center mb-14 md:mb-24">
             <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
               Case Studies
             </p>
-            <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
+            <h2 className="font-display text-[2rem] md:text-[3rem] lg:text-[3.5rem] font-bold uppercase tracking-wide">
               <TextScramble text="Real systems solving real operational problems" />
             </h2>
-            <p className="text-base font-light text-muted-foreground mt-6 max-w-xl mx-auto">
+            <p className="text-base md:text-[1.02rem] font-light text-muted-foreground mt-6 max-w-3xl mx-auto leading-8">
               Representative delivery across workflow automation, operational visibility,
               and business infrastructure for teams that need better execution.
             </p>
@@ -71,7 +71,6 @@ const OurProjects = () => {
           {projects.map((project, index) => (
             <AnimatedSection key={project.title} delay={index * 150}>
               <InteractiveCard className="rounded-lg group h-full flex flex-col">
-                {/* Image */}
                 <div className="relative aspect-video overflow-hidden rounded-t-lg">
                   <img
                     src={project.image}
@@ -84,48 +83,45 @@ const OurProjects = () => {
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-all duration-500" />
                 </div>
 
-                {/* Content */}
                 <div className="p-6 md:p-8 flex flex-col flex-1">
                   <h3 className="font-display text-base tracking-wider uppercase mb-3">
                     {project.title}
                   </h3>
                   <div className="space-y-4 mb-4 flex-1">
                     <div>
-                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
+                      <p className="font-display text-[0.68rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
                         Business Need
                       </p>
-                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                      <p className="text-base font-light text-muted-foreground leading-7">
                         {project.businessNeed}
                       </p>
                     </div>
                     <div>
-                      <p className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
+                      <p className="font-display text-[0.68rem] tracking-[0.15em] uppercase text-primary/70 mb-2">
                         Delivered
                       </p>
-                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                      <p className="text-base font-light text-muted-foreground leading-7">
                         {project.delivered}
                       </p>
                     </div>
                   </div>
 
-                  {/* Metrics */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.outcomes.map((metric) => (
                       <span
                         key={metric}
-                        className="text-[0.65rem] font-display tracking-wider px-2.5 py-1 rounded-full bg-primary/10 text-primary/80"
+                        className="text-[0.68rem] font-display tracking-wider px-2.5 py-1 rounded-full bg-primary/10 text-primary/80"
                       >
                         {metric}
                       </span>
                     ))}
                   </div>
 
-                  {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[0.65rem] font-display tracking-wider uppercase px-3 py-1 rounded-full border border-border/40 text-muted-foreground group-hover:border-primary/30 group-hover:text-primary/80 transition-colors duration-300"
+                        className="text-[0.68rem] font-display tracking-wider uppercase px-3 py-1 rounded-full border border-border/40 text-muted-foreground group-hover:border-primary/30 group-hover:text-primary/80 transition-colors duration-300"
                       >
                         {tag}
                       </span>
@@ -145,7 +141,7 @@ const OurProjects = () => {
             >
               Browse selected work
             </Link>
-            <p className="text-sm font-light text-muted-foreground mb-5 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base font-light text-muted-foreground mb-5 max-w-2xl mx-auto leading-8">
               If you want a walkthrough of work relevant to your industry or delivery
               stage, reach out and we will point you to the closest fit.
             </p>

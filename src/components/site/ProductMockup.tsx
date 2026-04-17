@@ -11,7 +11,7 @@ const ProductMockup = ({ accent, title, metrics, panels }: ProductMockupProps) =
   return (
     <div className="rounded-[1.5rem] border border-border/60 bg-card/85 p-3 shadow-[0_24px_90px_rgba(15,23,42,0.18)]">
       <div className="overflow-hidden rounded-[1.2rem] border border-border/60 bg-gradient-to-b from-background/70 to-card/85">
-        <div className="flex items-center justify-between border-b border-border/60 bg-background/60 px-4 py-3">
+        <div className="border-b border-border/60 bg-background/60 px-4 py-3">
           <div>
             <p className="font-display text-[0.6rem] tracking-[0.2em] uppercase text-primary/80">
               Product View
@@ -19,11 +19,6 @@ const ProductMockup = ({ accent, title, metrics, panels }: ProductMockupProps) =
             <h2 className="mt-1 font-display text-sm tracking-[0.18em] uppercase text-foreground">
               {title}
             </h2>
-          </div>
-          <div className="flex gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-foreground/20" />
-            <span className="h-2.5 w-2.5 rounded-full bg-foreground/12" />
-            <span className="h-2.5 w-2.5 rounded-full bg-foreground/8" />
           </div>
         </div>
 
@@ -53,11 +48,7 @@ const ProductMockup = ({ accent, title, metrics, panels }: ProductMockupProps) =
                 </p>
                 <div className="space-y-2">
                   {panel.items.map((item) => (
-                    <div key={item} className="flex items-center gap-2 rounded-lg border border-border/60 bg-background/75 px-3 py-2">
-                      <span
-                        className="w-2 h-2 rounded-full"
-                        style={{ backgroundColor: `hsl(${accent})` }}
-                      />
+                    <div key={item} className="rounded-lg border border-border/60 bg-background/75 px-3 py-2">
                       <span className="text-sm font-light text-foreground">{item}</span>
                     </div>
                   ))}

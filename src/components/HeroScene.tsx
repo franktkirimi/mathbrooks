@@ -1,140 +1,66 @@
-import { useEffect, useRef } from "react";
-import * as THREE from "three";
+import { useTheme } from "@/hooks/useTheme";
 
 const HeroScene = () => {
-  const mountRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const mount = mountRef.current;
-    if (!mount) return;
-
-    const w = mount.clientWidth;
-    const h = mount.clientHeight;
-
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(w, h);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0);
-    mount.appendChild(renderer.domElement);
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 100);
-    camera.position.z = 6;
-
-    // Particles
-    const COUNT = window.innerWidth < 768 ? 80 : 140;
-    const verts: THREE.Vector3[] = [];
-
-    for (let i = 0; i < COUNT; i++) {
-      verts.push(
-        new THREE.Vector3(
-          (Math.random() - 0.5) * 14,
-          (Math.random() - 0.5) * 9,
-          (Math.random() - 0.5) * 5
-        )
-      );
-    }
-
-    const ptGeo = new THREE.BufferGeometry().setFromPoints(verts);
-    const ptMat = new THREE.PointsMaterial({
-      color: 0x3b82f6,
-      size: 0.055,
-      transparent: true,
-      opacity: 0.7,
-    });
-    const points = new THREE.Points(ptGeo, ptMat);
-
-    // Lines — single LineSegments draw call
-    const linePositions: number[] = [];
-    const THRESHOLD = 2.4;
-    for (let i = 0; i < COUNT; i++) {
-      for (let j = i + 1; j < COUNT; j++) {
-        if (verts[i].distanceTo(verts[j]) < THRESHOLD) {
-          linePositions.push(
-            verts[i].x, verts[i].y, verts[i].z,
-            verts[j].x, verts[j].y, verts[j].z
-          );
-        }
-      }
-    }
-    const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute(
-      "position",
-      new THREE.Float32BufferAttribute(linePositions, 3)
-    );
-    const lineMat = new THREE.LineBasicMaterial({
-      color: 0x3b82f6,
-      transparent: true,
-      opacity: 0.1,
-    });
-    const lines = new THREE.LineSegments(lineGeo, lineMat);
-
-    const group = new THREE.Group();
-    group.add(points);
-    group.add(lines);
-    scene.add(group);
-
-    // Mouse
-    let mx = 0;
-    let my = 0;
-    const onMouseMove = (e: MouseEvent) => {
-      mx = (e.clientX / window.innerWidth - 0.5) * 2;
-      my = -(e.clientY / window.innerHeight - 0.5) * 2;
-    };
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
-
-    // Resize
-    const onResize = () => {
-      const nw = mount.clientWidth;
-      const nh = mount.clientHeight;
-      camera.aspect = nw / nh;
-      camera.updateProjectionMatrix();
-      renderer.setSize(nw, nh);
-    };
-    window.addEventListener("resize", onResize, { passive: true });
-
-    // Animate
-    let rafId: number;
-    const startTime = performance.now();
-
-    const animate = () => {
-      rafId = requestAnimationFrame(animate);
-      const t = (performance.now() - startTime) / 1000;
-
-      // Slow base rotation
-      group.rotation.y = t * 0.04;
-      // Mouse influence on top
-      group.rotation.x += (my * 0.25 - group.rotation.x) * 0.04;
-      group.rotation.y += (mx * 0.25 - (group.rotation.y - t * 0.04)) * 0.04;
-
-      renderer.render(scene, camera);
-    };
-    animate();
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("resize", onResize);
-      ptGeo.dispose();
-      ptMat.dispose();
-      lineGeo.dispose();
-      lineMat.dispose();
-      renderer.dispose();
-      if (mount.contains(renderer.domElement)) {
-        mount.removeChild(renderer.domElement);
-      }
-    };
-  }, []);
+  const { isDark } = useTheme();
 
   return (
-    <div
-      ref={mountRef}
-      aria-hidden="true"
-      className="absolute inset-0 pointer-events-none"
-    />
+    <div aria-hidden="true" className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div
+        className="absolute inset-0"
+        style={{
+          background: isDark
+            ? "radial-gradient(circle at 18% 18%, hsl(var(--primary) / 0.12) 0%, transparent 34%), radial-gradient(circle at 82% 22%, hsl(var(--primary) / 0.16) 0%, transparent 28%), radial-gradient(circle at 50% 100%, hsl(var(--primary) / 0.08) 0%, transparent 38%)"
+            : "radial-gradient(circle at 18% 18%, hsl(var(--primary) / 0.08) 0%, transparent 32%), radial-gradient(circle at 82% 22%, hsl(var(--primary) / 0.1) 0%, transparent 24%), radial-gradient(circle at 50% 100%, hsl(192 68% 82% / 0.2) 0%, transparent 34%)",
+        }}
+      />
+
+      <div
+        className="absolute left-[6%] top-[14%] h-[18rem] w-[18rem] rounded-full blur-3xl"
+        style={{
+          background: isDark
+            ? "radial-gradient(circle, hsl(var(--primary) / 0.18) 0%, transparent 72%)"
+            : "radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 72%)",
+          animation: "orbFloat1 18s ease-in-out infinite",
+        }}
+      />
+
+      <div
+        className="absolute right-[-4rem] top-[8%] h-[24rem] w-[24rem] rounded-full blur-3xl"
+        style={{
+          background: isDark
+            ? "radial-gradient(circle, hsl(var(--primary) / 0.16) 0%, transparent 72%)"
+            : "radial-gradient(circle, hsl(192 68% 78% / 0.18) 0%, transparent 72%)",
+          animation: "orbFloat2 20s ease-in-out infinite",
+        }}
+      />
+
+      {!isDark ? (
+        <>
+          <div
+            className="absolute right-[8%] top-[18%] hidden h-[18rem] w-[18rem] rounded-[2.8rem] backdrop-blur-sm lg:block"
+            style={{
+              border: "1px solid rgb(148 163 184 / 0.18)",
+              background: "linear-gradient(180deg, rgb(255 255 255 / 0.78), rgb(248 250 252 / 0.44))",
+              boxShadow: "0 30px 90px rgba(148,163,184,0.18)",
+            }}
+          />
+          <div
+            className="absolute right-[16%] top-[26%] hidden h-[14rem] w-[14rem] rounded-[2.4rem] lg:block"
+            style={{
+              border: "1px solid rgb(148 163 184 / 0.16)",
+              background: "linear-gradient(180deg, rgb(255 255 255 / 0.68), rgb(241 245 249 / 0.38))",
+            }}
+          />
+          <div
+            className="absolute bottom-[10%] left-[40%] hidden h-28 w-28 rounded-[2rem] lg:block"
+            style={{
+              border: "1px solid rgb(148 163 184 / 0.14)",
+              background: "rgb(255 255 255 / 0.58)",
+            }}
+          />
+        </>
+      ) : null}
+    </div>
   );
 };
 

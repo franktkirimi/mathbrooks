@@ -1,4 +1,5 @@
 import { useRef, useState, ReactNode } from "react";
+import { useTheme } from "@/hooks/useTheme";
 
 interface InteractiveCardProps {
   children: ReactNode;
@@ -9,6 +10,7 @@ const InteractiveCard = ({ children, className = "" }: InteractiveCardProps) => 
   const ref = useRef<HTMLDivElement>(null);
   const [hovering, setHovering] = useState(false);
   const [spot, setSpot] = useState({ x: 0, y: 0 });
+  const { isDark } = useTheme();
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const el = ref.current;
@@ -46,7 +48,7 @@ const InteractiveCard = ({ children, className = "" }: InteractiveCardProps) => 
         className="absolute inset-0 pointer-events-none transition-opacity duration-300"
         style={{
           opacity: hovering ? 1 : 0,
-          background: `radial-gradient(450px circle at ${spot.x}px ${spot.y}px, hsl(var(--primary) / 0.1), transparent 60%)`,
+          background: `radial-gradient(450px circle at ${spot.x}px ${spot.y}px, hsl(var(--primary) / ${isDark ? "0.1" : "0.055"}), transparent 60%)`,
         }}
       />
       {/* Edge glow */}
@@ -55,7 +57,9 @@ const InteractiveCard = ({ children, className = "" }: InteractiveCardProps) => 
         style={{
           opacity: hovering ? 1 : 0,
           boxShadow:
-            "inset 0 0 0 1px hsl(var(--primary) / 0.15), 0 0 50px hsl(var(--primary) / 0.12)",
+            isDark
+              ? "inset 0 0 0 1px hsl(var(--primary) / 0.15), 0 0 50px hsl(var(--primary) / 0.12)"
+              : "inset 0 0 0 1px hsl(var(--primary) / 0.12), 0 0 36px hsl(var(--primary) / 0.07)",
         }}
       />
       <div className="relative">{children}</div>

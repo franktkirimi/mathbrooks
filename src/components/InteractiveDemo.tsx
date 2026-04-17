@@ -53,7 +53,7 @@ const InteractiveDemo = () => {
   const [activeFeature, setActiveFeature] = useState<DemoFeature>(demoFeatures[0]);
 
   return (
-    <section className="relative px-6 py-20 md:py-28 overflow-hidden">
+    <section className="relative overflow-hidden px-6 py-24 md:py-36">
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -65,22 +65,23 @@ const InteractiveDemo = () => {
 
       <div className="relative max-w-7xl mx-auto">
         <AnimatedSection>
-          <div className="max-w-3xl mb-10 md:mb-14">
+          <div className="max-w-3xl mb-14 md:mb-20">
             <p className="font-display text-xs tracking-[0.3em] uppercase text-primary/70 mb-4">
               Interactive Demo
             </p>
-            <h2 className="font-display text-3xl md:text-5xl lg:text-[3.5rem] uppercase tracking-wide leading-[1.02]">
-              Click through the platform without leaving the page
+            <h2 className="font-display text-[2.1rem] md:text-[3.05rem] lg:text-[3.5rem] uppercase tracking-wide leading-[1.04]">
+              See the platform without the noise
             </h2>
-            <p className="mt-5 max-w-2xl text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-              The left side shows the modules. The right side updates like a live product surface, so visitors can understand the platform before they ever book a call.
+            <p className="mt-5 max-w-2xl text-base md:text-[1.04rem] font-light text-muted-foreground leading-8">
+              Pick a module on the left. The workspace updates on the right with just the
+              most important signals, so the product feels calm and understandable at a glance.
             </p>
           </div>
         </AnimatedSection>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(260px,280px)_minmax(0,1fr)] xl:grid-cols-[minmax(280px,300px)_minmax(0,1fr)]">
+        <div className="grid gap-6 lg:grid-cols-[minmax(230px,250px)_minmax(0,1fr)] xl:grid-cols-[minmax(240px,260px)_minmax(0,1fr)]">
           <AnimatedSection className="min-w-0">
-            <div className="lg:sticky lg:top-[120px]">
+            <div className="lg:sticky lg:top-[112px]">
               <div className="hidden md:block">
                 <DemoFeatureMenu
                   features={demoFeatures}
@@ -113,16 +114,15 @@ const InteractiveDemo = () => {
                   })}
                 </div>
                 <div className="mt-3">
-                  <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                  <p className="text-sm font-light text-muted-foreground leading-6">
                     {activeFeature.description}
                   </p>
                 </div>
               </div>
-
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={120} className="min-w-0">
+          <AnimatedSection delay={100} className="min-w-0">
             <DemoScreen feature={activeFeature} />
           </AnimatedSection>
         </div>

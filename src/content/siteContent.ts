@@ -1230,15 +1230,76 @@ export const operatingModel = [
 export const aiLabFocus = [
   {
     title: "Agriculture",
-    detail: "Operational decision support, field workflows, and crop intelligence for practical agricultural use cases.",
+    summary:
+      "Agriculture benefits from AI when the model helps teams see pressure earlier: crop conditions, input usage, field reporting, and intervention timing.",
+    directions: [
+      "Decision support for field and crop workflows",
+      "Structured reporting across field teams and agronomy operations",
+    ],
   },
   {
     title: "Mining",
-    detail: "Monitoring, reporting, and operating visibility for resource-intensive environments.",
+    summary:
+      "Mining environments need better visibility around inspections, exceptions, downtime, and safety-sensitive handoffs. The lab focuses on systems that improve response quality rather than replace operator judgment.",
+    directions: [
+      "Monitoring and exception surfacing for operations teams",
+      "Reporting and coordination tools for high-risk environments",
+    ],
   },
   {
     title: "Operational agents",
-    detail: "Agentic systems that help teams coordinate tasks, approvals, and information across tools.",
+    summary:
+      "The lab explores agents where work already has clear rules, systems, and approval paths. The goal is bounded execution, not open-ended autonomy.",
+    directions: [
+      "Tool-connected agents for routing, follow-up, and task preparation",
+      "Human-in-the-loop execution for higher-risk operational flows",
+    ],
+  },
+];
+
+export const aiLabPath = [
+  {
+    step: "01",
+    title: "Operational question",
+    detail:
+      "Research starts with the task, delay, or decision that needs improvement. The lab begins with workflow pressure, not model novelty.",
+  },
+  {
+    step: "02",
+    title: "Validation",
+    detail:
+      "Ideas are tested against real constraints, available data, and live tools to see whether AI can improve speed, quality, or visibility.",
+  },
+  {
+    step: "03",
+    title: "Pilot path",
+    detail:
+      "Promising experiments move into a narrow pilot with approval points, measurable outcomes, and limited operational risk.",
+  },
+  {
+    step: "04",
+    title: "Delivery route",
+    detail:
+      "From there, the work becomes a product capability, a service engagement, or a longer research track depending on fit.",
+  },
+];
+
+export const aiLabReadiness = [
+  {
+    title: "Good fit for AI Labs",
+    points: [
+      "There is a clear operational problem, not just a desire to use AI.",
+      "The workflow already exists and can be observed, measured, or structured.",
+      "There is a realistic path from experiment to pilot, internal tool, or governed rollout.",
+    ],
+  },
+  {
+    title: "Better handled outside the lab",
+    points: [
+      "The need is already covered by a standard product module or a normal software build.",
+      "The business problem is still too vague to define success, risk, or ownership.",
+      "The team wants fully autonomous behavior where approvals and safeguards are still unclear.",
+    ],
   },
 ];
 

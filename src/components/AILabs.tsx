@@ -1,102 +1,65 @@
-import { Leaf, Mountain, UserCircle } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Leaf, Mountain, UserCircle, type LucideIcon } from "lucide-react";
+import { aiLabFocus } from "@/content/siteContent";
 import AnimatedSection from "./AnimatedSection";
-import InteractiveCard from "./InteractiveCard";
-import TextScramble from "./TextScramble";
 
-const labs = [
-  {
-    icon: Leaf,
-    title: "AI for Agriculture",
-    description:
-      "Autonomous crop intelligence and predictive decision systems for smallholder and commercial farms across Southern Africa.",
-  },
-  {
-    icon: Mountain,
-    title: "AI for Mining",
-    description:
-      "Operational optimization and safety monitoring built for Africa's mining sector.",
-  },
-  {
-    icon: UserCircle,
-    title: "AI Managers",
-    description:
-      "Intelligent digital managers that coordinate teams, workflows, and enterprise operations while keeping human approvals where they matter.",
-  },
-];
+const iconByTitle: Record<string, LucideIcon> = {
+  Agriculture: Leaf,
+  Mining: Mountain,
+  "Operational agents": UserCircle,
+};
 
 const AILabs = () => {
   return (
-    <section id="labs" className="py-16 md:py-[120px] lg:py-[150px] px-6 relative">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 40% at 50% 100%, hsl(217 91% 60% / 0.04) 0%, transparent 60%)",
-        }}
-      />
-
+    <section id="labs" className="px-6 pb-16 md:pb-24">
       <div className="relative max-w-6xl mx-auto">
         <AnimatedSection>
-          <div className="text-center mb-12 md:mb-20">
-            <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
-              <TextScramble text="AI Labs" />
-            </h2>
-            <p className="text-base font-light text-muted-foreground mt-6 max-w-xl mx-auto">
-              Research and product exploration for intelligent systems that can create practical value in African industries.
+          <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+            <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+              Research Focus
             </p>
-            <div className="line-accent w-20 mx-auto mt-8" />
+            <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
+              AI Labs stays concentrated on a few high-value operating contexts
+            </h2>
+            <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+              The lab stays narrow on purpose. It focuses on contexts where AI can materially improve operating visibility, workflow speed, or decision quality without becoming a detached demo exercise.
+            </p>
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {labs.map((lab, index) => (
-            <AnimatedSection key={lab.title} delay={index * 150}>
-              <InteractiveCard className="rounded-lg p-6 md:p-10 group h-full">
-                <div
-                  className="absolute top-0 right-0 w-24 h-24 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-500 z-0"
-                  style={{
-                    background: "linear-gradient(135deg, hsl(var(--primary)) 0%, transparent 70%)",
-                    clipPath: "polygon(100% 0, 100% 100%, 0 0)",
-                  }}
-                />
+        <div className="grid gap-6 md:grid-cols-3">
+          {aiLabFocus.map((lab, index) => {
+            const Icon = iconByTitle[lab.title] ?? UserCircle;
+            return (
+              <AnimatedSection key={lab.title} delay={index * 150}>
+                <div className="card-glass rounded-3xl p-6 md:p-8 h-full min-h-[22rem] flex flex-col">
+                  <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center mb-6">
+                    <Icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="font-display text-lg md:text-xl uppercase tracking-wide mb-4">
+                    {lab.title}
+                  </h3>
+                  <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                    {lab.summary}
+                  </p>
 
-                <div className="mb-8">
-                  <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center group-hover:border-primary/40 transition-all duration-300">
-                    <lab.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+                  <div className="mt-6 border-t border-border/20 pt-4">
+                    <p className="font-display text-xs tracking-[0.15em] uppercase text-primary/70 mb-3">
+                      Current directions
+                    </p>
+                    <ul className="space-y-3">
+                      {lab.directions.map((item) => (
+                        <li key={item} className="text-sm font-light text-muted-foreground flex items-start gap-2">
+                          <span className="text-primary/60 mt-0.5">—</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-
-                <h3 className="font-display text-base tracking-wider uppercase mb-4">
-                  {lab.title}
-                </h3>
-                <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                  {lab.description}
-                </p>
-              </InteractiveCard>
-            </AnimatedSection>
-          ))}
+              </AnimatedSection>
+            );
+          })}
         </div>
-
-        <AnimatedSection delay={500}>
-          <div className="text-center mt-12 md:mt-20 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link to="/ai-labs">
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary transition-all duration-300"
-              >
-                Explore AI Labs
-              </Button>
-            </Link>
-            <Link to="/book-demo">
-              <Button size="lg" className="font-display text-xs tracking-[0.15em] uppercase px-8 sm:px-10 py-5 sm:py-6">
-                Discuss an AI Idea
-              </Button>
-            </Link>
-          </div>
-        </AnimatedSection>
       </div>
     </section>
   );

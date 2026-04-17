@@ -12,41 +12,60 @@ type PageHeroProps = {
 
 const PageHero = ({ eyebrow, title, description, actions, sideContent, chips }: PageHeroProps) => {
   return (
-    <section className="relative px-6 pt-28 md:pt-36 pb-14 md:pb-20">
+    <section className="relative px-6 pt-36 pb-20 md:pt-44 md:pb-28">
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 0%, hsl(217 91% 60% / 0.08) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 70%)",
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] lg:items-end">
+      <div
+        className={`relative mx-auto ${
+          sideContent
+            ? "max-w-7xl grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.9fr)] lg:items-end"
+            : "max-w-5xl"
+        }`}
+      >
         <AnimatedSection>
-          <div>
-            <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
+          <div className={sideContent ? "" : "text-center"}>
+            <p className="font-display mb-4 text-[0.76rem] tracking-[0.24em] uppercase text-primary">
               {eyebrow}
             </p>
-            <h1 className="font-display text-3xl md:text-5xl lg:text-[3.8rem] font-bold uppercase tracking-wide leading-[1.02] max-w-4xl">
+            <h1
+              className={`font-display text-[2.8rem] font-bold uppercase tracking-wide leading-[1.03] md:text-[3.5rem] lg:text-[4rem] ${
+                sideContent ? "max-w-5xl" : "max-w-4xl mx-auto"
+              }`}
+            >
               {title}
             </h1>
-            <p className="text-base md:text-lg font-light text-muted-foreground leading-relaxed max-w-2xl mt-6">
+            <p
+              className={`mt-6 text-base font-light leading-8 text-muted-foreground md:text-[1.08rem] ${
+                sideContent ? "max-w-3xl" : "max-w-3xl mx-auto"
+              }`}
+            >
               {description}
             </p>
             {chips && chips.length > 0 ? (
-              <div className="flex flex-wrap gap-2 mt-8">
+              <div
+                className={`mt-8 flex flex-wrap gap-x-6 gap-y-2 ${
+                  sideContent ? "" : "justify-center"
+                }`}
+              >
                 {chips.map((chip) => (
-                  <span
-                    key={chip}
-                    className="font-display text-[0.6rem] tracking-[0.18em] uppercase px-3 py-1.5 rounded-full border border-primary/25 text-primary/80"
-                  >
+                  <span key={chip} className="text-sm font-light text-muted-foreground">
                     {chip}
                   </span>
                 ))}
               </div>
             ) : null}
-            {actions ? <div className="flex flex-wrap gap-3 mt-8">{actions}</div> : null}
+            {actions ? (
+              <div className={`flex flex-wrap gap-3 mt-8 ${sideContent ? "" : "justify-center"}`}>
+                {actions}
+              </div>
+            ) : null}
           </div>
         </AnimatedSection>
 

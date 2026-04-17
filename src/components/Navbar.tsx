@@ -78,7 +78,7 @@ const Navbar = () => {
       <nav className="mx-auto grid h-16 w-full max-w-[1800px] grid-cols-[auto,minmax(0,1fr),auto] items-center px-6 lg:px-10">
         <Link
           to="/"
-          className="font-display text-sm tracking-[0.2em] text-foreground hover:text-primary transition-colors duration-300"
+          className="font-display text-sm tracking-[0.18em] text-foreground hover:text-primary transition-colors duration-300"
         >
           MATHBROOKS
         </Link>
@@ -87,7 +87,7 @@ const Navbar = () => {
           <Link
             to="/"
             className={cn(
-              "font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300 whitespace-nowrap",
+              "font-display text-[0.875rem] tracking-[0.1em] uppercase transition-colors duration-300 whitespace-nowrap",
               location.pathname === "/"
                 ? "text-primary"
                 : "text-muted-foreground hover:text-primary"
@@ -101,7 +101,7 @@ const Navbar = () => {
               type="button"
               onClick={() => setDesktopDropdownOpen((current) => !current)}
               className={cn(
-                "flex items-center gap-1 font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300 whitespace-nowrap",
+                "flex items-center gap-1 font-display text-[0.875rem] tracking-[0.1em] uppercase transition-colors duration-300 whitespace-nowrap",
                 productsActive || desktopDropdownOpen
                   ? "text-primary"
                   : "text-muted-foreground hover:text-primary"
@@ -124,7 +124,7 @@ const Navbar = () => {
                     to={item.href}
                     onClick={() => setDesktopDropdownOpen(false)}
                     className={cn(
-                      "block px-4 py-2.5 font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-200",
+                      "block px-4 py-3 font-display text-[0.875rem] tracking-[0.1em] uppercase transition-colors duration-200",
                       location.pathname === item.href
                         ? "text-primary"
                         : "text-muted-foreground hover:text-primary",
@@ -143,7 +143,7 @@ const Navbar = () => {
               key={item.href}
               to={item.href}
               className={cn(
-                "font-display text-[0.65rem] tracking-[0.08em] uppercase transition-colors duration-300 whitespace-nowrap",
+                "font-display text-[0.875rem] tracking-[0.1em] uppercase transition-colors duration-300 whitespace-nowrap",
                 location.pathname === item.href
                   ? "text-primary"
                   : "text-muted-foreground hover:text-primary"
@@ -157,9 +157,9 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center justify-end gap-4 ml-6">
           <Link
             to="/book-demo"
-            className="font-display text-[0.65rem] tracking-[0.08em] uppercase px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300 whitespace-nowrap"
+            className="rounded-lg bg-primary px-4 py-2 font-body text-sm font-medium text-primary-foreground transition-colors duration-300 hover:bg-primary/90 whitespace-nowrap"
           >
-            Start Demo
+            Book a demo
           </Link>
 
           <button
@@ -221,7 +221,7 @@ const Navbar = () => {
           <Link
             to="/"
             className={cn(
-              "font-display text-sm tracking-[0.15em] uppercase py-3 border-b border-border/10 transition-colors duration-300",
+              "font-display text-sm tracking-[0.14em] uppercase py-3 border-b border-border/10 transition-colors duration-300",
               location.pathname === "/"
                 ? "text-primary"
                 : "text-muted-foreground hover:text-primary"
@@ -233,7 +233,7 @@ const Navbar = () => {
           <button
             type="button"
             onClick={() => setMobileProductsOpen((current) => !current)}
-            className="flex items-center justify-between font-display text-sm tracking-[0.15em] uppercase py-3 border-b border-border/10 w-full text-left text-muted-foreground hover:text-primary transition-colors duration-300"
+            className="flex items-center justify-between font-display text-sm tracking-[0.14em] uppercase py-3 border-b border-border/10 w-full text-left text-muted-foreground hover:text-primary transition-colors duration-300"
           >
             Products
             <ChevronDown
@@ -251,7 +251,7 @@ const Navbar = () => {
                   key={item.href}
                   to={item.href}
                   className={cn(
-                    "font-display text-xs tracking-[0.15em] uppercase py-2 transition-colors duration-300",
+                    "font-display text-[0.82rem] tracking-[0.14em] uppercase py-2 transition-colors duration-300",
                     location.pathname === item.href
                       ? "text-primary"
                       : "text-muted-foreground hover:text-primary"
@@ -268,7 +268,7 @@ const Navbar = () => {
               key={item.href}
               to={item.href}
               className={cn(
-                "font-display text-sm tracking-[0.15em] uppercase py-3 border-b border-border/10 transition-colors duration-300",
+                "font-display text-[0.82rem] tracking-[0.15em] uppercase py-3 border-b border-border/10 transition-colors duration-300",
                 location.pathname === item.href
                   ? "text-primary"
                   : "text-muted-foreground hover:text-primary"
@@ -280,9 +280,9 @@ const Navbar = () => {
 
           <Link
             to="/book-demo"
-            className="mt-3 inline-flex items-center justify-center rounded-md bg-primary px-4 py-3 font-display text-xs tracking-[0.15em] uppercase text-primary-foreground hover:bg-primary/90 transition-colors duration-300"
+            className="mt-3 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-3 font-body text-sm font-medium text-primary-foreground transition-colors duration-300 hover:bg-primary/90"
           >
-            Start Demo
+            Book a demo
           </Link>
         </div>
       </div>

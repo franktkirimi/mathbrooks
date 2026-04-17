@@ -180,48 +180,40 @@ const ScrollProductReveal = () => {
       />
 
       <div className="relative max-w-6xl mx-auto">
-        <div className="max-w-3xl mb-12 md:mb-16">
+        <div className="max-w-3xl mb-14 md:mb-20">
           <p className="font-display text-xs tracking-[0.3em] uppercase text-primary/70 mb-4">
             Platform Storytelling
           </p>
-          <h2 className="font-display text-3xl md:text-5xl lg:text-[3.75rem] uppercase tracking-wide leading-[1.02]">
+          <h2 className="font-display text-[2.1rem] md:text-[3.1rem] lg:text-[3.6rem] uppercase tracking-wide leading-[1.04]">
             Software that reveals itself as the business grows
           </h2>
-          <p className="mt-5 max-w-2xl text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+          <p className="mt-5 max-w-2xl text-base md:text-[1.04rem] font-light text-muted-foreground leading-8">
             Scroll through the core modules and the product surface updates with the workflow. The aim is simple: show the platform as business infrastructure, not a static feature list.
           </p>
         </div>
 
         <div className="grid gap-10 lg:grid-cols-[minmax(320px,0.95fr)_minmax(0,1.05fr)] lg:items-start">
           <div className="lg:sticky lg:top-[120px]">
-            <div
-              className="relative rounded-[1.75rem] border border-border/60 bg-card/85 p-4 md:p-5 shadow-[0_24px_100px_rgba(15,23,42,0.22)]"
-              style={{
-                boxShadow: `0 0 0 1px hsl(${activeData.accent} / 0.12), 0 32px 100px rgba(15,23,42,0.22)`,
-              }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeData.key}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                  className="overflow-hidden rounded-[1.3rem] border border-border/60 bg-gradient-to-b from-background/65 to-card/80"
-                >
-                  <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeData.key}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden rounded-[1.75rem] border border-border/60 bg-gradient-to-b from-background/65 to-card/80"
+                style={{
+                  boxShadow: `0 0 0 1px hsl(${activeData.accent} / 0.12), 0 32px 100px rgba(15,23,42,0.22)`,
+                }}
+              >
+                  <div className="border-b border-border/60 px-4 py-3">
                     <div>
-                      <p className="font-display text-[0.6rem] tracking-[0.22em] uppercase text-primary/70">
+                      <p className="font-display text-[0.74rem] tracking-[0.22em] uppercase text-primary/70">
                         {activeData.summary}
                       </p>
-                      <h3 className="mt-1 font-display text-sm tracking-[0.18em] uppercase text-foreground">
+                      <h3 className="mt-1 font-display text-base tracking-[0.18em] uppercase text-foreground">
                         MathBrooks Platform
                       </h3>
-                    </div>
-                    <div className="flex gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full bg-foreground/20" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-foreground/12" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-foreground/8" />
                     </div>
                   </div>
 
@@ -235,13 +227,13 @@ const ScrollProductReveal = () => {
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div>
-                          <p className="text-[0.65rem] font-display tracking-[0.2em] uppercase text-muted-foreground/70">
+                          <p className="text-[0.78rem] font-display tracking-[0.2em] uppercase text-muted-foreground/70">
                             Active module
                           </p>
                           <h4 className="mt-2 font-display text-xl uppercase tracking-wide text-foreground">
                             {activeData.title}
                           </h4>
-                          <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-muted-foreground">
+                          <p className="mt-3 max-w-md text-base font-light leading-8 text-muted-foreground">
                             {activeData.description}
                           </p>
                         </div>
@@ -259,10 +251,10 @@ const ScrollProductReveal = () => {
                             transition={{ duration: 0.2, delay: index * 0.05 }}
                             className="rounded-xl border border-border/60 bg-background/65 px-3 py-3"
                           >
-                            <p className="text-[0.6rem] font-display tracking-[0.18em] uppercase text-muted-foreground/70">
+                            <p className="text-[0.74rem] font-display tracking-[0.18em] uppercase text-muted-foreground/70">
                               {metric.label}
                             </p>
-                            <p className="mt-2 text-lg font-display text-foreground">
+                            <p className="mt-2 text-[1.45rem] font-display text-foreground">
                               {metric.value}
                             </p>
                           </motion.div>
@@ -278,16 +270,10 @@ const ScrollProductReveal = () => {
                             transition={{ duration: 0.22, delay: index * 0.05 }}
                             className="rounded-xl border border-border/60 bg-background/65 p-4"
                           >
-                            <div className="flex items-center gap-2">
-                              <span
-                                className="h-2.5 w-2.5 rounded-full"
-                                style={{ backgroundColor: `hsl(${activeData.accent})` }}
-                              />
-                              <p className="text-[0.65rem] font-display tracking-[0.18em] uppercase text-muted-foreground/70">
-                                {card.title}
-                              </p>
-                            </div>
-                            <p className="mt-3 text-sm font-light leading-relaxed text-muted-foreground">
+                            <p className="text-[0.78rem] font-display tracking-[0.18em] uppercase text-muted-foreground/70">
+                              {card.title}
+                            </p>
+                            <p className="mt-3 text-base font-light leading-7 text-muted-foreground">
                               {card.detail}
                             </p>
                           </motion.div>
@@ -298,7 +284,7 @@ const ScrollProductReveal = () => {
                     <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
                       <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
                         <div className="flex items-center justify-between">
-                          <p className="text-[0.6rem] font-display tracking-[0.2em] uppercase text-muted-foreground/70">
+                          <p className="text-[0.74rem] font-display tracking-[0.2em] uppercase text-muted-foreground/70">
                             Activity
                           </p>
                           <ArrowRight className="h-3 w-3 text-muted-foreground/60" />
@@ -333,7 +319,7 @@ const ScrollProductReveal = () => {
                       </div>
 
                       <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
-                        <p className="text-[0.6rem] font-display tracking-[0.2em] uppercase text-muted-foreground/70">
+                        <p className="text-[0.74rem] font-display tracking-[0.2em] uppercase text-muted-foreground/70">
                           Weekly trend
                         </p>
                         <div className="mt-4 flex h-24 items-end gap-2">
@@ -352,7 +338,7 @@ const ScrollProductReveal = () => {
                             </div>
                           ))}
                         </div>
-                        <p className="mt-3 text-xs font-light text-muted-foreground/70">
+                        <p className="mt-3 text-sm font-light text-muted-foreground/70">
                           Calm, high-visibility signals without noise.
                         </p>
                       </div>
@@ -360,7 +346,6 @@ const ScrollProductReveal = () => {
                   </div>
                 </motion.div>
               </AnimatePresence>
-            </div>
           </div>
 
           <div className="space-y-5 md:space-y-6">
@@ -401,7 +386,7 @@ const ScrollProductReveal = () => {
                     </div>
 
                     <div className="flex-1">
-                      <p className="font-display text-[0.6rem] tracking-[0.22em] uppercase text-muted-foreground/70">
+                      <p className="font-display text-[0.74rem] tracking-[0.22em] uppercase text-muted-foreground/70">
                         {step.eyebrow}
                       </p>
                       <h3 className="mt-1 font-display text-lg md:text-xl uppercase tracking-wide text-foreground">

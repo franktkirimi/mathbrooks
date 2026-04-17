@@ -20,6 +20,23 @@ const productSections = productFamilies.flatMap((family) =>
       : [];
   })
 );
+const pricingJumpLinks = productSections.map(({ product, plans }) => ({
+  product,
+  startingPrice: plans[0]?.monthly ?? product.startingPrice,
+}));
+
+const pricingJumpBands = [
+  {
+    title: "Core operations",
+    description: "The foundational modules for day-to-day business systems.",
+    items: pricingJumpLinks.slice(0, 4),
+  },
+  {
+    title: "Automation and intelligence",
+    description: "The modules that extend operational workflows and decision support.",
+    items: pricingJumpLinks.slice(4),
+  },
+];
 
 const Pricing = () => {
   useEffect(() => {
@@ -88,49 +105,143 @@ const Pricing = () => {
             </Link>
           </>
         )}
-        sideContent={(
-          <div className="space-y-3">
-            <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70">
-              Payment Options
-            </p>
-            {pricingNotes.map((note) => (
-              <div key={note} className="rounded-xl border border-border/20 bg-background/40 px-4 py-3 text-sm font-light text-muted-foreground leading-relaxed">
-                {note}
-              </div>
-            ))}
-          </div>
-        )}
       />
 
       <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto space-y-12">
-          {productSections.map(({ product, plans }) => (
-            <div key={product.slug} id={product.slug} className="scroll-mt-32">
-              <AnimatedSection>
-                <div className="mb-8 md:mb-10 max-w-3xl">
+        <div className="max-w-6xl mx-auto">
+          <AnimatedSection>
+            <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                How Pricing Works
+              </p>
+              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
+                Product pricing stays repeatable, delivery scope stays separate
+              </h2>
+              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                The product plans are designed for clean, repeatable rollouts. When implementation, migration, or custom system work becomes more specific, that scope is priced separately instead of being buried inside a product fee.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {pricingNotes.map((note, index) => (
+              <AnimatedSection key={note} delay={index * 90}>
+                <div className="card-glass rounded-3xl p-6 md:p-8 h-full min-h-[14rem]">
+                  <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                    {note}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-16 md:pb-24">
+        <div className="max-w-6xl mx-auto">
+          <AnimatedSection>
+            <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                Product Pricing
+              </p>
+              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
+                Jump to the module family you want to compare
+              </h2>
+              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                The catalog is split into two balanced bands so the page reads in sections instead of one dense wall of cards.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="space-y-12 md:space-y-14">
+            {pricingJumpBands.map((band, bandIndex) => (
+              <div key={band.title} className="max-w-5xl mx-auto">
+                <AnimatedSection delay={bandIndex * 80}>
+                  <div className="max-w-2xl mx-auto text-center mb-6 md:mb-8">
+                    <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                      {band.title}
+                    </p>
+                    <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                      {band.description}
+                    </p>
+                  </div>
+                </AnimatedSection>
+
+                <div className="grid gap-6 md:grid-cols-2">
+                  {band.items.map(({ product, startingPrice }, index) => (
+                    <AnimatedSection key={product.slug} delay={index * 60}>
+                      <a
+                        href={`#${product.slug}`}
+                        className="card-glass rounded-3xl p-6 md:p-8 h-full min-h-[12rem] flex flex-col justify-between transition-colors duration-300 hover:border-primary/35"
+                      >
+                        <div>
+                          <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-2">
+                            {product.family}
+                          </p>
+                          <h3 className="font-display text-lg uppercase tracking-wide">
+                            {product.shortName}
+                          </h3>
+                        </div>
+                        <div className="mt-6">
+                          <p className="font-display text-xl text-foreground">
+                            From {startingPrice}
+                          </p>
+                          <p className="text-sm font-light text-muted-foreground mt-2">
+                            {product.trialAvailable ? "Guided trial available" : "Demo and onboarding rollout"}
+                          </p>
+                        </div>
+                      </a>
+                    </AnimatedSection>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-16 md:pb-24">
+        <div className="max-w-6xl mx-auto space-y-6">
+          {productSections.map(({ product, plans }, sectionIndex) => (
+            <AnimatedSection key={product.slug} delay={sectionIndex * 40}>
+              <article
+                id={product.slug}
+                className="card-glass rounded-3xl px-5 py-6 sm:px-6 md:px-8 lg:px-10 lg:py-10 scroll-mt-32"
+              >
+                <div className="max-w-3xl mx-auto text-center">
                   <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
                     {product.family}
                   </p>
-                  <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-3">
+                  <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
                     {product.shortName}
                   </h2>
                   <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
                     {product.summary}
                   </p>
                 </div>
-              </AnimatedSection>
-              <div className="grid gap-6 md:grid-cols-3">
-                {plans.map((plan, index) => {
-                  const query = new URLSearchParams({
-                    product: product.slug,
-                    plan: plan.name,
-                  }).toString();
-                  const ctaPath = product.trialAvailable ? `/start-trial?${query}` : `/book-demo?${query}`;
-                  const ctaLabel = product.trialAvailable ? "Start Guided Trial" : "Get Started";
 
-                  return (
-                    <AnimatedSection key={`${product.slug}-${plan.name}`} delay={index * 120}>
-                      <div className={`card-glass rounded-2xl p-6 md:p-8 h-full flex flex-col ${plan.featured ? "border border-primary/40" : ""}`}>
+                <div
+                  className={`mt-8 grid gap-5 md:gap-6 justify-items-stretch ${
+                    plans.length === 1
+                      ? "max-w-2xl mx-auto"
+                      : plans.length === 2
+                        ? "md:grid-cols-2 max-w-5xl mx-auto"
+                        : "md:grid-cols-2 xl:grid-cols-3 max-w-6xl mx-auto"
+                  }`}
+                >
+                  {plans.map((plan) => {
+                    const query = new URLSearchParams({
+                      product: product.slug,
+                      plan: plan.name,
+                    }).toString();
+                    const ctaPath = product.trialAvailable ? `/start-trial?${query}` : `/book-demo?${query}`;
+                    const ctaLabel = product.trialAvailable ? "Start Guided Trial" : "Get Started";
+
+                    return (
+                      <div
+                        key={`${product.slug}-${plan.name}`}
+                        className="mx-auto w-full max-w-[22rem] rounded-3xl border border-border/20 bg-background/25 p-6 md:p-8 h-full flex flex-col"
+                      >
                         <div className="mb-6">
                           <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-2">
                             {plan.audience}
@@ -160,35 +271,63 @@ const Pricing = () => {
                         </ul>
                         <Link to={ctaPath} className="mt-8">
                           <Button
-                            variant={plan.featured ? "default" : "outline"}
-                            className={`w-full font-display text-xs tracking-[0.15em] uppercase ${plan.featured ? "" : "border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"}`}
+                            variant="outline"
+                            className="w-full font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
                           >
                             {ctaLabel}
                           </Button>
                         </Link>
                       </div>
-                    </AnimatedSection>
-                  );
-                })}
-              </div>
-            </div>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-6 flex flex-wrap justify-center gap-3">
+                  <Link to={`/products/${product.slug}`}>
+                    <Button
+                      variant="outline"
+                      className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
+                    >
+                      View Product Details
+                    </Button>
+                  </Link>
+                  <Link to={`/book-demo?product=${product.slug}`}>
+                    <Button
+                      variant="outline"
+                      className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
+                    >
+                      Discuss {product.shortName}
+                    </Button>
+                  </Link>
+                </div>
+              </article>
+            </AnimatedSection>
           ))}
         </div>
       </section>
 
       <section className="px-6 pb-4 md:pb-8">
         <AnimatedSection>
-          <div className="max-w-6xl mx-auto rounded-3xl border border-border/20 bg-background/30 px-6 py-8 md:px-8 md:py-10">
-            <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-              What is not included in the product fee
-            </p>
-            <div className="grid gap-4 md:grid-cols-3">
+          <div className="max-w-6xl mx-auto">
+            <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                Scope Boundaries
+              </p>
+              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
+                Product fees cover the module, not bespoke delivery extras
+              </h2>
+              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                This keeps the plans easier to compare and makes it clear when a business is moving from standard rollout into custom work.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
               {[
                 "Data migration beyond standard onboarding",
                 "Custom integrations and bespoke workflow changes",
                 "Advanced reporting or additional module implementation",
               ].map((item) => (
-                <div key={item} className="rounded-xl border border-border/20 bg-background/40 px-4 py-4 text-sm font-light text-muted-foreground">
+                <div key={item} className="card-glass rounded-3xl p-6 md:p-8 h-full min-h-[12rem] text-sm md:text-base font-light text-muted-foreground leading-relaxed">
                   {item}
                 </div>
               ))}

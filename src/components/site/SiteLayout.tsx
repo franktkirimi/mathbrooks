@@ -11,7 +11,7 @@ type SiteLayoutProps = {
 
 const SiteLayout = ({ children }: SiteLayoutProps) => {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="site-shell min-h-screen bg-background overflow-x-hidden">
       <ScrollProgress />
       <CursorGlow />
       <a

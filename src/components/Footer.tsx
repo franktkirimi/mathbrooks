@@ -24,35 +24,35 @@ const companyLinks = [
 const Footer = () => {
   return (
     <footer className="pt-12 md:pt-16 pb-8 px-6 border-t border-border/20">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div className="sm:col-span-2 lg:col-span-1">
             <Link
               to="/"
-              className="font-display text-sm tracking-[0.2em] text-foreground hover:text-primary transition-colors duration-300"
+              className="font-display text-sm tracking-[0.18em] text-foreground hover:text-primary transition-colors duration-300"
             >
               MATHBROOKS
             </Link>
-            <p className="text-sm font-light text-muted-foreground mt-4 leading-relaxed max-w-xs">
+            <p className="mt-4 max-w-sm text-sm font-light leading-7 text-muted-foreground">
               Software, business platforms, and applied AI built in Harare for businesses that need practical operating systems.
             </p>
             <Link
               to="/book-demo"
-              className="inline-flex mt-5 font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
+              className="mt-5 inline-flex font-display text-xs tracking-[0.14em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
             >
               Start Demo
             </Link>
           </div>
 
           <div>
-            <h2 className="font-display text-xs tracking-[0.15em] uppercase text-foreground mb-4">
+            <h2 className="mb-4 font-display text-xs tracking-[0.14em] uppercase text-foreground">
               Products
             </h2>
             <ul className="space-y-2.5">
               <li>
                 <Link
                   to="/products"
-                  className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
+                    className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
                 >
                   All Products
                 </Link>
@@ -71,7 +71,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h2 className="font-display text-xs tracking-[0.15em] uppercase text-foreground mb-4">
+            <h2 className="mb-4 font-display text-xs tracking-[0.14em] uppercase text-foreground">
               Company
             </h2>
             <ul className="space-y-2.5">
@@ -89,7 +89,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h2 className="font-display text-xs tracking-[0.15em] uppercase text-foreground mb-4">
+            <h2 className="mb-4 font-display text-xs tracking-[0.14em] uppercase text-foreground">
               Contact
             </h2>
             <ul className="space-y-2.5">
@@ -119,7 +119,7 @@ const Footer = () => {
                   +263 78 346 9023
                 </a>
               </li>
-              <li className="text-sm font-light text-muted-foreground pt-2">
+              <li className="pt-2 text-sm font-light text-muted-foreground">
                 Harare, Zimbabwe
               </li>
             </ul>
@@ -127,10 +127,10 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border/20 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs font-light text-muted-foreground">
+          <p className="text-sm font-light text-muted-foreground">
             &copy; {new Date().getFullYear()} MathBrooks. All rights reserved.
           </p>
-          <p className="text-xs font-light text-muted-foreground">
+          <p className="text-sm font-light text-muted-foreground">
             Built for practical operations across Africa and beyond.
           </p>
         </div>

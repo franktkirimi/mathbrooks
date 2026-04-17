@@ -1,6 +1,4 @@
-import {
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { productFamilies, products } from "@/content/siteContent";
 import AnimatedSection from "./AnimatedSection";
@@ -21,20 +19,20 @@ const ProductsHighlight = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(217 91% 60% / 0.04) 0%, transparent 60%)",
+            "radial-gradient(ellipse 60% 40% at 50% 0%, hsl(var(--primary) / 0.04) 0%, transparent 60%)",
         }}
       />
 
       <div className="relative max-w-6xl mx-auto">
         <AnimatedSection>
-          <div className="text-center mb-12 md:mb-20">
+          <div className="text-center mb-14 md:mb-24">
             <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
               Platform Overview
             </p>
-            <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
+            <h2 className="font-display text-[2rem] md:text-[3rem] lg:text-[3.5rem] font-bold uppercase tracking-wide">
               <TextScramble text="Everything your business needs to run properly" />
             </h2>
-            <p className="text-base font-light text-muted-foreground mt-6 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base md:text-[1.02rem] font-light text-muted-foreground mt-6 max-w-3xl mx-auto leading-8">
               CRM, finance, HR, inventory, projects, automation, analytics, and AI. The platform is designed to give growing businesses one operational system instead of disconnected tools.
             </p>
             <div className="line-accent w-20 mx-auto mt-8" />
@@ -57,13 +55,11 @@ const ProductsHighlight = () => {
                     {product.shortName}
                   </h3>
 
-                  <div className="mb-4 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5">
-                    <span className="text-[0.62rem] font-display tracking-[0.18em] uppercase text-primary/80">
-                      {`Starting from ${product.startingPrice.replace(" / ", " per ")}`}
-                    </span>
-                  </div>
+                  <p className="mb-4 text-sm font-light text-primary/80">
+                    {`From ${product.startingPrice.replace(" / ", " per ")}`}
+                  </p>
 
-                  <p className="text-sm font-light text-muted-foreground leading-relaxed flex-1">
+                  <p className="text-base font-light text-muted-foreground leading-7 flex-1">
                     {product.overview}
                   </p>
 

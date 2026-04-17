@@ -9,16 +9,16 @@ const productLookup = new Map(products.map((product) => [product.slug, product])
 const ProductCatalog = () => {
   return (
     <section id="product-catalog" className="px-6 pb-16 md:pb-24">
-      <div className="max-w-6xl mx-auto space-y-12 md:space-y-16">
+      <div className="max-w-6xl mx-auto space-y-14 md:space-y-20">
         <AnimatedSection>
           <div className="max-w-3xl">
             <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
               Product Catalog
             </p>
-            <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
+            <h2 className="font-display text-[2rem] md:text-[3rem] uppercase tracking-wide mb-4">
               Choose the module that matches the operational pressure first
             </h2>
-            <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+            <p className="text-base md:text-[1.02rem] font-light text-muted-foreground leading-8">
               Every module can run on its own, and each one can connect into a broader MathBrooks rollout when the business needs more control. Start with the workflow that is currently slow, risky, or hard to see clearly.
             </p>
           </div>
@@ -32,7 +32,7 @@ const ProductCatalog = () => {
                   <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-2">
                     {family.title}
                   </p>
-                  <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                  <p className="text-base font-light text-muted-foreground leading-8">
                     {family.description}
                   </p>
                 </div>
@@ -58,31 +58,31 @@ const ProductCatalog = () => {
                         <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center">
                           <Icon className="w-5 h-5 text-primary" />
                         </div>
-                        <div className={`rounded-full border px-3 py-1.5 text-[0.62rem] font-display tracking-[0.18em] uppercase ${product.trialAvailable ? "border-emerald-400/25 bg-emerald-400/10 text-emerald-300" : "border-border/30 bg-background/40 text-muted-foreground"}`}>
-                          {product.trialAvailable ? "Guided trial" : "Demo-led rollout"}
-                        </div>
+                        <p className={`text-sm font-light ${product.trialAvailable ? "text-emerald-400" : "text-muted-foreground"}`}>
+                          {product.trialAvailable ? "Guided trial available" : "Demo-led rollout"}
+                        </p>
                       </div>
 
                       <div className="mb-5">
                         <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-2">
                           {product.family}
                         </p>
-                        <h3 className="font-display text-lg uppercase tracking-wide mb-3">
+                        <h3 className="font-display text-[1.35rem] uppercase tracking-wide mb-3">
                           {product.shortName}
                         </h3>
-                        <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                        <p className="text-base font-light text-muted-foreground leading-7">
                           {product.overview}
                         </p>
                       </div>
 
                       <div className="rounded-2xl border border-border/20 bg-background/40 px-4 py-4 mb-5 space-y-1.5">
-                        <p className="font-display text-[0.62rem] tracking-[0.18em] uppercase text-primary/70">
+                        <p className="font-display text-[0.68rem] tracking-[0.18em] uppercase text-primary/70">
                           Starting Price
                         </p>
                         <p className="font-display text-xl text-foreground">
                           {product.startingPrice}
                         </p>
-                        <p className="text-xs font-light text-muted-foreground leading-relaxed">
+                        <p className="text-sm font-light text-muted-foreground leading-7">
                           {product.trialAvailable
                             ? "Guided trial access is available before rollout."
                             : "Includes demo and onboarding-led rollout planning."}
@@ -90,10 +90,10 @@ const ProductCatalog = () => {
                       </div>
 
                       <div className="space-y-2 flex-1">
-                        <p className="font-display text-[0.62rem] tracking-[0.18em] uppercase text-primary/70">
+                        <p className="font-display text-[0.68rem] tracking-[0.18em] uppercase text-primary/70">
                           Best For
                         </p>
-                        <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                        <p className="text-base font-light text-muted-foreground leading-7">
                           {product.audience}
                         </p>
                       </div>

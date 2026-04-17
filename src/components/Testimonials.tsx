@@ -56,14 +56,13 @@ const WhyWorkWithUs = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 50% 50% at 50% 50%, hsl(217 91% 60% / 0.03) 0%, transparent 70%)",
+            "radial-gradient(ellipse 50% 50% at 50% 50%, hsl(var(--primary) / 0.03) 0%, transparent 70%)",
         }}
       />
 
       <div className="relative max-w-6xl mx-auto">
-        {/* Highlights bar */}
         <AnimatedSection>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-24">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-20 md:mb-28">
             {highlights.map((item, index) => (
               <AnimatedSection key={item.label} delay={index * 100}>
                 <div className="text-center group">
@@ -73,7 +72,7 @@ const WhyWorkWithUs = () => {
                   <div className="font-display text-sm tracking-wider uppercase mb-1">
                     {item.label}
                   </div>
-                  <div className="text-xs font-light text-muted-foreground">
+                  <div className="text-xs font-light text-muted-foreground leading-6">
                     {item.detail}
                   </div>
                 </div>
@@ -83,8 +82,8 @@ const WhyWorkWithUs = () => {
         </AnimatedSection>
 
         <AnimatedSection>
-          <div className="text-center mb-12 md:mb-20">
-            <h2 className="font-display text-2xl md:text-4xl lg:text-[3.5rem] font-bold uppercase tracking-wide">
+          <div className="text-center mb-14 md:mb-24">
+            <h2 className="font-display text-[2rem] md:text-[3rem] lg:text-[3.5rem] font-bold uppercase tracking-wide">
               <TextScramble text="Serious Software Infrastructure" />
             </h2>
             <div className="line-accent w-20 mx-auto mt-8" />
@@ -103,7 +102,7 @@ const WhyWorkWithUs = () => {
                   {value.title}
                 </h3>
 
-                <p className="text-sm font-light text-muted-foreground leading-relaxed flex-1">
+                <p className="text-base font-light text-muted-foreground leading-7 flex-1">
                   {value.description}
                 </p>
               </InteractiveCard>

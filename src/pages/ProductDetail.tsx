@@ -94,7 +94,7 @@ const ProductDetail = () => {
         )}
         sideContent={(
           <div className="space-y-5">
-            <div className="flex items-center justify-between gap-3">
+            <div>
               <div>
                 <p className="font-display text-[0.62rem] tracking-[0.24em] uppercase text-primary/70">
                   Best Fit
@@ -103,9 +103,9 @@ const ProductDetail = () => {
                   {product.family}
                 </h2>
               </div>
-              <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[0.62rem] font-display tracking-[0.16em] uppercase text-primary/80">
-                {product.shortName}
-              </span>
+              <p className="mt-2 text-sm font-light text-primary/80">
+                Module: {product.shortName}
+              </p>
             </div>
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -221,14 +221,11 @@ const ProductDetail = () => {
                   <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
                     Proof Points
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="space-y-3">
                     {product.proofPoints.map((point) => (
-                      <span
-                        key={point}
-                        className="rounded-full border border-border/30 bg-background/40 px-3 py-1.5 text-xs font-display tracking-[0.14em] uppercase text-muted-foreground"
-                      >
+                      <p key={point} className="text-sm font-light text-muted-foreground">
                         {point}
-                      </span>
+                      </p>
                     ))}
                   </div>
                 </div>

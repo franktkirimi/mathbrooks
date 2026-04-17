@@ -7,9 +7,9 @@ import TextScramble from "./TextScramble";
 const Contact = () => {
   return (
     <section id="contact" className="py-16 md:py-[120px] lg:py-[150px] px-6">
-      <div className="max-w-4xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto text-center">
         <AnimatedSection>
-          <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] font-bold uppercase tracking-wide mb-6 leading-tight">
+          <h2 className="font-display text-[2rem] md:text-[2.75rem] lg:text-[3.15rem] font-bold uppercase tracking-wide mb-6 leading-tight">
             <TextScramble text="Ready to run your business on better systems?" />
           </h2>
           <div className="line-accent w-20 mx-auto mt-8 mb-12" />
@@ -98,7 +98,7 @@ const Contact = () => {
                 <h3 className="font-display text-xs tracking-[0.15em] uppercase mb-3">
                   {step.title}
                 </h3>
-                <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                <p className="text-base font-light text-muted-foreground leading-7">
                   {step.description}
                 </p>
               </div>

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
 import PageHero from "@/components/site/PageHero";
 import SiteLayout from "@/components/site/SiteLayout";
-import { operatingModel, serviceAssurance } from "@/content/siteContent";
+import { operatingModel, proofHighlights } from "@/content/siteContent";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 type ServiceItem = {
@@ -206,62 +206,84 @@ const Services = () => {
             </Link>
           </>
         )}
-        sideContent={(
-          <div className="space-y-3">
-            <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70">
-              When to choose services
-            </p>
-            {[
-              "The workflow spans multiple tools or approval paths.",
-              "The process is important enough that a generic product will not fit cleanly.",
-              "The business needs custom logic, guided rollout, or AI with human control.",
-            ].map((item) => (
-              <div key={item} className="rounded-xl border border-border/20 bg-background/40 px-4 py-3 text-sm font-light text-muted-foreground leading-relaxed">
-                {item}
-              </div>
-            ))}
-          </div>
-        )}
       />
 
       <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Products vs Services
+            <div className="mb-8 md:mb-12 max-w-3xl mx-auto text-center">
+              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                How To Choose
               </p>
-              <div className="space-y-4">
-                {useServicesVsProducts.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-border/20 bg-background/40 p-4">
-                    <h2 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
-                      {item.title}
-                    </h2>
-                    <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                      {item.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
+                Start with repeatability, then choose the build path
+              </h2>
+              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                The first question is not whether you need software or AI. It is whether the workflow is repeatable enough for a product module, specific enough for a custom build, or best handled as a mix of both.
+              </p>
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={120}>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Delivery standards
-              </p>
-              <div className="space-y-4">
-                {serviceAssurance.map((item) => (
-                  <div key={item.title} className="border-b border-border/20 pb-4 last:border-b-0 last:pb-0">
-                    <h2 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
-                      {item.title}
-                    </h2>
-                    <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                      {item.detail}
-                    </p>
-                  </div>
-                ))}
+          <AnimatedSection delay={100}>
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="card-glass rounded-3xl p-6 md:p-8 lg:p-10 h-full">
+                <div className="max-w-2xl">
+                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                    Decision Guide
+                  </p>
+                  <h3 className="font-display text-lg md:text-xl uppercase tracking-wide mb-3">
+                    Choose the right starting point
+                  </h3>
+                  <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                    Start with the shape of the workflow. If the need repeats, use a product module. If the process is specific, connected, or higher risk, use services.
+                  </p>
+                </div>
+
+                <div className="mt-8 grid gap-4">
+                  {useServicesVsProducts.map((item) => (
+                    <div
+                      key={item.title}
+                      className="rounded-2xl border border-border/20 bg-background/30 p-5 min-h-[8.5rem]"
+                    >
+                      <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-3">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                        {item.detail}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="card-glass rounded-3xl p-6 md:p-8 lg:p-10 h-full">
+                <div className="max-w-2xl">
+                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                    Representative Delivery
+                  </p>
+                  <h3 className="font-display text-lg md:text-xl uppercase tracking-wide mb-3">
+                    Evidence before abstraction
+                  </h3>
+                  <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                    The work is shaped by concrete delivery outcomes, not service jargon. These examples show the scale and operating visibility MathBrooks has already supported.
+                  </p>
+                </div>
+
+                <div className="mt-8 grid gap-4">
+                  {proofHighlights.map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-2xl border border-border/20 bg-background/30 p-5 min-h-[8.5rem] flex flex-col justify-between"
+                    >
+                      <p className="font-display text-xs tracking-[0.15em] uppercase text-primary/70 mb-3">
+                        {item.label}
+                      </p>
+                      <p className="font-display text-xl md:text-2xl text-foreground">
+                        {item.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </AnimatedSection>
@@ -269,30 +291,30 @@ const Services = () => {
       </section>
 
       <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto space-y-6 md:space-y-8">
+        <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="max-w-3xl">
+            <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
               <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
-                Service Families
+                Service Lanes
               </p>
               <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
-                Structured service lanes for different kinds of operational work
+                Pick the lane that matches the kind of operational change you need
               </h2>
               <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                The page is organized around the kind of decision a buyer is trying to make, not just a list of capabilities.
+                Each lane is organized around a different kind of business problem: bespoke systems, repetitive workflow friction, applied intelligence, or real-time operational interaction.
               </p>
             </div>
           </AnimatedSection>
 
-          <div className="space-y-8">
+          <div className="grid gap-6 lg:grid-cols-2">
             {serviceGroups.map((group, groupIndex) => (
               <AnimatedSection key={group.title} delay={groupIndex * 90}>
-                <section className="rounded-3xl border border-border/20 bg-background/25 p-6 md:p-8">
-                  <div className="max-w-3xl mb-6 md:mb-8">
+                <article className="card-glass rounded-3xl p-6 md:p-8 lg:p-10 h-full min-h-[30rem] flex flex-col">
+                  <div className="max-w-xl">
                     <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-2">
                       {group.eyebrow}
                     </p>
-                    <h3 className="font-display text-xl md:text-2xl uppercase tracking-wide mb-3">
+                    <h3 className="font-display text-xl md:text-2xl uppercase tracking-wide mb-3 leading-tight">
                       {group.title}
                     </h3>
                     <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
@@ -300,46 +322,75 @@ const Services = () => {
                     </p>
                   </div>
 
-                  <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                    {group.items.map((service) => (
-                      <article key={service.title} className="card-glass rounded-2xl p-6 md:p-8 h-full">
-                        <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center mb-6">
-                          <service.icon className="w-5 h-5 text-primary" />
-                        </div>
-                        <h4 className="font-display text-base tracking-wider uppercase mb-3">
-                          {service.title}
-                        </h4>
-                        <p className="text-sm font-light text-primary/75 mb-4 leading-relaxed">
-                          {service.buyer}
-                        </p>
-                        <p className="text-sm font-light text-muted-foreground leading-relaxed mb-6">
+                  {group.items.length === 1 ? (
+                    group.items.map((service) => (
+                      <div key={service.title} className="mt-8 flex flex-1 flex-col">
+                        <p className="text-sm font-light text-muted-foreground leading-relaxed">
                           {service.description}
                         </p>
-                        <ul className="space-y-3">
-                          {service.outcomes.map((item) => (
-                            <li key={item} className="text-sm font-light text-muted-foreground flex items-start gap-2">
-                              <span className="text-primary/60 mt-0.5">—</span>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="mt-8 flex flex-wrap gap-3">
-                          <Link to="/book-demo">
-                            <Button className="font-display text-xs tracking-[0.15em] uppercase">
-                              Discuss This Service
-                            </Button>
-                          </Link>
-                          <Link
-                            to="/products"
-                            className="inline-flex items-center font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
-                          >
-                            Compare With Products
-                          </Link>
+                        <div className="mt-6 grid gap-4 md:grid-cols-2 flex-1">
+                          <div className="rounded-2xl border border-border/20 bg-background/30 p-5 h-full">
+                            <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center mb-5">
+                              <service.icon className="w-5 h-5 text-primary" />
+                            </div>
+                            <p className="font-display text-xs tracking-[0.15em] uppercase text-primary/70 mb-2">
+                              Best fit
+                            </p>
+                            <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                              {service.buyer}
+                            </p>
+                          </div>
+
+                          <div className="rounded-2xl border border-border/20 bg-background/30 p-5 h-full">
+                            <p className="font-display text-xs tracking-[0.15em] uppercase text-primary/70 mb-3">
+                              What you get
+                            </p>
+                            <ul className="space-y-3">
+                              {service.outcomes.map((item) => (
+                                <li key={item} className="text-sm font-light text-muted-foreground flex items-start gap-2">
+                                  <span className="text-primary/60 mt-0.5">—</span>
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
-                      </article>
-                    ))}
-                  </div>
-                </section>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="mt-8 grid gap-4 md:grid-cols-2 flex-1">
+                      {group.items.map((service) => (
+                        <div key={service.title} className="rounded-2xl border border-border/20 bg-background/30 p-5 h-full flex flex-col">
+                          <div className="w-12 h-12 rounded-md border border-border/40 flex items-center justify-center mb-5">
+                            <service.icon className="w-5 h-5 text-primary" />
+                          </div>
+                          <h4 className="font-display text-base tracking-wider uppercase mb-3">
+                            {service.title}
+                          </h4>
+                          <p className="text-sm font-light text-primary/75 mb-4 leading-relaxed">
+                            {service.buyer}
+                          </p>
+                          <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                            {service.description}
+                          </p>
+                          <div className="border-t border-border/20 pt-4 mt-5">
+                            <p className="font-display text-xs tracking-[0.15em] uppercase text-primary/70 mb-3">
+                              Included focus
+                            </p>
+                            <ul className="space-y-2">
+                              {service.outcomes.map((item) => (
+                                <li key={item} className="text-sm font-light text-muted-foreground flex items-start gap-2">
+                                  <span className="text-primary/60 mt-0.5">—</span>
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </article>
               </AnimatedSection>
             ))}
           </div>
@@ -347,56 +398,86 @@ const Services = () => {
       </section>
 
       <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Engagement Path
+            <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                Engagement Model
               </p>
-              <div className="space-y-4">
-                {engagementPath.map((step) => (
-                  <div key={step.step} className="rounded-xl border border-border/20 bg-background/40 p-4">
-                    <p className="font-display text-[0.62rem] tracking-[0.18em] uppercase text-primary/70 mb-2">
-                      Step {step.step}
-                    </p>
-                    <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                      {step.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
+                How the work moves from first review to rollout
+              </h2>
+              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                Engagements stay structured around workflow understanding, scope clarity, practical build decisions, and a rollout path the team can actually maintain.
+              </p>
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={120}>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Production Standards
-              </p>
-              <div className="space-y-4">
-                {operatingModel.map((item) => (
-                  <div key={item.title} className="border-b border-border/20 pb-4 last:border-b-0 last:pb-0">
-                    <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                      {item.detail}
-                    </p>
-                  </div>
-                ))}
+          <div className="grid gap-6 lg:grid-cols-2">
+            <AnimatedSection>
+              <div className="card-glass rounded-3xl p-6 md:p-8 lg:p-10 h-full">
+                <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                  Engagement Path
+                </p>
+                <h3 className="font-display text-lg md:text-xl uppercase tracking-wide mb-3">
+                  Delivery moves in four structured steps
+                </h3>
+                <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                  Every engagement is scoped to move from operational understanding into a practical build and a stable rollout path.
+                </p>
+
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  {engagementPath.map((step) => (
+                    <div key={step.step} className="rounded-2xl border border-border/20 bg-background/30 p-5 h-full">
+                      <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
+                        Step {step.step}
+                      </p>
+                      <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                        {step.detail}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+
+            <AnimatedSection delay={120}>
+              <div className="card-glass rounded-3xl p-6 md:p-8 lg:p-10 h-full">
+                <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
+                  Production Standards
+                </p>
+                <h3 className="font-display text-lg md:text-xl uppercase tracking-wide mb-3">
+                  The operating model stays visible throughout delivery
+                </h3>
+                <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                  The work stays grounded in workflow review, controlled rollout, and practical extension paths rather than isolated prototypes.
+                </p>
+
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  {operatingModel.map((item) => (
+                    <div key={item.title} className="rounded-2xl border border-border/20 bg-background/30 p-5 h-full">
+                      <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                        {item.detail}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
       <section className="px-6 pb-20 md:pb-28">
         <AnimatedSection>
-          <div className="max-w-6xl mx-auto rounded-3xl border border-primary/20 bg-primary/5 px-6 py-8 md:px-8 md:py-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-            <div className="max-w-2xl">
+          <div className="max-w-4xl mx-auto rounded-3xl border border-primary/20 bg-primary/5 px-6 py-10 md:px-10 md:py-12 text-center">
+            <div className="max-w-2xl mx-auto">
               <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/80 mb-3">
                 Ready to scope the workflow?
               </p>
@@ -407,7 +488,7 @@ const Services = () => {
                 If the problem is custom, connected, or high-risk, the service route is usually the right one. If it is repeatable, the product modules may be the better starting point.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link to="/book-demo">
                 <Button className="font-display text-xs tracking-[0.15em] uppercase">
                   Book a Scoping Call
