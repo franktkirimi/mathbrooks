@@ -309,6 +309,13 @@
   }
 }
 
+@keyframes loadingBar {
+  0% { width: 0%; }
+  40% { width: 55%; }
+  80% { width: 88%; }
+  100% { width: 100%; }
+}
+
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }

@@ -1,168 +1,190 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import ProductCatalog from "@/components/ProductCatalog";
-import AnimatedSection from "@/components/AnimatedSection";
-import PageHero from "@/components/site/PageHero";
-import SiteLayout from "@/components/site/SiteLayout";
+import { useReducer, useRef, useEffect, useCallback } from "react";
+import gsap from "gsap";
+import Navbar from "@/components/Navbar";
+import CursorGlow from "@/components/CursorGlow";
+import ScrollProgress from "@/components/ScrollProgress";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { complianceSignals, operatingModel, productFamilies } from "@/content/siteContent";
+import { NetworkBackground } from "@/components/products/NetworkBackground";
+import { ProductPreviewStrip } from "@/components/products/ProductPreviewStrip";
+import { SystemHero } from "@/components/products/SystemHero";
+import { IntentSelector } from "@/components/products/IntentSelector";
+import { ProductReveal } from "@/components/products/ProductReveal";
+import { ProductDetailPanel } from "@/components/products/ProductDetailPanel";
+import { DecisionCTA } from "@/components/products/DecisionCTA";
+import type { ProductEntry } from "@/content/siteContent";
+import WhatsAppWidget from "@/components/site/WhatsAppWidget";
 
+// ─── State machine ────────────────────────────────────────────────────────────
+type UIMode = "entry" | "selecting" | "revealing" | "detail" | "decision";
+
+interface State {
+  mode: UIMode;
+  intentId: string | null;
+  product: ProductEntry | null;
+}
+
+type Action =
+  | { type: "BEGIN" }
+  | { type: "SELECT_INTENT"; intentId: string }
+  | { type: "SELECT_PRODUCT"; product: ProductEntry }
+  | { type: "DECIDE" }
+  | { type: "BACK_TO_INTENTS" }
+  | { type: "BACK_TO_PRODUCTS" }
+  | { type: "RESTART" };
+
+const initial: State = { mode: "entry", intentId: null, product: null };
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case "BEGIN":           return { ...state, mode: "selecting" };
+    case "SELECT_INTENT":   return { mode: "revealing", intentId: action.intentId, product: null };
+    case "SELECT_PRODUCT":  return { ...state, mode: "detail", product: action.product };
+    case "DECIDE":          return { ...state, mode: "decision" };
+    case "BACK_TO_INTENTS": return { mode: "selecting", intentId: null, product: null };
+    case "BACK_TO_PRODUCTS":return { ...state, mode: "revealing", product: null };
+    case "RESTART":         return initial;
+    default:                return state;
+  }
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 const Products = () => {
   usePageMeta({
-    title: "Products | MathBrooks",
-    description:
-      "Explore MathBrooks business platforms for CRM, HR and payroll, accounting, inventory, projects, automation, analytics, and AI assistant workflows.",
+    title: "Systems | MathBrooks",
+    description: "Find and configure the right MathBrooks system for your operational needs.",
     canonicalPath: "/products",
-    keywords: [
-      "CRM software Africa",
-      "HR payroll software Zimbabwe",
-      "accounting software Africa",
-      "inventory software Africa",
-      "automation platform business",
-      "project management software Africa",
-      "analytics platform business",
-    ],
   });
 
+  const [state, dispatch] = useReducer(reducer, initial);
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  // Cross-fade between phases
+  const transition = useCallback((action: Action) => {
+    gsap.to(stageRef.current, {
+      opacity: 0,
+      duration: 0.25,
+      ease: "power2.in",
+      onComplete: () => {
+        dispatch(action);
+        gsap.to(stageRef.current, { opacity: 1, duration: 0.35, ease: "power2.out" });
+      },
+    });
+  }, []);
+
+  // Fade in on mount
+  useEffect(() => {
+    gsap.fromTo(stageRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" });
+  }, []);
+
   return (
-    <SiteLayout>
-      <PageHero
-        eyebrow="Products"
-        title="Product modules for the workflows that create the most operational drag"
-        description="MathBrooks products cover CRM, HR and payroll, accounting, inventory, projects, automation, analytics, and AI assistant workflows. Start with the module that fixes the current bottleneck, then connect more as the business needs tighter control."
-        chips={productFamilies.map((family) => family.title)}
-        actions={(
-          <>
-            <Link to="/book-demo">
-              <Button size="lg" className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6">
-                Book a Demo
-              </Button>
-            </Link>
-            <Link to="/pricing">
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
-              >
-                View Pricing
-              </Button>
-            </Link>
-            <a
-              href="#product-catalog"
-              className="inline-flex items-center font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
-            >
-              Compare Modules
-            </a>
-          </>
-        )}
-        sideContent={(
-          <div className="space-y-4">
-            <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70">
-              How To Choose
-            </p>
-            <div className="space-y-3">
-              {[
-                {
-                  title: "Start where work is currently slowing down",
-                  detail: "Use the products page to match the module to the bottleneck first: sales follow-up, payroll, invoicing, stock visibility, project control, automation, reporting, or AI-assisted analysis.",
-                },
-                {
-                  title: "Use pricing for repeatable rollouts",
-                  detail: "Every product has a pricing track. CRM and HR also support guided trial access before full rollout.",
-                },
-                {
-                  title: "Extend later if the workflow gets more complex",
-                  detail: "Products can connect into custom software, automation, analytics, or AI work when the business needs a broader operating system.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="rounded-xl border border-border/30 bg-background/40 p-4">
-                  <h2 className="font-display text-xs tracking-[0.15em] uppercase mb-2">
-                    {item.title}
-                  </h2>
-                  <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                    {item.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      />
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      <ScrollProgress />
+      <CursorGlow />
+      <Navbar />
+      <WhatsAppWidget />
 
-      <ProductCatalog />
+      {/* Full-viewport stage */}
+      <main className="relative min-h-screen flex flex-col">
+        {/* Persistent animated background */}
+        <NetworkBackground mode={state.mode} />
 
-      <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <AnimatedSection>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Deployment Options
-              </p>
-              <div className="space-y-4">
-                {operatingModel.map((item) => (
-                  <div key={item.title} className="border-b border-border/20 pb-4 last:border-b-0 last:pb-0">
-                    <h2 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
-                      {item.title}
-                    </h2>
-                    <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                      {item.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
+        {/* Radial vignette keeps content legible over the network */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, hsl(var(--background) / 0.85) 100%)",
+          }}
+        />
 
-          <AnimatedSection delay={120}>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Local Credibility
-              </p>
-              <p className="text-sm font-light text-muted-foreground leading-relaxed mb-6">
-                The product direction is grounded in how businesses in Zimbabwe and the region actually run: mixed channels, operational handoffs, local compliance, and teams that need software to be clear on day one.
-              </p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {complianceSignals.map((signal) => (
-                  <div key={signal} className="rounded-xl border border-border/20 bg-background/40 px-4 py-3 text-sm font-light text-muted-foreground">
-                    {signal}
-                  </div>
-                ))}
-              </div>
+        {/* Phase stage — centered vertically */}
+        <div
+          ref={stageRef}
+          className="relative z-10 flex flex-1 items-center justify-center py-24 md:py-28"
+        >
+          {state.mode === "entry" && (
+            <div className="flex flex-col items-center w-full">
+              <ProductPreviewStrip />
+              <SystemHero onBegin={() => transition({ type: "BEGIN" })} />
             </div>
-          </AnimatedSection>
+          )}
+
+          {state.mode === "selecting" && (
+            <IntentSelector
+              onSelect={(intentId) => transition({ type: "SELECT_INTENT", intentId })}
+            />
+          )}
+
+          {state.mode === "revealing" && state.intentId && (
+            <ProductReveal
+              intentId={state.intentId}
+              onSelect={(product) => transition({ type: "SELECT_PRODUCT", product })}
+              onBack={() => transition({ type: "BACK_TO_INTENTS" })}
+            />
+          )}
+
+          {state.mode === "detail" && state.product && (
+            <ProductDetailPanel
+              product={state.product}
+              onBack={() => transition({ type: "BACK_TO_PRODUCTS" })}
+              onDecide={() => transition({ type: "DECIDE" })}
+            />
+          )}
+
+          {state.mode === "decision" && state.product && (
+            <DecisionCTA
+              product={state.product}
+              onRestart={() => transition({ type: "RESTART" })}
+            />
+          )}
         </div>
-      </section>
 
-      <section className="px-6 pb-20 md:pb-28">
-        <AnimatedSection>
-          <div className="max-w-6xl mx-auto rounded-3xl border border-primary/20 bg-primary/5 px-6 py-8 md:px-8 md:py-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-            <div className="max-w-2xl">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/80 mb-3">
-                Need more than an off-the-shelf module?
-              </p>
-              <h2 className="font-display text-2xl md:text-3xl uppercase tracking-wide mb-3">
-                Start with a product, then extend with custom software or AI
-              </h2>
-              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                MathBrooks products are designed to connect with automation, reporting, and custom workflows when the business needs more than a standard deployment.
-              </p>
+        {/* Progress breadcrumb */}
+        <ProgressBar mode={state.mode} />
+      </main>
+    </div>
+  );
+};
+
+// ─── Progress indicator ───────────────────────────────────────────────────────
+const STEPS: { mode: UIMode; label: string }[] = [
+  { mode: "entry",     label: "Start"    },
+  { mode: "selecting", label: "Intent"   },
+  { mode: "revealing", label: "Match"    },
+  { mode: "detail",    label: "Explore"  },
+  { mode: "decision",  label: "Decide"   },
+];
+
+const modeIndex = (m: UIMode) => STEPS.findIndex((s) => s.mode === m);
+
+const ProgressBar = ({ mode }: { mode: UIMode }) => {
+  const current = modeIndex(mode);
+
+  return (
+    <div className="relative z-10 flex items-center justify-center gap-3 pb-8 px-6">
+      {STEPS.map((step, i) => {
+        const done    = i <= current;
+        const active  = i === current;
+        return (
+          <div key={step.mode} className="flex items-center gap-3">
+            <div className="flex flex-col items-center gap-1">
+              <div
+                className={`h-1 w-8 rounded-full transition-all duration-500 ${
+                  done ? "bg-primary" : "bg-border/40"
+                } ${active ? "shadow-[0_0_8px_hsl(202_89%_69%/0.6)]" : ""}`}
+              />
+              <span className={`font-display text-[0.55rem] tracking-[0.18em] uppercase transition-colors duration-300 ${active ? "text-primary" : done ? "text-muted-foreground/60" : "text-muted-foreground/25"}`}>
+                {step.label}
+              </span>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Link to="/services">
-                <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary">
-                  Explore Services
-                </Button>
-              </Link>
-              <Link to="/book-demo">
-                <Button className="font-display text-xs tracking-[0.15em] uppercase">
-                  Discuss Your Stack
-                </Button>
-              </Link>
-            </div>
+            {i < STEPS.length - 1 && (
+              <div className={`h-px w-4 mb-3 transition-all duration-500 ${i < current ? "bg-primary/40" : "bg-border/20"}`} />
+            )}
           </div>
-        </AnimatedSection>
-      </section>
-    </SiteLayout>
+        );
+      })}
+    </div>
   );
 };
 

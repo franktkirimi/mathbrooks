@@ -1,42 +1,37 @@
 import { lazy, Suspense } from "react";
-import Contact from "@/components/Contact";
-import Hero from "@/components/Hero";
-import OurProjects from "@/components/OurProjects";
-import ProductsHighlight from "@/components/ProductsHighlight";
-import WhyWorkWithUs from "@/components/Testimonials";
 import SiteLayout from "@/components/site/SiteLayout";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import HeroSection from "@/components/landing/HeroSection";
+import ProblemSection from "@/components/landing/ProblemSection";
+import SolutionsSection from "@/components/landing/SolutionsSection";
+import VisionSection from "@/components/landing/VisionSection";
 
-const InteractiveDemo = lazy(() => import("@/components/InteractiveDemo"));
-const ScrollProductReveal = lazy(() => import("@/components/ScrollProductReveal"));
+const DemoSection = lazy(() => import("@/components/landing/DemoSection"));
 
 const Index = () => {
   usePageMeta({
-    title: "MathBrooks | Run Your Business Better. Built for Africa.",
+    title: "MathBrooks | Software. Automation. AI. Built for real-world impact.",
     description:
-      "CRM, finance, HR, operations and AI - software built for modern African companies.",
+      "MathBrooks designs and builds custom software, automation systems, and AI-powered solutions for real-world business problems. Based in Harare, Zimbabwe.",
     canonicalPath: "/",
     keywords: [
       "software company Zimbabwe",
-      "business platforms Africa",
       "custom software Harare",
+      "business automation Africa",
       "applied AI systems",
+      "software engineering Harare",
     ],
   });
 
   return (
     <SiteLayout>
-      <Hero />
-      <ProductsHighlight />
+      <HeroSection />
+      <ProblemSection />
+      <SolutionsSection />
       <Suspense fallback={null}>
-        <InteractiveDemo />
+        <DemoSection />
       </Suspense>
-      <Suspense fallback={null}>
-        <ScrollProductReveal />
-      </Suspense>
-      <OurProjects />
-      <WhyWorkWithUs />
-      <Contact />
+      <VisionSection />
     </SiteLayout>
   );
 };

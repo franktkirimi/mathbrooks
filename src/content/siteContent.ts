@@ -1257,6 +1257,79 @@ export const aiLabFocus = [
   },
 ];
 
+export const aiLabSectors = [
+  {
+    code: "AGR-01",
+    title: "Agriculture",
+    status: "ACTIVE" as const,
+    coords: "17°49′S  31°02′E",
+    summary:
+      "AI systems that read the land. Satellite crop stress analysis, disease detection, yield forecasting, and field-level decision intelligence built for African conditions.",
+    directions: [
+      "Multi-spectral satellite crop stress analysis",
+      "Yield prediction from historical field and climate data",
+      "Pest and disease early-warning detection",
+      "Irrigation optimisation from weather and soil models",
+    ],
+  },
+  {
+    code: "VEH-02",
+    title: "Autonomous Vehicles",
+    status: "RESEARCH" as const,
+    coords: "20°09′S  28°35′E",
+    summary:
+      "Fleet intelligence and adaptive route AI for mixed-infrastructure environments. Built for roads that don't behave the way textbooks expect.",
+    directions: [
+      "Road condition classification from onboard camera feeds",
+      "Predictive fleet maintenance via sensor telemetry",
+      "Dynamic route optimisation for rural logistics",
+      "Driver behaviour scoring and safety AI",
+    ],
+  },
+  {
+    code: "MIN-03",
+    title: "Mining",
+    status: "ACTIVE" as const,
+    coords: "18°55′S  29°50′E",
+    summary:
+      "Deep-ground intelligence. AI that surfaces exceptions, optimises extraction paths, and keeps human operators in control of high-risk decisions.",
+    directions: [
+      "Ore body detection from seismic and drill data",
+      "Autonomous drill path optimisation",
+      "Real-time safety anomaly detection",
+      "Equipment downtime prediction from operational logs",
+    ],
+  },
+  {
+    code: "GEO-04",
+    title: "Geo Mapping",
+    status: "RESEARCH" as const,
+    coords: "19°03′S  29°10′E",
+    summary:
+      "AI that reads the earth at scale. Topographic change detection, land-use classification, and terrain modelling for infrastructure, agriculture, and resource planning.",
+    directions: [
+      "Terrain change detection from satellite time series",
+      "Land-use and vegetation classification at scale",
+      "Infrastructure site suitability modelling",
+      "Flood risk and erosion prediction from DEM data",
+    ],
+  },
+  {
+    code: "SAT-05",
+    title: "Internet Satellites",
+    status: "PROTOTYPE" as const,
+    coords: "LEO  /  550km",
+    summary:
+      "Orbital intelligence for connectivity. AI that predicts signal coverage, optimises ground station routing, and maps last-mile access gaps for underserved regions.",
+    directions: [
+      "Coverage prediction from orbital mechanics and terrain models",
+      "Ground station signal routing optimisation",
+      "Last-mile connectivity gap mapping",
+      "Interference and weather impact forecasting",
+    ],
+  },
+];
+
 export const aiLabPath = [
   {
     step: "01",

@@ -93,41 +93,39 @@ const ProductDetail = () => {
           </>
         )}
         sideContent={(
-          <div className="space-y-5">
+          <div className="space-y-8 pt-2">
+            {/* Family + module */}
             <div>
-              <div>
-                <p className="font-display text-[0.62rem] tracking-[0.24em] uppercase text-primary/70">
-                  Best Fit
-                </p>
-                <h2 className="mt-1 font-display text-lg tracking-[0.08em] uppercase text-foreground">
-                  {product.family}
-                </h2>
-              </div>
-              <p className="mt-2 text-sm font-light text-primary/80">
+              <p className="font-display text-[0.62rem] tracking-[0.26em] uppercase text-primary/60 mb-2">
+                {product.family}
+              </p>
+              <p className="font-display text-sm font-light text-muted-foreground">
                 Module: {product.shortName}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {/* Open stat blocks */}
+            <div className="grid grid-cols-3 gap-6">
               {heroMetrics.map((metric) => (
-                <div key={metric.label} className="rounded-xl border border-border/60 bg-background/60 p-3">
-                  <p className="text-[0.58rem] font-display tracking-[0.16em] uppercase text-muted-foreground">
-                    {metric.label}
-                  </p>
-                  <p className="mt-2 font-display text-sm tracking-[0.04em] text-foreground">
+                <div key={metric.label}>
+                  <p className="font-display text-2xl sm:text-3xl font-semibold text-primary leading-none mb-1">
                     {metric.value}
+                  </p>
+                  <p className="font-display text-[0.55rem] tracking-[0.18em] uppercase text-muted-foreground/60">
+                    {metric.label}
                   </p>
                 </div>
               ))}
             </div>
 
-            <div className="space-y-3">
+            {/* Support info — open text, no cards */}
+            <div className="space-y-5 border-t border-border/20 pt-6">
               {supportBlocks.map((block) => (
-                <div key={block.label} className="rounded-xl border border-border/60 bg-background/50 p-4">
-                  <h3 className="font-display text-[0.65rem] tracking-[0.18em] uppercase text-primary/70">
+                <div key={block.label}>
+                  <p className="font-display text-[0.6rem] tracking-[0.2em] uppercase text-primary/50 mb-1.5">
                     {block.label}
-                  </h3>
-                  <p className="mt-2 text-sm font-light leading-relaxed text-muted-foreground">
+                  </p>
+                  <p className="text-sm font-light text-muted-foreground leading-relaxed">
                     {block.detail}
                   </p>
                 </div>
@@ -142,25 +140,25 @@ const ProductDetail = () => {
           <AnimatedSection>
             <div className="mb-6 md:mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.72fr)] lg:items-end">
               <div className="max-w-3xl">
-                <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+                <p className="font-display text-[0.68rem] tracking-[0.3em] uppercase text-primary/60 mb-3">
                   Product Surface
                 </p>
-                <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide leading-[1.02]">
-                  A clearer operating view for {product.shortName}
+                <h2 className="font-display text-2xl md:text-[2rem] font-semibold tracking-[-0.02em] leading-tight">
+                  {product.shortName} at a glance.
                 </h2>
-                <p className="mt-5 max-w-2xl text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+                <p className="mt-5 max-w-2xl text-base font-light text-muted-foreground leading-relaxed">
                   The mockup is arranged to show the operational signals first, then the supporting detail. It keeps the page readable on desktop and compact on mobile.
                 </p>
               </div>
 
-              <div className="card-glass rounded-2xl p-5 md:p-6">
-                <p className="font-display text-[0.62rem] tracking-[0.24em] uppercase text-primary/70">
-                  Starting From
+              <div className="border-l-2 border-primary/40 pl-5">
+                <p className="font-display text-[0.6rem] tracking-[0.2em] uppercase text-primary/50 mb-1">
+                  Starting from
                 </p>
-                <p className="mt-2 font-display text-2xl text-foreground">
+                <p className="font-display text-2xl font-semibold text-foreground">
                   {product.startingPrice}
                 </p>
-                <p className="mt-3 text-sm font-light leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm font-light text-muted-foreground">
                   {product.trialAvailable ? "Guided trial access before rollout." : "Demo-led rollout with implementation support."}
                 </p>
               </div>
@@ -177,60 +175,55 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      <section className="px-6 pb-16 md:pb-24">
+      <section className="px-6 pb-20 md:pb-28">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="mb-8 max-w-3xl md:mb-12">
-              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+            <div className="mb-12 max-w-2xl">
+              <p className="font-display text-[0.68rem] tracking-[0.3em] uppercase text-primary/60 mb-3">
                 Why It Works
               </p>
-              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide">
-                Cleaner execution starts with a clearer operating view
+              <h2 className="font-display text-2xl md:text-[2.2rem] font-semibold tracking-[-0.02em] leading-tight">
+                Cleaner execution starts with a clearer view.
               </h2>
-              <p className="mt-4 text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                The layout gives the problem, the fit, and the proof points enough separation to read quickly without losing context.
-              </p>
             </div>
           </AnimatedSection>
 
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-          <AnimatedSection>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Problem This Solves
-              </p>
-              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                {product.problem}
-              </p>
-            </div>
-          </AnimatedSection>
-            <div className="space-y-6">
-              <AnimatedSection delay={120}>
-                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                    Why This Product Works
-                  </p>
-                  <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                    {product.tagline} The goal is not feature overload. It is cleaner execution, clearer visibility, and a faster path from admin work to business action.
-                  </p>
+          <div className="grid gap-px bg-border/15 lg:grid-cols-3 rounded-2xl overflow-hidden">
+            <AnimatedSection>
+              <div className="bg-background px-7 py-8 h-full">
+                <p className="font-display text-[0.6rem] tracking-[0.2em] uppercase text-primary/50 mb-4">
+                  The Problem
+                </p>
+                <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                  {product.problem}
+                </p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={80}>
+              <div className="bg-background px-7 py-8 h-full">
+                <p className="font-display text-[0.6rem] tracking-[0.2em] uppercase text-primary/50 mb-4">
+                  Why This Works
+                </p>
+                <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                  {product.tagline} The goal is not feature overload — it is cleaner execution, clearer visibility, and a faster path from admin work to business action.
+                </p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={160}>
+              <div className="bg-background px-7 py-8 h-full">
+                <p className="font-display text-[0.6rem] tracking-[0.2em] uppercase text-primary/50 mb-4">
+                  Proof Points
+                </p>
+                <div className="space-y-3">
+                  {product.proofPoints.map((point) => (
+                    <p key={point} className="text-sm font-light text-muted-foreground flex items-start gap-2">
+                      <span className="text-primary/40 mt-0.5 shrink-0">—</span>
+                      {point}
+                    </p>
+                  ))}
                 </div>
-              </AnimatedSection>
-
-              <AnimatedSection delay={180}>
-                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                    Proof Points
-                  </p>
-                  <div className="space-y-3">
-                    {product.proofPoints.map((point) => (
-                      <p key={point} className="text-sm font-light text-muted-foreground">
-                        {point}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -239,13 +232,13 @@ const ProductDetail = () => {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="mb-8 max-w-3xl md:mb-12">
-              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
+              <p className="font-display text-[0.68rem] tracking-[0.3em] uppercase text-primary/60 mb-3">
                 Feature Breakdown
               </p>
-              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide">
-                What teams actually use day to day
+              <h2 className="font-display text-2xl md:text-[2.2rem] font-semibold tracking-[-0.02em] leading-tight">
+                What teams use every day.
               </h2>
-              <p className="mt-4 text-sm md:text-base font-light text-muted-foreground leading-relaxed">
+              <p className="mt-4 text-base font-light text-muted-foreground leading-relaxed">
                 Each module focuses on the parts of the workflow that need clarity most: ownership, status, timing, and the next action.
               </p>
             </div>
@@ -253,14 +246,14 @@ const ProductDetail = () => {
           <div className="grid gap-4 md:grid-cols-2">
             {product.features.map((feature, index) => (
               <AnimatedSection key={feature.title} delay={index * 120}>
-                <div className="group card-glass rounded-2xl p-6 md:p-7 h-full transition-all duration-300 hover:border-primary/30 hover:-translate-y-1">
+                <div className="group border border-border/20 bg-background/20 rounded-2xl p-6 md:p-7 h-full transition-all duration-300 hover:border-primary/25 hover:bg-background/40 hover:-translate-y-0.5">
                   <div className="mb-4 flex items-center gap-3">
                     <span className="font-display text-[0.6rem] tracking-[0.22em] uppercase text-primary/70">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <div className="h-px flex-1 bg-border/40" />
                   </div>
-                  <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-3">
+                  <h3 className="font-display text-sm tracking-[-0.01em] font-semibold mb-3">
                     {feature.title}
                   </h3>
                   <p className="text-sm font-light text-muted-foreground leading-relaxed">
@@ -273,54 +266,61 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
-          <AnimatedSection>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
+      <section className="px-6 pb-20 md:pb-28">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)]">
+            <AnimatedSection>
+              <p className="font-display text-[0.68rem] tracking-[0.3em] uppercase text-primary/60 mb-3">
                 Use Cases
               </p>
-              <div className="grid gap-4 md:grid-cols-3">
-                {product.useCases.map((useCase) => (
-                  <div key={useCase.title} className="rounded-xl border border-border/30 bg-background/40 p-4">
-                    <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-2">
-                      {useCase.title}
-                    </h3>
-                    <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                      {useCase.detail}
-                    </p>
+              <h2 className="font-display text-xl md:text-2xl font-semibold tracking-[-0.02em] mb-8">
+                Built for these operations.
+              </h2>
+              <div className="space-y-6">
+                {product.useCases.map((useCase, i) => (
+                  <div key={useCase.title} className="flex gap-5">
+                    <span className="font-display text-[0.6rem] tracking-[0.2em] text-primary/40 mt-1 shrink-0">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="font-display text-sm font-semibold tracking-[-0.01em] mb-1">
+                        {useCase.title}
+                      </h3>
+                      <p className="text-sm font-light text-muted-foreground leading-relaxed">
+                        {useCase.detail}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection delay={120}>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full flex flex-col justify-between">
-              <div>
-                <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                  Implementation Path
-                </p>
-                <p className="text-sm font-light text-muted-foreground leading-relaxed mb-5">
-                  Deploy {product.shortName} as a focused platform, or connect it into a wider MathBrooks delivery covering custom software, workflow automation, analytics, or AI.
-                </p>
-                <ul className="space-y-3 text-sm font-light text-muted-foreground leading-relaxed">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary/60 mt-0.5">—</span>
-                    <span>Standalone deployment for a fast operational win.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary/60 mt-0.5">—</span>
-                    <span>Integration with existing finance, operations, or reporting tools.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary/60 mt-0.5">—</span>
-                    <span>Extension into bespoke workflows when the business outgrows a standard setup.</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="flex flex-wrap gap-3 mt-8">
+            </AnimatedSection>
+            <AnimatedSection delay={120}>
+              <p className="font-display text-[0.68rem] tracking-[0.3em] uppercase text-primary/60 mb-3">
+                Implementation
+              </p>
+              <h2 className="font-display text-xl md:text-2xl font-semibold tracking-[-0.02em] mb-5">
+                How rollout works.
+              </h2>
+              <p className="text-sm font-light text-muted-foreground leading-relaxed mb-7">
+                Deploy {product.shortName} as a focused platform, or connect it into a wider MathBrooks delivery covering custom software, workflow automation, analytics, or AI.
+              </p>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3 text-sm font-light text-muted-foreground">
+                  <span className="text-primary/50 shrink-0 mt-0.5">—</span>
+                  Standalone deployment for a fast operational win.
+                </li>
+                <li className="flex items-start gap-3 text-sm font-light text-muted-foreground">
+                  <span className="text-primary/50 shrink-0 mt-0.5">—</span>
+                  Integration with existing finance, operations, or reporting tools.
+                </li>
+                <li className="flex items-start gap-3 text-sm font-light text-muted-foreground">
+                  <span className="text-primary/50 shrink-0 mt-0.5">—</span>
+                  Extension into bespoke workflows when the business outgrows a standard setup.
+                </li>
+              </ul>
+              <div className="flex flex-wrap gap-3">
                 <Link to="/services">
-                  <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary">
+                  <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-border/40 hover:border-primary/40 hover:text-primary">
                     Customise the Workflow
                   </Button>
                 </Link>
@@ -330,8 +330,8 @@ const ProductDetail = () => {
                   </Button>
                 </Link>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
     </SiteLayout>

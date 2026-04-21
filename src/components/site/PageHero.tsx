@@ -12,7 +12,7 @@ type PageHeroProps = {
 
 const PageHero = ({ eyebrow, title, description, actions, sideContent, chips }: PageHeroProps) => {
   return (
-    <section className="relative px-6 pt-36 pb-20 md:pt-44 md:pb-28">
+    <section className="relative px-6 pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -25,44 +25,48 @@ const PageHero = ({ eyebrow, title, description, actions, sideContent, chips }: 
       <div
         className={`relative mx-auto ${
           sideContent
-            ? "max-w-7xl grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.9fr)] lg:items-end"
+            ? "max-w-7xl grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.85fr)] lg:items-end"
             : "max-w-5xl"
         }`}
       >
         <AnimatedSection>
-          <div className={sideContent ? "" : "text-center"}>
-            <p className="font-display mb-4 text-[0.76rem] tracking-[0.24em] uppercase text-primary">
+          <div className={`min-w-0 ${sideContent ? "" : "text-center"}`}>
+            <p className="font-display mb-4 text-[0.7rem] tracking-[0.24em] uppercase text-primary">
               {eyebrow}
             </p>
+
             <h1
-              className={`font-display text-[2.8rem] font-bold uppercase tracking-wide leading-[1.03] md:text-[3.5rem] lg:text-[4rem] ${
-                sideContent ? "max-w-5xl" : "max-w-4xl mx-auto"
-              }`}
+              className={`font-display font-semibold leading-[1.14] tracking-[-0.02em] break-words w-full
+                text-[1.35rem] sm:text-[1.75rem] md:text-[2.2rem] lg:text-[2.7rem] xl:text-[3.1rem]
+                ${sideContent ? "" : "max-w-4xl mx-auto"}`}
             >
               {title}
             </h1>
+
             <p
-              className={`mt-6 text-base font-light leading-8 text-muted-foreground md:text-[1.08rem] ${
-                sideContent ? "max-w-3xl" : "max-w-3xl mx-auto"
+              className={`mt-5 text-sm font-light leading-7 text-muted-foreground md:text-[1.02rem] md:leading-8 ${
+                sideContent ? "max-w-2xl" : "max-w-3xl mx-auto"
               }`}
             >
               {description}
             </p>
+
             {chips && chips.length > 0 ? (
               <div
-                className={`mt-8 flex flex-wrap gap-x-6 gap-y-2 ${
+                className={`mt-7 flex flex-wrap gap-x-5 gap-y-2 ${
                   sideContent ? "" : "justify-center"
                 }`}
               >
                 {chips.map((chip) => (
-                  <span key={chip} className="text-sm font-light text-muted-foreground">
+                  <span key={chip} className="text-sm font-light text-muted-foreground/70">
                     {chip}
                   </span>
                 ))}
               </div>
             ) : null}
+
             {actions ? (
-              <div className={`flex flex-wrap gap-3 mt-8 ${sideContent ? "" : "justify-center"}`}>
+              <div className={`flex flex-wrap items-center gap-3 mt-8 ${sideContent ? "" : "justify-center"}`}>
                 {actions}
               </div>
             ) : null}
@@ -70,8 +74,8 @@ const PageHero = ({ eyebrow, title, description, actions, sideContent, chips }: 
         </AnimatedSection>
 
         {sideContent ? (
-          <AnimatedSection delay={120}>
-            <div className="card-glass rounded-2xl p-5 md:p-6">{sideContent}</div>
+          <AnimatedSection delay={100}>
+            {sideContent}
           </AnimatedSection>
         ) : null}
       </div>
