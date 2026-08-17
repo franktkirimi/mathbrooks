@@ -41,7 +41,7 @@ const About = () => {
 
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl"><AnimatedSection className="max-w-3xl"><h2 className="font-display text-3xl font-semibold tracking-[-0.03em] text-foreground md:text-5xl">How MathBrooks is evolving.</h2><p className="mt-5 text-lg font-light leading-8 text-muted-foreground">Each layer expands what we can build, while keeping people and practical impact at the center.</p></AnimatedSection>
-          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">{evolution.map((item, index) => { const Icon = item.icon; return <AnimatedSection key={item.title} delay={index * 90}><article className="min-h-[225px] bg-card p-7"><Icon className="h-7 w-7 text-[hsl(var(--teal))]" /><h3 className="mt-8 font-display text-2xl font-semibold text-foreground">{item.title}</h3><p className="mt-4 text-sm font-light leading-7 text-muted-foreground">{item.detail}</p></article></AnimatedSection>; })}</div>
+          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">{evolution.map((item, index) => { const Icon = item.icon; return <AnimatedSection key={item.title} delay={index * 90}><article className="min-h-[225px] bg-card p-7"><Icon className="h-7 w-7 text-[hsl(var(--teal))]" /><h3 className="mt-8 font-display text-2xl font-bold tracking-[-0.02em] text-foreground">{item.title}</h3><p className="mt-4 text-sm font-light leading-7 text-muted-foreground">{item.detail}</p></article></AnimatedSection>; })}</div>
         </div>
       </section>
 

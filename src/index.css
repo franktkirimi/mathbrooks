@@ -1,6 +1,13 @@
 @import '@fontsource/inter/latin-400.css';
 @import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
 @import '@fontsource/inter/latin-700.css';
+@import '@fontsource/manrope/latin-500.css';
+@import '@fontsource/manrope/latin-600.css';
+@import '@fontsource/manrope/latin-700.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
+@import '@fontsource/ibm-plex-mono/latin-600.css';
+@import '@fontsource/ibm-plex-mono/latin-700.css';
 
 @tailwind base;
 @tailwind components;
@@ -234,10 +241,11 @@
 
     /* Typography */
     --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-mono: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, "Liberation Mono", monospace;
-    --font-display: var(--font-sans);
+    --font-display-family: "Manrope", var(--font-sans);
+    --font-mono: "IBM Plex Mono", "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, "Liberation Mono", monospace;
+    --font-display: var(--font-display-family);
     --font-body: var(--font-sans);
-    --font-heading: var(--font-sans);
+    --font-heading: var(--font-display-family);
     --text-caption: 0.75rem;
     --text-caption-lg: 0.8125rem;
     --text-body-sm: 0.875rem;
@@ -363,7 +371,7 @@
     font-size: clamp(var(--text-display-sm), 6vw, var(--text-display-lg));
     font-weight: 700;
     line-height: 1.04;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.045em;
   }
 
   .mb-heading {
@@ -371,16 +379,18 @@
     font-size: clamp(var(--text-heading-xl), 3vw, var(--text-heading-2xl));
     font-weight: 700;
     line-height: 1.2;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.035em;
   }
 
   .mb-body { font-size: var(--text-body); line-height: 1.6; }
 
   .mb-caption {
+    font-family: var(--font-mono);
     font-size: var(--text-caption);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.4;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
   }
 
   .mb-link,
@@ -407,9 +417,10 @@
   .mb-icon { width: 1.5rem; height: 1.5rem; stroke-width: 1.5; }
 
   .mb-nav-link {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.875rem;
+    font-weight: 600;
     line-height: 1.5;
+    letter-spacing: 0em;
     transition: color var(--motion-micro) var(--ease-standard);
   }
 

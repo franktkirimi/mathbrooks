@@ -529,7 +529,7 @@ const AILabsPage = () => {
             </div>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 md:[&>*:last-child:nth-child(odd)]:col-span-2 md:[&>*:last-child:nth-child(odd)]:max-w-[calc(50%-0.625rem)] md:[&>*:last-child:nth-child(odd)]:justify-self-center">
             {aiLabSectors.map((sector, i) => (
               <SectorCard key={sector.code} sector={sector} index={i} />
             ))}

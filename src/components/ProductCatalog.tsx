@@ -42,10 +42,7 @@ const ProductCard = ({ product, index }: { product: ProductEntry; index: number 
 
         {/* Name + overview */}
         <div className="mb-5 flex-1">
-          <p className={`font-display text-[0.65rem] tracking-[0.2em] uppercase mb-1.5 ${accentClass}`}>
-            {product.shortName}
-          </p>
-          <h3 className="font-display text-lg font-semibold tracking-[-0.01em] mb-3 text-foreground">
+          <h3 className="font-display text-xl font-bold tracking-[-0.02em] mb-3 text-foreground">
             {product.shortName}
           </h3>
           <p className="text-sm font-light text-muted-foreground leading-6">
@@ -98,11 +95,17 @@ const FamilyGroup = ({ family }: { family: ProductFamily }) => {
       <div className="pb-4 border-b border-border/30">
         <p className="text-sm font-light text-muted-foreground max-w-xl">{family.description}</p>
       </div>
-      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        {familyProducts.map((product, i) => (
-          <ProductCard key={product.slug} product={product} index={i} />
-        ))}
-      </div>
+      {familyProducts.length > 1 ? (
+        <div className="grid gap-5 sm:grid-cols-2">
+          {familyProducts.map((product, i) => (
+            <ProductCard key={product.slug} product={product} index={i} />
+          ))}
+        </div>
+      ) : (
+        <div className="max-w-sm">
+          <ProductCard product={familyProducts[0]} index={0} />
+        </div>
+      )}
     </div>
   );
 };

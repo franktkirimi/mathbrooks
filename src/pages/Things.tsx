@@ -15,7 +15,7 @@ const Things = () => {
       <div className="px-6 pb-28 pt-28 md:pb-36 md:pt-32">
         <div className="mx-auto max-w-6xl">
           <section className="max-w-4xl pb-10 pt-8 md:pb-12 md:pt-14">
-            <h1 className="font-body text-4xl font-semibold leading-[1.02] tracking-[-0.045em] text-foreground sm:text-5xl md:text-6xl">MathBrooks Things</h1>
+            <h1 className="font-display text-4xl font-semibold leading-[1.02] tracking-[-0.045em] text-foreground sm:text-5xl md:text-6xl">MathBrooks Things</h1>
             <p className="mt-5 max-w-2xl text-xl font-medium leading-8 text-foreground md:text-2xl md:leading-9">Our research wing, currently focused on bringing hardware and software together.</p>
           </section>
           <SokoA01Experience />
