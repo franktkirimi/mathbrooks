@@ -104,9 +104,6 @@ const SolutionsSection = () => {
 
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 md:mb-20">
-          <p className="mb-4 font-display text-[0.68rem] tracking-[0.28em] uppercase text-primary/70">
-            What We Build
-          </p>
           <h2
             ref={headlineRef}
             className="font-display text-[2rem] sm:text-[2.6rem] md:text-[3.2rem] font-semibold leading-[1.1] tracking-[-0.025em] text-foreground max-w-2xl mx-auto"
@@ -121,15 +118,15 @@ const SolutionsSection = () => {
             <div
               key={pillar.number}
               ref={(el) => { cardRefs.current[i] = el; }}
-              className="group relative rounded-2xl border border-border/40 bg-card/40 backdrop-blur-sm p-7 md:p-8 transition-all duration-500 hover:border-primary/30 hover:bg-card/60 hover:-translate-y-2 hover:shadow-[0_20px_60px_hsl(202_89%_37%/0.15)] cursor-default"
+              className="product-card group relative rounded-2xl border p-7 md:p-8 transition-all duration-500 hover:border-primary/30 hover:-translate-y-0.5 cursor-default"
             >
               {/* Number */}
-              <span className="font-display text-[0.65rem] tracking-[0.28em] uppercase text-primary/40 mb-5 block">
+              <span className="font-display text-[0.65rem] tracking-[0.28em] uppercase text-[hsl(var(--teal))] mb-5 block">
                 {pillar.number}
               </span>
 
               {/* Icon */}
-              <div className="mb-5 w-12 h-12 rounded-xl border border-border/60 bg-background/60 flex items-center justify-center text-primary/70 group-hover:text-primary group-hover:border-primary/30 transition-colors duration-300">
+              <div className="mb-5 w-12 h-12 rounded-xl border border-border flex items-center justify-center text-[hsl(var(--teal))] group-hover:border-[hsl(var(--teal))] transition-colors duration-300">
                 {pillar.icon}
               </div>
 
@@ -137,7 +134,7 @@ const SolutionsSection = () => {
               <h3 className="font-display text-xl tracking-[0.02em] text-foreground mb-1">
                 {pillar.title}
               </h3>
-              <p className="text-primary/70 text-sm font-light mb-4">{pillar.short}</p>
+              <p className="text-[hsl(var(--teal))] text-sm font-light mb-4">{pillar.short}</p>
 
               {/* Description */}
               <p className="text-muted-foreground text-sm leading-relaxed mb-6 font-light">
@@ -148,14 +145,12 @@ const SolutionsSection = () => {
               <ul className="space-y-2">
                 {pillar.features.map((feat) => (
                   <li key={feat} className="flex items-center gap-2.5 text-xs text-muted-foreground">
-                    <span className="w-1 h-1 rounded-full bg-primary/50 flex-shrink-0" />
+                    <span className="w-1 h-1 rounded-full bg-[hsl(var(--teal))] flex-shrink-0" />
                     {feat}
                   </li>
                 ))}
               </ul>
 
-              {/* Bottom accent line on hover */}
-              <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           ))}
         </div>

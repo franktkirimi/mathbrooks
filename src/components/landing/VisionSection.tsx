@@ -192,10 +192,6 @@ const VisionSection = () => {
       />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <p className="mb-5 font-display text-[0.68rem] tracking-[0.28em] uppercase text-primary/70">
-          Our Vision
-        </p>
-
         <h2
           ref={headlineRef}
           className="font-display text-[2.4rem] sm:text-[3.2rem] md:text-[4rem] lg:text-[4.8rem] font-semibold leading-[1.08] tracking-[-0.03em] text-foreground mb-6"
@@ -236,7 +232,7 @@ const VisionSection = () => {
         <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="/contact"
-            className="group inline-flex items-center gap-2 rounded-xl bg-primary px-10 py-4 font-display text-sm tracking-[0.1em] uppercase text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:shadow-[0_0_50px_hsl(202_89%_69%/0.4)] hover:-translate-y-0.5"
+            className="action-button group inline-flex items-center gap-2 rounded-xl px-10 py-4 font-display text-sm tracking-[0.1em] uppercase transition-all duration-300 hover:-translate-y-0.5"
           >
             Start a Project
             <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 16 16" fill="none">

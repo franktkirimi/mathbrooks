@@ -12,7 +12,6 @@ import { ProductReveal } from "@/components/products/ProductReveal";
 import { ProductDetailPanel } from "@/components/products/ProductDetailPanel";
 import { DecisionCTA } from "@/components/products/DecisionCTA";
 import type { ProductEntry } from "@/content/siteContent";
-import WhatsAppWidget from "@/components/site/WhatsAppWidget";
 
 // ─── State machine ────────────────────────────────────────────────────────────
 type UIMode = "entry" | "selecting" | "revealing" | "detail" | "decision";
@@ -50,9 +49,9 @@ function reducer(state: State, action: Action): State {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 const Products = () => {
   usePageMeta({
-    title: "Systems | MathBrooks",
-    description: "Find and configure the right MathBrooks system for your operational needs.",
-    canonicalPath: "/products",
+    title: "Solutions | MathBrooks",
+    description: "Explore and configure the right MathBrooks solution for your operational needs.",
+    canonicalPath: "/solutions",
   });
 
   const [state, dispatch] = useReducer(reducer, initial);
@@ -81,7 +80,6 @@ const Products = () => {
       <ScrollProgress />
       <CursorGlow />
       <Navbar />
-      <WhatsAppWidget />
 
       {/* Full-viewport stage */}
       <main className="relative min-h-screen flex flex-col">

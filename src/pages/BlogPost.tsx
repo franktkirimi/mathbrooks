@@ -36,7 +36,7 @@ const BlogPost = () => {
             name: "MathBrooks",
             logo: {
               "@type": "ImageObject",
-              url: "https://www.mathbrooks.com/favicon.svg",
+              url: "https://www.mathbrooks.com/mathbrooks-mark.svg",
             },
           },
           mainEntityOfPage: `https://www.mathbrooks.com/blog/${post.slug}`,

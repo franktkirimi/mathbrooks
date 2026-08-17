@@ -146,7 +146,7 @@ export const ProductDetailPanel = ({ product, onBack, onDecide }: Props) => {
             <button
               type="button"
               onClick={handleDecide}
-              className="flex-1 sm:flex-none rounded-xl bg-primary px-8 py-3.5 font-display text-sm tracking-[0.1em] uppercase text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:shadow-[0_0_30px_hsl(202_89%_69%/0.35)]"
+              className="action-button flex-1 sm:flex-none rounded-xl px-8 py-3.5 font-display text-sm tracking-[0.1em] uppercase transition-all duration-300"
             >
               Start Implementation
             </button>

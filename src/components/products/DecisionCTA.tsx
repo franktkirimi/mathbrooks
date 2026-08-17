@@ -60,7 +60,7 @@ export const DecisionCTA = ({ product, onRestart }: Props) => {
       <div className="decision-line flex flex-col sm:flex-row items-center gap-4" style={{ opacity: 0 }}>
         <Link
           to="/contact"
-          className="group inline-flex items-center gap-2.5 rounded-xl bg-primary px-10 py-4 font-display text-sm tracking-[0.1em] uppercase text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:shadow-[0_0_50px_hsl(202_89%_69%/0.45)] hover:-translate-y-0.5"
+          className="action-button group inline-flex items-center gap-2.5 rounded-xl px-10 py-4 font-display text-sm tracking-[0.1em] uppercase transition-all duration-300 hover:-translate-y-0.5"
         >
           Start Implementation
           <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 16 16" fill="none">

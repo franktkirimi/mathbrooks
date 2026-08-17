@@ -27,6 +27,19 @@ const upsertMetaTag = (selector: string, attributes: Record<string, string>) => 
   });
 };
 
+const upsertLinkTag = (selector: string, attributes: Record<string, string>) => {
+  let tag = document.head.querySelector(selector) as HTMLLinkElement | null;
+
+  if (!tag) {
+    tag = document.createElement("link");
+    document.head.appendChild(tag);
+  }
+
+  Object.entries(attributes).forEach(([key, value]) => {
+    tag?.setAttribute(key, value);
+  });
+};
+
 export function usePageMeta({
   title,
   description,
@@ -39,6 +52,10 @@ export function usePageMeta({
     document.title = title;
 
     upsertMetaTag('meta[name="description"]', { name: "description", content: description });
+    upsertMetaTag('meta[name="robots"]', {
+      name: "robots",
+      content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    });
 
     if (keywords?.length) {
       upsertMetaTag('meta[name="keywords"]', {
@@ -53,18 +70,29 @@ export function usePageMeta({
       content: description,
     });
     upsertMetaTag('meta[property="og:type"]', { property: "og:type", content: ogType });
+    upsertMetaTag('meta[property="og:site_name"]', { property: "og:site_name", content: "MathBrooks" });
+    upsertMetaTag('meta[property="og:locale"]', { property: "og:locale", content: "en_US" });
+    upsertMetaTag('meta[property="og:image"]', {
+      property: "og:image",
+      content: "https://www.mathbrooks.com/og-image.png",
+    });
+    upsertMetaTag('meta[name="twitter:card"]', {
+      name: "twitter:card",
+      content: "summary_large_image",
+    });
     upsertMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: title });
     upsertMetaTag('meta[name="twitter:description"]', {
       name: "twitter:description",
       content: description,
     });
+    upsertMetaTag('meta[name="twitter:image"]', {
+      name: "twitter:image",
+      content: "https://www.mathbrooks.com/og-image.png",
+    });
 
     if (canonicalPath) {
       const canonicalUrl = `https://www.mathbrooks.com${canonicalPath}`;
-      const canonicalTag = document.querySelector('link[rel="canonical"]');
-      if (canonicalTag) {
-        canonicalTag.setAttribute("href", canonicalUrl);
-      }
+      upsertLinkTag('link[rel="canonical"]', { rel: "canonical", href: canonicalUrl });
       upsertMetaTag('meta[property="og:url"]', { property: "og:url", content: canonicalUrl });
     }
 

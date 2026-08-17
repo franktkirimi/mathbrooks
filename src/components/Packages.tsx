@@ -64,9 +64,6 @@ const Packages = () => {
       <div className="max-w-6xl mx-auto">
         <AnimatedSection>
           <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
-            <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-4">
-              Custom Delivery
-            </p>
             <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-4">
               Engagement paths for work that sits outside standard product rollout
             </h2>

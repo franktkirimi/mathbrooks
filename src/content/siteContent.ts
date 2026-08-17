@@ -30,6 +30,11 @@ export type ProductSlug =
   | "automation"
   | "ai-assistant";
 
+export type ProductAccentTone = "teal" | "coral";
+
+export const getProductAccentTone = (slug: ProductSlug): ProductAccentTone =>
+  slug === "accounting" || slug === "analytics" ? "coral" : "teal";
+
 export type ProductPanel = {
   title: string;
   items: string[];

@@ -2,9 +2,8 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import type { ProductEntry, ProductSlug } from "@/content/siteContent";
-import { products } from "@/content/siteContent";
-import type { Intent } from "./IntentSelector";
-import { INTENTS } from "./IntentSelector";
+import { getProductAccentTone, products } from "@/content/siteContent";
+import { INTENTS, type Intent } from "./intents";
 
 const productLookup = new Map(products.map((p) => [p.slug, p]));
 
@@ -67,7 +66,7 @@ export const ProductReveal = ({ intentId, onSelect, onBack }: Props) => {
         <button
           type="button"
           onClick={onBack}
-          className="mb-6 inline-flex items-center gap-2 font-display text-[0.65rem] tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors duration-200"
+          className="mb-6 inline-flex items-center gap-2 font-display text-[0.65rem] tracking-[0.2em] uppercase text-muted-foreground hover:text-[hsl(var(--teal))] hover:underline transition-colors duration-200"
         >
           <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
             <path d="M10 6H2M6 10L2 6l4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -75,15 +74,6 @@ export const ProductReveal = ({ intentId, onSelect, onBack }: Props) => {
           Change intent
         </button>
 
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-1.5">
-          <span className="font-display text-[0.65rem] tracking-[0.24em] uppercase text-primary/70">
-            {intent?.label ?? intentId}
-          </span>
-        </div>
-
-        <p className="font-display text-[0.68rem] tracking-[0.28em] uppercase text-primary/50 mb-2">
-          Step 02 — System Match
-        </p>
         <h2 className="font-display text-xl sm:text-2xl font-semibold tracking-[-0.02em] text-foreground mb-2">
           Systems matched to your need.
         </h2>
@@ -96,22 +86,26 @@ export const ProductReveal = ({ intentId, onSelect, onBack }: Props) => {
       <div className={`grid gap-5 ${revealed.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
         {revealed.map((product, idx) => {
           const Icon = product.icon;
+          const accentClass =
+            getProductAccentTone(product.slug) === "coral"
+              ? "text-[hsl(var(--action))] hover:border-[hsl(var(--action))]"
+              : "text-[hsl(var(--teal))] hover:border-[hsl(var(--teal))]";
           return (
             <div
               key={product.slug}
               ref={(el) => { cardRefs.current[idx] = el; }}
-              className="group relative rounded-2xl border border-border/40 bg-card/50 backdrop-blur-sm p-7 flex flex-col cursor-pointer transition-all duration-300 hover:border-primary/40 hover:bg-card/70 hover:-translate-y-1.5 hover:shadow-[0_12px_50px_hsl(202_89%_37%/0.2)]"
+              className="product-card group relative rounded-2xl border p-7 flex flex-col cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
               style={{ opacity: 0 }}
               onClick={() => handleSelect(product, idx)}
             >
               {/* Family label */}
-              <p className="font-display text-[0.62rem] tracking-[0.22em] uppercase text-primary/50 mb-4">
-                {product.family}
+              <p className={`font-display text-[0.62rem] tracking-[0.22em] uppercase mb-4 ${accentClass}`}>
+                {product.shortName}
               </p>
 
               {/* Icon + name */}
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl border border-border/50 bg-background/60 flex items-center justify-center text-primary/70 group-hover:text-primary group-hover:border-primary/30 transition-all duration-300">
+                <div className={`w-10 h-10 rounded-xl border border-border flex items-center justify-center transition-colors duration-300 ${accentClass}`}>
                   <Icon className="w-5 h-5" />
                 </div>
                 <h3 className="font-display text-lg font-semibold tracking-[-0.01em] text-foreground">
@@ -125,8 +119,8 @@ export const ProductReveal = ({ intentId, onSelect, onBack }: Props) => {
               </p>
 
               {/* Audience */}
-              <div className="mb-6 rounded-xl border border-border/20 bg-background/40 px-4 py-3">
-                <p className="font-display text-[0.6rem] tracking-[0.18em] uppercase text-primary/50 mb-1">
+              <div className="mb-6 border-t border-border pt-4">
+                <p className={`font-display text-[0.6rem] tracking-[0.18em] uppercase mb-1 ${accentClass}`}>
                   Built for
                 </p>
                 <p className="text-xs font-light text-muted-foreground leading-5">
@@ -135,8 +129,8 @@ export const ProductReveal = ({ intentId, onSelect, onBack }: Props) => {
               </div>
 
               {/* CTA row */}
-              <div className="flex items-center justify-between mt-auto">
-                <span className="font-display text-[0.68rem] tracking-[0.15em] uppercase text-primary group-hover:text-primary transition-colors duration-200">
+              <div className="flex items-center justify-between mt-auto border-t border-border pt-4">
+                <span className={`font-display text-[0.68rem] tracking-[0.15em] uppercase hover:underline ${accentClass}`}>
                   View System →
                 </span>
                 <Link
@@ -147,8 +141,6 @@ export const ProductReveal = ({ intentId, onSelect, onBack }: Props) => {
                   Talk to us
                 </Link>
               </div>
-
-              <div className="absolute bottom-0 left-5 right-5 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           );
         })}

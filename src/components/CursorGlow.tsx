@@ -1,15 +1,37 @@
-import { useState, useEffect } from "react";
-import { useTheme } from "@/hooks/useTheme";
+import { useEffect, useRef } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const CursorGlow = () => {
-  const [pos, setPos] = useState({ x: -600, y: -600 });
-  const { isDark } = useTheme();
+  const glowRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef(0);
+  const positionRef = useRef({ x: -600, y: -600 });
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const update = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
+    if (reducedMotion) return;
+
+    const render = () => {
+      const glow = glowRef.current;
+      if (glow) {
+        const { x, y } = positionRef.current;
+        glow.style.transform = `translate3d(${x - 230}px, ${y - 230}px, 0)`;
+      }
+      frameRef.current = 0;
+    };
+
+    const update = (event: MouseEvent) => {
+      positionRef.current = { x: event.clientX, y: event.clientY };
+      if (!frameRef.current) frameRef.current = requestAnimationFrame(render);
+    };
+
     window.addEventListener("mousemove", update, { passive: true });
-    return () => window.removeEventListener("mousemove", update);
-  }, []);
+    return () => {
+      window.removeEventListener("mousemove", update);
+      cancelAnimationFrame(frameRef.current);
+    };
+  }, [reducedMotion]);
+
+  if (reducedMotion) return null;
 
   return (
     <div
@@ -17,18 +39,18 @@ const CursorGlow = () => {
       className="pointer-events-none fixed inset-0 z-[1] overflow-hidden hidden md:block"
     >
       <div
+        ref={glowRef}
         style={{
           position: "absolute",
-          width: isDark ? 520 : 460,
-          height: isDark ? 520 : 460,
+          width: 460,
+          height: 460,
           borderRadius: "50%",
-          left: pos.x - (isDark ? 260 : 230),
-          top: pos.y - (isDark ? 260 : 230),
-          background:
-            isDark
-              ? "radial-gradient(circle, hsl(var(--primary) / 0.05) 0%, transparent 68%)"
-              : "radial-gradient(circle, hsl(var(--primary) / 0.032) 0%, transparent 70%)",
-          transition: "left 0.35s ease-out, top 0.35s ease-out",
+          left: 0,
+          top: 0,
+          transform: "translate3d(-600px, -600px, 0)",
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.032) 0%, transparent 70%)",
+          transition: "transform 0.35s ease-out",
+          willChange: "transform",
           pointerEvents: "none",
         }}
       />

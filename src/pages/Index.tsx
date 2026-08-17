@@ -1,37 +1,25 @@
-import { lazy, Suspense } from "react";
 import SiteLayout from "@/components/site/SiteLayout";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import HeroSection from "@/components/landing/HeroSection";
-import ProblemSection from "@/components/landing/ProblemSection";
-import SolutionsSection from "@/components/landing/SolutionsSection";
-import VisionSection from "@/components/landing/VisionSection";
-
-const DemoSection = lazy(() => import("@/components/landing/DemoSection"));
+import PeopleFirstHomepage from "@/components/landing/PeopleFirstHomepage";
 
 const Index = () => {
   usePageMeta({
-    title: "MathBrooks | Software. Automation. AI. Built for real-world impact.",
+    title: "MathBrooks | Technology built around people",
     description:
-      "MathBrooks designs and builds custom software, automation systems, and AI-powered solutions for real-world business problems. Based in Harare, Zimbabwe.",
+      "MathBrooks builds intelligent technology for people and the real world: products, AI, software, computing, and connected systems that solve meaningful problems.",
     canonicalPath: "/",
     keywords: [
-      "software company Zimbabwe",
-      "custom software Harare",
-      "business automation Africa",
+      "people-first technology company",
+      "intelligent technology Zimbabwe",
+      "products built in Zimbabwe",
       "applied AI systems",
-      "software engineering Harare",
+      "connected technology Africa",
     ],
   });
 
   return (
     <SiteLayout>
-      <HeroSection />
-      <ProblemSection />
-      <SolutionsSection />
-      <Suspense fallback={null}>
-        <DemoSection />
-      </Suspense>
-      <VisionSection />
+      <PeopleFirstHomepage />
     </SiteLayout>
   );
 };

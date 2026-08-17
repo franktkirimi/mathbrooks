@@ -1,16 +1,28 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ScrollProgress = () => {
   const [progress, setProgress] = useState(0);
+  const frameRef = useRef(0);
 
   useEffect(() => {
     const update = () => {
       const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
       const total = scrollHeight - clientHeight;
       setProgress(total > 0 ? (scrollTop / total) * 100 : 0);
+      frameRef.current = 0;
     };
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    const requestUpdate = () => {
+      if (!frameRef.current) frameRef.current = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      cancelAnimationFrame(frameRef.current);
+    };
   }, []);
 
   return (

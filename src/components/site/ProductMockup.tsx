@@ -9,8 +9,8 @@ type ProductMockupProps = {
 
 const ProductMockup = ({ accent, title, metrics, panels }: ProductMockupProps) => {
   return (
-    <div className="rounded-[1.5rem] border border-border/60 bg-card/85 p-3 shadow-[0_24px_90px_rgba(15,23,42,0.18)]">
-      <div className="overflow-hidden rounded-[1.2rem] border border-border/60 bg-gradient-to-b from-background/70 to-card/85">
+    <div className="elevated-panel rounded-[1.5rem] p-3">
+      <div className="overflow-hidden rounded-[1.2rem] border border-border/80 bg-secondary/35">
         <div className="border-b border-border/60 bg-background/60 px-4 py-3">
           <div>
             <p className="font-display text-[0.6rem] tracking-[0.2em] uppercase text-primary/80">
@@ -27,8 +27,8 @@ const ProductMockup = ({ accent, title, metrics, panels }: ProductMockupProps) =
             {metrics.map((metric) => (
               <div
                 key={metric.label}
-                className="rounded-xl border border-border/60 p-4"
-                style={{ background: `linear-gradient(180deg, hsl(${accent} / 0.14), hsl(var(--background) / 0.72))` }}
+                className="surface-card rounded-xl p-4"
+                style={{ background: `linear-gradient(180deg, hsl(${accent} / 0.1), hsl(var(--card)))` }}
               >
                 <p className="text-[0.65rem] font-display tracking-[0.16em] uppercase text-muted-foreground">
                   {metric.label}
@@ -42,14 +42,14 @@ const ProductMockup = ({ accent, title, metrics, panels }: ProductMockupProps) =
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {panels.map((panel) => (
-              <div key={panel.title} className="rounded-xl border border-border/60 bg-background/65 p-4">
+              <div key={panel.title} className="surface-card rounded-xl p-4">
                 <p className="mb-3 text-[0.65rem] font-display tracking-[0.16em] uppercase text-muted-foreground">
                   {panel.title}
                 </p>
                 <div className="space-y-2">
                   {panel.items.map((item) => (
-                    <div key={item} className="rounded-lg border border-border/60 bg-background/75 px-3 py-2">
-                      <span className="text-sm font-light text-foreground">{item}</span>
+                    <div key={item} className="rounded-lg border border-border/70 bg-secondary/45 px-3 py-2.5">
+                      <span className="text-sm font-medium text-foreground">{item}</span>
                     </div>
                   ))}
                 </div>

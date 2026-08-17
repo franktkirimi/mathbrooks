@@ -1,23 +1,16 @@
 import { Link } from "react-router-dom";
 
-const productLinks = [
-  { label: "CRM", href: "/products/crm" },
-  { label: "HR & Payroll", href: "/products/hr" },
-  { label: "Accounting", href: "/products/accounting" },
-  { label: "Inventory", href: "/products/inventory" },
-  { label: "Projects", href: "/products/projects" },
-  { label: "Automation", href: "/products/automation" },
-  { label: "Analytics", href: "/products/analytics" },
-  { label: "AI Assistant", href: "/products/ai-assistant" },
+const buildLinks = [
+  { label: "Solutions", href: "/solutions" },
+  { label: "Our technology", href: "/#technology" },
+  { label: "MathBrooks Things", href: "/things" },
+  { label: "Industries", href: "/#industries" },
 ];
 
 const companyLinks = [
-  { label: "Services", href: "/services" },
-  { label: "Case Studies", href: "/work" },
-  { label: "AI Labs", href: "/ai-labs" },
-  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
-  { label: "Resources", href: "/blog" },
+  { label: "Our approach", href: "/#what-we-build" },
+  { label: "Contact", href: "/contact" },
   { label: "Privacy Policy", href: "/privacy" },
 ];
 
@@ -29,35 +22,34 @@ const Footer = () => {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link
               to="/"
-              className="font-display text-sm tracking-[0.18em] text-foreground hover:text-primary transition-colors duration-300"
+              className="group inline-flex items-center gap-3 text-foreground transition-colors duration-300 hover:text-primary"
             >
-              MATHBROOKS
+              <img
+                src="/mathbrooks-mark.svg"
+                alt=""
+                className="h-10 w-10 object-contain transition-transform duration-300 group-hover:-rotate-3"
+                width="64"
+                height="64"
+              />
+              <span className="font-display text-sm tracking-[0.18em]">MATHBROOKS</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm font-light leading-7 text-muted-foreground">
-              Software, business platforms, and applied AI built in Harare for businesses that need practical operating systems.
+              Intelligent technology built around people, for the real world.
             </p>
             <Link
-              to="/book-demo"
+              to="/contact"
               className="mt-5 inline-flex font-display text-xs tracking-[0.14em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
             >
-              Start Demo
+              Talk to MathBrooks
             </Link>
           </div>
 
           <div>
             <h2 className="mb-4 font-display text-xs tracking-[0.14em] uppercase text-foreground">
-              Products
+              What we build
             </h2>
             <ul className="space-y-2.5">
-              <li>
-                <Link
-                  to="/products"
-                    className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
-                >
-                  All Products
-                </Link>
-              </li>
-              {productLinks.map((link) => (
+              {buildLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
@@ -131,7 +123,7 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} MathBrooks. All rights reserved.
           </p>
           <p className="text-sm font-light text-muted-foreground">
-            Built for practical operations across Africa and beyond.
+            Built for people. Built to work. Built for the real world.
           </p>
         </div>
       </div>

@@ -52,7 +52,7 @@ export const SystemHero = ({ onBegin }: Props) => {
       <button
         type="button"
         onClick={handleBegin}
-        className="group relative inline-flex items-center gap-3 rounded-full bg-primary px-10 py-4 font-display text-sm tracking-[0.12em] uppercase text-primary-foreground transition-all duration-300 hover:shadow-[0_0_40px_hsl(202_89%_69%/0.5)] hover:-translate-y-0.5 active:translate-y-0"
+        className="action-button group relative inline-flex items-center gap-3 rounded-full px-10 py-4 font-display text-sm tracking-[0.12em] uppercase transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
       >
         Begin Configuration
         <svg

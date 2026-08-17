@@ -229,11 +229,6 @@ const Hero = () => {
 
         {/* Left — text */}
         <div className="max-w-2xl">
-          <p ref={setRef(0)} className="font-mono text-[0.6rem] tracking-[0.3em] uppercase text-primary/50 mb-5 flex items-center gap-3" style={{ opacity: 0 }}>
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            MathBrooks AI Labs — Active Research
-          </p>
-
           <h1
             ref={setRef(1)}
             className="font-display font-semibold leading-[1.04] tracking-[-0.03em] text-foreground mb-6"

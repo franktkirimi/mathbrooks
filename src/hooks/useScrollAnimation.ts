@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -12,10 +13,16 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
   const { threshold = 0.05, rootMargin = "0px 0px 120px 0px", triggerOnce = true } = options;
   const ref = useRef<T>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
+
+    if (reducedMotion) {
+      setIsVisible(true);
+      return;
+    }
 
     const reveal = () => {
       setIsVisible(true);
@@ -48,7 +55,7 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
       observer.disconnect();
       clearTimeout(fallback);
     };
-  }, [threshold, rootMargin, triggerOnce]);
+  }, [reducedMotion, threshold, rootMargin, triggerOnce]);
 
   return { ref, isVisible };
 }

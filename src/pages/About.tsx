@@ -1,218 +1,51 @@
+import { ArrowRight, BrainCircuit, Cable, Cpu, HeartHandshake, MonitorCog } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
-import WhyWorkWithUs from "@/components/Testimonials";
-import PageHero from "@/components/site/PageHero";
 import SiteLayout from "@/components/site/SiteLayout";
-import {
-  businessPillars,
-  leadershipProfiles,
-  operatingModel,
-  proofHighlights,
-  trustSignals,
-} from "@/content/siteContent";
+import { Button } from "@/components/ui/button";
 import { usePageMeta } from "@/hooks/usePageMeta";
+
+const evolution = [
+  { title: "Software", detail: "Building useful digital systems people can use.", icon: MonitorCog },
+  { title: "Applied AI", detail: "Making those systems more intelligent where it is genuinely helpful.", icon: BrainCircuit },
+  { title: "Computing", detail: "Exploring new forms of accessible intelligence.", icon: Cpu },
+  { title: "Connected technology", detail: "Bringing intelligence closer to the physical world.", icon: Cable },
+];
 
 const About = () => {
   usePageMeta({
     title: "About | MathBrooks",
-    description:
-      "Learn how MathBrooks builds practical software, business platforms, and applied AI from Harare for operations-heavy teams.",
+    description: "MathBrooks is a people-first technology company building practical intelligent systems for the real world.",
     canonicalPath: "/about",
-    keywords: [
-      "software company Zimbabwe",
-      "Harare software developers",
-      "applied AI Africa",
-      "business platforms Africa",
-    ],
+    keywords: ["MathBrooks", "people-first technology", "intelligent systems", "connected technology"],
   });
 
   return (
     <SiteLayout>
-      <PageHero
-        eyebrow="About"
-        title="An engineer-led software company building practical systems for African business"
-        description="MathBrooks exists to replace fragmented operations with software that is clear, usable, and grounded in how real teams work. The company is based in Harare and builds for businesses that need more than generic templates."
-        chips={businessPillars}
-        actions={(
-          <>
-            <Link to="/book-demo">
-              <Button size="lg" className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6">
-                Talk to MathBrooks
-              </Button>
-            </Link>
-            <Link to="/work">
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"
-              >
-                See Case Studies
-              </Button>
-            </Link>
-          </>
-        )}
-        sideContent={(
-          <div className="space-y-3">
-            <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70">
-              Trust Signals
-            </p>
-            {trustSignals.map((item) => (
-              <div key={item.title} className="rounded-xl border border-border/20 bg-background/40 p-4">
-                <h2 className="font-display text-xs tracking-[0.15em] uppercase mb-2">
-                  {item.title}
-                </h2>
-                <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                  {item.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
-      />
-
-      <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-          <AnimatedSection>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Why MathBrooks Exists
-              </p>
-              <div className="space-y-4 text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                <p>
-                  Too many businesses are asked to choose between generic imported software that does not fit the workflow, or custom systems that take too long to become useful. MathBrooks sits between those extremes.
-                </p>
-                <p>
-                  The company builds products where the business need repeats, then uses custom software and applied AI where the workflow is specific to the client. That keeps the offer practical and keeps delivery close to real operations.
-                </p>
-                <p>
-                  The standard is simple: software should reduce admin drag, improve visibility, and make the next decision easier for the people running the business.
-                </p>
-              </div>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection delay={120}>
-            <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-              <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-4">
-                Stage and Focus
-              </p>
-              <div className="space-y-4 text-sm font-light text-muted-foreground leading-relaxed">
-                <p>
-                  MathBrooks is still growing, and that is deliberate. The company stays selective so delivery remains close to architecture, implementation, and rollout.
-                </p>
-                <p>
-                  That means fewer handoffs, clearer technical accountability, and direct conversations about what should be a product, what should be bespoke, and what should not be built at all.
-                </p>
-              </div>
-            </div>
+      <section className="px-6 pb-20 pt-36 md:pb-28 md:pt-44">
+        <div className="mx-auto max-w-5xl">
+          <AnimatedSection className="max-w-4xl">
+            <HeartHandshake className="h-9 w-9 text-[hsl(var(--teal))]" />
+            <h1 className="mt-8 font-display text-4xl font-semibold leading-[1.08] tracking-[-0.04em] text-foreground md:text-6xl">We are builders first.</h1>
+            <p className="mt-7 max-w-3xl text-lg font-light leading-8 text-muted-foreground md:text-xl">MathBrooks believes technology is most valuable when it improves people’s ability to live, work, learn, create, and solve problems.</p>
           </AnimatedSection>
         </div>
       </section>
 
-      <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto">
-          <AnimatedSection>
-            <div className="mb-8 md:mb-12 max-w-3xl">
-              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
-                Leadership
-              </p>
-              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-3">
-                Small enough to stay close to the work
-              </h2>
-              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                MathBrooks stays intentionally close to architecture, product thinking, and delivery. That means clients work with the people shaping the system, not a handoff chain.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {leadershipProfiles.map((profile, index) => (
-              <AnimatedSection key={profile.name} delay={index * 120}>
-                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
-                    {profile.role}
-                  </p>
-                  <h3 className="font-display text-xl uppercase tracking-wide mb-2">
-                    {profile.name}
-                  </h3>
-                  <p className="text-sm font-light text-muted-foreground mb-4">
-                    {profile.qualification}
-                  </p>
-                  <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                    {profile.roleFocus}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
+      <section className="bg-card px-6 py-20 md:py-28">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2">
+          <AnimatedSection><h2 className="font-display text-3xl font-semibold tracking-[-0.03em] text-foreground md:text-5xl">People first. Technology in service of what matters.</h2></AnimatedSection>
+          <AnimatedSection delay={100} className="space-y-5 text-base font-light leading-8 text-muted-foreground md:text-lg"><p>We start with human needs and real-world problems. Only then do we choose the technology that can help.</p><p>That is why MathBrooks is growing from useful digital systems into applied AI, computing, and connected technology. It is an evolution of the same idea—not a reinvention.</p><p>Our standard remains simple: build technology that works for people in the real world.</p></AnimatedSection>
         </div>
       </section>
 
-      <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto">
-          <AnimatedSection>
-            <div className="mb-8 md:mb-12 max-w-3xl">
-              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
-                Proof
-              </p>
-              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-3">
-                Credibility comes from delivery, not slogans
-              </h2>
-              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                MathBrooks is still selective about what it takes on. The clearest proof is the work already shipped and the operational outcomes clients cared about.
-              </p>
-            </div>
-          </AnimatedSection>
-          <div className="grid gap-6 md:grid-cols-3">
-            {proofHighlights.map((item, index) => (
-              <AnimatedSection key={item.label} delay={index * 120}>
-                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-                  <p className="font-display text-xs tracking-[0.18em] uppercase text-primary/70 mb-3">
-                    {item.label}
-                  </p>
-                  <p className="font-display text-2xl md:text-3xl uppercase tracking-wide">
-                    {item.value}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
+      <section className="px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl"><AnimatedSection className="max-w-3xl"><h2 className="font-display text-3xl font-semibold tracking-[-0.03em] text-foreground md:text-5xl">How MathBrooks is evolving.</h2><p className="mt-5 text-lg font-light leading-8 text-muted-foreground">Each layer expands what we can build, while keeping people and practical impact at the center.</p></AnimatedSection>
+          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">{evolution.map((item, index) => { const Icon = item.icon; return <AnimatedSection key={item.title} delay={index * 90}><article className="min-h-[225px] bg-card p-7"><Icon className="h-7 w-7 text-[hsl(var(--teal))]" /><h3 className="mt-8 font-display text-2xl font-semibold text-foreground">{item.title}</h3><p className="mt-4 text-sm font-light leading-7 text-muted-foreground">{item.detail}</p></article></AnimatedSection>; })}</div>
         </div>
       </section>
 
-      <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto">
-          <AnimatedSection>
-            <div className="mb-8 md:mb-12 max-w-3xl">
-              <p className="font-display text-xs tracking-[0.3em] uppercase text-primary mb-3">
-                Operating Model
-              </p>
-              <h2 className="font-display text-2xl md:text-4xl uppercase tracking-wide mb-3">
-                How the company works with clients
-              </h2>
-              <p className="text-sm md:text-base font-light text-muted-foreground leading-relaxed">
-                The workflow matters first. Product, custom build, or AI is a delivery choice that comes after the business problem is clear.
-              </p>
-            </div>
-          </AnimatedSection>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {operatingModel.map((item, index) => (
-              <AnimatedSection key={item.title} delay={index * 120}>
-                <div className="card-glass rounded-2xl p-6 md:p-8 h-full">
-                  <h3 className="font-display text-sm tracking-[0.15em] uppercase mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                    {item.detail}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <WhyWorkWithUs />
+      <section className="bg-foreground px-6 py-20 text-white md:py-28"><div className="mx-auto flex max-w-6xl flex-col justify-between gap-8 md:flex-row md:items-end"><AnimatedSection><h2 className="max-w-3xl font-display text-3xl font-semibold tracking-[-0.03em] md:text-5xl">We start with people. We find problems worth solving. We build technology that works.</h2></AnimatedSection><AnimatedSection delay={100}><Button asChild><Link to="/contact">Talk to MathBrooks <ArrowRight /></Link></Button></AnimatedSection></div></section>
     </SiteLayout>
   );
 };

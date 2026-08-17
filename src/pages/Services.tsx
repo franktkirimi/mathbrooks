@@ -180,7 +180,6 @@ const engagementPath = [
 
 const Hero = () => {
   const wrapRef   = useRef<HTMLDivElement>(null);
-  const eyeRef    = useRef<HTMLParagraphElement>(null);
   const h1Ref     = useRef<HTMLHeadingElement>(null);
   const subRef    = useRef<HTMLParagraphElement>(null);
   const ctaRef    = useRef<HTMLDivElement>(null);
@@ -244,8 +243,7 @@ const Hero = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.fromTo(eyeRef.current,  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7 })
-        .fromTo(h1Ref.current,   { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.9 }, "-=0.4")
+      tl.fromTo(h1Ref.current,   { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.9 })
         .fromTo(subRef.current,  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7 }, "-=0.5")
         .fromTo(ctaRef.current,  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.4");
     }, wrapRef);
@@ -262,10 +260,6 @@ const Hero = () => {
       />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <p ref={eyeRef} className="font-display text-[0.68rem] tracking-[0.32em] uppercase text-primary/70 mb-6" style={{ opacity: 0 }}>
-          Services
-        </p>
-
         <h1
           ref={h1Ref}
           className="font-display font-semibold leading-[1.06] tracking-[-0.03em] text-foreground mb-6"

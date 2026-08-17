@@ -126,7 +126,7 @@ const HeroSection = () => {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, hsl(202 89% 37% / 0.12) 0%, transparent 70%)",
+            "none",
         }}
       />
 
@@ -151,13 +151,6 @@ const HeroSection = () => {
 
       {/* Main content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-          <span className="font-display text-[0.7rem] tracking-[0.22em] uppercase text-primary/80">
-            Harare, Zimbabwe · Est. 2020
-          </span>
-        </div>
-
         <h1
           ref={headlineRef}
           className="font-display text-[2.6rem] sm:text-[3.5rem] md:text-[4.2rem] lg:text-[4.8rem] xl:text-[5.4rem] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground mb-6 overflow-hidden"
@@ -169,10 +162,7 @@ const HeroSection = () => {
               style={
                 word === "systems" || word === "work."
                   ? {
-                      background: "linear-gradient(135deg, hsl(202 89% 69%) 0%, hsl(191 74% 78%) 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
+                      color: "hsl(219 100% 56%)",
                     }
                   : undefined
               }
@@ -193,7 +183,7 @@ const HeroSection = () => {
         <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             to="/contact"
-            className="group relative inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 font-display text-sm tracking-[0.08em] uppercase text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:shadow-[0_0_40px_hsl(202_89%_69%/0.35)] hover:-translate-y-0.5"
+            className="action-button group relative inline-flex items-center gap-2 rounded-xl px-8 py-4 font-display text-sm tracking-[0.08em] uppercase transition-all duration-300 hover:-translate-y-0.5"
           >
             Start a Project
             <svg

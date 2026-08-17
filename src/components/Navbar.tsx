@@ -1,38 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
 
-const productLinks = [
-  { label: "All Products", href: "/products" },
-  { label: "CRM", href: "/products/crm" },
-  { label: "HR & Payroll", href: "/products/hr" },
-  { label: "Accounting", href: "/products/accounting" },
-  { label: "Inventory", href: "/products/inventory" },
-  { label: "Projects", href: "/products/projects" },
-  { label: "Automation", href: "/products/automation" },
-  { label: "Analytics", href: "/products/analytics" },
-  { label: "AI Assistant", href: "/products/ai-assistant" },
-];
+const productLink = { label: "Solutions", href: "/solutions" };
+const thingsLink = { label: "Things", href: "/things" };
 
 const mainNav = [
-  { label: "Services", href: "/services" },
-  { label: "Case Studies", href: "/work" },
-  { label: "AI Labs", href: "/ai-labs" },
-  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
-  { label: "Resources", href: "/blog" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
-  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
-  const { isDark, toggle } = useTheme();
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const solutionsMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const isSolutions = location.pathname.startsWith("/solutions");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -41,23 +25,38 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDesktopDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  useEffect(() => {
     setMobileOpen(false);
-    setMobileProductsOpen(false);
-    setDesktopDropdownOpen(false);
+    setSolutionsOpen(false);
   }, [location.pathname]);
 
-  const productsActive = location.pathname === "/products" || location.pathname.startsWith("/products/");
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!solutionsOpen) return;
+
+    const closeMenu = (event: MouseEvent) => {
+      if (!solutionsMenuRef.current?.contains(event.target as Node)) setSolutionsOpen(false);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSolutionsOpen(false);
+    };
+
+    document.addEventListener("mousedown", closeMenu);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("mousedown", closeMenu);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [solutionsOpen]);
 
   return (
     <header
@@ -68,78 +67,98 @@ const Navbar = () => {
           : "bg-transparent"
       )}
     >
-      <nav className="mx-auto grid h-16 w-full max-w-[1800px] grid-cols-[auto,minmax(0,1fr),auto] items-center px-6 lg:px-10">
+      <nav className="mx-auto grid h-[4.5rem] w-full max-w-[1800px] grid-cols-[auto,minmax(0,1fr),auto] items-center px-5 sm:h-20 sm:px-6 xl:px-10">
         <Link
           to="/"
-          className="font-display text-sm tracking-[0.18em] text-foreground hover:text-primary transition-colors duration-300"
+          className="group inline-flex items-center gap-3 text-foreground transition-colors duration-300"
         >
-          MATHBROOKS
+          <img
+            src="/mathbrooks-mark.svg"
+            alt=""
+            className="h-9 w-9 object-contain transition-transform duration-300 group-hover:-rotate-3 sm:h-11 sm:w-11"
+            width="64"
+            height="64"
+          />
+          <span className="font-body text-xl font-semibold tracking-[0.02em] sm:text-2xl">MATHBROOKS</span>
         </Link>
 
-        <div className="hidden lg:flex items-center justify-center gap-7 xl:gap-9 min-w-0">
+        <div className="hidden min-w-0 items-center justify-center gap-14 xl:flex">
           <Link
             to="/"
             className={cn(
-              "font-display text-[0.875rem] tracking-[0.1em] uppercase transition-colors duration-300 whitespace-nowrap",
+              "mb-nav-link font-body whitespace-nowrap",
               location.pathname === "/"
                 ? "text-primary"
-                : "text-muted-foreground hover:text-primary"
+                : "text-[hsl(var(--nav))] hover:text-primary"
             )}
           >
             Home
           </Link>
 
-          <div ref={dropdownRef} className="relative">
+          <div className="relative" ref={solutionsMenuRef}>
             <button
               type="button"
-              onClick={() => setDesktopDropdownOpen((current) => !current)}
+              onClick={() => setSolutionsOpen((open) => !open)}
+              aria-expanded={solutionsOpen}
+              aria-haspopup="menu"
+              aria-controls="solutions-menu"
               className={cn(
-                "flex items-center gap-1 font-display text-[0.875rem] tracking-[0.1em] uppercase transition-colors duration-300 whitespace-nowrap",
-                productsActive || desktopDropdownOpen
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-primary"
+                "mb-nav-link inline-flex items-center gap-1 font-body whitespace-nowrap",
+                isSolutions ? "text-primary" : "text-[hsl(var(--nav))] hover:text-primary"
               )}
             >
-              Products
-              <ChevronDown
-                className={cn(
-                  "w-3 h-3 transition-transform duration-200",
-                  desktopDropdownOpen ? "rotate-180" : ""
-                )}
-              />
+              {productLink.label}
+              <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", solutionsOpen && "rotate-180")} aria-hidden="true" />
             </button>
 
-            {desktopDropdownOpen ? (
-              <div className="absolute top-full left-0 mt-3 w-60 rounded-xl border border-border/30 bg-background/95 backdrop-blur-md shadow-xl py-2">
-                {productLinks.map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    onClick={() => setDesktopDropdownOpen(false)}
-                    className={cn(
-                      "block px-4 py-3 font-display text-[0.875rem] tracking-[0.1em] uppercase transition-colors duration-200",
-                      location.pathname === item.href
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-primary",
-                      item.href === "/products" ? "border-b border-border/20 mb-1" : ""
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+            {solutionsOpen && (
+              <div
+                id="solutions-menu"
+                role="menu"
+                aria-label="Solutions"
+                className="absolute left-1/2 top-[calc(100%+1rem)] w-80 -translate-x-1/2 rounded-lg border border-border bg-card p-2 shadow-[var(--shadow-overlay)]"
+              >
+                <Link
+                  to="/solutions"
+                  role="menuitem"
+                  className="block rounded-md px-4 py-3 transition-colors hover:bg-muted focus-visible:bg-muted"
+                >
+                  <span className="mb-caption block text-primary">Custom</span>
+                  <span className="block text-sm font-medium text-foreground">Configure a system around your work</span>
+                </Link>
+                <Link
+                  to="/solutions/available"
+                  role="menuitem"
+                  className="block rounded-md px-4 py-3 transition-colors hover:bg-muted focus-visible:bg-muted"
+                >
+                  <span className="mb-caption block text-primary">Available</span>
+                  <span className="block text-sm font-medium text-foreground">Choose from ready-to-use solutions</span>
+                </Link>
               </div>
-            ) : null}
+            )}
           </div>
+
+          <Link
+            to={thingsLink.href}
+            className={cn(
+              "mb-nav-link font-body whitespace-nowrap",
+              location.pathname === thingsLink.href
+                ? "text-primary"
+                : "text-[hsl(var(--nav))] hover:text-primary"
+            )}
+          >
+            {thingsLink.label}
+          </Link>
 
           {mainNav.map((item) => (
             <Link
               key={item.href}
               to={item.href}
               className={cn(
-                "font-display text-[0.875rem] tracking-[0.1em] uppercase transition-colors duration-300 whitespace-nowrap",
+                "mb-nav-link font-body whitespace-nowrap",
                 location.pathname === item.href
                   ? "text-primary"
-                  : "text-muted-foreground hover:text-primary"
+                  : "text-[hsl(var(--nav))] hover:text-primary"
               )}
             >
               {item.label}
@@ -147,52 +166,23 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden lg:flex items-center justify-end gap-4 ml-6">
+        <div className="hidden xl:flex items-center justify-end gap-4 ml-6">
           <Link
-            to="/book-demo"
-            className="rounded-lg bg-primary px-4 py-2 font-body text-sm font-medium text-primary-foreground transition-colors duration-300 hover:bg-primary/90 whitespace-nowrap"
+            to="/contact"
+            className="action-button rounded-lg px-4 py-2 font-body text-sm font-medium transition-colors duration-300 whitespace-nowrap"
           >
-            Book a demo
+            Contact us
           </Link>
 
-          <button
-            type="button"
-            onClick={toggle}
-            aria-label="Toggle theme"
-            className="relative w-12 h-6 rounded-full border border-border/40 bg-secondary/50 hover:border-primary/30 transition-all duration-300 flex items-center px-1"
-          >
-            <div
-              className={cn(
-                "w-4 h-4 rounded-full flex items-center justify-center transition-all duration-300",
-                isDark ? "translate-x-0 bg-primary/20" : "translate-x-6 bg-primary/20"
-              )}
-            >
-              {isDark ? (
-                <Moon className="w-2.5 h-2.5 text-primary" />
-              ) : (
-                <Sun className="w-2.5 h-2.5 text-primary" />
-              )}
-            </div>
-          </button>
         </div>
 
-        <div className="lg:hidden col-start-3 flex items-center gap-3 justify-self-end">
-          <button
-            type="button"
-            onClick={toggle}
-            aria-label="Toggle theme"
-            className="w-9 h-9 rounded-md border border-border/40 flex items-center justify-center hover:border-primary/30 transition-all duration-300"
-          >
-            {isDark ? (
-              <Moon className="w-4 h-4 text-muted-foreground" />
-            ) : (
-              <Sun className="w-4 h-4 text-muted-foreground" />
-            )}
-          </button>
+        <div className="xl:hidden col-start-3 flex items-center gap-3 justify-self-end">
           <button
             type="button"
             onClick={() => setMobileOpen((current) => !current)}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-controls="mobile-navigation"
+            aria-expanded={mobileOpen}
             className="w-9 h-9 rounded-md border border-border/40 flex items-center justify-center hover:border-primary/30 transition-all duration-300"
           >
             {mobileOpen ? (
@@ -205,66 +195,54 @@ const Navbar = () => {
       </nav>
 
       <div
+        id="mobile-navigation"
         className={cn(
-          "lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-md border-b border-border/20",
+          "xl:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-md border-b border-border/20",
           mobileOpen ? "max-h-[80vh] opacity-100 overflow-y-auto" : "max-h-0 opacity-0 border-b-0"
         )}
       >
-        <div className="px-6 py-4 flex flex-col gap-1">
+        <div className="flex flex-col gap-1 px-5 py-4 sm:px-6" aria-label="Mobile navigation">
           <Link
             to="/"
             className={cn(
-              "font-display text-sm tracking-[0.14em] uppercase py-3 border-b border-border/10 transition-colors duration-300",
+              "mb-nav-link font-body py-3 border-b border-border/10",
               location.pathname === "/"
                 ? "text-primary"
-                : "text-muted-foreground hover:text-primary"
+                : "text-[hsl(var(--nav))] hover:text-primary"
             )}
           >
             Home
           </Link>
 
-          <button
-            type="button"
-            onClick={() => setMobileProductsOpen((current) => !current)}
-            className="flex items-center justify-between font-display text-sm tracking-[0.14em] uppercase py-3 border-b border-border/10 w-full text-left text-muted-foreground hover:text-primary transition-colors duration-300"
-          >
-            Products
-            <ChevronDown
-              className={cn(
-                "w-3 h-3 transition-transform duration-200",
-                mobileProductsOpen ? "rotate-180 text-primary" : ""
-              )}
-            />
-          </button>
-
-          {mobileProductsOpen ? (
-            <div className="pl-4 flex flex-col gap-1 pb-2 border-b border-border/10">
-              {productLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={cn(
-                    "font-display text-[0.82rem] tracking-[0.14em] uppercase py-2 transition-colors duration-300",
-                    location.pathname === item.href
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-primary"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
+          <div className="border-b border-border/10 py-3">
+            <p className={cn("mb-nav-link font-body", isSolutions ? "text-primary" : "text-[hsl(var(--nav))]")}>{productLink.label}</p>
+            <div className="mt-2 grid gap-1 border-l border-border/50 pl-4 text-sm">
+              <Link to="/solutions" className="py-1.5 text-muted-foreground transition-colors hover:text-primary">Custom</Link>
+              <Link to="/solutions/available" className="py-1.5 text-muted-foreground transition-colors hover:text-primary">Available</Link>
             </div>
-          ) : null}
+          </div>
+
+          <Link
+            to={thingsLink.href}
+            className={cn(
+              "mb-nav-link font-body py-3 border-b border-border/10",
+              location.pathname === thingsLink.href
+                ? "text-primary"
+                : "text-[hsl(var(--nav))] hover:text-primary"
+            )}
+          >
+            {thingsLink.label}
+          </Link>
 
           {mainNav.map((item) => (
             <Link
               key={item.href}
               to={item.href}
               className={cn(
-                "font-display text-[0.82rem] tracking-[0.15em] uppercase py-3 border-b border-border/10 transition-colors duration-300",
+                "mb-nav-link font-body py-3 border-b border-border/10",
                 location.pathname === item.href
                   ? "text-primary"
-                  : "text-muted-foreground hover:text-primary"
+                  : "text-[hsl(var(--nav))] hover:text-primary"
               )}
             >
               {item.label}
@@ -272,10 +250,10 @@ const Navbar = () => {
           ))}
 
           <Link
-            to="/book-demo"
-            className="mt-3 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-3 font-body text-sm font-medium text-primary-foreground transition-colors duration-300 hover:bg-primary/90"
+            to="/contact"
+            className="action-button mt-3 inline-flex items-center justify-center rounded-lg px-4 py-3 font-body text-sm font-medium transition-colors duration-300"
           >
-            Book a demo
+            Contact us
           </Link>
         </div>
       </div>

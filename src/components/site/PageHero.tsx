@@ -10,9 +10,9 @@ type PageHeroProps = {
   chips?: string[];
 };
 
-const PageHero = ({ eyebrow, title, description, actions, sideContent, chips }: PageHeroProps) => {
+const PageHero = ({ eyebrow: _eyebrow, title, description, actions, sideContent, chips }: PageHeroProps) => {
   return (
-    <section className="relative px-6 pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
+    <section className="relative px-5 pb-14 pt-28 sm:px-6 md:pb-28 md:pt-44 overflow-hidden">
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -31,20 +31,16 @@ const PageHero = ({ eyebrow, title, description, actions, sideContent, chips }: 
       >
         <AnimatedSection>
           <div className={`min-w-0 ${sideContent ? "" : "text-center"}`}>
-            <p className="font-display mb-4 text-[0.7rem] tracking-[0.24em] uppercase text-primary">
-              {eyebrow}
-            </p>
-
             <h1
               className={`font-display font-semibold leading-[1.14] tracking-[-0.02em] break-words w-full
-                text-[1.35rem] sm:text-[1.75rem] md:text-[2.2rem] lg:text-[2.7rem] xl:text-[3.1rem]
+                text-[2rem] sm:text-[2.35rem] md:text-[2.5rem] lg:text-[2.7rem] xl:text-[3.1rem]
                 ${sideContent ? "" : "max-w-4xl mx-auto"}`}
             >
               {title}
             </h1>
 
             <p
-              className={`mt-5 text-sm font-light leading-7 text-muted-foreground md:text-[1.02rem] md:leading-8 ${
+              className={`mt-5 text-base font-light leading-7 text-muted-foreground md:text-[1.02rem] md:leading-8 ${
                 sideContent ? "max-w-2xl" : "max-w-3xl mx-auto"
               }`}
             >
@@ -66,7 +62,7 @@ const PageHero = ({ eyebrow, title, description, actions, sideContent, chips }: 
             ) : null}
 
             {actions ? (
-              <div className={`flex flex-wrap items-center gap-3 mt-8 ${sideContent ? "" : "justify-center"}`}>
+              <div className={`mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center ${sideContent ? "" : "sm:justify-center"} [&>a]:w-full [&>a>button]:w-full sm:[&>a]:w-auto sm:[&>a>button]:w-auto`}>
                 {actions}
               </div>
             ) : null}

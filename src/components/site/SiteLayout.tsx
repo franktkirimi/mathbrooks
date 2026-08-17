@@ -1,17 +1,32 @@
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
+import { useLocation } from "react-router-dom";
 import CursorGlow from "@/components/CursorGlow";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
-import WhatsAppWidget from "./WhatsAppWidget";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type SiteLayoutProps = {
   children: ReactNode;
 };
 
+const HashScroll = () => {
+  const { hash } = useLocation();
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (!hash) return;
+    const target = document.getElementById(hash.slice(1));
+    target?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+  }, [hash, reducedMotion]);
+
+  return null;
+};
+
 const SiteLayout = ({ children }: SiteLayoutProps) => {
   return (
     <div className="site-shell min-h-screen bg-background overflow-x-hidden">
+      <HashScroll />
       <ScrollProgress />
       <CursorGlow />
       <a
@@ -22,7 +37,6 @@ const SiteLayout = ({ children }: SiteLayoutProps) => {
       </a>
       <Navbar />
       <main id="main-content">{children}</main>
-      <WhatsAppWidget />
       <Footer />
     </div>
   );

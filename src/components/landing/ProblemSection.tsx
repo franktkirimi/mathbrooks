@@ -112,9 +112,6 @@ const ProblemSection = () => {
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         {/* Left: Headline + pain points */}
         <div>
-          <p className="mb-4 font-display text-[0.68rem] tracking-[0.28em] uppercase text-primary/70">
-            The Problem
-          </p>
           <h2
             ref={headlineRef}
             className="font-display text-[2rem] sm:text-[2.6rem] md:text-[3rem] font-semibold leading-[1.1] tracking-[-0.025em] text-foreground mb-8"
@@ -136,8 +133,8 @@ const ProblemSection = () => {
                 ref={(el) => { painRef.current[i] = el; }}
                 className="flex items-start gap-3 group"
               >
-                <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full border border-red-500/40 bg-red-500/10 flex items-center justify-center">
-                  <svg className="w-2.5 h-2.5 text-red-400" viewBox="0 0 10 10" fill="none">
+                <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full border border-[#d32f2f]/40 bg-[#d32f2f]/10 flex items-center justify-center">
+                  <svg className="w-2.5 h-2.5 text-[#d32f2f]" viewBox="0 0 10 10" fill="none">
                     <path d="M2 2l6 6M8 2L2 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </span>

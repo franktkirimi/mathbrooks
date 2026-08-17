@@ -127,9 +127,6 @@ const DemoSection = () => {
 
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <p className="mb-4 font-display text-[0.68rem] tracking-[0.28em] uppercase text-primary/70">
-            See It In Action
-          </p>
           <h2 className="font-display text-[2rem] sm:text-[2.6rem] md:text-[3rem] font-semibold leading-[1.1] tracking-[-0.025em] text-foreground mb-4">
             Describe your process.{" "}
             <span className="text-gradient-accent">We'll show you the system.</span>
@@ -139,7 +136,7 @@ const DemoSection = () => {
           </p>
         </div>
 
-        <div ref={wrapRef} className="rounded-2xl border border-border/40 bg-card/50 backdrop-blur-sm p-6 md:p-8">
+        <div ref={wrapRef} className="product-card rounded-2xl border p-6 md:p-8">
           {/* Input area */}
           <div className="relative mb-4">
             <textarea
@@ -166,8 +163,8 @@ const DemoSection = () => {
                 onClick={() => handleSuggestion(s, idx)}
                 className={`rounded-full border px-3 py-1.5 text-[11px] font-display tracking-[0.08em] transition-all duration-200 ${
                   activeSuggestion === idx
-                    ? "border-primary/60 bg-primary/10 text-primary"
-                    : "border-border/50 bg-background/40 text-muted-foreground hover:border-primary/30 hover:text-foreground"
+                    ? "border-[hsl(var(--teal))] text-[hsl(var(--teal))]"
+                    : "border-border bg-card text-muted-foreground hover:border-[hsl(var(--teal))] hover:text-[hsl(var(--teal))]"
                 }`}
               >
                 {s}
@@ -179,7 +176,7 @@ const DemoSection = () => {
             type="button"
             onClick={() => runDemo(input)}
             disabled={!input.trim() || loading}
-            className="w-full rounded-xl bg-primary py-3.5 font-display text-sm tracking-[0.1em] uppercase text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:shadow-[0_0_30px_hsl(202_89%_69%/0.3)] disabled:opacity-40 disabled:cursor-not-allowed"
+            className="action-button w-full rounded-xl py-3.5 font-display text-sm tracking-[0.1em] uppercase transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {loading ? "Analyzing process…" : "Build the System"}
           </button>
@@ -221,7 +218,7 @@ const DemoSection = () => {
                   </div>
                 ))}
               </div>
-              <div className="px-4 py-3 border-t border-border/30 bg-primary/5">
+              <div className="px-4 py-3 border-t border-border">
                 <p className="text-xs text-muted-foreground font-light">
                   Ready to implement?{" "}
                   <a href="/contact" className="text-primary hover:underline">
