@@ -158,13 +158,13 @@ const ProblemSection = () => {
             <defs>
               <style>{`line { stroke-dasharray: 200; }`}</style>
             </defs>
-            <line x1="15" y1="20" x2="40" y2="34" stroke="hsl(202 89% 69% / 0.18)" strokeWidth="0.4" />
-            <line x1="70" y1="12" x2="40" y2="34" stroke="hsl(202 89% 69% / 0.18)" strokeWidth="0.4" />
-            <line x1="40" y1="34" x2="80" y2="54" stroke="hsl(202 89% 69% / 0.18)" strokeWidth="0.4" />
-            <line x1="10" y1="64" x2="40" y2="34" stroke="hsl(202 89% 69% / 0.12)" strokeWidth="0.4" />
-            <line x1="55" y1="74" x2="80" y2="54" stroke="hsl(202 89% 69% / 0.12)" strokeWidth="0.4" />
-            <line x1="30" y1="84" x2="55" y2="74" stroke="hsl(202 89% 69% / 0.1)" strokeWidth="0.4" />
-            <line x1="10" y1="64" x2="30" y2="84" stroke="hsl(202 89% 69% / 0.1)" strokeWidth="0.4" />
+            <line x1="15" y1="20" x2="40" y2="34" stroke="hsl(187 81% 29% / 0.18)" strokeWidth="0.4" />
+            <line x1="70" y1="12" x2="40" y2="34" stroke="hsl(187 81% 29% / 0.18)" strokeWidth="0.4" />
+            <line x1="40" y1="34" x2="80" y2="54" stroke="hsl(187 81% 29% / 0.18)" strokeWidth="0.4" />
+            <line x1="10" y1="64" x2="40" y2="34" stroke="hsl(187 81% 29% / 0.12)" strokeWidth="0.4" />
+            <line x1="55" y1="74" x2="80" y2="54" stroke="hsl(187 81% 29% / 0.12)" strokeWidth="0.4" />
+            <line x1="30" y1="84" x2="55" y2="74" stroke="hsl(187 81% 29% / 0.1)" strokeWidth="0.4" />
+            <line x1="10" y1="64" x2="30" y2="84" stroke="hsl(187 81% 29% / 0.1)" strokeWidth="0.4" />
           </svg>
 
           {/* Chaos nodes */}

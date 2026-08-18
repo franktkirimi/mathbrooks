@@ -183,61 +183,6 @@ const Hero = () => {
   const h1Ref     = useRef<HTMLHeadingElement>(null);
   const subRef    = useRef<HTMLParagraphElement>(null);
   const ctaRef    = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef    = useRef<number>(0);
-
-  // Particle canvas
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let W = 0, H = 0;
-    type P = { x: number; y: number; vx: number; vy: number; r: number; alpha: number };
-    let particles: P[] = [];
-
-    const resize = () => {
-      W = canvas.offsetWidth;
-      H = canvas.offsetHeight;
-      canvas.width  = W;
-      canvas.height = H;
-      const count = Math.floor((W * H) / 9000);
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
-        r: Math.random() * 1.4 + 0.4,
-        alpha: Math.random() * 0.35 + 0.08,
-      }));
-    };
-
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = W;
-        if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H;
-        if (p.y > H) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(202, 89%, 69%, ${p.alpha})`;
-        ctx.fill();
-      }
-      rafRef.current = requestAnimationFrame(draw);
-    };
-
-    resize();
-    draw();
-    window.addEventListener("resize", resize);
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
 
   // Entrance animations
   useEffect(() => {
@@ -252,31 +197,17 @@ const Hero = () => {
 
   return (
     <section ref={wrapRef} className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-24 overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 70% 60% at 50% 40%, hsl(202 89% 69% / 0.07) 0%, transparent 70%)" }}
-      />
-
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <h1
           ref={h1Ref}
-          className="font-display font-semibold leading-[1.06] tracking-[-0.03em] text-foreground mb-6"
+          className="font-display font-bold leading-[1.06] tracking-[-0.03em] text-foreground mb-6"
           style={{ fontSize: "clamp(2.4rem, 7vw, 5rem)", opacity: 0 }}
         >
           We build the systems{" "}
-          <span style={{
-            background: "linear-gradient(135deg, hsl(202 89% 69%) 0%, hsl(191 74% 78%) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}>
-            behind your operations.
-          </span>
+          <span className="text-primary">behind your operations.</span>
         </h1>
 
-        <p ref={subRef} className="text-base sm:text-lg font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10" style={{ opacity: 0 }}>
+        <p ref={subRef} className="text-base sm:text-lg font-normal text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10" style={{ opacity: 0 }}>
           Custom software, workflow automation, and applied AI for processes too specific for a standard product — and too important to leave in spreadsheets.
         </p>
 

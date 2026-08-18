@@ -71,7 +71,7 @@ const VisionSection = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(202, 89%, 69%, ${p.alpha})`;
+        ctx.fillStyle = `hsla(187, 81%, 29%, ${p.alpha})`;
         ctx.fill();
       });
 
@@ -85,7 +85,7 @@ const VisionSection = () => {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `hsla(202, 89%, 69%, ${0.06 * (1 - dist / 100)})`;
+            ctx.strokeStyle = `hsla(187, 81%, 29%, ${0.06 * (1 - dist / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -187,7 +187,7 @@ const VisionSection = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(202 89% 37% / 0.08) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 50% 50%, hsl(187 81% 20% / 0.08) 0%, transparent 70%)",
         }}
       />
 
