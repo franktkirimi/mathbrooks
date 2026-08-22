@@ -216,7 +216,7 @@ const Hero = () => {
               Request an Architecture Review
             </Button>
           </Link>
-          <Link to="/solutions/available">
+          <Link to="/products">
             <Button
               variant="outline"
               size="lg"
@@ -470,7 +470,7 @@ const Services = () => {
                     Request an Architecture Review
                   </Button>
                 </Link>
-                <Link to="/solutions/available">
+                <Link to="/products">
                   <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary">
                     Compare Deployable Products
                   </Button>

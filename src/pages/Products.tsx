@@ -72,7 +72,7 @@ const Products = () => {
   usePageMeta({
     title: "Systems Architecture | MathBrooks",
     description: "Deploy MathBrooks products or commission custom software, automation, AI, and connected infrastructure.",
-    canonicalPath: "/solutions",
+    canonicalPath: "/systems-architecture",
     keywords: ["MathBrooks solutions", "custom software Zimbabwe", "workflow automation", "applied AI systems"],
   });
 
@@ -93,7 +93,7 @@ const Products = () => {
                 <Link to="/contact">Request Systems Brief <ArrowRight className="h-4 w-4" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link to="/solutions/available">Compare Deployable Products</Link>
+                <Link to="/products">Compare Deployable Products</Link>
               </Button>
             </div>
           </AnimatedSection>
@@ -189,7 +189,7 @@ const Products = () => {
                   <ul className="mt-8 grid gap-3 sm:grid-cols-2">
                     {["HR and payroll", "CRM", "Finance", "Operations"].map((item) => <li key={item} className="flex items-center gap-2 text-sm text-black"><Check className="h-4 w-4 text-primary" />{item}</li>)}
                   </ul>
-                  <Link to="/solutions/available" className="mt-9 inline-flex items-center gap-2 text-sm font-semibold text-black">Compare Deployable Products <ArrowRight className="h-4 w-4" /></Link>
+                  <Link to="/products" className="mt-9 inline-flex items-center gap-2 text-sm font-semibold text-black">Compare Deployable Products <ArrowRight className="h-4 w-4" /></Link>
                 </div>
               </article>
             </AnimatedSection>

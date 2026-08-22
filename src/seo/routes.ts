@@ -12,12 +12,13 @@ export type RouteMeta = {
   lastmod: string;
   indexable: boolean;
   ogType: "website" | "article";
+  ogImage: string;
   changefreq: "weekly" | "monthly" | "yearly";
   priority: number;
 };
 
-type RouteInput = Omit<RouteMeta, "canonical" | "lastmod" | "indexable" | "ogType" | "changefreq" | "priority"> &
-  Partial<Pick<RouteMeta, "lastmod" | "indexable" | "ogType" | "changefreq" | "priority">>;
+type RouteInput = Omit<RouteMeta, "canonical" | "lastmod" | "indexable" | "ogType" | "ogImage" | "changefreq" | "priority"> &
+  Partial<Pick<RouteMeta, "lastmod" | "indexable" | "ogType" | "ogImage" | "changefreq" | "priority">>;
 
 const normalisePath = (path: string) => {
   const clean = path.split("?")[0].split("#")[0] || "/";
@@ -34,6 +35,7 @@ const route = ({
   lastmod = RELEASE_DATE,
   indexable = true,
   ogType = "website",
+  ogImage = "/og-image.png",
   changefreq = "monthly",
   priority = 0.7,
 }: RouteInput): RouteMeta => ({
@@ -44,6 +46,7 @@ const route = ({
   lastmod,
   indexable,
   ogType,
+  ogImage,
   changefreq,
   priority,
 });
@@ -109,13 +112,13 @@ const staticRoutes: RouteMeta[] = [
     priority: 1,
   }),
   route({
-    path: "/solutions",
+    path: "/systems-architecture",
     title: "Systems Architecture & Custom Infrastructure | MathBrooks",
     description: "Explore how MathBrooks deploys production-ready products and architects custom software, AI, connected systems, and resilient digital infrastructure.",
     priority: 0.9,
   }),
   route({
-    path: "/solutions/available",
+    path: "/products",
     title: "Deployable Business Software Products | MathBrooks",
     description: "Compare production-ready MathBrooks software for CRM, people, finance, delivery, inventory, automation, analytics, and governed AI operations.",
     changefreq: "weekly",
@@ -128,7 +131,7 @@ const staticRoutes: RouteMeta[] = [
     priority: 0.9,
   }),
   route({
-    path: "/things",
+    path: "/research",
     title: "MathBrooks Things | Advanced Technology Research Portfolio",
     description: "Explore MathBrooks research in embodied intelligence, environmental infrastructure, Zimbabwean language AI, resilient networks, and energy systems.",
     priority: 0.8,
@@ -199,20 +202,22 @@ const staticRoutes: RouteMeta[] = [
 
 const productRoutes = products.map((product) =>
   route({
-    path: `/solutions/available/${product.slug}`,
+    path: `/products/${product.slug}`,
     title: productTitles[product.slug],
     description: productDescriptions[product.slug],
     changefreq: "weekly",
     priority: 0.8,
+    ogImage: `/og/products/${product.slug}.png`,
   }),
 );
 
 const thingRoutes = thingsProjects.map((project) =>
   route({
-    path: `/things/${project.slug}`,
+    path: `/research/${project.slug}`,
     title: thingTitles[project.slug],
     description: thingDescriptions[project.slug],
     priority: 0.8,
+    ogImage: `/og/research/${project.slug}.png`,
   }),
 );
 
@@ -223,6 +228,7 @@ const blogRoutes = blogPosts.map((post) =>
     description: blogDescriptions[post.slug],
     lastmod: post.publishedOn,
     ogType: "article",
+    ogImage: `/og/blog/${post.slug}.png`,
     changefreq: "yearly",
     priority: 0.6,
   }),
@@ -241,8 +247,11 @@ export const getRouteMeta = (path: string) => {
 };
 
 export const redirectRoutes = [
-  { source: "/products", destination: "/solutions" },
-  { source: "/products/:slug", destination: "/solutions/available/:slug" },
+  { source: "/solutions", destination: "/systems-architecture" },
+  { source: "/solutions/available", destination: "/products" },
+  { source: "/solutions/available/:slug", destination: "/products/:slug" },
+  { source: "/things", destination: "/research" },
+  { source: "/things/:slug", destination: "/research/:slug" },
   { source: "/case-studies", destination: "/work" },
   { source: "/resources", destination: "/blog" },
   { source: "/clients", destination: "/contact" },

@@ -6,7 +6,7 @@ const projectRoot = process.cwd();
 const distDir = join(projectRoot, "dist");
 const template = await readFile(join(distDir, "index.html"), "utf8");
 const serverEntry = await import(pathToFileURL(join(projectRoot, ".prerender", "entry-server.js")).href);
-const { illustrativeProductCopyByPath, publicRoutes, render } = serverEntry;
+const { illustrativeProductCopyByPath, publicRoutes, render, structuredDataForRoute } = serverEntry;
 
 const escapeHtml = (value) =>
   value
@@ -48,7 +48,9 @@ const validateMetadata = () => {
 };
 
 const buildPage = (page, renderedBody) => {
-  let html = template.replace(
+  let html = template
+    .replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, "")
+    .replace(
     /<!--app-start-->[\s\S]*?<!--app-end-->/,
     `<!--app-start--><div id="root">${renderedBody}</div><!--app-end-->`,
   );
@@ -66,20 +68,13 @@ const buildPage = (page, renderedBody) => {
   html = replaceTag(html, /<meta property="og:description" content="[^"]*"\s*\/?>/, `<meta property="og:description" content="${description}" />`);
   html = replaceTag(html, /<meta property="og:type" content="[^"]*"\s*\/?>/, `<meta property="og:type" content="${page.ogType}" />`);
   html = replaceTag(html, /<meta property="og:url" content="[^"]*"\s*\/?>/, `<meta property="og:url" content="${page.canonical}" />`);
+  html = replaceTag(html, /<meta property="og:image" content="[^"]*"\s*\/?>/, `<meta property="og:image" content="https://www.mathbrooks.com${page.ogImage}" />`);
   html = replaceTag(html, /<meta name="twitter:title" content="[^"]*"\s*\/?>/, `<meta name="twitter:title" content="${title}" />`);
   html = replaceTag(html, /<meta name="twitter:description" content="[^"]*"\s*\/?>/, `<meta name="twitter:description" content="${description}" />`);
+  html = replaceTag(html, /<meta name="twitter:image" content="[^"]*"\s*\/?>/, `<meta name="twitter:image" content="https://www.mathbrooks.com${page.ogImage}" />`);
 
-  const webPageData = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": page.ogType === "article" ? "Article" : "WebPage",
-    "@id": `${page.canonical}#webpage`,
-    url: page.canonical,
-    name: page.title,
-    description: page.description,
-    isPartOf: { "@id": "https://www.mathbrooks.com/#website" },
-    inLanguage: "en",
-  }).replaceAll("<", "\\u003c");
-  html = html.replace("</head>", `    <script id="route-structured-data" type="application/ld+json">${webPageData}</script>\n  </head>`);
+  const routeStructuredData = JSON.stringify(structuredDataForRoute(page)).replaceAll("<", "\\u003c");
+  html = html.replace("</head>", `    <script id="route-structured-data" type="application/ld+json">${routeStructuredData}</script>\n  </head>`);
   return html;
 };
 
@@ -88,7 +83,7 @@ const assertRenderedContent = (page, html) => {
     throw new Error(`${page.path}: prerendered document has no h1`);
   }
   if (!page.indexable) return;
-  const requiredLinks = ["/solutions/available", "/services", "/things", "/about"];
+  const requiredLinks = ["/products", "/services", "/research", "/about"];
   for (const href of requiredLinks) {
     if (!html.includes(`href="${href}"`)) {
       throw new Error(`${page.path}: prerendered navigation is missing href=${href}`);

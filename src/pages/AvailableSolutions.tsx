@@ -9,7 +9,7 @@ const AvailableSolutions = () => {
   usePageMeta({
     title: "Deployable Products | MathBrooks",
     description: "Compare production-ready MathBrooks products for customers, people, finance, delivery, automation, analytics, and AI.",
-    canonicalPath: "/solutions/available",
+    canonicalPath: "/products",
   });
 
   return (

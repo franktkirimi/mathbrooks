@@ -42,7 +42,7 @@ const ProductsHighlight = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
           {orderedProducts.map((product, index) => (
             <AnimatedSection key={product.slug} delay={index * 100}>
-              <Link to={`/solutions/available/${product.slug}`} className="group block h-full">
+              <Link to={`/products/${product.slug}`} className="group block h-full">
                 <div className="card-glass relative rounded-lg p-6 md:p-8 h-full flex flex-col transition-all duration-300 group-hover:border-primary/30 group-hover:-translate-y-1">
                   <div className="absolute inset-x-6 top-0 h-px overflow-hidden">
                     <div className="h-full w-24 -translate-x-24 bg-gradient-to-r from-transparent via-primary/70 to-transparent opacity-0 transition-all duration-500 group-hover:translate-x-[320%] group-hover:opacity-100" />
@@ -76,7 +76,7 @@ const ProductsHighlight = () => {
         <AnimatedSection delay={450}>
           <div className="text-center mt-10">
             <Link
-              to="/solutions/available"
+              to="/products"
               className="font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
             >
               Explore all products

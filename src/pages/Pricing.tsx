@@ -67,12 +67,6 @@ const Pricing = () => {
       "software pricing MathBrooks",
       "business software pricing",
     ],
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "OfferCatalog",
-      name: "MathBrooks Pricing",
-      url: "https://www.mathbrooks.com/pricing",
-    },
   });
 
   return (
@@ -88,7 +82,7 @@ const Pricing = () => {
                 Book a Demo
               </Button>
             </Link>
-            <Link to="/solutions/available">
+            <Link to="/products">
               <Button
                 variant="outline"
                 size="lg"
@@ -283,7 +277,7 @@ const Pricing = () => {
                 </div>
 
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
-                  <Link to={`/solutions/available/${product.slug}`}>
+                  <Link to={`/products/${product.slug}`}>
                     <Button
                       variant="outline"
                       className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"

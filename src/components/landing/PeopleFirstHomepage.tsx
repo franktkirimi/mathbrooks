@@ -28,10 +28,10 @@ const audiences = [
 ];
 
 const researchProjects = [
-  { code: "SOKO A01", field: "Embodied intelligence", href: "/things/soko-a01" },
-  { code: "neFI", field: "National environmental infrastructure", href: "/things/zimbabwe-earth-intelligence" },
-  { code: "Ilwimi", field: "Zimbabwean language intelligence", href: "/things/zimbabwe-language-intelligence" },
-  { code: "Tessera", field: "Resilient decentralised networks", href: "/things/tessera" },
+  { code: "SOKO A01", field: "Embodied intelligence", href: "/research/soko-a01" },
+  { code: "neFI", field: "National environmental infrastructure", href: "/research/zimbabwe-earth-intelligence" },
+  { code: "Ilwimi", field: "Zimbabwean language intelligence", href: "/research/zimbabwe-language-intelligence" },
+  { code: "Tessera", field: "Resilient decentralised networks", href: "/research/tessera" },
 ];
 
 const heroStyles = `
@@ -211,7 +211,7 @@ const PeopleFirstHomepage = () => (
             </p>
             <div className="mb-hero-actions">
               <Button asChild size="lg" className="mb-hero-primary">
-                <Link to="/solutions/available">Deploy a product <ArrowRight aria-hidden="true" /></Link>
+                <Link to="/products">Deploy a product <ArrowRight aria-hidden="true" /></Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="mb-hero-secondary">
                 <Link to="/services">Commission a custom system</Link>
@@ -238,7 +238,7 @@ const PeopleFirstHomepage = () => (
             <p className="mt-5 max-w-xl text-base leading-8 text-[#5f6b78]">
               Production-ready software for the operational core of your organisation—from customers and people to finance, delivery, automation, analytics, and AI. Deploy one capability now. Connect products into a unified operating system as your requirements grow.
             </p>
-            <Link to="/solutions/available" className="mt-10 inline-flex items-center gap-2 font-display text-sm font-semibold text-[#1e7f65] transition-colors hover:text-[#0f1626]">
+            <Link to="/products" className="mt-10 inline-flex items-center gap-2 font-display text-sm font-semibold text-[#1e7f65] transition-colors hover:text-[#0f1626]">
               Compare deployable products <ArrowRight className="h-4 w-4" />
             </Link>
           </AnimatedSection>
@@ -356,7 +356,7 @@ const PeopleFirstHomepage = () => (
           ))}
         </div>
         <Button asChild size="lg" className="mt-10">
-          <Link to="/things">Open the research portfolio <ArrowRight /></Link>
+          <Link to="/research">Open the research portfolio <ArrowRight /></Link>
         </Button>
       </div>
     </section>

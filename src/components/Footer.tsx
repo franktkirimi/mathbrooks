@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 const buildLinks = [
-  { label: "Products", href: "/solutions/available" },
+  { label: "Products", href: "/products" },
   { label: "Custom Systems", href: "/services" },
-  { label: "Research", href: "/things" },
-  { label: "Systems Architecture", href: "/solutions" },
+  { label: "Research", href: "/research" },
+  { label: "Systems Architecture", href: "/systems-architecture" },
 ];
 
 const companyLinks = [

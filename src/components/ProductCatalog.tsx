@@ -33,7 +33,7 @@ const ProductCard = ({ product }: { product: ProductEntry }) => {
 
   return (
     <Link
-      to={`/solutions/available/${product.slug}`}
+      to={`/products/${product.slug}`}
       className="group flex min-h-[19rem] flex-col rounded-2xl border border-black bg-white p-6 text-black transition duration-300 hover:-translate-y-1 hover:bg-[#f1fbf9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 md:min-h-[21rem] md:p-8"
       aria-label={`View ${product.shortName}`}
     >

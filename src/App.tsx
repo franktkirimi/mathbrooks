@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Toaster as Sonner } from "./components/ui/sonner";
 import { Toaster } from "./components/ui/toaster";
@@ -25,6 +25,16 @@ import Zifa from "./pages/Zifa";
 
 const queryClient = new QueryClient();
 
+const LegacyProductRedirect = () => {
+  const { slug } = useParams();
+  return <Navigate to={slug ? `/products/${slug}` : "/products"} replace />;
+};
+
+const LegacyResearchRedirect = () => {
+  const { slug } = useParams();
+  return <Navigate to={slug ? `/research/${slug}` : "/research"} replace />;
+};
+
 export const AppContent = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
@@ -33,14 +43,17 @@ export const AppContent = () => (
         <Sonner />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/solutions" element={<Products />} />
-          <Route path="/solutions/available" element={<AvailableSolutions />} />
-          <Route path="/solutions/available/:slug" element={<ProductDetail />} />
-          <Route path="/products" element={<Navigate to="/solutions" replace />} />
-          <Route path="/products/:slug" element={<Navigate to="/solutions" replace />} />
+          <Route path="/systems-architecture" element={<Products />} />
+          <Route path="/products" element={<AvailableSolutions />} />
+          <Route path="/products/:slug" element={<ProductDetail />} />
+          <Route path="/solutions" element={<Navigate to="/systems-architecture" replace />} />
+          <Route path="/solutions/available" element={<Navigate to="/products" replace />} />
+          <Route path="/solutions/available/:slug" element={<LegacyProductRedirect />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/things" element={<Things />} />
-          <Route path="/things/:slug" element={<ThingProject />} />
+          <Route path="/research" element={<Things />} />
+          <Route path="/research/:slug" element={<ThingProject />} />
+          <Route path="/things" element={<Navigate to="/research" replace />} />
+          <Route path="/things/:slug" element={<LegacyResearchRedirect />} />
           <Route path="/work" element={<Work />} />
           <Route path="/case-studies" element={<Navigate to="/work" replace />} />
           <Route path="/ai-labs" element={<AILabsPage />} />

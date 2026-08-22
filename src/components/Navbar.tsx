@@ -4,9 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const navigation = [
-  { label: "Products", href: "/solutions/available" },
+  { label: "Products", href: "/products" },
   { label: "Custom Systems", href: "/services" },
-  { label: "Research", href: "/things" },
+  { label: "Research", href: "/research" },
   { label: "About", href: "/about" },
 ];
 
@@ -16,8 +16,8 @@ const Navbar = () => {
   const location = useLocation();
 
   const isActive = (href: string) => {
-    if (href === "/solutions/available") return location.pathname.startsWith("/solutions/available");
-    if (href === "/things") return location.pathname.startsWith("/things");
+    if (href === "/products") return location.pathname.startsWith("/products");
+    if (href === "/research") return location.pathname.startsWith("/research");
     return location.pathname === href;
   };
 

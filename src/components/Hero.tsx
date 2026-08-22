@@ -63,7 +63,7 @@ const Hero = () => {
               </Button>
             </Link>
 
-            <Link to="/solutions/available" className="block w-full sm:w-auto">
+            <Link to="/products" className="block w-full sm:w-auto">
               <Button
                 variant="outline"
                 size="lg"
@@ -97,7 +97,7 @@ const Hero = () => {
             {featuredApps.map((product) => (
               <Link
                 key={product.slug}
-                to={`/solutions/available/${product.slug}`}
+                to={`/products/${product.slug}`}
                 className="group flex items-center gap-4 rounded-2xl px-2 py-4 transition-colors duration-300 hover:bg-background/60"
               >
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-background/70">
@@ -120,7 +120,7 @@ const Hero = () => {
 
           <div className="mt-3 border-t border-border/60 px-2 pt-4">
             <Link
-              to="/solutions/available"
+              to="/products"
               className="flex items-center justify-between font-display text-xs uppercase tracking-[0.16em] text-primary/80 transition-colors duration-300 hover:text-primary"
             >
               <span>Explore all products</span>

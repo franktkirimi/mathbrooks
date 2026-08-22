@@ -23,11 +23,11 @@ const ThingProject = () => {
   usePageMeta({
     title: project ? `${project.name} | MathBrooks Things` : "MathBrooks Things",
     description: project?.summary ?? "Explore the MathBrooks Things research portfolio.",
-    canonicalPath: project ? `/things/${project.slug}` : "/things",
+    canonicalPath: project ? `/research/${project.slug}` : "/research",
     keywords: project ? ["MathBrooks Things", project.name, project.domain] : ["MathBrooks Things"],
   });
 
-  if (!project) return <Navigate to="/things" replace />;
+  if (!project) return <Navigate to="/research" replace />;
 
   const Icon = projectIcons[project.slug as keyof typeof projectIcons];
   const isSoko = project.slug === "soko-a01";
@@ -39,7 +39,7 @@ const ThingProject = () => {
     <SiteLayout>
       <div className="px-6 pb-28 pt-28 md:pb-36 md:pt-32">
         <div className="mx-auto max-w-6xl">
-          <Link to="/things" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">
+          <Link to="/research" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             All Things projects
           </Link>
@@ -49,7 +49,7 @@ const ThingProject = () => {
               {thingsProjects.map((item) => (
                 <Link
                   key={item.slug}
-                  to={`/things/${item.slug}`}
+                  to={`/research/${item.slug}`}
                   aria-current={item.slug === project.slug ? "page" : undefined}
                   className={`relative py-4 text-sm font-semibold transition-colors ${
                     item.slug === project.slug ? "text-primary" : "text-muted-foreground hover:text-foreground"

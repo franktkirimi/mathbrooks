@@ -16,7 +16,7 @@ const Things = () => {
   usePageMeta({
     title: "MathBrooks Things | Research Portfolio",
     description: "MathBrooks Things is our research portfolio for embodied intelligence, inclusive language intelligence, national environmental data, and resilient infrastructure.",
-    canonicalPath: "/things",
+    canonicalPath: "/research",
     keywords: ["MathBrooks Things", "Zimbabwe research", "SOKO A01", "Ilwimi", "neFI", "Zimbabwe environmental data", "energy intelligence"],
   });
 
@@ -62,7 +62,7 @@ const Things = () => {
                 return (
                   <Link
                     key={project.slug}
-                    to={`/things/${project.slug}`}
+                    to={`/research/${project.slug}`}
                     className="group relative flex min-h-[31rem] flex-col overflow-hidden rounded-[2rem] border border-border bg-card p-7 shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[var(--shadow-overlay)] md:p-9"
                   >
                     {isSoko ? (

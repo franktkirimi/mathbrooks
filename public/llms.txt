@@ -40,11 +40,11 @@ MathBrooks Things is the company's research portfolio for embodied intelligence,
 ## Important URLs
 
 - Home: https://www.mathbrooks.com/
-- Products: https://www.mathbrooks.com/solutions/available
+- Products: https://www.mathbrooks.com/products
 - Custom Systems: https://www.mathbrooks.com/services
 - Case studies: https://www.mathbrooks.com/work
 - AI Labs: https://www.mathbrooks.com/ai-labs
-- MathBrooks Things: https://www.mathbrooks.com/things
+- MathBrooks Things: https://www.mathbrooks.com/research
 - Pricing: https://www.mathbrooks.com/pricing
 - About: https://www.mathbrooks.com/about
 - Blog: https://www.mathbrooks.com/blog

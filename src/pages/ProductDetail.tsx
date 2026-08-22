@@ -18,21 +18,10 @@ const ProductDetail = () => {
     description:
       product?.summary ??
       "MathBrooks business platforms for CRM, finance, HR, inventory, projects, automation, analytics, and AI assistant workflows.",
-    canonicalPath: product ? `/solutions/available/${product.slug}` : "/solutions/available",
+    canonicalPath: product ? `/products/${product.slug}` : "/products",
     keywords: product
       ? [product.shortName, `${product.shortName} software`, "business platform Africa", "MathBrooks"]
       : ["business software Africa", "MathBrooks products"],
-    structuredData: product
-      ? {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          name: product.name,
-          applicationCategory: "BusinessApplication",
-          description: product.summary,
-          operatingSystem: "Web",
-          url: `https://www.mathbrooks.com/solutions/available/${product.slug}`,
-        }
-      : undefined,
   });
 
   if (!product) {
