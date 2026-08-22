@@ -268,18 +268,18 @@ const Work = () => {
                 Facing a similar problem?<br />Let's scope it together.
               </h2>
               <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                Every case study started with a conversation about the workflow that wasn't working. Bring your process and we'll find the right path forward.
+                Every case study started with a systems review of the workflow under pressure. Bring the mission and constraints; we will define the right path forward.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to="/book-demo">
+              <Link to="/contact">
                 <Button className="font-display text-xs tracking-[0.15em] uppercase">
-                  Discuss a Project
+                  Request Systems Brief
                 </Button>
               </Link>
               <Link to="/services">
                 <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary">
-                  View Services
+                  View Custom Systems
                 </Button>
               </Link>
             </div>

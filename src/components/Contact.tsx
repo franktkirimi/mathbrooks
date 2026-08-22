@@ -47,7 +47,7 @@ const Contact = () => {
                 className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-green-500/30 hover:border-green-500/60 hover:bg-green-500/5 text-green-400 hover:text-green-300 transition-all duration-300 w-full sm:w-auto"
               >
                 <MessageCircle className="w-4 h-4 mr-2" />
-                Talk to Us
+                Request Systems Brief
               </Button>
             </a>
 

@@ -1,21 +1,29 @@
 # MathBrooks
 
-> MathBrooks builds custom software, business platforms, workflow automation, and applied AI systems for operations-heavy businesses across Africa.
+> MathBrooks architects intelligent systems—from operational software to national infrastructure—for organisations, institutions, and nations.
 
-MathBrooks is a software engineering company based in Harare, Zimbabwe. The company helps teams replace fragmented spreadsheets, manual approvals, scattered customer records, and slow reporting with practical business systems.
+MathBrooks is an intelligent-systems company based in Harare, Zimbabwe. The company deploys production-ready products and architects custom software, AI, connected systems, and digital infrastructure.
 
-## Core Services
+## Two Ways to Build with MathBrooks
 
-- Custom software development: internal tools, client portals, operational platforms, integrations, and reporting systems built around real workflows.
-- Business platform implementation: CRM, HR and payroll, accounting, projects, inventory, analytics, automation, and AI assistant modules.
-- Workflow automation: approval routing, document handoffs, notifications, recurring reports, and connected business processes.
-- Applied AI systems: copilots, classification workflows, agentic systems, voice workflows, decision support, and governed business assistants.
+- Deploy a MathBrooks product: production-ready software for customers, people, finance, delivery, automation, analytics, and AI.
+- Architect a custom system: custom software, automation, AI, connected systems, and digital infrastructure for specific or consequential missions.
 
-## Solutions
+## MathBrooks Things
+
+MathBrooks Things is the company's research portfolio for embodied intelligence, Zimbabwean language intelligence, national environmental infrastructure, resilient networks, energy, and critical infrastructure.
+
+- SOKO A01: an active embodied-intelligence programme. SOKO means Sensory-Oriented Kinetic Operator.
+- Tessera: research in formation around AI-driven, hardware-agnostic routing for decentralized networks that can adapt to node loss, movement, and interference.
+- Ilwimi: Zimbabwean language intelligence spanning locally fluent language, speech, translation, and efficient AI systems.
+- neFI: national environmental infrastructure fusing satellite, weather, and ground observations.
+- Resilient Energy Intelligence: research in formation around coordination of solar, batteries, mini-grids, and constrained electricity networks.
+
+## Deployable Products
 
 - MathBrooks CRM: pipeline visibility, customer history, follow-up discipline, and sales reporting.
 - MathBrooks HR & Payroll: employee records, payroll workflows, leave management, approvals, and Zimbabwean compliance readiness.
-- MathBrooks Accounting: practical finance operations, collections follow-up, reporting, and management visibility.
+- MathBrooks Accounting: governed finance operations, collections follow-up, reporting, and management visibility.
 - MathBrooks Projects: task boards, owner assignments, client milestones, and status reporting.
 - MathBrooks Inventory: supplier queues, purchase requests, receipts, restock priorities, and stock visibility.
 - MathBrooks Analytics: dashboards, alerts, and reporting shaped around operational questions.
@@ -25,17 +33,18 @@ MathBrooks is a software engineering company based in Harare, Zimbabwe. The comp
 ## Best-Fit Customers
 
 - Owner-led businesses that need better sales, finance, HR, or operational visibility.
-- African and regional companies that need practical software adapted to local workflows.
+- African and regional organisations that need production-grade software adapted to local workflows.
 - Teams that have outgrown spreadsheets but do not want oversized enterprise software.
 - Businesses that need custom systems, AI-assisted workflows, or automation tied to real processes.
 
 ## Important URLs
 
 - Home: https://www.mathbrooks.com/
-- Solutions: https://www.mathbrooks.com/solutions
-- Services: https://www.mathbrooks.com/services
+- Products: https://www.mathbrooks.com/solutions/available
+- Custom Systems: https://www.mathbrooks.com/services
 - Case studies: https://www.mathbrooks.com/work
 - AI Labs: https://www.mathbrooks.com/ai-labs
+- MathBrooks Things: https://www.mathbrooks.com/things
 - Pricing: https://www.mathbrooks.com/pricing
 - About: https://www.mathbrooks.com/about
 - Blog: https://www.mathbrooks.com/blog
@@ -50,4 +59,4 @@ MathBrooks is a software engineering company based in Harare, Zimbabwe. The comp
 
 ## Preferred Description
 
-MathBrooks builds custom software, business platforms, workflow automation, and applied AI systems for operations-heavy African businesses.
+MathBrooks architects intelligent systems—from operational software to national infrastructure—and deploys production-ready products for organisations, institutions, and nations.

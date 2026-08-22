@@ -65,7 +65,7 @@ const ProductDetail = () => {
     <SiteLayout>
       <PageHero
         eyebrow={product.category}
-        title={`${product.shortName} built for practical operations`}
+        title={`${product.shortName} built for production operations`}
         description={product.summary}
         chips={product.proofPoints}
         actions={(
@@ -326,7 +326,7 @@ const ProductDetail = () => {
                 </Link>
                 <Link to={demoPath}>
                   <Button className="font-display text-xs tracking-[0.15em] uppercase">
-                    Talk to MathBrooks
+                    Request Systems Brief
                   </Button>
                 </Link>
               </div>

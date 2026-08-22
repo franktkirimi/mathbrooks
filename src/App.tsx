@@ -20,6 +20,7 @@ const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const Products = lazy(() => import("./pages/Products"));
 const Services = lazy(() => import("./pages/Services"));
 const Things = lazy(() => import("./pages/Things"));
+const ThingProject = lazy(() => import("./pages/ThingProject"));
 const Work = lazy(() => import("./pages/Work"));
 const Zifa = lazy(() => import("./pages/Zifa"));
 
@@ -42,6 +43,7 @@ const App = () => (
               <Route path="/products/:slug" element={<ProductDetail />} />
               <Route path="/services" element={<Services />} />
               <Route path="/things" element={<Things />} />
+              <Route path="/things/:slug" element={<ThingProject />} />
               <Route path="/work" element={<Work />} />
               <Route path="/case-studies" element={<Work />} />
               <Route path="/ai-labs" element={<AILabsPage />} />

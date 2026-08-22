@@ -63,7 +63,7 @@ const Hero = () => {
               </Button>
             </Link>
 
-            <Link to="/products" className="block w-full sm:w-auto">
+            <Link to="/solutions/available" className="block w-full sm:w-auto">
               <Button
                 variant="outline"
                 size="lg"
@@ -120,7 +120,7 @@ const Hero = () => {
 
           <div className="mt-3 border-t border-border/60 px-2 pt-4">
             <Link
-              to="/products"
+              to="/solutions/available"
               className="flex items-center justify-between font-display text-xs uppercase tracking-[0.16em] text-primary/80 transition-colors duration-300 hover:text-primary"
             >
               <span>Explore all products</span>

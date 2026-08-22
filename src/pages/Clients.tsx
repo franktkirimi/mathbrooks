@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { AlertCircle, CheckCircle, Send } from "lucide-react";
+import { AlertCircle, CheckCircle, Clock3, Mail, MessageCircle, Send } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SiteLayout from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { usePageMeta } from "@/hooks/usePageMeta";
 import { products } from "@/content/siteContent";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { getFormspreeId, hasFormspreeConfig } from "@/lib/forms";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
+
+const nextSteps = [
+  ["01", "We read the context", "A person reviews what you send—not an automated qualification system."],
+  ["02", "We define the next systems step", "That may be an architecture review, a product demonstration, or a few focused questions."],
+  ["03", "You get a clear response", "We reply within one business day and tell you what we think should happen next."],
+];
 
 const Clients = () => {
   const location = useLocation();
   const isContact = location.pathname === "/contact";
   const isBookDemo = location.pathname === "/book-demo";
   const isStartTrial = location.pathname === "/start-trial";
-  const pageLabel = isStartTrial ? "Guided trial" : isBookDemo ? "Book a demo" : "Contact";
+  const pageLabel = isStartTrial ? "Guided trial" : isBookDemo ? "Book a demo" : "Request Systems Brief";
   const pageTitle = isStartTrial
-    ? "Start a guided trial."
+    ? "Start with the work you want to test."
     : isBookDemo
-      ? "Book a practical demo."
-      : "Tell us what needs to work better.";
+      ? "See the part that matters to your work."
+      : "Brief us on the system your mission requires.";
   const pageDescription = isStartTrial
-    ? "Tell us which product you would like to try. We will respond within one business day."
+    ? "Tell us which solution you want to try and what you need to learn from the trial."
     : isBookDemo
-      ? "Tell us a little about your work. We will show you the most relevant MathBrooks solution."
-      : "Share the challenge in a few words. We will respond within one business day with a clear next step.";
+      ? "Give us the context first. We will show you the MathBrooks solution most relevant to your operation."
+      : "Describe the mission, constraints, operating environment, and outcome. We will define the right architecture or deployable product path.";
   const canonicalPath = isStartTrial ? "/start-trial" : isBookDemo ? "/book-demo" : isContact ? "/contact" : "/clients";
   const searchParams = new URLSearchParams(location.search);
   const selectedProductEntry = products.find((entry) => entry.slug === searchParams.get("product"));
@@ -96,84 +102,114 @@ const Clients = () => {
 
   return (
     <SiteLayout>
-      <section className="px-6 pb-24 pt-32 md:pb-32 md:pt-40">
-        <div className="mx-auto max-w-2xl">
-          {status === "success" ? (
+      <section className="px-5 pb-20 pt-32 sm:px-6 md:pb-28 md:pt-40">
+        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:gap-20">
+          <div>
             <AnimatedSection>
-              <div className="mb-card space-y-5 text-center md:p-10">
-                <CheckCircle className="mx-auto size-10 text-success" aria-hidden="true" />
-                <div>
-                  <p className="mb-caption text-primary">Message received</p>
-                  <h1 className="mt-2 text-2xl font-bold tracking-[-0.025em] text-foreground">Thank you.</h1>
-                  <p className="mt-3 text-base leading-7 text-muted-foreground">We will get back to you within one business day.</p>
-                </div>
-                <Button onClick={resetForm} variant="outline">Send another message</Button>
-              </div>
+              <p className="mb-caption text-primary">{pageLabel}</p>
+              <h1 className="mt-6 max-w-2xl font-display text-[clamp(3.5rem,6.6vw,6.5rem)] font-semibold leading-[0.91] tracking-[-0.06em] text-black">{pageTitle}</h1>
+              <p className="mt-7 max-w-xl text-lg leading-8 text-black md:text-xl md:leading-9">{pageDescription}</p>
             </AnimatedSection>
-          ) : (
-            <>
-              <AnimatedSection className="mb-10 md:mb-12">
-                <p className="mb-caption text-primary">{pageLabel}</p>
-                <h1 className="mt-3 text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-foreground md:text-6xl">{pageTitle}</h1>
-                <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">{pageDescription}</p>
-              </AnimatedSection>
 
-              <AnimatedSection delay={80}>
-                <form onSubmit={handleSubmit} className="mb-card space-y-6" aria-describedby="contact-note">
+            <AnimatedSection delay={80} className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              <a href="mailto:cto@mathbrooks.com" className="group rounded-xl border border-black bg-white p-5 transition hover:bg-[#f4fbfa]">
+                <Mail className="h-5 w-5 text-primary" strokeWidth={1.5} aria-hidden="true" />
+                <p className="mt-5 font-display text-sm font-semibold text-black">Email directly</p>
+                <p className="mt-2 text-sm text-black">cto@mathbrooks.com</p>
+              </a>
+              <a href="https://wa.me/263783469023" target="_blank" rel="noopener noreferrer" className="group rounded-xl border border-black bg-white p-5 transition hover:bg-[#f4fbfa]">
+                <MessageCircle className="h-5 w-5 text-primary" strokeWidth={1.5} aria-hidden="true" />
+                <p className="mt-5 font-display text-sm font-semibold text-black">Use WhatsApp</p>
+                <p className="mt-2 text-sm text-black">+263 78 346 9023</p>
+              </a>
+            </AnimatedSection>
+
+            <AnimatedSection delay={120} className="mt-12 border-t border-black pt-8">
+              <div className="flex items-center gap-3">
+                <Clock3 className="h-5 w-5 text-primary" strokeWidth={1.5} aria-hidden="true" />
+                <h2 className="font-display text-xl font-semibold text-black">What happens next</h2>
+              </div>
+              <ol className="mt-6 divide-y divide-black/20 border-y border-black/20">
+                {nextSteps.map(([number, title, copy]) => (
+                  <li key={number} className="grid gap-2 py-5 sm:grid-cols-[2.5rem_1fr]">
+                    <span className="font-mono text-xs font-semibold text-primary">{number}</span>
+                    <div>
+                      <p className="font-display text-sm font-semibold text-black">{title}</p>
+                      <p className="mt-2 text-sm leading-6 text-black">{copy}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </AnimatedSection>
+          </div>
+
+          <AnimatedSection delay={100} className="lg:pt-4">
+            <div className="overflow-hidden rounded-[2rem] border border-black bg-white shadow-[var(--shadow-overlay)]">
+              <div className="border-b border-black bg-black px-6 py-6 text-white md:px-9">
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#71d7d5]">Systems brief</p>
+                <p className="mt-3 max-w-xl text-sm leading-6 text-white/70">No long brief required. Give us enough context to understand where the friction is.</p>
+              </div>
+
+              {status === "success" ? (
+                <div className="flex min-h-[32rem] flex-col items-center justify-center px-7 py-12 text-center md:px-10">
+                  <CheckCircle className="h-12 w-12 text-primary" strokeWidth={1.5} aria-hidden="true" />
+                  <p className="mt-8 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">Systems brief received</p>
+                  <h2 className="mt-4 font-display text-4xl font-semibold tracking-[-0.04em] text-black">Thank you.</h2>
+                  <p className="mt-4 max-w-sm text-base leading-7 text-black">We will respond within one business day with a clear next step.</p>
+                  <Button onClick={resetForm} variant="outline" className="mt-8">Send another message</Button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6 p-6 md:p-9" aria-describedby="contact-note">
                   {status === "error" ? (
                     <div className="flex items-start gap-3 rounded-md border border-error-border bg-error-subtle px-4 py-3 text-sm leading-6 text-error-text" role="alert">
-                      <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                      <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                       {formspreeConfigured
                         ? "We could not send your message. Please try again or use WhatsApp."
-                        : "Online messages are unavailable right now. Please use WhatsApp."}
+                        : "Online messages are unavailable right now. Please use WhatsApp or email."}
                     </div>
                   ) : null}
 
                   <div className="grid gap-5 sm:grid-cols-2">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <Label htmlFor="name">Name <span className="text-error" aria-hidden="true">*</span></Label>
                       <Input id="name" value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" required />
                     </div>
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <Label htmlFor="email">Email <span className="text-error" aria-hidden="true">*</span></Label>
                       <Input id="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@company.com" required />
                     </div>
                   </div>
 
-                  <div className="space-y-1">
-                    <Label htmlFor="company">Organisation <span className="text-muted-foreground">(optional)</span></Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="company">Organisation <span className="font-normal text-black/55">(optional)</span></Label>
                     <Input id="company" value={company} onChange={(event) => setCompany(event.target.value)} placeholder="Organisation name" />
                   </div>
 
-                  <div className="space-y-1">
-                    <Label htmlFor="description">What would you like to improve? <span className="text-error" aria-hidden="true">*</span></Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="description">What must the system achieve? <span className="text-error" aria-hidden="true">*</span></Label>
                     <Textarea
                       id="description"
                       value={description}
                       onChange={(event) => setDescription(event.target.value)}
-                      placeholder="Briefly describe the problem or project."
+                      placeholder="The mission, constraints, existing systems, and required outcome."
                       required
-                      className="min-h-32"
+                      className="min-h-44"
                     />
                   </div>
 
                   {initialProduct ? (
-                    <p className="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground">About: {initialProduct}{initialPlan ? ` · ${initialPlan}` : ""}</p>
+                    <p className="rounded-md bg-muted px-3 py-2 text-sm text-black">About: {initialProduct}{initialPlan ? ` · ${initialPlan}` : ""}</p>
                   ) : null}
 
-                  <div className="flex flex-col gap-4 pt-1 sm:flex-row sm:items-center sm:justify-between">
-                    <Button type="submit" size="lg" disabled={!isValid || status === "submitting" || !formspreeConfigured}>
-                      <Send className="size-4" />
-                      {status === "submitting" ? "Sending…" : "Send message"}
-                    </Button>
-                    <p id="contact-note" className="text-sm leading-6 text-muted-foreground">
-                      Prefer WhatsApp? <a className="mb-link" href="https://wa.me/263783469023" target="_blank" rel="noopener noreferrer">Start a chat</a>.
-                    </p>
-                  </div>
+                  <Button type="submit" size="lg" className="w-full" disabled={!isValid || status === "submitting" || !formspreeConfigured}>
+                    <Send className="h-4 w-4" />
+                    {status === "submitting" ? "Sending…" : "Request Systems Brief"}
+                  </Button>
+                  <p id="contact-note" className="text-center text-xs leading-5 text-black/65">We only use these details to respond to this enquiry.</p>
                 </form>
-              </AnimatedSection>
-            </>
-          )}
+              )}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </SiteLayout>

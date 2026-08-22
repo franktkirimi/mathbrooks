@@ -61,7 +61,7 @@ export const DecisionCTA = ({ product, onRestart }: Props) => {
           to="/contact"
           className="font-display text-sm tracking-[0.1em] uppercase text-muted-foreground hover:text-primary transition-colors duration-200"
         >
-          Talk to MathBrooks
+          Request Systems Brief
         </Link>
       </div>
 

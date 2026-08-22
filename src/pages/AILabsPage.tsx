@@ -506,18 +506,18 @@ const AILabsPage = () => {
                 If it feels impossible,<br />that's where we start.
               </h2>
               <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                Every sector in the lab started with a conversation about something that seemed too complex to automate, too expensive to detect, or too remote to reach. Bring your version of that problem.
+                Every sector in the lab started with a systems review of a mission that seemed too complex to automate, too expensive to detect, or too remote to reach. Bring your version of that mission.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to="/book-demo">
+              <Link to="/contact">
                 <Button className="font-display text-xs tracking-[0.15em] uppercase">
-                  Discuss an AI Use Case
+                  Request Systems Brief
                 </Button>
               </Link>
               <Link to="/services">
                 <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary">
-                  View AI Services
+                  View Custom Systems
                 </Button>
               </Link>
             </div>

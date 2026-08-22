@@ -88,7 +88,7 @@ const Pricing = () => {
                 Book a Demo
               </Button>
             </Link>
-            <Link to="/products">
+            <Link to="/solutions/available">
               <Button
                 variant="outline"
                 size="lg"

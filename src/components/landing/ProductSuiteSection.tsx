@@ -51,7 +51,7 @@ const ProductSuiteSection = () => {
             <p className="editorial-copy">
               Our product suite packages recurring operating needs into practical starting points. Each product can stand alone or connect into a wider MathBrooks system.
             </p>
-            <Link to="/products" className="mt-7 inline-flex items-center gap-2 text-base font-semibold text-primary">
+            <Link to="/solutions/available" className="mt-7 inline-flex items-center gap-2 text-base font-semibold text-primary">
               Explore the complete suite
               <ArrowRight className="h-4 w-4" />
             </Link>
@@ -85,7 +85,7 @@ const ProductSuiteSection = () => {
           <div>
             <h3 className="text-2xl font-semibold text-foreground">Accounting, inventory, projects, automation and AI can connect when you are ready.</h3>
           </div>
-          <Link to="/products" className="button-primary flex-none">
+          <Link to="/solutions/available" className="button-primary flex-none">
             View all products
             <ArrowRight className="h-4 w-4" />
           </Link>

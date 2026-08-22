@@ -4,16 +4,16 @@ import PeopleFirstHomepage from "@/components/landing/PeopleFirstHomepage";
 
 const Index = () => {
   usePageMeta({
-    title: "MathBrooks | Technology built around people",
+    title: "MathBrooks | Intelligent Systems Architecture",
     description:
-      "MathBrooks builds intelligent technology for people and the real world: products, AI, software, computing, and connected systems that solve meaningful problems.",
+      "MathBrooks architects intelligent systems—from operational software to national infrastructure—for organisations, institutions, and nations.",
     canonicalPath: "/",
     keywords: [
-      "people-first technology company",
-      "intelligent technology Zimbabwe",
-      "products built in Zimbabwe",
+      "intelligent systems company Zimbabwe",
+      "digital infrastructure Zimbabwe",
+      "production-grade software products",
       "applied AI systems",
-      "connected technology Africa",
+      "connected systems Africa",
     ],
   });
 

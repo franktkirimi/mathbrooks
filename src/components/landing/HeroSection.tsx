@@ -177,7 +177,7 @@ const HeroSection = () => {
           className="text-base sm:text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-xl mx-auto mb-10"
         >
           Software. Automation. AI.{" "}
-          <span className="text-foreground/80">Built for real-world impact.</span>
+          <span className="text-foreground/80">Engineered for operational impact.</span>
         </p>
 
         <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">

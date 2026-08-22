@@ -154,7 +154,7 @@ export const ProductDetailPanel = ({ product, onBack, onDecide }: Props) => {
               href="/contact"
               className="flex-1 sm:flex-none text-center rounded-xl border border-border/50 px-8 py-3.5 font-display text-sm tracking-[0.1em] uppercase text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:text-foreground"
             >
-              Talk to MathBrooks
+              Request Systems Brief
             </a>
           </div>
         </div>

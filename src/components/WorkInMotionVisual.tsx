@@ -3,7 +3,7 @@ import { useState, type CSSProperties } from "react";
 const workAreas = [
   {
     title: "Health",
-    description: "Practical systems that bring care closer to people.",
+    description: "Connected systems that bring care closer to people.",
     image: "/work-health.png",
   },
   {
@@ -51,7 +51,7 @@ const WorkInMotionVisual = () => {
             </article>
           ))}
         </div>
-        <p className="px-5 text-xs text-muted-foreground">Swipe to explore how MathBrooks works in the real world.</p>
+        <p className="px-5 text-xs text-muted-foreground">Swipe to explore MathBrooks systems in operation.</p>
       </section>
 
       <div

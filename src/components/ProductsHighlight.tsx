@@ -76,7 +76,7 @@ const ProductsHighlight = () => {
         <AnimatedSection delay={450}>
           <div className="text-center mt-10">
             <Link
-              to="/products"
+              to="/solutions/available"
               className="font-display text-xs tracking-[0.15em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
             >
               Explore all products

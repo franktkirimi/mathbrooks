@@ -166,13 +166,13 @@ const engagementPath = [
     step: "03",
     title: "Build",
     detail:
-      "We ship the minimum useful system, test it with the team, and tighten the workflow before wider rollout.",
+      "We ship the minimum production-ready system, test it with the team, and tighten the workflow before wider rollout.",
   },
   {
     step: "04",
     title: "Stabilize",
     detail:
-      "We leave the team with a clear handoff, audit trail, and a practical path for future extension.",
+      "We leave the team with a clear handoff, audit trail, and a defined path for future extension.",
   },
 ];
 
@@ -203,21 +203,20 @@ const Hero = () => {
           className="font-display font-bold leading-[1.06] tracking-[-0.03em] text-foreground mb-6"
           style={{ fontSize: "clamp(2.4rem, 7vw, 5rem)", opacity: 0 }}
         >
-          We build the systems{" "}
-          <span className="text-primary">behind your operations.</span>
+          Architect the system your mission cannot buy off the shelf.
         </h1>
 
         <p ref={subRef} className="text-base sm:text-lg font-normal text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10" style={{ opacity: 0 }}>
-          Custom software, workflow automation, and applied AI for processes too specific for a standard product — and too important to leave in spreadsheets.
+          Custom software, automation, AI, connected systems, and digital infrastructure for missions too specific, interconnected, or consequential for standard products.
         </p>
 
         <div ref={ctaRef} className="flex flex-wrap items-center justify-center gap-4" style={{ opacity: 0 }}>
-          <Link to="/book-demo">
+          <Link to="/contact">
             <Button size="lg" className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6">
-              Discuss a Project
+              Request an Architecture Review
             </Button>
           </Link>
-          <Link to="/products">
+          <Link to="/solutions/available">
             <Button
               variant="outline"
               size="lg"
@@ -242,9 +241,9 @@ const Hero = () => {
 
 const Services = () => {
   usePageMeta({
-    title: "Services | MathBrooks",
+    title: "Custom Systems | MathBrooks",
     description:
-      "MathBrooks provides custom software, workflow automation, applied AI, agentic systems, and voice automation for operations-heavy businesses.",
+      "MathBrooks architects custom software, automation, AI, connected systems, and digital infrastructure for consequential missions.",
     canonicalPath: "/services",
     keywords: [
       "custom software Zimbabwe",
@@ -267,7 +266,7 @@ const Services = () => {
                 Service Lanes
               </p>
               <h2 className="font-display text-2xl md:text-[2.4rem] font-semibold tracking-[-0.025em] leading-tight">
-                Pick the lane that matches the change you need.
+                Select the capability your system requires.
               </h2>
             </div>
           </AnimatedSection>
@@ -459,21 +458,21 @@ const Services = () => {
                   Ready to scope the workflow?
                 </p>
                 <h2 className="font-display text-2xl md:text-[2rem] font-semibold tracking-[-0.025em] leading-tight mb-4">
-                  Bring the process, and we'll map the right service path.
+                  Bring the mission, constraints, and existing systems. We will define the architecture required to move forward.
                 </h2>
                 <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                  If the problem is custom, connected, or high-risk, the service route is usually right. If it is repeatable, the product modules may be the better starting point.
+                  Custom when the workflow is specific. Ready-made when the need repeats.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <Link to="/book-demo">
+                <Link to="/contact">
                   <Button className="font-display text-xs tracking-[0.15em] uppercase">
-                    Book a Scoping Call
+                    Request an Architecture Review
                   </Button>
                 </Link>
-                <Link to="/products">
+                <Link to="/solutions/available">
                   <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary">
-                    Review Product Modules
+                    Compare Deployable Products
                   </Button>
                 </Link>
               </div>
