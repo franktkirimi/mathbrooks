@@ -44,10 +44,9 @@ const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
     --hero-teal: #1f5c5c;
-    --hero-knot-a: color-mix(in srgb, var(--hero-teal) 82%, white);
-    --hero-knot-b: color-mix(in srgb, var(--hero-teal) 68%, white);
-    --hero-knot-c: color-mix(in srgb, var(--hero-teal) 90%, black);
-    --hero-knot-d: color-mix(in srgb, var(--hero-teal) 92%, white);
+    --hero-orbit-a: color-mix(in srgb, var(--hero-teal) 82%, white);
+    --hero-orbit-b: color-mix(in srgb, var(--hero-teal) 68%, white);
+    --hero-orbit-c: color-mix(in srgb, var(--hero-teal) 90%, black);
     background: #fff;
     color: var(--hero-ink);
   }
@@ -169,23 +168,25 @@ const heroStyles = `
     margin-left: 0;
   }
 
-  .mb-hero-knot {
+  .mb-hero-orbit {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
   }
 
-  .mb-hero-knot-group {
+  .mb-hero-orbit-motion {
     transform-box: view-box;
     transform-origin: center;
-    animation: mb-knot-breathe 12s ease-in-out infinite alternate;
   }
 
-  .mb-hero-knot-a { stroke: var(--hero-knot-a); stroke-width: 9; }
-  .mb-hero-knot-b { stroke: var(--hero-knot-b); stroke-width: 8; }
-  .mb-hero-knot-c { stroke: var(--hero-knot-c); stroke-width: 7; }
-  .mb-hero-knot-d { stroke: var(--hero-knot-d); stroke-width: 8; }
+  .mb-hero-orbit-motion-a { animation: mb-orbit-a 16s ease-in-out infinite alternate; }
+  .mb-hero-orbit-motion-b { animation: mb-orbit-b 16s ease-in-out infinite alternate; }
+  .mb-hero-orbit-motion-c { animation: mb-orbit-c 16s ease-in-out infinite alternate; }
+
+  .mb-hero-orbit-a { stroke: var(--hero-orbit-a); stroke-width: 8; }
+  .mb-hero-orbit-b { stroke: var(--hero-orbit-b); stroke-width: 7; }
+  .mb-hero-orbit-c { stroke: var(--hero-orbit-c); stroke-width: 6; }
 
   .mb-hero-proof {
     position: relative;
@@ -239,9 +240,19 @@ const heroStyles = `
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes mb-knot-breathe {
-    from { transform: scaleX(1) scaleY(.995); }
-    to { transform: scaleX(.9) scaleY(1.012); }
+  @keyframes mb-orbit-a {
+    from { transform: rotate(-5deg) scaleX(.96); }
+    to { transform: rotate(5deg) scaleX(1.02); }
+  }
+
+  @keyframes mb-orbit-b {
+    from { transform: rotate(5deg) scaleX(1.02); }
+    to { transform: rotate(-5deg) scaleX(.96); }
+  }
+
+  @keyframes mb-orbit-c {
+    from { transform: rotate(-3deg) scaleX(1.03); }
+    to { transform: rotate(3deg) scaleX(.94); }
   }
 
   @media (max-width: 64rem) {
@@ -314,7 +325,7 @@ const heroStyles = `
       animation: none;
     }
 
-    .mb-hero-knot-group {
+    .mb-hero-orbit-motion {
       animation: none;
     }
   }
@@ -347,23 +358,14 @@ const PeopleFirstHomepage = () => (
 
           <div className="mb-hero-art" aria-hidden="true">
             <svg viewBox="0 0 640 470" role="presentation" shapeRendering="geometricPrecision">
-              <g className="mb-hero-knot-group">
-                <path
-                  className="mb-hero-knot mb-hero-knot-a"
-                  d="M66 -30 C92 92 190 150 320 232 C452 314 548 376 582 504"
-                />
-                <path
-                  className="mb-hero-knot mb-hero-knot-b"
-                  d="M574 -30 C548 92 450 150 320 232 C188 314 92 376 58 504"
-                />
-                <path
-                  className="mb-hero-knot mb-hero-knot-c"
-                  d="M244 -30 C486 86 474 158 320 232 C166 306 156 410 400 504"
-                />
-                <path
-                  className="mb-hero-knot mb-hero-knot-d"
-                  d="M396 -30 C154 86 166 158 320 232 C474 306 484 410 240 504"
-                />
+              <g className="mb-hero-orbit-motion mb-hero-orbit-motion-a">
+                <ellipse className="mb-hero-orbit mb-hero-orbit-a" cx="320" cy="235" rx="94" ry="220" transform="rotate(-24 320 235)" />
+              </g>
+              <g className="mb-hero-orbit-motion mb-hero-orbit-motion-b">
+                <ellipse className="mb-hero-orbit mb-hero-orbit-b" cx="320" cy="235" rx="94" ry="220" transform="rotate(24 320 235)" />
+              </g>
+              <g className="mb-hero-orbit-motion mb-hero-orbit-motion-c">
+                <ellipse className="mb-hero-orbit mb-hero-orbit-c" cx="320" cy="235" rx="212" ry="72" />
               </g>
             </svg>
           </div>
