@@ -44,9 +44,10 @@ const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
     --hero-teal: #1f5c5c;
-    --hero-rope-a: color-mix(in srgb, var(--hero-teal) 82%, white);
-    --hero-rope-b: color-mix(in srgb, var(--hero-teal) 68%, white);
-    --hero-rope-c: color-mix(in srgb, var(--hero-teal) 88%, black);
+    --hero-knot-a: color-mix(in srgb, var(--hero-teal) 82%, white);
+    --hero-knot-b: color-mix(in srgb, var(--hero-teal) 68%, white);
+    --hero-knot-c: color-mix(in srgb, var(--hero-teal) 90%, black);
+    --hero-knot-d: color-mix(in srgb, var(--hero-teal) 92%, white);
     background: #fff;
     color: var(--hero-ink);
   }
@@ -168,32 +169,23 @@ const heroStyles = `
     margin-left: 0;
   }
 
-  .mb-hero-rope {
+  .mb-hero-knot {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
+  }
+
+  .mb-hero-knot-group {
     transform-box: view-box;
     transform-origin: center;
+    animation: mb-knot-breathe 12s ease-in-out infinite alternate;
   }
 
-  .mb-hero-rope-a {
-    stroke: var(--hero-rope-a);
-    stroke-width: 14;
-    animation: mb-rope-sway-a 12s ease-in-out infinite alternate;
-  }
-
-  .mb-hero-rope-b {
-    stroke: var(--hero-rope-b);
-    stroke-width: 12;
-    animation: mb-rope-sway-b 12s ease-in-out infinite alternate;
-  }
-
-  .mb-hero-rope-c {
-    stroke: var(--hero-rope-c);
-    stroke-width: 10;
-    animation: mb-rope-sway-c 12s ease-in-out infinite alternate;
-  }
+  .mb-hero-knot-a { stroke: var(--hero-knot-a); stroke-width: 9; }
+  .mb-hero-knot-b { stroke: var(--hero-knot-b); stroke-width: 8; }
+  .mb-hero-knot-c { stroke: var(--hero-knot-c); stroke-width: 7; }
+  .mb-hero-knot-d { stroke: var(--hero-knot-d); stroke-width: 8; }
 
   .mb-hero-proof {
     position: relative;
@@ -247,19 +239,9 @@ const heroStyles = `
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes mb-rope-sway-a {
-    from { transform: translateX(-10px) scaleY(1.01); }
-    to { transform: translateX(14px) scaleY(.99); }
-  }
-
-  @keyframes mb-rope-sway-b {
-    from { transform: translateX(13px) scaleY(.99); }
-    to { transform: translateX(-11px) scaleY(1.01); }
-  }
-
-  @keyframes mb-rope-sway-c {
-    from { transform: translateX(-6px); }
-    to { transform: translateX(9px); }
+  @keyframes mb-knot-breathe {
+    from { transform: scaleX(1) scaleY(.995); }
+    to { transform: scaleX(.9) scaleY(1.012); }
   }
 
   @media (max-width: 64rem) {
@@ -332,7 +314,7 @@ const heroStyles = `
       animation: none;
     }
 
-    .mb-hero-rope {
+    .mb-hero-knot-group {
       animation: none;
     }
   }
@@ -365,18 +347,24 @@ const PeopleFirstHomepage = () => (
 
           <div className="mb-hero-art" aria-hidden="true">
             <svg viewBox="0 0 640 470" role="presentation" shapeRendering="geometricPrecision">
-              <path
-                className="mb-hero-rope mb-hero-rope-a"
-                d="M168 -28 C486 42 494 126 250 178 C88 212 96 294 336 326 C554 354 548 430 252 504"
-              />
-              <path
-                className="mb-hero-rope mb-hero-rope-b"
-                d="M454 -28 C128 54 124 138 370 184 C534 214 524 298 278 332 C72 364 84 440 394 504"
-              />
-              <path
-                className="mb-hero-rope mb-hero-rope-c"
-                d="M302 -28 C152 62 204 126 410 174 C568 210 472 278 220 326 C78 356 162 432 322 504"
-              />
+              <g className="mb-hero-knot-group">
+                <path
+                  className="mb-hero-knot mb-hero-knot-a"
+                  d="M66 -30 C92 92 190 150 320 232 C452 314 548 376 582 504"
+                />
+                <path
+                  className="mb-hero-knot mb-hero-knot-b"
+                  d="M574 -30 C548 92 450 150 320 232 C188 314 92 376 58 504"
+                />
+                <path
+                  className="mb-hero-knot mb-hero-knot-c"
+                  d="M244 -30 C486 86 474 158 320 232 C166 306 156 410 400 504"
+                />
+                <path
+                  className="mb-hero-knot mb-hero-knot-d"
+                  d="M396 -30 C154 86 166 158 320 232 C474 306 484 410 240 504"
+                />
+              </g>
             </svg>
           </div>
         </div>
