@@ -14,7 +14,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const darkHomeNav = location.pathname === "/" && !scrolled;
 
   const isActive = (href: string) => {
     if (href === "/solutions/available") return location.pathname.startsWith("/solutions/available");
@@ -45,23 +44,15 @@ const Navbar = () => {
     <header
       className={cn(
         "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
-        darkHomeNav
-          ? "bg-transparent"
-          : scrolled || mobileOpen
+        scrolled || mobileOpen
           ? "border-b border-border/20 bg-background/85 backdrop-blur-md"
           : "bg-transparent"
       )}
     >
       <nav className="relative z-10 mx-auto flex h-[4.25rem] w-full max-w-7xl items-center px-5 sm:h-[4.5rem] sm:px-6 xl:px-10">
-        <Link
-          to="/"
-          className={cn(
-            "group inline-flex shrink-0 items-center gap-2 transition-colors duration-300",
-            darkHomeNav ? "text-[#f4f6f8]" : "text-foreground"
-          )}
-        >
+        <Link to="/" className="group inline-flex shrink-0 items-center gap-2 text-foreground transition-colors duration-300">
           <img
-            src={darkHomeNav ? "/mathbrooks-mark-reversed.svg" : "/mathbrooks-mark.svg"}
+            src="/mathbrooks-mark.svg"
             alt=""
             className="h-7 w-7 object-contain transition-transform duration-300 group-hover:-rotate-3 sm:h-8 sm:w-8"
             width="64"
@@ -77,9 +68,7 @@ const Navbar = () => {
               to={item.href}
               className={cn(
                 "mb-nav-link whitespace-nowrap font-display !font-medium",
-                darkHomeNav
-                  ? isActive(item.href) ? "text-[#2aa97f]" : "text-[#9aa5b1] hover:text-[#f4f6f8]"
-                  : isActive(item.href) ? "text-primary" : "text-[hsl(var(--nav))] hover:text-primary"
+                isActive(item.href) ? "text-primary" : "text-[hsl(var(--nav))] hover:text-primary"
               )}
             >
               {item.label}
@@ -87,12 +76,7 @@ const Navbar = () => {
           ))}
           <Link
             to="/contact"
-            className={cn(
-              "action-button ml-2 whitespace-nowrap rounded-lg px-4 py-2 font-display text-sm font-medium transition-colors duration-300",
-              darkHomeNav
-                ? "!bg-[#1e7f65] !text-[#f4f6f8] hover:!bg-[#176c56]"
-                : "!bg-[#1f5c5c] hover:!bg-[#184c4c]"
-            )}
+            className="action-button ml-2 whitespace-nowrap rounded-lg px-4 py-2 font-display text-sm font-medium transition-colors duration-300 !bg-[#1f5c5c] hover:!bg-[#184c4c]"
           >
             Request Systems Brief
           </Link>
@@ -105,14 +89,9 @@ const Navbar = () => {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-controls="mobile-navigation"
             aria-expanded={mobileOpen}
-            className={cn(
-              "flex h-9 w-9 items-center justify-center rounded-md border transition-all duration-300",
-              darkHomeNav ? "border-white/20 hover:border-white/40" : "border-border/40 hover:border-primary/30"
-            )}
+            className="flex h-9 w-9 items-center justify-center rounded-md border border-border/40 transition-all duration-300 hover:border-primary/30"
           >
-            {mobileOpen
-              ? <X className={cn("h-4 w-4", darkHomeNav ? "text-[#e2e7ec]" : "text-muted-foreground")} />
-              : <Menu className={cn("h-4 w-4", darkHomeNav ? "text-[#e2e7ec]" : "text-muted-foreground")} />}
+            {mobileOpen ? <X className="h-4 w-4 text-muted-foreground" /> : <Menu className="h-4 w-4 text-muted-foreground" />}
           </button>
         </div>
       </nav>
@@ -120,8 +99,7 @@ const Navbar = () => {
       <div
         id="mobile-navigation"
         className={cn(
-          "overflow-hidden border-b transition-all duration-300 ease-in-out xl:hidden",
-          darkHomeNav ? "border-white/10 bg-[#0b1119]" : "border-border/20 bg-background/95 backdrop-blur-md",
+          "overflow-hidden border-b border-border/20 bg-background/95 backdrop-blur-md transition-all duration-300 ease-in-out xl:hidden",
           mobileOpen ? "max-h-[80vh] overflow-y-auto opacity-100" : "max-h-0 border-b-0 opacity-0"
         )}
       >
@@ -132,9 +110,7 @@ const Navbar = () => {
               to={item.href}
               className={cn(
                 "mb-nav-link border-b border-border/10 py-3 font-display !font-medium",
-                darkHomeNav
-                  ? isActive(item.href) ? "text-[#2aa97f]" : "border-white/10 text-[#9aa5b1] hover:text-[#f4f6f8]"
-                  : isActive(item.href) ? "text-primary" : "text-[hsl(var(--nav))] hover:text-primary"
+                isActive(item.href) ? "text-primary" : "text-[hsl(var(--nav))] hover:text-primary"
               )}
             >
               {item.label}
@@ -142,12 +118,7 @@ const Navbar = () => {
           ))}
           <Link
             to="/contact"
-            className={cn(
-              "action-button mt-3 inline-flex items-center justify-center rounded-lg px-4 py-3 font-display text-sm font-medium transition-colors duration-300",
-              darkHomeNav
-                ? "!bg-[#1e7f65] !text-[#f4f6f8] hover:!bg-[#176c56]"
-                : "!bg-[#1f5c5c] hover:!bg-[#184c4c]"
-            )}
+            className="action-button mt-3 inline-flex items-center justify-center rounded-lg px-4 py-3 font-display text-sm font-medium transition-colors duration-300 !bg-[#1f5c5c] hover:!bg-[#184c4c]"
           >
             Request Systems Brief
           </Link>

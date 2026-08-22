@@ -35,53 +35,42 @@ const researchProjects = [
 ];
 
 const heroProof = [
-  { value: industries.length.toString().padStart(2, "0"), label: "Operating domains" },
+  { value: "LIVE", label: "neFI Sentinel + rainfall pipelines" },
   { value: researchProjects.length.toString().padStart(2, "0"), label: "Research systems" },
   { value: technologyTools.length.toString().padStart(2, "0"), label: "Core technologies" },
 ];
 
 const heroStyles = `
   .mb-hero {
-    --hero-ink: #0b1119;
-    --hero-near-white: #f4f6f8;
-    --hero-muted: #9aa5b1;
-    --hero-strong: #e2e7ec;
-    --hero-teal: #1e7f65;
-    --schematic-structure: #5a6b7a;
-    --schematic-accent: #2aa97f;
-    background: var(--hero-ink);
-    color: var(--hero-near-white);
-    border-bottom: 1px solid #dfe5ea;
+    --hero-ink: #0f1626;
+    --hero-muted: #5a6570;
+    --hero-teal: #1f5c5c;
+    background: #fcfcfb;
+    color: var(--hero-ink);
+    border-bottom: 1px solid #e2e4e7;
   }
 
   .mb-hero-shell {
     width: min(100%, 80rem);
     margin-inline: auto;
     padding: 4.5rem 1.25rem 0;
+    animation: mb-hero-enter 360ms ease-out both;
   }
 
   .mb-hero-main {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: clamp(1rem, 2.2vw, 2rem);
-    align-items: start;
-    padding-block: clamp(4.5rem, 10vh, 6.5rem) 0;
+    padding-block: 2rem 0;
   }
 
   .mb-hero-copy {
-    position: relative;
-    z-index: 2;
-    grid-column: 1 / span 8;
     max-width: 49rem;
   }
 
   .mb-hero-title {
     max-width: 49rem;
     margin: 0;
-    color: var(--hero-near-white);
+    color: var(--hero-ink);
     font-family: var(--font-display);
-    font-size: clamp(2.75rem, 5.5vw, 5rem);
+    font-size: clamp(2.75rem, 4.7vw, 4rem);
     font-weight: 600;
     line-height: 0.95;
     letter-spacing: -0.052em;
@@ -97,8 +86,8 @@ const heroStyles = `
   }
 
   .mb-hero-subhead {
-    max-width: 49rem;
-    margin: 1.65rem 0 0;
+    max-width: 64ch;
+    margin: 2.5rem 0 0;
     color: var(--hero-muted);
     font-size: clamp(1rem, 1.45vw, 1.2rem);
     font-weight: 400;
@@ -106,7 +95,7 @@ const heroStyles = `
   }
 
   .mb-hero-subhead strong {
-    color: var(--hero-strong);
+    color: var(--hero-ink);
     font-weight: 500;
   }
 
@@ -114,7 +103,7 @@ const heroStyles = `
     display: flex;
     flex-wrap: wrap;
     gap: .75rem;
-    margin-top: 1.75rem;
+    margin-top: 3rem;
   }
 
   .mb-hero-actions a {
@@ -131,93 +120,32 @@ const heroStyles = `
 
   .mb-hero-primary {
     background: var(--hero-teal) !important;
-    color: var(--hero-near-white) !important;
+    color: #fff !important;
   }
 
   .mb-hero-primary:hover {
-    background: #176c56 !important;
+    background: #184c4c !important;
   }
 
   .mb-hero-secondary {
-    border-color: rgba(255, 255, 255, .2) !important;
+    border-color: #e2e4e7 !important;
     background: transparent !important;
-    color: var(--hero-strong) !important;
+    color: var(--hero-ink) !important;
   }
 
   .mb-hero-secondary:hover {
-    border-color: rgba(255, 255, 255, .4) !important;
+    border-color: #b8bec5 !important;
     background: transparent !important;
-    color: var(--hero-near-white) !important;
+    color: var(--hero-ink) !important;
   }
-
-  .mb-hero-art {
-    pointer-events: none;
-    position: absolute;
-    z-index: 0;
-    left: calc(62% + 1rem);
-    right: calc((100vw - min(100vw, 80rem)) / -2);
-    bottom: 4.2rem;
-    overflow: hidden;
-  }
-
-  .mb-hero-art svg {
-    display: block;
-    width: max(118%, 44rem);
-    height: auto;
-    margin-left: 0;
-  }
-
-  .mb-schematic-line {
-    fill: none;
-    stroke-width: .8;
-    stroke-linecap: square;
-    stroke-linejoin: miter;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .mb-schematic-structure {
-    stroke: var(--schematic-structure);
-  }
-
-  .mb-schematic-accent {
-    stroke: var(--schematic-accent);
-    stroke-width: 1;
-  }
-
-  .mb-schematic-boundary {
-    stroke-dasharray: 7 7;
-  }
-
-  .mb-schematic-module rect {
-    fill: var(--hero-ink);
-    stroke-width: .9;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .mb-schematic-module text,
-  .mb-schematic-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .08em;
-  }
-
-  .mb-schematic-module-structure rect { stroke: var(--schematic-structure); }
-  .mb-schematic-module-structure text { fill: var(--schematic-structure); }
-  .mb-schematic-module-accent rect { stroke: var(--schematic-accent); }
-  .mb-schematic-module-accent text { fill: var(--schematic-accent); }
-  .mb-schematic-label { fill: var(--schematic-structure); }
-  .mb-schematic-label-accent { fill: var(--schematic-accent); }
 
 
   .mb-hero-proof {
-    position: relative;
-    z-index: 2;
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: clamp(1rem, 2.2vw, 2rem);
-    border-top: 1px solid rgba(255, 255, 255, .12);
-    margin-top: 5.6rem;
+    border-top: 1px solid #e2e4e7;
+    margin-top: 7.5rem;
     padding-block: 1.15rem 1.4rem;
   }
 
@@ -230,12 +158,12 @@ const heroStyles = `
   }
 
   .mb-hero-proof-item + .mb-hero-proof-item {
-    border-left: 1px solid rgba(255, 255, 255, .12);
+    border-left: 1px solid #e2e4e7;
     padding-left: clamp(1rem, 2.2vw, 2rem);
   }
 
   .mb-hero-proof-value {
-    color: var(--schematic-accent);
+    color: var(--hero-teal);
     font-family: var(--font-mono);
     font-size: .78rem;
     font-weight: 700;
@@ -243,18 +171,18 @@ const heroStyles = `
   }
 
   .mb-hero-proof-label {
-    color: #7c8894;
-    font-family: var(--font-mono);
-    font-size: .63rem;
+    color: #6b7580;
+    font-family: var(--font-display);
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: .15em;
+    letter-spacing: .1em;
     line-height: 1.4;
     text-transform: uppercase;
   }
 
-  @media (max-width: 64rem) {
-    .mb-hero-copy { grid-column: 1 / -1; }
-    .mb-hero-art { display: none; }
+  @keyframes mb-hero-enter {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @media (max-width: 48rem) {
@@ -264,14 +192,14 @@ const heroStyles = `
 
     .mb-hero-main {
       display: block;
-      padding-block: 5rem 0;
+      padding-block: 2rem 0;
     }
 
     .mb-hero-copy { max-width: 100%; }
 
     .mb-hero-title {
       max-width: 39rem;
-      font-size: clamp(2.5rem, 11.2vw, 3.6rem);
+      font-size: 2.5rem;
       line-height: .98;
       letter-spacing: -.048em;
       text-wrap: initial;
@@ -279,7 +207,7 @@ const heroStyles = `
 
     .mb-hero-subhead {
       max-width: 35rem;
-      margin-top: 1.4rem;
+      margin-top: 2.5rem;
       font-size: 1rem;
       line-height: 1.6;
     }
@@ -287,7 +215,7 @@ const heroStyles = `
     .mb-hero-actions {
       flex-direction: column;
       align-items: stretch;
-      margin-top: 1.5rem;
+      margin-top: 3rem;
     }
 
     .mb-hero-actions a {
@@ -308,10 +236,14 @@ const heroStyles = `
     }
 
     .mb-hero-proof-item + .mb-hero-proof-item {
-      border-top: 1px solid rgba(255, 255, 255, .1);
+      border-top: 1px solid #e2e4e7;
       border-left: 0;
       padding-left: 0;
     }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mb-hero-shell { animation: none; }
   }
 
 `;
@@ -341,71 +273,6 @@ const PeopleFirstHomepage = () => (
             </div>
           </div>
 
-          <div className="mb-hero-art" aria-hidden="true">
-            <svg viewBox="0 0 720 520" role="presentation" shapeRendering="geometricPrecision">
-              <g className="mb-schematic-line mb-schematic-structure">
-                <rect className="mb-schematic-boundary" x="24" y="64" width="500" height="380" rx="2" />
-                <path d="M24 38 H524 M24 32 V44 M524 32 V44" />
-                <path d="M12 64 V444 M6 64 H18 M6 444 H18" />
-                <path d="M12 64 H36 M24 52 V76 M512 64 H536 M524 52 V76" />
-                <path d="M12 444 H36 M24 432 V456 M512 444 H536 M524 432 V456" />
-                <path d="M180 132 H210 V332 M180 232 H210 M180 332 H210 M210 232 H240" />
-              </g>
-
-              <g className="mb-schematic-line mb-schematic-accent">
-                <path d="M370 232 H395 M452 260 V316 M395 344 H370 M305 372 V410 H524" />
-              </g>
-
-              <text className="mb-schematic-label" x="24" y="24">NEFI / NATIONAL ENVIRONMENTAL DATA SUBSYSTEM</text>
-              <text className="mb-schematic-label" x="388" y="84">Rev. 04 — plan view</text>
-              <text className="mb-schematic-label" x="230" y="35">5000 SYSTEM EXTENT</text>
-              <text className="mb-schematic-label" x="24" y="478">SCALE 1:250 / ORTHOGRAPHIC</text>
-              <text className="mb-schematic-label" x="414" y="478">HARARE / ZW</text>
-              <text className="mb-schematic-label mb-schematic-label-accent" x="424" y="401">QUERY ACCESS</text>
-
-              <g className="mb-schematic-module mb-schematic-module-structure">
-                <rect x="50" y="104" width="130" height="56" rx="2" />
-                <text x="64" y="127">
-                  <tspan x="64">Sentinel</tspan>
-                  <tspan x="64" dy="15">observations</tspan>
-                </text>
-              </g>
-              <g className="mb-schematic-module mb-schematic-module-structure">
-                <rect x="50" y="204" width="130" height="56" rx="2" />
-                <text x="64" y="236">ZMS weather</text>
-              </g>
-              <g className="mb-schematic-module mb-schematic-module-structure">
-                <rect x="50" y="304" width="130" height="56" rx="2" />
-                <text x="64" y="336">Ground reports</text>
-              </g>
-
-              <g className="mb-schematic-module mb-schematic-module-accent">
-                <rect x="240" y="204" width="130" height="56" rx="2" />
-                <text x="252" y="227">
-                  <tspan x="252">Spatial + time</tspan>
-                  <tspan x="252" dy="15">alignment</tspan>
-                </text>
-              </g>
-              <g className="mb-schematic-module mb-schematic-module-accent">
-                <rect x="395" y="204" width="115" height="56" rx="2" />
-                <text x="407" y="227">
-                  <tspan x="407">Quality</tspan>
-                  <tspan x="407" dy="15">control</tspan>
-                </text>
-              </g>
-              <g className="mb-schematic-module mb-schematic-module-accent">
-                <rect x="395" y="316" width="115" height="56" rx="2" />
-                <text x="407" y="339">
-                  <tspan x="407">National data</tspan>
-                  <tspan x="407" dy="15">cube</tspan>
-                </text>
-              </g>
-              <g className="mb-schematic-module mb-schematic-module-accent">
-                <rect x="240" y="316" width="130" height="56" rx="2" />
-                <text x="252" y="348">NEFI query API</text>
-              </g>
-            </svg>
-          </div>
         </div>
 
         <div className="mb-hero-proof" aria-label="MathBrooks portfolio scale">
