@@ -41,21 +41,21 @@ const heroProof = [
 ];
 
 const isoColumns = [
-  { row: 0, column: 0, height: 70 },
-  { row: 0, column: 1, height: 124 },
-  { row: 1, column: 0, height: 145 },
-  { row: 0, column: 2, height: 88 },
-  { row: 1, column: 1, height: 104 },
-  { row: 2, column: 0, height: 82 },
-  { row: 1, column: 2, height: 132 },
-  { row: 2, column: 1, height: 116 },
-  { row: 2, column: 2, height: 64 },
+  { row: 0, column: 0, height: 91 },
+  { row: 0, column: 1, height: 161 },
+  { row: 1, column: 0, height: 189 },
+  { row: 0, column: 2, height: 114 },
+  { row: 1, column: 1, height: 135 },
+  { row: 2, column: 0, height: 107 },
+  { row: 1, column: 2, height: 172 },
+  { row: 2, column: 1, height: 151 },
+  { row: 2, column: 2, height: 83 },
 ];
 
-const ISO_HALF_WIDTH = 48;
-const ISO_HALF_HEIGHT = 25;
-const ISO_STEP_X = 66;
-const ISO_STEP_Y = 36;
+const ISO_HALF_WIDTH = 34;
+const ISO_HALF_HEIGHT = 20;
+const ISO_STEP_X = 72;
+const ISO_STEP_Y = 42;
 const ISO_ORIGIN_X = 320;
 const ISO_ORIGIN_Y = 255;
 
@@ -75,9 +75,9 @@ const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
     --hero-teal: #1f5c5c;
-    --hero-teal-top: #9fe1cb;
-    --hero-teal-left: #1d9e75;
-    --hero-teal-right: #0f6e56;
+    --hero-teal-top: #5bb9b9;
+    --hero-teal-left: #3c8b8b;
+    --hero-teal-right: #255656;
     background: #fff;
     color: var(--hero-ink);
   }
@@ -187,14 +187,14 @@ const heroStyles = `
     z-index: 0;
     left: calc(62% + 1rem);
     right: calc((100vw - min(100vw, 80rem)) / -2);
-    bottom: -5.6rem;
+    bottom: 1.9rem;
     overflow: hidden;
     animation: mb-hero-art-settle 720ms 190ms cubic-bezier(.22, 1, .36, 1) both;
   }
 
   .mb-hero-art svg {
     display: block;
-    width: max(100%, 34rem);
+    width: max(118%, 40rem);
     height: auto;
     margin-left: 0;
   }
@@ -350,7 +350,6 @@ const PeopleFirstHomepage = () => (
 
           <div className="mb-hero-art" aria-hidden="true">
             <svg viewBox="0 0 640 470" role="presentation" shapeRendering="geometricPrecision">
-              <polygon points="320,215 532,326 320,447 108,326" fill="#fff" stroke="var(--hero-teal-top)" strokeWidth="2" />
               {isoColumns.map((column) => {
                 const faces = columnGeometry(column.row, column.column, column.height);
                 return (

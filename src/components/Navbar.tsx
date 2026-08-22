@@ -76,7 +76,7 @@ const Navbar = () => {
           ))}
           <Link
             to="/contact"
-            className="action-button ml-2 whitespace-nowrap rounded-lg px-4 py-2 font-display text-sm font-medium transition-colors duration-300"
+            className="action-button ml-2 whitespace-nowrap rounded-lg px-4 py-2 font-display text-sm font-medium transition-colors duration-300 !bg-[#1f5c5c] hover:!bg-[#184c4c]"
           >
             Request Systems Brief
           </Link>
@@ -118,7 +118,7 @@ const Navbar = () => {
           ))}
           <Link
             to="/contact"
-            className="action-button mt-3 inline-flex items-center justify-center rounded-lg px-4 py-3 font-display text-sm font-medium transition-colors duration-300"
+            className="action-button mt-3 inline-flex items-center justify-center rounded-lg px-4 py-3 font-display text-sm font-medium transition-colors duration-300 !bg-[#1f5c5c] hover:!bg-[#184c4c]"
           >
             Request Systems Brief
           </Link>
