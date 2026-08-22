@@ -6,7 +6,7 @@ const projectRoot = process.cwd();
 const distDir = join(projectRoot, "dist");
 const template = await readFile(join(distDir, "index.html"), "utf8");
 const serverEntry = await import(pathToFileURL(join(projectRoot, ".prerender", "entry-server.js")).href);
-const { publicRoutes, render } = serverEntry;
+const { illustrativeProductCopyByPath, publicRoutes, render } = serverEntry;
 
 const escapeHtml = (value) =>
   value
@@ -92,6 +92,13 @@ const assertRenderedContent = (page, html) => {
   for (const href of requiredLinks) {
     if (!html.includes(`href="${href}"`)) {
       throw new Error(`${page.path}: prerendered navigation is missing href=${href}`);
+    }
+  }
+
+  const illustrativeCopy = illustrativeProductCopyByPath[page.path] || [];
+  for (const sampleText of illustrativeCopy) {
+    if (html.includes(sampleText)) {
+      throw new Error(`${page.path}: illustrative product copy leaked into prerendered HTML: ${sampleText}`);
     }
   }
 };

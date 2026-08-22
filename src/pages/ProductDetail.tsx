@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
 import PageHero from "@/components/site/PageHero";
 import ProductMockup from "@/components/site/ProductMockup";
+import IllustrativeProductData from "@/components/site/IllustrativeProductData";
 import SiteLayout from "@/components/site/SiteLayout";
 import { products } from "@/content/siteContent";
 import { usePageMeta } from "@/hooks/usePageMeta";
@@ -105,18 +106,20 @@ const ProductDetail = () => {
             </div>
 
             {/* Open stat blocks */}
-            <div className="grid grid-cols-3 gap-6">
-              {heroMetrics.map((metric) => (
-                <div key={metric.label}>
-                  <p className="font-display text-2xl sm:text-3xl font-semibold text-primary leading-none mb-1">
-                    {metric.value}
-                  </p>
-                  <p className="font-display text-[0.55rem] tracking-[0.18em] uppercase text-muted-foreground/60">
-                    {metric.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <IllustrativeProductData>
+              <div className="grid grid-cols-3 gap-6">
+                {heroMetrics.map((metric) => (
+                  <div key={metric.label}>
+                    <p className="font-display text-2xl sm:text-3xl font-semibold text-primary leading-none mb-1">
+                      {metric.value}
+                    </p>
+                    <p className="font-display text-[0.55rem] tracking-[0.18em] uppercase text-muted-foreground/60">
+                      {metric.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </IllustrativeProductData>
 
             {/* Support info — open text, no cards */}
             <div className="space-y-5 border-t border-border/20 pt-6">
