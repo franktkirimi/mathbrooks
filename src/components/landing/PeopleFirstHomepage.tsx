@@ -2,6 +2,7 @@ import { ArrowRight, BrainCircuit, Cable, Cpu, Database, Sparkles, Workflow } fr
 import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import LazyIndustryOrbit from "@/components/LazyIndustryOrbit";
+import LivingMathBrooksGrid from "@/components/landing/LivingMathBrooksGrid";
 import { Button } from "@/components/ui/button";
 import { industries, technologyTools } from "@/content/ecosystemContent";
 import { toast } from "@/hooks/use-toast";
@@ -45,12 +46,19 @@ const heroStyles = `
     --hero-ink: #0f1626;
     --hero-muted: #5a6570;
     --hero-teal: #1f5c5c;
-    background: #fcfcfb;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 78% 22%, rgb(100 227 226 / 0.16), transparent 25rem),
+      linear-gradient(145deg, #ffffff 0%, #f7fbfb 53%, #edf9f8 100%);
     color: var(--hero-ink);
     border-bottom: 1px solid #e2e4e7;
   }
 
   .mb-hero-shell {
+    position: relative;
+    z-index: 1;
     width: min(100%, 80rem);
     margin-inline: auto;
     padding: 4.5rem 1.25rem 0;
@@ -58,19 +66,21 @@ const heroStyles = `
   }
 
   .mb-hero-main {
-    padding-block: 2rem 0;
+    position: relative;
+    z-index: 2;
+    padding-block: clamp(4.5rem, 10vh, 6.5rem) 0;
   }
 
   .mb-hero-copy {
-    max-width: 49rem;
+    max-width: 51rem;
   }
 
   .mb-hero-title {
-    max-width: 49rem;
+    max-width: 51rem;
     margin: 0;
     color: var(--hero-ink);
     font-family: var(--font-display);
-    font-size: clamp(2.75rem, 4.7vw, 4rem);
+    font-size: clamp(3rem, 5.6vw, 5.35rem);
     font-weight: 600;
     line-height: 0.95;
     letter-spacing: -0.052em;
@@ -129,23 +139,43 @@ const heroStyles = `
 
   .mb-hero-secondary {
     border-color: #e2e4e7 !important;
-    background: transparent !important;
+    background: rgb(255 255 255 / .7) !important;
+    backdrop-filter: blur(8px);
     color: var(--hero-ink) !important;
   }
 
   .mb-hero-secondary:hover {
     border-color: #b8bec5 !important;
-    background: transparent !important;
+    background: rgb(255 255 255 / .9) !important;
     color: var(--hero-ink) !important;
+  }
+
+  .mb-hero-art {
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+    inset-block: 0;
+    right: -19vw;
+    display: flex;
+    width: 68vw;
+    min-width: 48rem;
+    align-items: center;
+    opacity: .58;
+  }
+
+  .mb-hero-art > div {
+    width: 100%;
   }
 
 
   .mb-hero-proof {
+    position: relative;
+    z-index: 2;
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: clamp(1rem, 2.2vw, 2rem);
     border-top: 1px solid #e2e4e7;
-    margin-top: 7.5rem;
+    margin-top: clamp(5rem, 10vh, 7.5rem);
     padding-block: 1.15rem 1.4rem;
   }
 
@@ -192,7 +222,7 @@ const heroStyles = `
 
     .mb-hero-main {
       display: block;
-      padding-block: 2rem 0;
+      padding-block: 4rem 0;
     }
 
     .mb-hero-copy { max-width: 100%; }
@@ -203,6 +233,15 @@ const heroStyles = `
       line-height: .98;
       letter-spacing: -.048em;
       text-wrap: initial;
+    }
+
+    .mb-hero-art {
+      inset-block: 2rem 0;
+      right: -35rem;
+      display: flex;
+      width: 58rem;
+      min-width: 0;
+      opacity: .18;
     }
 
     .mb-hero-subhead {
@@ -242,6 +281,14 @@ const heroStyles = `
     }
   }
 
+  @media (min-width: 48.01rem) and (max-width: 64rem) {
+    .mb-hero-art {
+      right: -34rem;
+      width: 64rem;
+      opacity: .24;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .mb-hero-shell { animation: none; }
   }
@@ -253,6 +300,9 @@ const PeopleFirstHomepage = () => (
     <style>{heroStyles}</style>
     <section className="mb-hero overflow-hidden" aria-labelledby="home-hero-title">
       <div className="mb-hero-shell">
+        <div className="mb-hero-art" aria-hidden="true">
+          <LivingMathBrooksGrid />
+        </div>
         <div className="mb-hero-main">
           <div className="mb-hero-copy">
             <h1 id="home-hero-title" className="mb-hero-title">

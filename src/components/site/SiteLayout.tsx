@@ -35,14 +35,12 @@ const RouteScroll = () => {
 };
 
 const SiteLayout = ({ children }: SiteLayoutProps) => {
-  const { pathname } = useLocation();
-
   return (
     <div className="site-shell min-h-screen bg-background overflow-x-hidden">
       <HashScroll />
       <RouteScroll />
       <ScrollProgress />
-      {pathname !== "/" ? <CursorGlow /> : null}
+      <CursorGlow />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:text-sm focus:font-display focus:tracking-wider focus:uppercase"

@@ -27,6 +27,7 @@ const LazyIndustryOrbit = () => {
 
   return (
     <div ref={hostRef} aria-hidden="true" className="pointer-events-none absolute inset-0">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_52%,hsl(var(--primary)/0.07),transparent_34%)]" />
       {shouldLoad ? <Suspense fallback={null}><IndustryOrbit /></Suspense> : null}
     </div>
   );
