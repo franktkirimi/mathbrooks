@@ -283,7 +283,7 @@ const Pricing = () => {
                 </div>
 
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
-                  <Link to={`/products/${product.slug}`}>
+                  <Link to={`/solutions/available/${product.slug}`}>
                     <Button
                       variant="outline"
                       className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary"

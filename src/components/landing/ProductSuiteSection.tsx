@@ -65,7 +65,7 @@ const ProductSuiteSection = () => {
           title={<>{headline} <span className="text-primary">{highlight}</span></>}
           description={product.summary}
           bullets={product.proofPoints.slice(0, 3)}
-          primaryAction={{ label: `Explore ${product.shortName}`, href: `/products/${product.slug}` }}
+          primaryAction={{ label: `Explore ${product.shortName}`, href: `/solutions/available/${product.slug}` }}
           secondaryAction={index === 0 ? { label: "See product pricing", href: "/pricing" } : undefined}
           visual={(
             <ProductMockup

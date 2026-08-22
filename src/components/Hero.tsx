@@ -97,7 +97,7 @@ const Hero = () => {
             {featuredApps.map((product) => (
               <Link
                 key={product.slug}
-                to={`/products/${product.slug}`}
+                to={`/solutions/available/${product.slug}`}
                 className="group flex items-center gap-4 rounded-2xl px-2 py-4 transition-colors duration-300 hover:bg-background/60"
               >
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-background/70">

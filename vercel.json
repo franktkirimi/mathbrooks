@@ -1,4 +1,6 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -11,10 +13,11 @@
       ]
     }
   ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+  "redirects": [
+    { "source": "/products", "destination": "/solutions", "permanent": true },
+    { "source": "/products/:slug", "destination": "/solutions/available/:slug", "permanent": true },
+    { "source": "/case-studies", "destination": "/work", "permanent": true },
+    { "source": "/resources", "destination": "/blog", "permanent": true },
+    { "source": "/clients", "destination": "/contact", "permanent": true }
   ]
 }

@@ -1,13 +1,14 @@
-import { createRoot } from "react-dom/client";
-import { Analytics } from "@vercel/analytics/react";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
 document.documentElement.classList.add("light");
 
-createRoot(document.getElementById("root")!).render(
-  <>
-    <App />
-    <Analytics />
-  </>
-);
+const root = document.getElementById("root")!;
+const application = <App />;
+
+if (root.hasChildNodes()) {
+  hydrateRoot(root, application);
+} else {
+  createRoot(root).render(application);
+}

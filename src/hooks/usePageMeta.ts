@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { getRouteMeta } from "@/seo/routes";
 
 type PageMeta = {
   title: string;
@@ -49,12 +50,21 @@ export function usePageMeta({
   structuredData,
 }: PageMeta) {
   useEffect(() => {
-    document.title = title;
+    const registeredMeta = getRouteMeta(window.location.pathname);
+    const resolvedTitle = registeredMeta?.title ?? title;
+    const resolvedDescription = registeredMeta?.description ?? description;
+    const resolvedOgType = registeredMeta?.ogType ?? ogType;
+    const canonicalUrl = registeredMeta?.canonical ??
+      (canonicalPath ? `https://www.mathbrooks.com${canonicalPath}` : undefined);
 
-    upsertMetaTag('meta[name="description"]', { name: "description", content: description });
+    document.title = resolvedTitle;
+
+    upsertMetaTag('meta[name="description"]', { name: "description", content: resolvedDescription });
     upsertMetaTag('meta[name="robots"]', {
       name: "robots",
-      content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      content: registeredMeta?.indexable === false
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
     });
 
     if (keywords?.length) {
@@ -64,12 +74,12 @@ export function usePageMeta({
       });
     }
 
-    upsertMetaTag('meta[property="og:title"]', { property: "og:title", content: title });
+    upsertMetaTag('meta[property="og:title"]', { property: "og:title", content: resolvedTitle });
     upsertMetaTag('meta[property="og:description"]', {
       property: "og:description",
-      content: description,
+      content: resolvedDescription,
     });
-    upsertMetaTag('meta[property="og:type"]', { property: "og:type", content: ogType });
+    upsertMetaTag('meta[property="og:type"]', { property: "og:type", content: resolvedOgType });
     upsertMetaTag('meta[property="og:site_name"]', { property: "og:site_name", content: "MathBrooks" });
     upsertMetaTag('meta[property="og:locale"]', { property: "og:locale", content: "en_US" });
     upsertMetaTag('meta[property="og:image"]', {
@@ -80,18 +90,17 @@ export function usePageMeta({
       name: "twitter:card",
       content: "summary_large_image",
     });
-    upsertMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: title });
+    upsertMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: resolvedTitle });
     upsertMetaTag('meta[name="twitter:description"]', {
       name: "twitter:description",
-      content: description,
+      content: resolvedDescription,
     });
     upsertMetaTag('meta[name="twitter:image"]', {
       name: "twitter:image",
       content: "https://www.mathbrooks.com/og-image.png",
     });
 
-    if (canonicalPath) {
-      const canonicalUrl = `https://www.mathbrooks.com${canonicalPath}`;
+    if (canonicalUrl) {
       upsertLinkTag('link[rel="canonical"]', { rel: "canonical", href: canonicalUrl });
       upsertMetaTag('meta[property="og:url"]', { property: "og:url", content: canonicalUrl });
     }
