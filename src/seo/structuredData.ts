@@ -161,10 +161,21 @@ const article = (page: RouteMeta): JsonLdNode | undefined => {
     headline: post.title,
     description: page.description,
     url: page.canonical,
-    datePublished: post.publishedOn,
-    dateModified: page.lastmod,
-    author: { "@id": ORGANIZATION_ID },
-    publisher: { "@id": ORGANIZATION_ID },
+    image: `${SITE_ORIGIN}${page.ogImage}`,
+    datePublished: `${post.publishedOn}T00:00:00+02:00`,
+    dateModified: `${page.lastmod}T00:00:00+02:00`,
+    author: {
+      "@type": "Organization",
+      "@id": ORGANIZATION_ID,
+      name: "MathBrooks",
+      url: SITE_ORIGIN,
+    },
+    publisher: {
+      "@type": "Organization",
+      "@id": ORGANIZATION_ID,
+      name: "MathBrooks",
+      url: SITE_ORIGIN,
+    },
     inLanguage: "en",
   };
 };

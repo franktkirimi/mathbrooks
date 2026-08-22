@@ -83,7 +83,7 @@ for (const page of publicRoutes) {
   if (page.ogType === "article") {
     const article = graph.find((node) => node["@type"] === "Article");
     if (!article) throw new Error(`${page.path}: schema missing Article`);
-    if (article.dateModified !== page.lastmod || article.datePublished !== page.lastmod) {
+    if (!article.dateModified.startsWith(page.lastmod) || !article.datePublished.startsWith(page.lastmod)) {
       throw new Error(`${page.path}: article dates do not match sitemap lastmod ${page.lastmod}`);
     }
   }
