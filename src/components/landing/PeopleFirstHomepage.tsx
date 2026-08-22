@@ -42,13 +42,16 @@ const heroProof = [
 
 const heroStyles = `
   .mb-hero {
-    --hero-ink: #0f1626;
-    --hero-teal: #1f5c5c;
-    --hero-orbit-a: color-mix(in srgb, var(--hero-teal) 82%, white);
-    --hero-orbit-b: color-mix(in srgb, var(--hero-teal) 68%, white);
-    --hero-orbit-c: color-mix(in srgb, var(--hero-teal) 90%, black);
-    background: #fff;
-    color: var(--hero-ink);
+    --hero-ink: #0b1119;
+    --hero-near-white: #f4f6f8;
+    --hero-muted: #9aa5b1;
+    --hero-strong: #e2e7ec;
+    --hero-teal: #1e7f65;
+    --schematic-structure: #5a6b7a;
+    --schematic-accent: #2aa97f;
+    background: var(--hero-ink);
+    color: var(--hero-near-white);
+    border-bottom: 1px solid #dfe5ea;
   }
 
   .mb-hero-shell {
@@ -76,14 +79,13 @@ const heroStyles = `
   .mb-hero-title {
     max-width: 49rem;
     margin: 0;
-    color: var(--hero-ink);
+    color: var(--hero-near-white);
     font-family: var(--font-display);
     font-size: clamp(2.75rem, 5.5vw, 5rem);
     font-weight: 600;
     line-height: 0.95;
     letter-spacing: -0.052em;
     text-wrap: balance;
-    animation: mb-hero-fade-up 520ms cubic-bezier(.22, 1, .36, 1) both;
   }
 
   .mb-hero-line-one {
@@ -97,16 +99,15 @@ const heroStyles = `
   .mb-hero-subhead {
     max-width: 49rem;
     margin: 1.65rem 0 0;
-    color: color-mix(in srgb, var(--hero-ink) 68%, white);
+    color: var(--hero-muted);
     font-size: clamp(1rem, 1.45vw, 1.2rem);
     font-weight: 400;
     line-height: 1.65;
-    animation: mb-hero-fade-up 520ms 60ms cubic-bezier(.22, 1, .36, 1) both;
   }
 
   .mb-hero-subhead strong {
-    color: var(--hero-ink);
-    font-weight: 600;
+    color: var(--hero-strong);
+    font-weight: 500;
   }
 
   .mb-hero-actions {
@@ -114,7 +115,6 @@ const heroStyles = `
     flex-wrap: wrap;
     gap: .75rem;
     margin-top: 1.75rem;
-    animation: mb-hero-fade-up 520ms 120ms cubic-bezier(.22, 1, .36, 1) both;
   }
 
   .mb-hero-actions a {
@@ -131,23 +131,23 @@ const heroStyles = `
 
   .mb-hero-primary {
     background: var(--hero-teal) !important;
-    color: #fff !important;
+    color: var(--hero-near-white) !important;
   }
 
   .mb-hero-primary:hover {
-    background: #184c4c !important;
+    background: #176c56 !important;
   }
 
   .mb-hero-secondary {
-    border-color: color-mix(in srgb, var(--hero-ink) 32%, white) !important;
-    background: rgba(255, 255, 255, .76) !important;
-    color: var(--hero-ink) !important;
+    border-color: rgba(255, 255, 255, .2) !important;
+    background: transparent !important;
+    color: var(--hero-strong) !important;
   }
 
   .mb-hero-secondary:hover {
-    border-color: var(--hero-teal) !important;
-    background: #fff !important;
-    color: var(--hero-teal) !important;
+    border-color: rgba(255, 255, 255, .4) !important;
+    background: transparent !important;
+    color: var(--hero-near-white) !important;
   }
 
   .mb-hero-art {
@@ -156,37 +156,59 @@ const heroStyles = `
     z-index: 0;
     left: calc(62% + 1rem);
     right: calc((100vw - min(100vw, 80rem)) / -2);
-    bottom: 1.9rem;
+    bottom: 4.2rem;
     overflow: hidden;
-    animation: mb-hero-art-settle 720ms 190ms cubic-bezier(.22, 1, .36, 1) both;
   }
 
   .mb-hero-art svg {
     display: block;
-    width: max(118%, 40rem);
+    width: max(118%, 44rem);
     height: auto;
     margin-left: 0;
   }
 
-  .mb-hero-orbit {
+  .mb-schematic-line {
     fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    stroke-width: .8;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
     vector-effect: non-scaling-stroke;
   }
 
-  .mb-hero-orbit-motion {
-    transform-box: view-box;
-    transform-origin: center;
+  .mb-schematic-structure {
+    stroke: var(--schematic-structure);
   }
 
-  .mb-hero-orbit-motion-a { animation: mb-orbit-a 16s ease-in-out infinite alternate; }
-  .mb-hero-orbit-motion-b { animation: mb-orbit-b 16s ease-in-out infinite alternate; }
-  .mb-hero-orbit-motion-c { animation: mb-orbit-c 16s ease-in-out infinite alternate; }
+  .mb-schematic-accent {
+    stroke: var(--schematic-accent);
+    stroke-width: 1;
+  }
 
-  .mb-hero-orbit-a { stroke: var(--hero-orbit-a); stroke-width: 8; }
-  .mb-hero-orbit-b { stroke: var(--hero-orbit-b); stroke-width: 7; }
-  .mb-hero-orbit-c { stroke: var(--hero-orbit-c); stroke-width: 6; }
+  .mb-schematic-boundary {
+    stroke-dasharray: 7 7;
+  }
+
+  .mb-schematic-module rect {
+    fill: var(--hero-ink);
+    stroke-width: .9;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .mb-schematic-module text,
+  .mb-schematic-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .08em;
+  }
+
+  .mb-schematic-module-structure rect { stroke: var(--schematic-structure); }
+  .mb-schematic-module-structure text { fill: var(--schematic-structure); }
+  .mb-schematic-module-accent rect { stroke: var(--schematic-accent); }
+  .mb-schematic-module-accent text { fill: var(--schematic-accent); }
+  .mb-schematic-label { fill: var(--schematic-structure); }
+  .mb-schematic-label-accent { fill: var(--schematic-accent); }
+
 
   .mb-hero-proof {
     position: relative;
@@ -194,7 +216,7 @@ const heroStyles = `
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: clamp(1rem, 2.2vw, 2rem);
-    border-top: 1px solid color-mix(in srgb, var(--hero-ink) 17%, white);
+    border-top: 1px solid rgba(255, 255, 255, .12);
     margin-top: 5.6rem;
     padding-block: 1.15rem 1.4rem;
   }
@@ -208,12 +230,12 @@ const heroStyles = `
   }
 
   .mb-hero-proof-item + .mb-hero-proof-item {
-    border-left: 1px solid color-mix(in srgb, var(--hero-ink) 12%, white);
+    border-left: 1px solid rgba(255, 255, 255, .12);
     padding-left: clamp(1rem, 2.2vw, 2rem);
   }
 
   .mb-hero-proof-value {
-    color: var(--hero-teal);
+    color: var(--schematic-accent);
     font-family: var(--font-mono);
     font-size: .78rem;
     font-weight: 700;
@@ -221,38 +243,13 @@ const heroStyles = `
   }
 
   .mb-hero-proof-label {
-    color: color-mix(in srgb, var(--hero-ink) 67%, white);
+    color: #7c8894;
     font-family: var(--font-mono);
     font-size: .63rem;
     font-weight: 600;
     letter-spacing: .15em;
     line-height: 1.4;
     text-transform: uppercase;
-  }
-
-  @keyframes mb-hero-fade-up {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes mb-hero-art-settle {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes mb-orbit-a {
-    from { transform: rotate(-5deg) scaleX(.96); }
-    to { transform: rotate(5deg) scaleX(1.02); }
-  }
-
-  @keyframes mb-orbit-b {
-    from { transform: rotate(5deg) scaleX(1.02); }
-    to { transform: rotate(-5deg) scaleX(.96); }
-  }
-
-  @keyframes mb-orbit-c {
-    from { transform: rotate(-3deg) scaleX(1.03); }
-    to { transform: rotate(3deg) scaleX(.94); }
   }
 
   @media (max-width: 64rem) {
@@ -311,24 +308,12 @@ const heroStyles = `
     }
 
     .mb-hero-proof-item + .mb-hero-proof-item {
-      border-top: 1px solid color-mix(in srgb, var(--hero-ink) 10%, white);
+      border-top: 1px solid rgba(255, 255, 255, .1);
       border-left: 0;
       padding-left: 0;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .mb-hero-title,
-    .mb-hero-subhead,
-    .mb-hero-actions,
-    .mb-hero-art {
-      animation: none;
-    }
-
-    .mb-hero-orbit-motion {
-      animation: none;
-    }
-  }
 `;
 
 const PeopleFirstHomepage = () => (
@@ -357,15 +342,67 @@ const PeopleFirstHomepage = () => (
           </div>
 
           <div className="mb-hero-art" aria-hidden="true">
-            <svg viewBox="0 0 640 470" role="presentation" shapeRendering="geometricPrecision">
-              <g className="mb-hero-orbit-motion mb-hero-orbit-motion-a">
-                <ellipse className="mb-hero-orbit mb-hero-orbit-a" cx="320" cy="235" rx="94" ry="220" transform="rotate(-24 320 235)" />
+            <svg viewBox="0 0 720 520" role="presentation" shapeRendering="geometricPrecision">
+              <g className="mb-schematic-line mb-schematic-structure">
+                <rect className="mb-schematic-boundary" x="24" y="64" width="500" height="380" rx="2" />
+                <path d="M24 38 H524 M24 32 V44 M524 32 V44" />
+                <path d="M12 64 V444 M6 64 H18 M6 444 H18" />
+                <path d="M12 64 H36 M24 52 V76 M512 64 H536 M524 52 V76" />
+                <path d="M12 444 H36 M24 432 V456 M512 444 H536 M524 432 V456" />
+                <path d="M180 132 H210 V332 M180 232 H210 M180 332 H210 M210 232 H240" />
               </g>
-              <g className="mb-hero-orbit-motion mb-hero-orbit-motion-b">
-                <ellipse className="mb-hero-orbit mb-hero-orbit-b" cx="320" cy="235" rx="94" ry="220" transform="rotate(24 320 235)" />
+
+              <g className="mb-schematic-line mb-schematic-accent">
+                <path d="M370 232 H395 M452 260 V316 M395 344 H370 M305 372 V410 H524" />
               </g>
-              <g className="mb-hero-orbit-motion mb-hero-orbit-motion-c">
-                <ellipse className="mb-hero-orbit mb-hero-orbit-c" cx="320" cy="235" rx="212" ry="72" />
+
+              <text className="mb-schematic-label" x="24" y="24">NEFI / NATIONAL ENVIRONMENTAL DATA SUBSYSTEM</text>
+              <text className="mb-schematic-label" x="388" y="84">Rev. 04 — plan view</text>
+              <text className="mb-schematic-label" x="230" y="35">5000 SYSTEM EXTENT</text>
+              <text className="mb-schematic-label" x="24" y="478">SCALE 1:250 / ORTHOGRAPHIC</text>
+              <text className="mb-schematic-label" x="414" y="478">HARARE / ZW</text>
+              <text className="mb-schematic-label mb-schematic-label-accent" x="424" y="401">QUERY ACCESS</text>
+
+              <g className="mb-schematic-module mb-schematic-module-structure">
+                <rect x="50" y="104" width="130" height="56" rx="2" />
+                <text x="64" y="127">
+                  <tspan x="64">Sentinel</tspan>
+                  <tspan x="64" dy="15">observations</tspan>
+                </text>
+              </g>
+              <g className="mb-schematic-module mb-schematic-module-structure">
+                <rect x="50" y="204" width="130" height="56" rx="2" />
+                <text x="64" y="236">ZMS weather</text>
+              </g>
+              <g className="mb-schematic-module mb-schematic-module-structure">
+                <rect x="50" y="304" width="130" height="56" rx="2" />
+                <text x="64" y="336">Ground reports</text>
+              </g>
+
+              <g className="mb-schematic-module mb-schematic-module-accent">
+                <rect x="240" y="204" width="130" height="56" rx="2" />
+                <text x="252" y="227">
+                  <tspan x="252">Spatial + time</tspan>
+                  <tspan x="252" dy="15">alignment</tspan>
+                </text>
+              </g>
+              <g className="mb-schematic-module mb-schematic-module-accent">
+                <rect x="395" y="204" width="115" height="56" rx="2" />
+                <text x="407" y="227">
+                  <tspan x="407">Quality</tspan>
+                  <tspan x="407" dy="15">control</tspan>
+                </text>
+              </g>
+              <g className="mb-schematic-module mb-schematic-module-accent">
+                <rect x="395" y="316" width="115" height="56" rx="2" />
+                <text x="407" y="339">
+                  <tspan x="407">National data</tspan>
+                  <tspan x="407" dy="15">cube</tspan>
+                </text>
+              </g>
+              <g className="mb-schematic-module mb-schematic-module-accent">
+                <rect x="240" y="316" width="130" height="56" rx="2" />
+                <text x="252" y="348">NEFI query API</text>
               </g>
             </svg>
           </div>
@@ -382,32 +419,32 @@ const PeopleFirstHomepage = () => (
       </div>
     </section>
 
-    <section id="what-we-build" className="bg-foreground px-5 py-20 text-white sm:px-6 md:py-28 lg:py-36">
+    <section id="what-we-build" className="border-b border-[#dfe5ea] bg-white px-5 py-20 text-[#0f1626] sm:px-6 md:py-28 lg:py-36">
       <div className="mx-auto max-w-6xl">
         <AnimatedSection className="max-w-4xl">
-          <p className="mb-caption text-[hsl(var(--signal-4))]">Two ways to build with MathBrooks</p>
+          <p className="mb-caption text-[#1e7f65]">Two ways to build with MathBrooks</p>
           <h2 className="mt-5 font-display text-4xl font-bold leading-[1.01] tracking-[-0.05em] sm:text-5xl md:text-7xl">
             Deploy what already works. Architect what does not yet exist.
           </h2>
         </AnimatedSection>
-        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl bg-white/15 md:mt-16 md:grid-cols-2">
-          <AnimatedSection className="flex h-full flex-col bg-white/[0.06] p-7 sm:p-10" delay={60}>
-            <p className="mb-caption text-[hsl(var(--signal-4))]">01 · Product lane</p>
+        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-[#dfe5ea] bg-[#dfe5ea] md:mt-16 md:grid-cols-2">
+          <AnimatedSection className="flex h-full flex-col bg-[#f8fafb] p-7 sm:p-10" delay={60}>
+            <p className="mb-caption text-[#1e7f65]">01 · Product lane</p>
             <h3 className="mt-7 font-display text-3xl font-semibold tracking-[-0.035em]">Deploy a MathBrooks product</h3>
-            <p className="mt-5 max-w-xl text-base leading-8 text-white/70">
+            <p className="mt-5 max-w-xl text-base leading-8 text-[#5f6b78]">
               Production-ready software for the operational core of your organisation—from customers and people to finance, delivery, automation, analytics, and AI. Deploy one capability now. Connect products into a unified operating system as your requirements grow.
             </p>
-            <Link to="/solutions/available" className="mt-10 inline-flex items-center gap-2 font-display text-sm font-semibold text-[hsl(var(--signal-4))] transition-colors hover:text-white">
+            <Link to="/solutions/available" className="mt-10 inline-flex items-center gap-2 font-display text-sm font-semibold text-[#1e7f65] transition-colors hover:text-[#0f1626]">
               Compare deployable products <ArrowRight className="h-4 w-4" />
             </Link>
           </AnimatedSection>
-          <AnimatedSection className="flex h-full flex-col bg-white/[0.06] p-7 sm:p-10" delay={120}>
-            <p className="mb-caption text-[hsl(var(--signal-4))]">02 · Custom lane</p>
+          <AnimatedSection className="flex h-full flex-col bg-[#f8fafb] p-7 sm:p-10" delay={120}>
+            <p className="mb-caption text-[#1e7f65]">02 · Custom lane</p>
             <h3 className="mt-7 font-display text-3xl font-semibold tracking-[-0.035em]">Architect a custom system</h3>
-            <p className="mt-5 max-w-xl text-base leading-8 text-white/70">
+            <p className="mt-5 max-w-xl text-base leading-8 text-[#5f6b78]">
               Custom software, automation, AI, connected systems, and digital infrastructure for missions too specific, interconnected, or consequential for standard products.
             </p>
-            <Link to="/services" className="mt-10 inline-flex items-center gap-2 font-display text-sm font-semibold text-[hsl(var(--signal-4))] transition-colors hover:text-white">
+            <Link to="/services" className="mt-10 inline-flex items-center gap-2 font-display text-sm font-semibold text-[#1e7f65] transition-colors hover:text-[#0f1626]">
               Request an architecture review <ArrowRight className="h-4 w-4" />
             </Link>
           </AnimatedSection>
