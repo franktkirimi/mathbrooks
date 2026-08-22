@@ -40,49 +40,13 @@ const heroProof = [
   { value: technologyTools.length.toString().padStart(2, "0"), label: "Core technologies" },
 ];
 
-const isoColumns = [
-  { row: 0, column: 0, height: 135 },
-  { row: 0, column: 1, height: 172 },
-  { row: 1, column: 0, height: 172 },
-  { row: 2, column: 0, height: 102 },
-  { row: 1, column: 2, height: 135 },
-  { row: 2, column: 1, height: 135 },
-  { row: 2, column: 2, height: 102 },
-];
-
-const ISO_HALF_WIDTH = 34;
-const ISO_HALF_HEIGHT = 20;
-const ISO_STEP_X = 72;
-const ISO_STEP_Y = 42;
-const ISO_ORIGIN_X = 320;
-const ISO_ORIGIN_Y = 255;
-
-const latticeNode = (row: number, column: number) => ({
-  x: ISO_ORIGIN_X + (column - row) * ISO_STEP_X,
-  y: ISO_ORIGIN_Y + (column + row) * ISO_STEP_Y,
-});
-
-const columnGeometry = (row: number, column: number, height: number) => {
-  const node = latticeNode(row, column);
-  const topFrontY = node.y - height;
-  const topSideY = topFrontY - ISO_HALF_HEIGHT;
-  const baseSideY = node.y - ISO_HALF_HEIGHT;
-
-  return {
-    node,
-    top: `${node.x},${topSideY - ISO_HALF_HEIGHT} ${node.x + ISO_HALF_WIDTH},${topSideY} ${node.x},${topFrontY} ${node.x - ISO_HALF_WIDTH},${topSideY}`,
-    left: `${node.x - ISO_HALF_WIDTH},${topSideY} ${node.x},${topFrontY} ${node.x},${node.y} ${node.x - ISO_HALF_WIDTH},${baseSideY}`,
-    right: `${node.x},${topFrontY} ${node.x + ISO_HALF_WIDTH},${topSideY} ${node.x + ISO_HALF_WIDTH},${baseSideY} ${node.x},${node.y}`,
-  };
-};
-
 const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
     --hero-teal: #1f5c5c;
-    --hero-teal-top: color-mix(in srgb, var(--hero-teal) 72%, white);
-    --hero-teal-left: color-mix(in srgb, var(--hero-teal) 86%, white);
-    --hero-teal-right: color-mix(in srgb, var(--hero-teal) 90%, black);
+    --hero-rope-a: color-mix(in srgb, var(--hero-teal) 82%, white);
+    --hero-rope-b: color-mix(in srgb, var(--hero-teal) 68%, white);
+    --hero-rope-c: color-mix(in srgb, var(--hero-teal) 88%, black);
     background: #fff;
     color: var(--hero-ink);
   }
@@ -204,6 +168,33 @@ const heroStyles = `
     margin-left: 0;
   }
 
+  .mb-hero-rope {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    transform-box: view-box;
+    transform-origin: center;
+  }
+
+  .mb-hero-rope-a {
+    stroke: var(--hero-rope-a);
+    stroke-width: 14;
+    animation: mb-rope-sway-a 12s ease-in-out infinite alternate;
+  }
+
+  .mb-hero-rope-b {
+    stroke: var(--hero-rope-b);
+    stroke-width: 12;
+    animation: mb-rope-sway-b 12s ease-in-out infinite alternate;
+  }
+
+  .mb-hero-rope-c {
+    stroke: var(--hero-rope-c);
+    stroke-width: 10;
+    animation: mb-rope-sway-c 12s ease-in-out infinite alternate;
+  }
+
   .mb-hero-proof {
     position: relative;
     z-index: 2;
@@ -254,6 +245,21 @@ const heroStyles = `
   @keyframes mb-hero-art-settle {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes mb-rope-sway-a {
+    from { transform: translateX(-10px) scaleY(1.01); }
+    to { transform: translateX(14px) scaleY(.99); }
+  }
+
+  @keyframes mb-rope-sway-b {
+    from { transform: translateX(13px) scaleY(.99); }
+    to { transform: translateX(-11px) scaleY(1.01); }
+  }
+
+  @keyframes mb-rope-sway-c {
+    from { transform: translateX(-6px); }
+    to { transform: translateX(9px); }
   }
 
   @media (max-width: 64rem) {
@@ -325,6 +331,10 @@ const heroStyles = `
     .mb-hero-art {
       animation: none;
     }
+
+    .mb-hero-rope {
+      animation: none;
+    }
   }
 `;
 
@@ -355,19 +365,18 @@ const PeopleFirstHomepage = () => (
 
           <div className="mb-hero-art" aria-hidden="true">
             <svg viewBox="0 0 640 470" role="presentation" shapeRendering="geometricPrecision">
-              {isoColumns.map((column) => {
-                const faces = columnGeometry(column.row, column.column, column.height);
-                return (
-                  <g
-                    key={`${column.row}-${column.column}`}
-                    data-lattice-node={`${faces.node.x},${faces.node.y}`}
-                  >
-                    <polygon points={faces.left} fill="var(--hero-teal-left)" />
-                    <polygon points={faces.right} fill="var(--hero-teal-right)" />
-                    <polygon points={faces.top} fill="var(--hero-teal-top)" />
-                  </g>
-                );
-              })}
+              <path
+                className="mb-hero-rope mb-hero-rope-a"
+                d="M168 -28 C486 42 494 126 250 178 C88 212 96 294 336 326 C554 354 548 430 252 504"
+              />
+              <path
+                className="mb-hero-rope mb-hero-rope-b"
+                d="M454 -28 C128 54 124 138 370 184 C534 214 524 298 278 332 C72 364 84 440 394 504"
+              />
+              <path
+                className="mb-hero-rope mb-hero-rope-c"
+                d="M302 -28 C152 62 204 126 410 174 C568 210 472 278 220 326 C78 356 162 432 322 504"
+              />
             </svg>
           </div>
         </div>
