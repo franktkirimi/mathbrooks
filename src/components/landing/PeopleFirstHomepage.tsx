@@ -2,7 +2,6 @@ import { ArrowRight, BrainCircuit, Cable, Cpu, Database, Sparkles, Workflow } fr
 import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import LazyIndustryOrbit from "@/components/LazyIndustryOrbit";
-import LivingMathBrooksGrid from "@/components/landing/LivingMathBrooksGrid";
 import { Button } from "@/components/ui/button";
 import { industries, technologyTools } from "@/content/ecosystemContent";
 import { toast } from "@/hooks/use-toast";
@@ -35,12 +34,6 @@ const researchProjects = [
   { code: "Tessera", field: "Resilient decentralised networks", href: "/things/tessera" },
 ];
 
-const heroProof = [
-  { value: "LIVE", label: "neFI Sentinel + rainfall pipelines" },
-  { value: researchProjects.length.toString().padStart(2, "0"), label: "Research systems" },
-  { value: technologyTools.length.toString().padStart(2, "0"), label: "Core technologies" },
-];
-
 const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
@@ -61,7 +54,7 @@ const heroStyles = `
     z-index: 1;
     width: min(100%, 80rem);
     margin-inline: auto;
-    padding: 4.5rem 1.25rem 0;
+    padding: 4.5rem 1.25rem clamp(4.5rem, 8vh, 6.5rem);
     animation: mb-hero-enter 360ms ease-out both;
   }
 
@@ -150,66 +143,6 @@ const heroStyles = `
     color: var(--hero-ink) !important;
   }
 
-  .mb-hero-art {
-    pointer-events: none;
-    position: absolute;
-    z-index: 0;
-    inset-block: 0;
-    right: -19vw;
-    display: flex;
-    width: 68vw;
-    min-width: 48rem;
-    align-items: center;
-    opacity: .58;
-  }
-
-  .mb-hero-art > div {
-    width: 100%;
-  }
-
-
-  .mb-hero-proof {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: clamp(1rem, 2.2vw, 2rem);
-    border-top: 1px solid #e2e4e7;
-    margin-top: clamp(5rem, 10vh, 7.5rem);
-    padding-block: 1.15rem 1.4rem;
-  }
-
-  .mb-hero-proof-item {
-    grid-column: span 4;
-    display: flex;
-    align-items: baseline;
-    gap: .75rem;
-    min-width: 0;
-  }
-
-  .mb-hero-proof-item + .mb-hero-proof-item {
-    border-left: 1px solid #e2e4e7;
-    padding-left: clamp(1rem, 2.2vw, 2rem);
-  }
-
-  .mb-hero-proof-value {
-    color: var(--hero-teal);
-    font-family: var(--font-mono);
-    font-size: .78rem;
-    font-weight: 700;
-    letter-spacing: .1em;
-  }
-
-  .mb-hero-proof-label {
-    color: #6b7580;
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .1em;
-    line-height: 1.4;
-    text-transform: uppercase;
-  }
-
   @keyframes mb-hero-enter {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -217,7 +150,7 @@ const heroStyles = `
 
   @media (max-width: 48rem) {
     .mb-hero-shell {
-      padding: 4.25rem 1.25rem 0;
+      padding: 4.25rem 1.25rem 3.5rem;
     }
 
     .mb-hero-main {
@@ -233,15 +166,6 @@ const heroStyles = `
       line-height: .98;
       letter-spacing: -.048em;
       text-wrap: initial;
-    }
-
-    .mb-hero-art {
-      inset-block: 2rem 0;
-      right: -35rem;
-      display: flex;
-      width: 58rem;
-      min-width: 0;
-      opacity: .18;
     }
 
     .mb-hero-subhead {
@@ -262,31 +186,6 @@ const heroStyles = `
       min-width: 0;
     }
 
-    .mb-hero-proof {
-      grid-template-columns: 1fr;
-      gap: 0;
-      margin-top: 4.5rem;
-      padding-block: .35rem 1rem;
-    }
-
-    .mb-hero-proof-item {
-      grid-column: 1;
-      padding-block: .75rem;
-    }
-
-    .mb-hero-proof-item + .mb-hero-proof-item {
-      border-top: 1px solid #e2e4e7;
-      border-left: 0;
-      padding-left: 0;
-    }
-  }
-
-  @media (min-width: 48.01rem) and (max-width: 64rem) {
-    .mb-hero-art {
-      right: -34rem;
-      width: 64rem;
-      opacity: .24;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -300,9 +199,6 @@ const PeopleFirstHomepage = () => (
     <style>{heroStyles}</style>
     <section className="mb-hero overflow-hidden" aria-labelledby="home-hero-title">
       <div className="mb-hero-shell">
-        <div className="mb-hero-art" aria-hidden="true">
-          <LivingMathBrooksGrid />
-        </div>
         <div className="mb-hero-main">
           <div className="mb-hero-copy">
             <h1 id="home-hero-title" className="mb-hero-title">
@@ -323,15 +219,6 @@ const PeopleFirstHomepage = () => (
             </div>
           </div>
 
-        </div>
-
-        <div className="mb-hero-proof" aria-label="MathBrooks portfolio scale">
-          {heroProof.map((item) => (
-            <div key={item.label} className="mb-hero-proof-item">
-              <span className="mb-hero-proof-value">{item.value}</span>
-              <span className="mb-hero-proof-label">{item.label}</span>
-            </div>
-          ))}
         </div>
       </div>
     </section>
