@@ -70,7 +70,7 @@ const Navbar = () => {
               key={item.href}
               to={item.href}
               className={cn(
-                "mb-nav-link whitespace-nowrap font-display",
+                "mb-nav-link whitespace-nowrap font-display !font-medium",
                 isActive(item.href) ? "text-primary" : "text-[hsl(var(--nav))] hover:text-primary"
               )}
             >
@@ -112,7 +112,7 @@ const Navbar = () => {
               key={item.href}
               to={item.href}
               className={cn(
-                "mb-nav-link border-b border-border/10 py-3 font-display",
+                "mb-nav-link border-b border-border/10 py-3 font-display !font-medium",
                 isActive(item.href) ? "text-primary" : "text-[hsl(var(--nav))] hover:text-primary"
               )}
             >

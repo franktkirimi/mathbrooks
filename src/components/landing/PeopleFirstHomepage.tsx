@@ -2,7 +2,6 @@ import { ArrowRight, BrainCircuit, Cable, Cpu, Database, Sparkles, Workflow } fr
 import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import LazyIndustryOrbit from "@/components/LazyIndustryOrbit";
-import LivingMathBrooksGrid from "@/components/landing/LivingMathBrooksGrid";
 import { Button } from "@/components/ui/button";
 import { industries, technologyTools } from "@/content/ecosystemContent";
 import { toast } from "@/hooks/use-toast";
@@ -35,29 +34,368 @@ const researchProjects = [
   { code: "Tessera", field: "Resilient decentralised networks", href: "/things/tessera" },
 ];
 
+const heroProof = [
+  { value: industries.length.toString().padStart(2, "0"), label: "Operating domains" },
+  { value: researchProjects.length.toString().padStart(2, "0"), label: "Research systems" },
+  { value: technologyTools.length.toString().padStart(2, "0"), label: "Core technologies" },
+];
+
+const heroStyles = `
+  .mb-hero {
+    --hero-ink: #0f1626;
+    --hero-teal: #1f5c5c;
+    --hero-cool: #91a6ad;
+    background: #fff;
+    color: var(--hero-ink);
+  }
+
+  .mb-hero-shell {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    min-height: 100svh;
+    width: min(100%, 80rem);
+    margin-inline: auto;
+    padding: 4.5rem 1.25rem 0;
+  }
+
+  .mb-hero-main {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2.2vw, 2rem);
+    align-items: center;
+    padding-block: clamp(2.5rem, 7vh, 4.75rem) clamp(2rem, 5vh, 3.5rem);
+  }
+
+  .mb-hero-copy {
+    position: relative;
+    z-index: 2;
+    grid-column: 1 / span 11;
+    max-width: 72rem;
+  }
+
+  .mb-hero-title {
+    max-width: 72rem;
+    margin: 0;
+    color: var(--hero-ink);
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 5.5vw, 5rem);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.052em;
+    text-wrap: balance;
+    animation: mb-hero-fade-up 520ms cubic-bezier(.22, 1, .36, 1) both;
+  }
+
+  .mb-hero-line-one {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .mb-hero-line-two {
+    display: block;
+  }
+
+  .mb-hero-subhead {
+    max-width: 49rem;
+    margin: 1.65rem 0 0;
+    color: color-mix(in srgb, var(--hero-ink) 68%, white);
+    font-size: clamp(1rem, 1.45vw, 1.2rem);
+    font-weight: 400;
+    line-height: 1.65;
+    animation: mb-hero-fade-up 520ms 60ms cubic-bezier(.22, 1, .36, 1) both;
+  }
+
+  .mb-hero-subhead strong {
+    color: var(--hero-ink);
+    font-weight: 600;
+  }
+
+  .mb-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: 1.75rem;
+    animation: mb-hero-fade-up 520ms 120ms cubic-bezier(.22, 1, .36, 1) both;
+  }
+
+  .mb-hero-actions a {
+    height: 3rem;
+    min-width: 12rem;
+    padding-inline: 1.35rem;
+    border-radius: .45rem;
+    transition: transform 140ms ease, background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+  }
+
+  .mb-hero-actions a:hover {
+    transform: translateY(-1px);
+  }
+
+  .mb-hero-primary {
+    background: var(--hero-teal) !important;
+    color: #fff !important;
+  }
+
+  .mb-hero-primary:hover {
+    background: #184c4c !important;
+  }
+
+  .mb-hero-secondary {
+    border-color: color-mix(in srgb, var(--hero-ink) 32%, white) !important;
+    background: rgba(255, 255, 255, .76) !important;
+    color: var(--hero-ink) !important;
+  }
+
+  .mb-hero-secondary:hover {
+    border-color: var(--hero-teal) !important;
+    background: #fff !important;
+    color: var(--hero-teal) !important;
+  }
+
+  .mb-hero-art {
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    right: -10.5rem;
+    width: min(53vw, 43rem);
+    aspect-ratio: 1 / .88;
+    opacity: .36;
+    transform: translateY(-48%);
+    animation: mb-hero-art-settle 720ms 190ms cubic-bezier(.22, 1, .36, 1) both;
+  }
+
+  .mb-hero-plane {
+    position: absolute;
+    transform-origin: center;
+  }
+
+  .mb-hero-plane-a {
+    inset: 6% 0 27% 27%;
+    clip-path: polygon(34% 0, 100% 0, 70% 100%, 0 77%);
+    background: var(--hero-cool);
+    transform: rotate(-4deg);
+  }
+
+  .mb-hero-plane-b {
+    inset: 24% 14% 5% 5%;
+    clip-path: polygon(19% 0, 100% 17%, 73% 100%, 0 68%);
+    background: var(--hero-teal);
+    transform: rotate(5deg);
+    opacity: .74;
+  }
+
+  .mb-hero-plane-c {
+    inset: 42% 0 0 42%;
+    clip-path: polygon(0 0, 100% 20%, 82% 100%, 19% 73%);
+    background: var(--hero-ink);
+    transform: rotate(-7deg);
+    opacity: .72;
+  }
+
+  .mb-hero-mark-field {
+    position: absolute;
+    top: 10%;
+    right: 12%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(.55rem, 1.15vw, .9rem);
+    width: 64%;
+    transform: rotate(-8deg) skewY(-3deg);
+  }
+
+  .mb-hero-mark-field span {
+    aspect-ratio: 1;
+    background: var(--hero-ink);
+  }
+
+  .mb-hero-mark-field span:nth-child(3),
+  .mb-hero-mark-field span:nth-child(5) {
+    background: var(--hero-teal);
+  }
+
+  .mb-hero-mark-field span:nth-child(2) { transform: translateY(-24%); }
+  .mb-hero-mark-field span:nth-child(3) { transform: translate(18%, -42%); }
+  .mb-hero-mark-field span:nth-child(4) { transform: translateX(-18%); }
+  .mb-hero-mark-field span:nth-child(6) { transform: translateX(26%); }
+  .mb-hero-mark-field span:nth-child(7) { transform: translate(-30%, 12%); }
+  .mb-hero-mark-field span:nth-child(9) { transform: translate(38%, 24%); }
+
+  .mb-hero-proof {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2.2vw, 2rem);
+    border-top: 1px solid color-mix(in srgb, var(--hero-ink) 17%, white);
+    padding-block: 1.15rem 1.4rem;
+  }
+
+  .mb-hero-proof-item {
+    grid-column: span 4;
+    display: flex;
+    align-items: baseline;
+    gap: .75rem;
+    min-width: 0;
+  }
+
+  .mb-hero-proof-item + .mb-hero-proof-item {
+    border-left: 1px solid color-mix(in srgb, var(--hero-ink) 12%, white);
+    padding-left: clamp(1rem, 2.2vw, 2rem);
+  }
+
+  .mb-hero-proof-value {
+    color: var(--hero-teal);
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+  }
+
+  .mb-hero-proof-label {
+    color: color-mix(in srgb, var(--hero-ink) 67%, white);
+    font-family: var(--font-mono);
+    font-size: .63rem;
+    font-weight: 600;
+    letter-spacing: .15em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  @keyframes mb-hero-fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes mb-hero-art-settle {
+    from { opacity: 0; transform: translateY(-45%) translateX(24px); }
+    to { opacity: .36; transform: translateY(-48%) translateX(0); }
+  }
+
+  @media (max-width: 68.75rem) {
+    .mb-hero-line-one { white-space: normal; }
+    .mb-hero-copy { grid-column: 1 / span 10; }
+    .mb-hero-art { right: -14rem; opacity: .26; }
+  }
+
+  @media (max-width: 48rem) {
+    .mb-hero-shell {
+      min-height: auto;
+      padding: 4.25rem 1.25rem 0;
+    }
+
+    .mb-hero-main {
+      display: block;
+      min-height: 39rem;
+      padding-block: 5rem 2.5rem;
+    }
+
+    .mb-hero-copy { max-width: 100%; }
+
+    .mb-hero-title {
+      max-width: 39rem;
+      font-size: clamp(2.5rem, 11.2vw, 3.6rem);
+      line-height: .98;
+      letter-spacing: -.048em;
+      text-wrap: initial;
+    }
+
+    .mb-hero-subhead {
+      max-width: 35rem;
+      margin-top: 1.4rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .mb-hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+      margin-top: 1.5rem;
+    }
+
+    .mb-hero-actions a {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .mb-hero-art {
+      top: 42%;
+      right: -48%;
+      width: 100vw;
+      opacity: .13;
+    }
+
+    .mb-hero-proof {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding-block: .35rem 1rem;
+    }
+
+    .mb-hero-proof-item {
+      grid-column: 1;
+      padding-block: .75rem;
+    }
+
+    .mb-hero-proof-item + .mb-hero-proof-item {
+      border-top: 1px solid color-mix(in srgb, var(--hero-ink) 10%, white);
+      border-left: 0;
+      padding-left: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mb-hero-title,
+    .mb-hero-subhead,
+    .mb-hero-actions,
+    .mb-hero-art {
+      animation: none;
+    }
+  }
+`;
+
 const PeopleFirstHomepage = () => (
   <>
-    <section className="relative isolate overflow-hidden bg-white px-5 pb-16 pt-28 text-foreground sm:px-6 md:pb-20 md:pt-36 lg:min-h-screen lg:py-0">
-      <div className="relative mx-auto w-full max-w-7xl lg:min-h-screen">
-        <AnimatedSection className="relative z-10 flex max-w-[57rem] flex-col justify-center lg:min-h-screen">
-          <h1 className="human-signal-headline text-[clamp(2.75rem,6.4vw,5.8rem)] font-semibold leading-[0.94] tracking-[-0.05em] text-foreground">
-            We architect intelligent systems—from operational software to national infrastructure.
-          </h1>
-          <p className="mt-7 max-w-[48rem] text-lg font-normal leading-8 text-muted-foreground sm:text-xl sm:leading-9 md:mt-9 md:text-[1.3rem]">
-            Deploy proven products or commission custom software, AI, connected systems, and digital infrastructure. Built in Zimbabwe. Engineered for organisations, institutions, and nations.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link to="/solutions/available">Deploy a product <ArrowRight /></Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="w-full bg-white/70 backdrop-blur-sm sm:w-auto">
-              <Link to="/services">Architect a custom system</Link>
-            </Button>
+    <style>{heroStyles}</style>
+    <section className="mb-hero overflow-hidden" aria-labelledby="home-hero-title">
+      <div className="mb-hero-shell">
+        <div className="mb-hero-main">
+          <div className="mb-hero-copy">
+            <h1 id="home-hero-title" className="mb-hero-title">
+              <span className="mb-hero-line-one">We architect intelligent systems—</span>
+              <span className="mb-hero-line-two">from operational software to national infrastructure.</span>
+            </h1>
+            <p className="mb-hero-subhead">
+              Deploy proven products or commission custom software, AI, connected systems, and digital infrastructure.{" "}
+              <strong>Built in Zimbabwe. Engineered for organisations, institutions, and nations.</strong>
+            </p>
+            <div className="mb-hero-actions">
+              <Button asChild size="lg" className="mb-hero-primary">
+                <Link to="/solutions/available">Deploy a product <ArrowRight aria-hidden="true" /></Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="mb-hero-secondary">
+                <Link to="/services">Commission a custom system</Link>
+              </Button>
+            </div>
           </div>
-        </AnimatedSection>
-        <AnimatedSection delay={120} className="pointer-events-none absolute inset-y-0 -right-[44%] z-0 flex w-[145%] items-center opacity-20 sm:-right-[30%] sm:w-[112%] sm:opacity-25 lg:-right-[19vw] lg:w-[68vw] lg:max-w-none lg:opacity-55">
-          <LivingMathBrooksGrid />
-        </AnimatedSection>
+
+          <div className="mb-hero-art" aria-hidden="true">
+            <span className="mb-hero-plane mb-hero-plane-a" />
+            <span className="mb-hero-plane mb-hero-plane-b" />
+            <span className="mb-hero-plane mb-hero-plane-c" />
+            <div className="mb-hero-mark-field">
+              {Array.from({ length: 9 }, (_, index) => <span key={index} />)}
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-hero-proof" aria-label="MathBrooks portfolio scale">
+          {heroProof.map((item) => (
+            <div key={item.label} className="mb-hero-proof-item">
+              <span className="mb-hero-proof-value">{item.value}</span>
+              <span className="mb-hero-proof-label">{item.label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
