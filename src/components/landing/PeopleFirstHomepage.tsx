@@ -40,19 +40,49 @@ const heroProof = [
   { value: technologyTools.length.toString().padStart(2, "0"), label: "Core technologies" },
 ];
 
+const isoColumns = [
+  { row: 0, column: 0, height: 70 },
+  { row: 0, column: 1, height: 124 },
+  { row: 1, column: 0, height: 145 },
+  { row: 0, column: 2, height: 88 },
+  { row: 1, column: 1, height: 104 },
+  { row: 2, column: 0, height: 82 },
+  { row: 1, column: 2, height: 132 },
+  { row: 2, column: 1, height: 116 },
+  { row: 2, column: 2, height: 64 },
+];
+
+const ISO_HALF_WIDTH = 48;
+const ISO_HALF_HEIGHT = 25;
+const ISO_STEP_X = 66;
+const ISO_STEP_Y = 36;
+const ISO_ORIGIN_X = 320;
+const ISO_ORIGIN_Y = 255;
+
+const columnGeometry = (row: number, column: number, height: number) => {
+  const x = ISO_ORIGIN_X + (column - row) * ISO_STEP_X;
+  const baseY = ISO_ORIGIN_Y + (column + row) * ISO_STEP_Y;
+  const topY = baseY - height;
+
+  return {
+    top: `${x},${topY - ISO_HALF_HEIGHT} ${x + ISO_HALF_WIDTH},${topY} ${x},${topY + ISO_HALF_HEIGHT} ${x - ISO_HALF_WIDTH},${topY}`,
+    left: `${x - ISO_HALF_WIDTH},${topY} ${x},${topY + ISO_HALF_HEIGHT} ${x},${baseY + ISO_HALF_HEIGHT} ${x - ISO_HALF_WIDTH},${baseY}`,
+    right: `${x},${topY + ISO_HALF_HEIGHT} ${x + ISO_HALF_WIDTH},${topY} ${x + ISO_HALF_WIDTH},${baseY} ${x},${baseY + ISO_HALF_HEIGHT}`,
+  };
+};
+
 const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
     --hero-teal: #1f5c5c;
-    --hero-cool: #91a6ad;
+    --hero-teal-top: #9fe1cb;
+    --hero-teal-left: #1d9e75;
+    --hero-teal-right: #0f6e56;
     background: #fff;
     color: var(--hero-ink);
   }
 
   .mb-hero-shell {
-    display: grid;
-    grid-template-rows: minmax(0, 1fr) auto;
-    min-height: 100svh;
     width: min(100%, 80rem);
     margin-inline: auto;
     padding: 4.5rem 1.25rem 0;
@@ -63,19 +93,19 @@ const heroStyles = `
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: clamp(1rem, 2.2vw, 2rem);
-    align-items: center;
-    padding-block: clamp(2.5rem, 7vh, 4.75rem) clamp(2rem, 5vh, 3.5rem);
+    align-items: start;
+    padding-block: clamp(4.5rem, 10vh, 6.5rem) 0;
   }
 
   .mb-hero-copy {
     position: relative;
     z-index: 2;
-    grid-column: 1 / span 11;
-    max-width: 72rem;
+    grid-column: 1 / span 8;
+    max-width: 49rem;
   }
 
   .mb-hero-title {
-    max-width: 72rem;
+    max-width: 49rem;
     margin: 0;
     color: var(--hero-ink);
     font-family: var(--font-display);
@@ -89,7 +119,6 @@ const heroStyles = `
 
   .mb-hero-line-one {
     display: block;
-    white-space: nowrap;
   }
 
   .mb-hero-line-two {
@@ -156,70 +185,19 @@ const heroStyles = `
     pointer-events: none;
     position: absolute;
     z-index: 0;
-    top: 50%;
-    right: -10.5rem;
-    width: min(53vw, 43rem);
-    aspect-ratio: 1 / .88;
-    opacity: .36;
-    transform: translateY(-48%);
+    left: calc(62% + 1rem);
+    right: calc((100vw - min(100vw, 80rem)) / -2);
+    bottom: -5.6rem;
+    overflow: hidden;
     animation: mb-hero-art-settle 720ms 190ms cubic-bezier(.22, 1, .36, 1) both;
   }
 
-  .mb-hero-plane {
-    position: absolute;
-    transform-origin: center;
+  .mb-hero-art svg {
+    display: block;
+    width: max(100%, 34rem);
+    height: auto;
+    margin-left: 0;
   }
-
-  .mb-hero-plane-a {
-    inset: 6% 0 27% 27%;
-    clip-path: polygon(34% 0, 100% 0, 70% 100%, 0 77%);
-    background: var(--hero-cool);
-    transform: rotate(-4deg);
-  }
-
-  .mb-hero-plane-b {
-    inset: 24% 14% 5% 5%;
-    clip-path: polygon(19% 0, 100% 17%, 73% 100%, 0 68%);
-    background: var(--hero-teal);
-    transform: rotate(5deg);
-    opacity: .74;
-  }
-
-  .mb-hero-plane-c {
-    inset: 42% 0 0 42%;
-    clip-path: polygon(0 0, 100% 20%, 82% 100%, 19% 73%);
-    background: var(--hero-ink);
-    transform: rotate(-7deg);
-    opacity: .72;
-  }
-
-  .mb-hero-mark-field {
-    position: absolute;
-    top: 10%;
-    right: 12%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(.55rem, 1.15vw, .9rem);
-    width: 64%;
-    transform: rotate(-8deg) skewY(-3deg);
-  }
-
-  .mb-hero-mark-field span {
-    aspect-ratio: 1;
-    background: var(--hero-ink);
-  }
-
-  .mb-hero-mark-field span:nth-child(3),
-  .mb-hero-mark-field span:nth-child(5) {
-    background: var(--hero-teal);
-  }
-
-  .mb-hero-mark-field span:nth-child(2) { transform: translateY(-24%); }
-  .mb-hero-mark-field span:nth-child(3) { transform: translate(18%, -42%); }
-  .mb-hero-mark-field span:nth-child(4) { transform: translateX(-18%); }
-  .mb-hero-mark-field span:nth-child(6) { transform: translateX(26%); }
-  .mb-hero-mark-field span:nth-child(7) { transform: translate(-30%, 12%); }
-  .mb-hero-mark-field span:nth-child(9) { transform: translate(38%, 24%); }
 
   .mb-hero-proof {
     position: relative;
@@ -228,6 +206,7 @@ const heroStyles = `
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: clamp(1rem, 2.2vw, 2rem);
     border-top: 1px solid color-mix(in srgb, var(--hero-ink) 17%, white);
+    margin-top: 5.6rem;
     padding-block: 1.15rem 1.4rem;
   }
 
@@ -268,26 +247,23 @@ const heroStyles = `
   }
 
   @keyframes mb-hero-art-settle {
-    from { opacity: 0; transform: translateY(-45%) translateX(24px); }
-    to { opacity: .36; transform: translateY(-48%) translateX(0); }
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  @media (max-width: 68.75rem) {
-    .mb-hero-line-one { white-space: normal; }
-    .mb-hero-copy { grid-column: 1 / span 10; }
-    .mb-hero-art { right: -14rem; opacity: .26; }
+  @media (max-width: 64rem) {
+    .mb-hero-copy { grid-column: 1 / -1; }
+    .mb-hero-art { display: none; }
   }
 
   @media (max-width: 48rem) {
     .mb-hero-shell {
-      min-height: auto;
       padding: 4.25rem 1.25rem 0;
     }
 
     .mb-hero-main {
       display: block;
-      min-height: 39rem;
-      padding-block: 5rem 2.5rem;
+      padding-block: 5rem 0;
     }
 
     .mb-hero-copy { max-width: 100%; }
@@ -318,16 +294,10 @@ const heroStyles = `
       min-width: 0;
     }
 
-    .mb-hero-art {
-      top: 42%;
-      right: -48%;
-      width: 100vw;
-      opacity: .13;
-    }
-
     .mb-hero-proof {
       grid-template-columns: 1fr;
       gap: 0;
+      margin-top: 4.5rem;
       padding-block: .35rem 1rem;
     }
 
@@ -379,12 +349,19 @@ const PeopleFirstHomepage = () => (
           </div>
 
           <div className="mb-hero-art" aria-hidden="true">
-            <span className="mb-hero-plane mb-hero-plane-a" />
-            <span className="mb-hero-plane mb-hero-plane-b" />
-            <span className="mb-hero-plane mb-hero-plane-c" />
-            <div className="mb-hero-mark-field">
-              {Array.from({ length: 9 }, (_, index) => <span key={index} />)}
-            </div>
+            <svg viewBox="0 0 640 470" role="presentation" shapeRendering="geometricPrecision">
+              <polygon points="320,215 532,326 320,447 108,326" fill="#fff" stroke="var(--hero-teal-top)" strokeWidth="2" />
+              {isoColumns.map((column) => {
+                const faces = columnGeometry(column.row, column.column, column.height);
+                return (
+                  <g key={`${column.row}-${column.column}`}>
+                    <polygon points={faces.left} fill="var(--hero-teal-left)" />
+                    <polygon points={faces.right} fill="var(--hero-teal-right)" />
+                    <polygon points={faces.top} fill="var(--hero-teal-top)" />
+                  </g>
+                );
+              })}
+            </svg>
           </div>
         </div>
 

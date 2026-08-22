@@ -49,9 +49,6 @@ const Navbar = () => {
           : "bg-transparent"
       )}
     >
-      {location.pathname === "/" && !scrolled && !mobileOpen && (
-        <div aria-hidden="true" className="human-signal-nav-stream pointer-events-none absolute -right-40 -top-8 hidden h-56 w-[64rem] lg:block" />
-      )}
       <nav className="relative z-10 mx-auto flex h-[4.25rem] w-full max-w-7xl items-center px-5 sm:h-[4.5rem] sm:px-6 xl:px-10">
         <Link to="/" className="group inline-flex shrink-0 items-center gap-2 text-foreground transition-colors duration-300">
           <img
