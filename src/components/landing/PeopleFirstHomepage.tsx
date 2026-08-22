@@ -41,15 +41,13 @@ const heroProof = [
 ];
 
 const isoColumns = [
-  { row: 0, column: 0, height: 91 },
-  { row: 0, column: 1, height: 161 },
-  { row: 1, column: 0, height: 189 },
-  { row: 0, column: 2, height: 114 },
-  { row: 1, column: 1, height: 135 },
-  { row: 2, column: 0, height: 107 },
-  { row: 1, column: 2, height: 172 },
-  { row: 2, column: 1, height: 151 },
-  { row: 2, column: 2, height: 83 },
+  { row: 0, column: 0, height: 135 },
+  { row: 0, column: 1, height: 172 },
+  { row: 1, column: 0, height: 172 },
+  { row: 2, column: 0, height: 102 },
+  { row: 1, column: 2, height: 135 },
+  { row: 2, column: 1, height: 135 },
+  { row: 2, column: 2, height: 102 },
 ];
 
 const ISO_HALF_WIDTH = 34;
@@ -59,15 +57,22 @@ const ISO_STEP_Y = 42;
 const ISO_ORIGIN_X = 320;
 const ISO_ORIGIN_Y = 255;
 
+const latticeNode = (row: number, column: number) => ({
+  x: ISO_ORIGIN_X + (column - row) * ISO_STEP_X,
+  y: ISO_ORIGIN_Y + (column + row) * ISO_STEP_Y,
+});
+
 const columnGeometry = (row: number, column: number, height: number) => {
-  const x = ISO_ORIGIN_X + (column - row) * ISO_STEP_X;
-  const baseY = ISO_ORIGIN_Y + (column + row) * ISO_STEP_Y;
-  const topY = baseY - height;
+  const node = latticeNode(row, column);
+  const topFrontY = node.y - height;
+  const topSideY = topFrontY - ISO_HALF_HEIGHT;
+  const baseSideY = node.y - ISO_HALF_HEIGHT;
 
   return {
-    top: `${x},${topY - ISO_HALF_HEIGHT} ${x + ISO_HALF_WIDTH},${topY} ${x},${topY + ISO_HALF_HEIGHT} ${x - ISO_HALF_WIDTH},${topY}`,
-    left: `${x - ISO_HALF_WIDTH},${topY} ${x},${topY + ISO_HALF_HEIGHT} ${x},${baseY + ISO_HALF_HEIGHT} ${x - ISO_HALF_WIDTH},${baseY}`,
-    right: `${x},${topY + ISO_HALF_HEIGHT} ${x + ISO_HALF_WIDTH},${topY} ${x + ISO_HALF_WIDTH},${baseY} ${x},${baseY + ISO_HALF_HEIGHT}`,
+    node,
+    top: `${node.x},${topSideY - ISO_HALF_HEIGHT} ${node.x + ISO_HALF_WIDTH},${topSideY} ${node.x},${topFrontY} ${node.x - ISO_HALF_WIDTH},${topSideY}`,
+    left: `${node.x - ISO_HALF_WIDTH},${topSideY} ${node.x},${topFrontY} ${node.x},${node.y} ${node.x - ISO_HALF_WIDTH},${baseSideY}`,
+    right: `${node.x},${topFrontY} ${node.x + ISO_HALF_WIDTH},${topSideY} ${node.x + ISO_HALF_WIDTH},${baseSideY} ${node.x},${node.y}`,
   };
 };
 
@@ -75,9 +80,9 @@ const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
     --hero-teal: #1f5c5c;
-    --hero-teal-top: #5bb9b9;
-    --hero-teal-left: #3c8b8b;
-    --hero-teal-right: #255656;
+    --hero-teal-top: color-mix(in srgb, var(--hero-teal) 72%, white);
+    --hero-teal-left: color-mix(in srgb, var(--hero-teal) 86%, white);
+    --hero-teal-right: color-mix(in srgb, var(--hero-teal) 90%, black);
     background: #fff;
     color: var(--hero-ink);
   }
@@ -353,7 +358,10 @@ const PeopleFirstHomepage = () => (
               {isoColumns.map((column) => {
                 const faces = columnGeometry(column.row, column.column, column.height);
                 return (
-                  <g key={`${column.row}-${column.column}`}>
+                  <g
+                    key={`${column.row}-${column.column}`}
+                    data-lattice-node={`${faces.node.x},${faces.node.y}`}
+                  >
                     <polygon points={faces.left} fill="var(--hero-teal-left)" />
                     <polygon points={faces.right} fill="var(--hero-teal-right)" />
                     <polygon points={faces.top} fill="var(--hero-teal-top)" />
