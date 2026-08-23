@@ -37,7 +37,6 @@ const researchProjects = [
 const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
-    --hero-muted: #5a6570;
     --hero-teal: #1f5c5c;
     position: relative;
     isolation: isolate;
@@ -81,20 +80,6 @@ const heroStyles = `
   .mb-hero-title-line {
     display: block;
     white-space: nowrap;
-  }
-
-  .mb-hero-subhead {
-    max-width: 64ch;
-    margin: 2.5rem 0 0;
-    color: var(--hero-muted);
-    font-size: clamp(1rem, 1.45vw, 1.2rem);
-    font-weight: 400;
-    line-height: 1.65;
-  }
-
-  .mb-hero-subhead strong {
-    color: var(--hero-ink);
-    font-weight: 500;
   }
 
   .mb-hero-actions {
@@ -167,13 +152,6 @@ const heroStyles = `
       white-space: normal;
     }
 
-    .mb-hero-subhead {
-      max-width: 35rem;
-      margin-top: 2.5rem;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
     .mb-hero-actions {
       flex-direction: column;
       align-items: stretch;
@@ -206,10 +184,6 @@ const PeopleFirstHomepage = () => (
               <span className="mb-hero-title-line">to mission-critical connected platforms</span>
               <span className="mb-hero-title-line">and sovereign national infrastructure.</span>
             </h1>
-            <p className="mb-hero-subhead">
-              Deploy proven products or commission custom software, AI, connected systems, and digital infrastructure.{" "}
-              <strong>Built in Zimbabwe. Engineered for organisations, institutions, and nations.</strong>
-            </p>
             <div className="mb-hero-actions">
               <Button asChild size="lg" className="mb-hero-primary">
                 <Link to="/products">Deploy a product <ArrowRight aria-hidden="true" /></Link>
