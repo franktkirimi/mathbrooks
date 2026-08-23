@@ -41,6 +41,8 @@ const heroStyles = `
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    min-height: 100vh;
+    min-height: 100svh;
     background: #ffffff;
     color: var(--hero-ink);
     border-bottom: 1px solid #e2e4e7;
