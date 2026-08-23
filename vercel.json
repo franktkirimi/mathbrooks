@@ -11,19 +11,7 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
       ]
-    },
-    {
-      "source": "/google9d7d44fb531c6d49.html",
-      "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }]
-    },
-    {
-      "source": "/services/google806c6e81b99b2a3f.html",
-      "headers": [{ "key": "Content-Type", "value": "text/html; charset=utf-8" }]
     }
-  ],
-  "rewrites": [
-    { "source": "/google9d7d44fb531c6d49.html", "destination": "/verify/google9d7d44fb531c6d49.txt" },
-    { "source": "/services/google806c6e81b99b2a3f.html", "destination": "/verify/google806c6e81b99b2a3f.txt" }
   ],
   "redirects": [
     { "source": "/solutions", "destination": "/systems-architecture", "statusCode": 301 },
