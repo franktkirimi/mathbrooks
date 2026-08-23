@@ -168,40 +168,6 @@ const RadarHUD = () => {
 const Hero = () => {
   const wrapRef  = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(HTMLElement | null)[]>([]);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef   = useRef<number>(0);
-
-  // Particle field background
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    let W = 0, H = 0;
-    type P = { x: number; y: number; vx: number; vy: number; r: number; a: number };
-    let pts: P[] = [];
-    const resize = () => {
-      W = canvas.offsetWidth; H = canvas.offsetHeight;
-      canvas.width = W; canvas.height = H;
-      pts = Array.from({ length: Math.floor((W * H) / 14000) }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.14, vy: (Math.random() - 0.5) * 0.14,
-        r: Math.random() * 1.1 + 0.3, a: Math.random() * 0.22 + 0.05,
-      }));
-    };
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of pts) {
-        p.x = (p.x + p.vx + W) % W; p.y = (p.y + p.vy + H) % H;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(202,89%,69%,${p.a})`; ctx.fill();
-      }
-      rafRef.current = requestAnimationFrame(draw);
-    };
-    resize(); draw();
-    window.addEventListener("resize", resize);
-    return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener("resize", resize); };
-  }, []);
 
   // GSAP text entrance
   useEffect(() => {
@@ -218,32 +184,20 @@ const Hero = () => {
 
   return (
     <section ref={wrapRef} className="relative flex items-center min-h-[92vh] px-6 pt-28 pb-16 overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
-
-      {/* Radial glow */}
-      <div aria-hidden className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 55% 60% at 30% 50%, hsl(202 89% 69% / 0.07) 0%, transparent 70%)" }}
-      />
-
       <div className="relative z-10 w-full max-w-6xl mx-auto grid gap-16 lg:grid-cols-[1fr_auto] lg:items-center">
 
         {/* Left — text */}
         <div className="max-w-2xl">
           <h1
             ref={setRef(1)}
-            className="font-display font-semibold leading-[1.04] tracking-[-0.03em] text-foreground mb-6"
+            className="font-display font-bold leading-[1.04] tracking-[-0.03em] text-foreground mb-6"
             style={{ fontSize: "clamp(2.6rem, 7vw, 5rem)", opacity: 0 }}
           >
             Building intelligence{" "}
-            <span style={{
-              background: "linear-gradient(135deg, hsl(202 89% 69%) 0%, hsl(191 74% 78%) 100%)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-            }}>
-              for the world's hardest problems.
-            </span>
+            <span className="text-primary">for the world's hardest problems.</span>
           </h1>
 
-          <p ref={setRef(2)} className="text-base sm:text-lg font-light text-muted-foreground leading-relaxed mb-10 max-w-xl" style={{ opacity: 0 }}>
+          <p ref={setRef(2)} className="text-base sm:text-lg font-normal text-muted-foreground leading-relaxed mb-10 max-w-xl" style={{ opacity: 0 }}>
             Five research sectors. Agriculture, autonomous vehicles, mining, geo mapping, and internet satellites. The lab works on problems where AI can change the operational baseline — not just automate the obvious.
           </p>
 
@@ -552,18 +506,18 @@ const AILabsPage = () => {
                 If it feels impossible,<br />that's where we start.
               </h2>
               <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                Every sector in the lab started with a conversation about something that seemed too complex to automate, too expensive to detect, or too remote to reach. Bring your version of that problem.
+                Every sector in the lab started with a systems review of a mission that seemed too complex to automate, too expensive to detect, or too remote to reach. Bring your version of that mission.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to="/book-demo">
+              <Link to="/contact">
                 <Button className="font-display text-xs tracking-[0.15em] uppercase">
-                  Discuss an AI Use Case
+                  Request Systems Brief
                 </Button>
               </Link>
               <Link to="/services">
                 <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary">
-                  View AI Services
+                  View Custom Systems
                 </Button>
               </Link>
             </div>

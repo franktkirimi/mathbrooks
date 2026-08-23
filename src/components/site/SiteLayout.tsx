@@ -23,10 +23,22 @@ const HashScroll = () => {
   return null;
 };
 
+const RouteScroll = () => {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) return;
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname, hash]);
+
+  return null;
+};
+
 const SiteLayout = ({ children }: SiteLayoutProps) => {
   return (
     <div className="site-shell min-h-screen bg-background overflow-x-hidden">
       <HashScroll />
+      <RouteScroll />
       <ScrollProgress />
       <CursorGlow />
       <a

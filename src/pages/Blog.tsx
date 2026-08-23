@@ -20,14 +20,6 @@ const Blog = () => {
       "applied AI business articles",
     ],
     ogType: "website",
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      name: "MathBrooks Resources",
-      description:
-        "Practical articles on payroll, CRM, operations, automation, and applied AI for African businesses.",
-      url: "https://www.mathbrooks.com/blog",
-    },
   });
 
   return (

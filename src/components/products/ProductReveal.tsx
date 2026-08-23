@@ -138,7 +138,7 @@ export const ProductReveal = ({ intentId, onSelect, onBack }: Props) => {
                   onClick={(e) => e.stopPropagation()}
                   className="font-display text-[0.65rem] tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
-                  Talk to us
+                  Request Systems Brief
                 </Link>
               </div>
             </div>

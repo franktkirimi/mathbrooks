@@ -67,12 +67,6 @@ const Pricing = () => {
       "software pricing MathBrooks",
       "business software pricing",
     ],
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "OfferCatalog",
-      name: "MathBrooks Pricing",
-      url: "https://www.mathbrooks.com/pricing",
-    },
   });
 
   return (

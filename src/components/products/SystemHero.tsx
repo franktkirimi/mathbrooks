@@ -31,21 +31,11 @@ export const SystemHero = ({ onBegin }: Props) => {
 
   return (
     <div ref={wrapRef} className="flex flex-col items-center text-center px-6 opacity-0">
-      <h1 className="font-display text-[2.2rem] sm:text-[3rem] md:text-[3.8rem] lg:text-[4.6rem] font-semibold leading-[1.06] tracking-[-0.03em] text-foreground mb-5 max-w-3xl">
-        Let's configure{" "}
-        <span
-          style={{
-            background: "linear-gradient(135deg, hsl(202 89% 69%) 0%, hsl(191 74% 78%) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          your system.
-        </span>
+      <h1 className="font-display text-[2.2rem] sm:text-[3rem] md:text-[3.8rem] lg:text-[4.6rem] font-bold leading-[1.06] tracking-[-0.03em] text-foreground mb-5 max-w-3xl">
+        Let's configure <span className="text-primary">your system.</span>
       </h1>
 
-      <p className="text-base sm:text-lg text-muted-foreground font-light max-w-md leading-relaxed mb-12">
+      <p className="text-base sm:text-lg text-muted-foreground font-normal max-w-md leading-relaxed mb-12">
         Tell us where your operational pressure is — we'll surface the right solution.
       </p>
 

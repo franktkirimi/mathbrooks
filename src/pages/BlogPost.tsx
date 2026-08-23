@@ -19,29 +19,6 @@ const BlogPost = () => {
     canonicalPath: post ? `/blog/${post.slug}` : "/blog",
     keywords: post?.keywords,
     ogType: "article",
-    structuredData: post
-      ? {
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: post.title,
-          description: post.description,
-          datePublished: post.publishedOn,
-          dateModified: post.publishedOn,
-          author: {
-            "@type": "Organization",
-            name: "MathBrooks",
-          },
-          publisher: {
-            "@type": "Organization",
-            name: "MathBrooks",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://www.mathbrooks.com/mathbrooks-mark.svg",
-            },
-          },
-          mainEntityOfPage: `https://www.mathbrooks.com/blog/${post.slug}`,
-        }
-      : undefined,
   });
 
   if (!post) {

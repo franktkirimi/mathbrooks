@@ -22,18 +22,6 @@ const Hero = () => {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `
-            linear-gradient(hsl(var(--foreground) / 0.02) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--foreground) / 0.02) 1px, transparent 1px)
-          `,
-          backgroundSize: "88px 88px",
-        }}
-      />
-
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
           background:
             "radial-gradient(ellipse 72% 62% at 50% 50%, transparent 28%, hsl(var(--background) / 0.72) 100%)",
         }}

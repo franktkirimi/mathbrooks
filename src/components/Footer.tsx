@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 
 const buildLinks = [
-  { label: "Solutions", href: "/solutions" },
-  { label: "Our technology", href: "/#technology" },
-  { label: "MathBrooks Things", href: "/things" },
-  { label: "Industries", href: "/#industries" },
+  { label: "Products", href: "/products" },
+  { label: "Custom Systems", href: "/services" },
+  { label: "Research", href: "/research" },
+  { label: "Systems Architecture", href: "/systems-architecture" },
 ];
 
 const companyLinks = [
   { label: "About", href: "/about" },
   { label: "Our approach", href: "/#what-we-build" },
-  { label: "Contact", href: "/contact" },
+  { label: "Request Systems Brief", href: "/contact" },
   { label: "Privacy Policy", href: "/privacy" },
 ];
 
@@ -34,13 +34,13 @@ const Footer = () => {
               <span className="font-display text-sm tracking-[0.18em]">MATHBROOKS</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm font-light leading-7 text-muted-foreground">
-              Intelligent technology built around people, for the real world.
+              Intelligent systems and digital infrastructure for organisations, institutions, and nations.
             </p>
             <Link
               to="/contact"
               className="mt-5 inline-flex font-display text-xs tracking-[0.14em] uppercase text-primary/80 hover:text-primary transition-colors duration-300"
             >
-              Talk to MathBrooks
+              Request Systems Brief
             </Link>
           </div>
 
@@ -123,7 +123,7 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} MathBrooks. All rights reserved.
           </p>
           <p className="text-sm font-light text-muted-foreground">
-            Built for people. Built to work. Built for the real world.
+            Built for people. Engineered to endure.
           </p>
         </div>
       </div>

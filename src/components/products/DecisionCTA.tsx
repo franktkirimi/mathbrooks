@@ -33,27 +33,17 @@ export const DecisionCTA = ({ product, onRestart }: Props) => {
       </div>
 
       <h2
-        className="decision-line font-display text-[1.9rem] sm:text-[2.6rem] md:text-[3.2rem] font-semibold leading-[1.1] tracking-[-0.025em] text-foreground mb-4"
+        className="decision-line font-display text-[1.9rem] sm:text-[2.6rem] md:text-[3.2rem] font-bold leading-[1.1] tracking-[-0.025em] text-foreground mb-4"
         style={{ opacity: 0 }}
       >
-        This system fits{" "}
-        <span
-          style={{
-            background: "linear-gradient(135deg, hsl(202 89% 69%) 0%, hsl(191 74% 78%) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          your need.
-        </span>
+        This system fits <span className="text-primary">your need.</span>
       </h2>
 
-      <p className="decision-line text-sm text-muted-foreground font-light max-w-sm mb-3 leading-relaxed" style={{ opacity: 0 }}>
+      <p className="decision-line text-sm text-muted-foreground font-normal max-w-sm mb-3 leading-relaxed" style={{ opacity: 0 }}>
         {product.shortName} — {product.tagline}
       </p>
 
-      <p className="decision-line text-xs text-muted-foreground/50 font-light mb-12" style={{ opacity: 0 }}>
+      <p className="decision-line text-xs text-muted-foreground/50 font-normal mb-12" style={{ opacity: 0 }}>
         Starting at {product.startingPrice}
       </p>
 
@@ -71,7 +61,7 @@ export const DecisionCTA = ({ product, onRestart }: Props) => {
           to="/contact"
           className="font-display text-sm tracking-[0.1em] uppercase text-muted-foreground hover:text-primary transition-colors duration-200"
         >
-          Talk to MathBrooks
+          Request Systems Brief
         </Link>
       </div>
 

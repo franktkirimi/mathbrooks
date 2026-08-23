@@ -166,13 +166,13 @@ const engagementPath = [
     step: "03",
     title: "Build",
     detail:
-      "We ship the minimum useful system, test it with the team, and tighten the workflow before wider rollout.",
+      "We ship the minimum production-ready system, test it with the team, and tighten the workflow before wider rollout.",
   },
   {
     step: "04",
     title: "Stabilize",
     detail:
-      "We leave the team with a clear handoff, audit trail, and a practical path for future extension.",
+      "We leave the team with a clear handoff, audit trail, and a defined path for future extension.",
   },
 ];
 
@@ -183,61 +183,6 @@ const Hero = () => {
   const h1Ref     = useRef<HTMLHeadingElement>(null);
   const subRef    = useRef<HTMLParagraphElement>(null);
   const ctaRef    = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef    = useRef<number>(0);
-
-  // Particle canvas
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let W = 0, H = 0;
-    type P = { x: number; y: number; vx: number; vy: number; r: number; alpha: number };
-    let particles: P[] = [];
-
-    const resize = () => {
-      W = canvas.offsetWidth;
-      H = canvas.offsetHeight;
-      canvas.width  = W;
-      canvas.height = H;
-      const count = Math.floor((W * H) / 9000);
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
-        r: Math.random() * 1.4 + 0.4,
-        alpha: Math.random() * 0.35 + 0.08,
-      }));
-    };
-
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = W;
-        if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H;
-        if (p.y > H) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(202, 89%, 69%, ${p.alpha})`;
-        ctx.fill();
-      }
-      rafRef.current = requestAnimationFrame(draw);
-    };
-
-    resize();
-    draw();
-    window.addEventListener("resize", resize);
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
 
   // Entrance animations
   useEffect(() => {
@@ -252,38 +197,23 @@ const Hero = () => {
 
   return (
     <section ref={wrapRef} className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-24 overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 70% 60% at 50% 40%, hsl(202 89% 69% / 0.07) 0%, transparent 70%)" }}
-      />
-
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <h1
           ref={h1Ref}
-          className="font-display font-semibold leading-[1.06] tracking-[-0.03em] text-foreground mb-6"
+          className="font-display font-bold leading-[1.06] tracking-[-0.03em] text-foreground mb-6"
           style={{ fontSize: "clamp(2.4rem, 7vw, 5rem)", opacity: 0 }}
         >
-          We build the systems{" "}
-          <span style={{
-            background: "linear-gradient(135deg, hsl(202 89% 69%) 0%, hsl(191 74% 78%) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}>
-            behind your operations.
-          </span>
+          Architect the system your mission cannot buy off the shelf.
         </h1>
 
-        <p ref={subRef} className="text-base sm:text-lg font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10" style={{ opacity: 0 }}>
-          Custom software, workflow automation, and applied AI for processes too specific for a standard product — and too important to leave in spreadsheets.
+        <p ref={subRef} className="text-base sm:text-lg font-normal text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10" style={{ opacity: 0 }}>
+          Custom software, automation, AI, connected systems, and digital infrastructure for missions too specific, interconnected, or consequential for standard products.
         </p>
 
         <div ref={ctaRef} className="flex flex-wrap items-center justify-center gap-4" style={{ opacity: 0 }}>
-          <Link to="/book-demo">
+          <Link to="/contact">
             <Button size="lg" className="font-display text-xs tracking-[0.15em] uppercase px-8 py-6">
-              Discuss a Project
+              Request an Architecture Review
             </Button>
           </Link>
           <Link to="/products">
@@ -311,9 +241,9 @@ const Hero = () => {
 
 const Services = () => {
   usePageMeta({
-    title: "Services | MathBrooks",
+    title: "Custom Systems | MathBrooks",
     description:
-      "MathBrooks provides custom software, workflow automation, applied AI, agentic systems, and voice automation for operations-heavy businesses.",
+      "MathBrooks architects custom software, automation, AI, connected systems, and digital infrastructure for consequential missions.",
     canonicalPath: "/services",
     keywords: [
       "custom software Zimbabwe",
@@ -336,7 +266,7 @@ const Services = () => {
                 Service Lanes
               </p>
               <h2 className="font-display text-2xl md:text-[2.4rem] font-semibold tracking-[-0.025em] leading-tight">
-                Pick the lane that matches the change you need.
+                Select the capability your system requires.
               </h2>
             </div>
           </AnimatedSection>
@@ -528,21 +458,21 @@ const Services = () => {
                   Ready to scope the workflow?
                 </p>
                 <h2 className="font-display text-2xl md:text-[2rem] font-semibold tracking-[-0.025em] leading-tight mb-4">
-                  Bring the process, and we'll map the right service path.
+                  Bring the mission, constraints, and existing systems. We will define the architecture required to move forward.
                 </h2>
                 <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                  If the problem is custom, connected, or high-risk, the service route is usually right. If it is repeatable, the product modules may be the better starting point.
+                  Custom when the workflow is specific. Ready-made when the need repeats.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <Link to="/book-demo">
+                <Link to="/contact">
                   <Button className="font-display text-xs tracking-[0.15em] uppercase">
-                    Book a Scoping Call
+                    Request an Architecture Review
                   </Button>
                 </Link>
                 <Link to="/products">
                   <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary">
-                    Review Product Modules
+                    Compare Deployable Products
                   </Button>
                 </Link>
               </div>

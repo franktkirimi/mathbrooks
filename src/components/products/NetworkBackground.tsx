@@ -63,7 +63,7 @@ export const NetworkBackground = ({ mode }: Props) => {
     const draw = () => {
       ctx.clearRect(0, 0, W, H);
 
-      const activeColor = "202, 89%, 69%";
+      const activeColor = "187, 81%, 29%";
       const nodes = nodesRef.current;
 
       for (let i = 0; i < nodes.length; i++) {

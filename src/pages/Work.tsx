@@ -14,39 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
   const wrapRef  = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(HTMLElement | null)[]>([]);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef   = useRef<number>(0);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    let W = 0, H = 0;
-    type P = { x: number; y: number; vx: number; vy: number; r: number; a: number };
-    let pts: P[] = [];
-    const resize = () => {
-      W = canvas.offsetWidth; H = canvas.offsetHeight;
-      canvas.width = W; canvas.height = H;
-      pts = Array.from({ length: Math.floor((W * H) / 11000) }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
-        r: Math.random() * 1.3 + 0.3, a: Math.random() * 0.3 + 0.07,
-      }));
-    };
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of pts) {
-        p.x = (p.x + p.vx + W) % W; p.y = (p.y + p.vy + H) % H;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(202,89%,69%,${p.a})`; ctx.fill();
-      }
-      rafRef.current = requestAnimationFrame(draw);
-    };
-    resize(); draw();
-    window.addEventListener("resize", resize);
-    return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener("resize", resize); };
-  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -62,11 +29,6 @@ const Hero = () => {
 
   return (
     <section ref={wrapRef} className="relative flex flex-col items-center justify-center min-h-[85vh] px-6 pt-32 pb-16 text-center overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
-      <div aria-hidden className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 60% 55% at 50% 40%, hsl(202 89% 69% / 0.06) 0%, transparent 70%)" }}
-      />
-
       <div className="relative z-10 max-w-3xl mx-auto">
         <p ref={setRef(0)} className="font-display text-[0.68rem] tracking-[0.32em] uppercase text-primary/60 mb-6" style={{ opacity: 0 }}>
           Case Studies — {String(caseStudies.length).padStart(2, "0")} Projects
@@ -74,19 +36,14 @@ const Hero = () => {
 
         <h1
           ref={setRef(1)}
-          className="font-display font-semibold leading-[1.06] tracking-[-0.03em] text-foreground mb-6"
+          className="font-display font-bold leading-[1.06] tracking-[-0.03em] text-foreground mb-6"
           style={{ fontSize: "clamp(2.6rem, 8vw, 5.5rem)", opacity: 0 }}
         >
           Real delivery.{" "}
-          <span style={{
-            background: "linear-gradient(135deg, hsl(202 89% 69%) 0%, hsl(191 74% 78%) 100%)",
-            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-          }}>
-            Real problems solved.
-          </span>
+          <span className="text-primary">Real problems solved.</span>
         </h1>
 
-        <p ref={setRef(2)} className="text-base sm:text-lg font-light text-muted-foreground max-w-xl mx-auto leading-relaxed mb-10" style={{ opacity: 0 }}>
+        <p ref={setRef(2)} className="text-base sm:text-lg font-normal text-muted-foreground max-w-xl mx-auto leading-relaxed mb-10" style={{ opacity: 0 }}>
           Workflow automation, platform engineering, and operational analytics — built for businesses where the process matters as much as the product.
         </p>
 
@@ -311,18 +268,18 @@ const Work = () => {
                 Facing a similar problem?<br />Let's scope it together.
               </h2>
               <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                Every case study started with a conversation about the workflow that wasn't working. Bring your process and we'll find the right path forward.
+                Every case study started with a systems review of the workflow under pressure. Bring the mission and constraints; we will define the right path forward.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to="/book-demo">
+              <Link to="/contact">
                 <Button className="font-display text-xs tracking-[0.15em] uppercase">
-                  Discuss a Project
+                  Request Systems Brief
                 </Button>
               </Link>
               <Link to="/services">
                 <Button variant="outline" className="font-display text-xs tracking-[0.15em] uppercase border-primary/30 hover:border-primary/60 hover:bg-primary/5 hover:text-primary">
-                  View Services
+                  View Custom Systems
                 </Button>
               </Link>
             </div>
