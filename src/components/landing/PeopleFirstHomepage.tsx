@@ -59,7 +59,7 @@ const heroStyles = `
   .mb-hero-main {
     position: relative;
     z-index: 2;
-    padding-block: clamp(4.5rem, 10vh, 6.5rem) 0;
+    padding-block: clamp(7rem, calc(10vh + 2.5rem), 9rem) 0;
   }
 
   .mb-hero-copy {
@@ -150,7 +150,7 @@ const heroStyles = `
 
     .mb-hero-main {
       display: block;
-      padding-block: 4rem 0;
+      padding-block: 5.5rem 0;
     }
 
     .mb-hero-copy { max-width: 100%; }
