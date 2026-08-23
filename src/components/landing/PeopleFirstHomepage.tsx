@@ -42,9 +42,7 @@ const heroStyles = `
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background:
-      radial-gradient(circle at 78% 22%, rgb(100 227 226 / 0.16), transparent 25rem),
-      linear-gradient(145deg, #ffffff 0%, #f7fbfb 53%, #edf9f8 100%);
+    background: #ffffff;
     color: var(--hero-ink);
     border-bottom: 1px solid #e2e4e7;
   }
