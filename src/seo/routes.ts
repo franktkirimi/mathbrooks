@@ -78,7 +78,7 @@ const thingTitles: Record<string, string> = {
   tessera: "Tessera Resilient Network Intelligence | MathBrooks",
   "zimbabwe-language-intelligence": "Ilwimi Zimbabwean Language Intelligence | MathBrooks",
   "zimbabwe-earth-intelligence": "neFI Environmental Data Infrastructure | MathBrooks",
-  "resilient-energy-intelligence": "Resilient Energy Intelligence Research | MathBrooks",
+  eklezo: "Eklezo End-to-End Energy Intelligence | MathBrooks",
 };
 
 const thingDescriptions: Record<string, string> = {
@@ -86,7 +86,7 @@ const thingDescriptions: Record<string, string> = {
   tessera: "Explore Tessera, a resilient network intelligence layer designed to restore useful communications as devices move, weaken, fail, or disconnect.",
   "zimbabwe-language-intelligence": "Explore Ilwimi, Zimbabwean language intelligence for Shona, Ndebele, English, code-switching, speech, translation, and locally fluent AI services.",
   "zimbabwe-earth-intelligence": "Explore neFI, Zimbabwe's environmental data infrastructure for fused satellite, weather, water, ground, terrain, and catchment observations.",
-  "resilient-energy-intelligence": "Explore intelligent coordination for solar, batteries, mini-grids, backup power, and constrained electricity networks serving essential operations.",
+  eklezo: "Explore Eklezo energy intelligence spanning resilient hybrid power, Eklezo OS orchestration, local battery capability, reuse, and recycling research.",
 };
 
 const blogTitles: Record<string, string> = {
@@ -251,8 +251,10 @@ export const redirectRoutes = [
   { source: "/solutions/available", destination: "/products" },
   { source: "/solutions/available/:slug", destination: "/products/:slug" },
   { source: "/things", destination: "/research" },
+  { source: "/things/resilient-energy-intelligence", destination: "/research/eklezo" },
   { source: "/things/:slug", destination: "/research/:slug" },
   { source: "/case-studies", destination: "/work" },
   { source: "/resources", destination: "/blog" },
   { source: "/clients", destination: "/contact" },
+  { source: "/research/resilient-energy-intelligence", destination: "/research/eklezo" },
 ];

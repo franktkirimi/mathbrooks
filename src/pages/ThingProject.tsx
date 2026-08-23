@@ -1,3 +1,4 @@
+import EklezoExperience from "@/components/EklezoExperience";
 import IlwimiExperience from "@/components/IlwimiExperience";
 import NefiExperience from "@/components/NefiExperience";
 import SokoA01Experience from "@/components/SokoA01Experience";
@@ -13,7 +14,7 @@ const projectIcons = {
   tessera: Network,
   "zimbabwe-language-intelligence": Languages,
   "zimbabwe-earth-intelligence": Satellite,
-  "resilient-energy-intelligence": Zap,
+  eklezo: Zap,
 };
 
 const ThingProject = () => {
@@ -34,6 +35,7 @@ const ThingProject = () => {
   const isTessera = project.slug === "tessera";
   const isIlwimi = project.slug === "zimbabwe-language-intelligence";
   const isNefi = project.slug === "zimbabwe-earth-intelligence";
+  const isEklezo = project.slug === "eklezo";
 
   return (
     <SiteLayout>
@@ -78,6 +80,10 @@ const ThingProject = () => {
           ) : isNefi ? (
             <div className="mt-10 md:mt-14">
               <NefiExperience />
+            </div>
+          ) : isEklezo ? (
+            <div className="mt-10 md:mt-14">
+              <EklezoExperience />
             </div>
           ) : (
             <>

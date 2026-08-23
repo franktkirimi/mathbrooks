@@ -110,25 +110,26 @@ export const thingsProjects: ThingsProject[] = [
   },
   {
     code: "G01",
-    slug: "resilient-energy-intelligence",
-    name: "Resilient Energy Intelligence",
-    shortName: "Energy Intelligence",
-    domain: "Energy systems",
+    slug: "eklezo",
+    name: "Eklezo",
+    shortName: "Eklezo",
+    domain: "Energy intelligence",
     status: "Research in formation",
+    expansion: "End-to-End Energy Intelligence",
     summary:
-      "Intelligent coordination for solar, batteries, mini-grids, and unreliable electricity networks.",
+      "From local lithium to grid orchestration—resilient infrastructure, operating intelligence, and the long path towards local battery capability.",
     question:
-      "Can forecasting and control software make constrained energy systems more reliable, efficient, and affordable?",
+      "Can Zimbabwe connect energy deployment, intelligent orchestration, and local battery capability into one resilient value chain?",
     whyItMatters:
-      "Farms, mines, schools, clinics, and businesses increasingly combine grid power, solar generation, batteries, and backup systems without one clear operating intelligence.",
+      "Farms, mines, schools, clinics, and businesses increasingly combine grid power, solar generation, storage, and backup systems without one operating intelligence, while much of the battery value chain remains external.",
     researchAreas: [
-      "Solar generation and demand forecasting",
-      "Battery scheduling and load prioritisation",
-      "Grid, solar, storage, and backup coordination",
-      "Mini-grid monitoring and fault detection",
+      "Eklezo OS forecasting, scheduling, and control",
+      "Hybrid energy infrastructure and mini-grid deployment",
+      "Local battery-material and pack-engineering research",
+      "Second-life storage and recycling pathways",
     ],
     intendedOutcome:
-      "An energy operating layer that helps essential systems stay productive through changing supply conditions.",
+      "A vertically connected energy ecosystem that deploys resilient power now, coordinates it intelligently, and builds towards deeper local battery capability.",
   },
 ];
 

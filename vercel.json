@@ -18,9 +18,11 @@
     { "source": "/solutions/available", "destination": "/products", "statusCode": 301 },
     { "source": "/solutions/available/:slug", "destination": "/products/:slug", "statusCode": 301 },
     { "source": "/things", "destination": "/research", "statusCode": 301 },
+    { "source": "/things/resilient-energy-intelligence", "destination": "/research/eklezo", "statusCode": 301 },
     { "source": "/things/:slug", "destination": "/research/:slug", "statusCode": 301 },
     { "source": "/case-studies", "destination": "/work", "statusCode": 301 },
     { "source": "/resources", "destination": "/blog", "statusCode": 301 },
-    { "source": "/clients", "destination": "/contact", "statusCode": 301 }
+    { "source": "/clients", "destination": "/contact", "statusCode": 301 },
+    { "source": "/research/resilient-energy-intelligence", "destination": "/research/eklezo", "statusCode": 301 }
   ]
 }

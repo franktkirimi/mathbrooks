@@ -42,6 +42,7 @@ const researchProjects = [
   { code: "neFI", field: "National environmental infrastructure", href: "/research/zimbabwe-earth-intelligence" },
   { code: "Ilwimi", field: "Zimbabwean language intelligence", href: "/research/zimbabwe-language-intelligence" },
   { code: "Tessera", field: "Resilient decentralised networks", href: "/research/tessera" },
+  { code: "Eklezo", field: "End-to-end energy intelligence", href: "/research/eklezo" },
 ];
 
 type PoweredBrand = {

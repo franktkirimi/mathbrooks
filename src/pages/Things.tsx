@@ -9,7 +9,7 @@ const projectIcons = {
   tessera: Network,
   "zimbabwe-language-intelligence": Languages,
   "zimbabwe-earth-intelligence": Satellite,
-  "resilient-energy-intelligence": Zap,
+  eklezo: Zap,
 };
 
 const Things = () => {
@@ -57,13 +57,14 @@ const Things = () => {
                 const isTessera = project.slug === "tessera";
                 const isIlwimi = project.slug === "zimbabwe-language-intelligence";
                 const isNefi = project.slug === "zimbabwe-earth-intelligence";
-                const hasDarkArtwork = isSoko || isTessera || isIlwimi || isNefi;
+                const isEklezo = project.slug === "eklezo";
+                const hasDarkArtwork = isSoko || isTessera || isIlwimi || isNefi || isEklezo;
 
                 return (
                   <Link
                     key={project.slug}
                     to={`/research/${project.slug}`}
-                    className="group relative flex min-h-[31rem] flex-col overflow-hidden rounded-[2rem] border border-border bg-card p-7 shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[var(--shadow-overlay)] md:p-9"
+                    className={`group relative flex min-h-[31rem] flex-col overflow-hidden rounded-[2rem] border border-border bg-card p-7 shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[var(--shadow-overlay)] md:p-9 ${isEklezo ? "md:col-span-2 md:min-h-[28rem]" : ""}`}
                   >
                     {isSoko ? (
                       <>
@@ -112,6 +113,18 @@ const Things = () => {
                         <div className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(181,237,131,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(181,237,131,0.2)_1px,transparent_1px)] [background-size:46px_46px]" />
                         <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_8%,rgba(7,27,13,0.24)_48%,rgba(7,27,13,0.99)_100%)]" />
                       </div>
+                    ) : isEklezo ? (
+                      <div className="absolute inset-0 overflow-hidden bg-[#071412]">
+                        <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(126,221,176,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(126,221,176,0.22)_1px,transparent_1px)] [background-size:42px_42px]" />
+                        <svg viewBox="0 0 600 500" className="absolute -right-20 top-8 h-[76%] w-[96%] opacity-80" aria-hidden="true">
+                          <g fill="none" stroke="#79d5ac">
+                            <path d="M42 96V204H174V282H322V176H470V338H575" strokeOpacity="0.3" strokeWidth="2" />
+                            <path d="M18 390H142V322H260V424H392V268H548" strokeOpacity="0.22" strokeWidth="2" />
+                          </g>
+                          {[[42,96],[174,282],[322,176],[470,338],[142,322],[260,424],[392,268],[548,268]].map(([x,y], pointIndex) => <rect key={`${x}-${y}`} x={x-10} y={y-10} width="20" height="20" rx="4" fill={pointIndex % 3 === 0 ? "#f3b763" : "#0f766e"} stroke="#9ae5c2" />)}
+                        </svg>
+                        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_8%,rgba(7,20,18,0.28)_48%,rgba(7,20,18,0.99)_100%)]" />
+                      </div>
                     ) : (
                       <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(145deg,hsl(var(--card))_0%,hsl(var(--secondary))_100%)]">
                         <div className="absolute -right-24 -top-20 h-72 w-72 rounded-full border border-primary/15" />
@@ -121,7 +134,7 @@ const Things = () => {
                     )}
 
                     <div className={`relative z-10 flex items-center justify-between ${hasDarkArtwork ? "text-white" : "text-foreground"}`}>
-                      <span className={`mb-caption ${isSoko ? "text-[#f5a170]" : isTessera || isIlwimi ? "text-[#71d7d5]" : isNefi ? "text-[#b6ed83]" : "text-primary"}`}>
+                      <span className={`mb-caption ${isSoko ? "text-[#f5a170]" : isTessera || isIlwimi ? "text-[#71d7d5]" : isNefi ? "text-[#b6ed83]" : isEklezo ? "text-[#8de0b9]" : "text-primary"}`}>
                         {project.code} · {project.domain}
                       </span>
                       <Icon className={`h-6 w-6 ${hasDarkArtwork ? "text-white/70" : "text-primary"}`} strokeWidth={1.5} aria-hidden="true" />
