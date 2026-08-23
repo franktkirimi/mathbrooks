@@ -65,27 +65,24 @@ const heroStyles = `
   }
 
   .mb-hero-copy {
-    max-width: 51rem;
+    max-width: 72rem;
   }
 
   .mb-hero-title {
-    max-width: 51rem;
+    max-width: 72rem;
     margin: 0;
     color: var(--hero-ink);
     font-family: var(--font-display);
-    font-size: clamp(3rem, 5.6vw, 5.35rem);
+    font-size: clamp(3rem, 4.4vw, 4.5rem);
     font-weight: 600;
     line-height: 0.95;
     letter-spacing: -0.052em;
     text-wrap: balance;
   }
 
-  .mb-hero-line-one {
+  .mb-hero-title-line {
     display: block;
-  }
-
-  .mb-hero-line-two {
-    display: block;
+    white-space: nowrap;
   }
 
   .mb-hero-subhead {
@@ -168,6 +165,10 @@ const heroStyles = `
       text-wrap: initial;
     }
 
+    .mb-hero-title-line {
+      white-space: normal;
+    }
+
     .mb-hero-subhead {
       max-width: 35rem;
       margin-top: 2.5rem;
@@ -202,8 +203,10 @@ const PeopleFirstHomepage = () => (
         <div className="mb-hero-main">
           <div className="mb-hero-copy">
             <h1 id="home-hero-title" className="mb-hero-title">
-              <span className="mb-hero-line-one">We architect intelligent systems—</span>
-              <span className="mb-hero-line-two">from operational software to national infrastructure.</span>
+              <span className="mb-hero-title-line">We architect intelligent systems—</span>
+              <span className="mb-hero-title-line">from operational software and AI</span>
+              <span className="mb-hero-title-line">to mission-critical connected platforms</span>
+              <span className="mb-hero-title-line">and sovereign national infrastructure.</span>
             </h1>
             <p className="mb-hero-subhead">
               Deploy proven products or commission custom software, AI, connected systems, and digital infrastructure.{" "}
