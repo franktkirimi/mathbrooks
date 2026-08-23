@@ -1,5 +1,15 @@
 import { ArrowRight, BrainCircuit, Cable, Cpu, Database, Sparkles, Workflow } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  siAmazonwebservices,
+  siAnthropic,
+  siGooglecloud,
+  siNvidia,
+  siOpenai,
+  siPostgresql,
+  siSupabase,
+  siVercel,
+} from "simple-icons";
 import AnimatedSection from "@/components/AnimatedSection";
 import LazyIndustryOrbit from "@/components/LazyIndustryOrbit";
 import { Button } from "@/components/ui/button";
@@ -34,6 +44,39 @@ const researchProjects = [
   { code: "Tessera", field: "Resilient decentralised networks", href: "/research/tessera" },
 ];
 
+type PoweredBrand = {
+  name: string;
+  icon?: { path: string };
+  microsoftMark?: boolean;
+};
+
+const poweredBrands: PoweredBrand[] = [
+  { name: "AWS", icon: siAmazonwebservices },
+  { name: "Microsoft Azure", microsoftMark: true },
+  { name: "Google Cloud", icon: siGooglecloud },
+  { name: "NVIDIA", icon: siNvidia },
+  { name: "OpenAI", icon: siOpenai },
+  { name: "Vercel", icon: siVercel },
+  { name: "Supabase", icon: siSupabase },
+  { name: "PostgreSQL", icon: siPostgresql },
+  { name: "Anthropic", icon: siAnthropic },
+];
+
+const PoweredBrandItem = ({ brand }: { brand: PoweredBrand }) => (
+  <span className="mb-powered-brand" role="listitem">
+    {brand.microsoftMark ? (
+      <span className="mb-microsoft-mark" aria-hidden="true">
+        <i /><i /><i /><i />
+      </span>
+    ) : (
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d={brand.icon?.path} />
+      </svg>
+    )}
+    <span>{brand.name}</span>
+  </span>
+);
+
 const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
@@ -41,6 +84,8 @@ const heroStyles = `
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     min-height: 100svh;
     background: #ffffff;
@@ -51,6 +96,7 @@ const heroStyles = `
   .mb-hero-shell {
     position: relative;
     z-index: 1;
+    flex: 1;
     width: min(100%, 80rem);
     margin-inline: auto;
     padding: 4.5rem 1.25rem clamp(4.5rem, 8vh, 6.5rem);
@@ -125,6 +171,103 @@ const heroStyles = `
     color: var(--hero-ink) !important;
   }
 
+  .mb-powered {
+    position: relative;
+    z-index: 2;
+    flex: none;
+    border-top: 1px solid #e2e4e7;
+    background: #ffffff;
+  }
+
+  .mb-powered-shell {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    width: min(100%, 80rem);
+    min-height: 7rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .mb-powered-label {
+    margin: 0;
+    color: #68737f;
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .mb-powered-viewport {
+    min-width: 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .mb-powered-track {
+    display: flex;
+    width: max-content;
+    animation: mb-powered-flow 34s linear infinite;
+    will-change: transform;
+  }
+
+  .mb-powered:hover .mb-powered-track {
+    animation-play-state: paused;
+  }
+
+  .mb-powered-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    padding-right: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .mb-powered-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+    flex: none;
+    color: #59646f;
+    font-family: var(--font-display);
+    font-size: .95rem;
+    font-weight: 600;
+    letter-spacing: -.015em;
+    white-space: nowrap;
+    transition: color 140ms ease;
+  }
+
+  .mb-powered-brand svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex: none;
+    fill: currentColor;
+  }
+
+  .mb-powered-brand:hover {
+    color: var(--hero-teal);
+  }
+
+  .mb-microsoft-mark {
+    display: grid;
+    grid-template-columns: repeat(2, .55rem);
+    grid-template-rows: repeat(2, .55rem);
+    gap: .12rem;
+    flex: none;
+  }
+
+  .mb-microsoft-mark i {
+    display: block;
+    background: currentColor;
+  }
+
+  @keyframes mb-powered-flow {
+    to { transform: translateX(-50%); }
+  }
+
   @keyframes mb-hero-enter {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -165,10 +308,41 @@ const heroStyles = `
       min-width: 0;
     }
 
+    .mb-powered-shell {
+      grid-template-columns: 1fr;
+      gap: .9rem;
+      min-height: 7.5rem;
+      padding-block: 1rem;
+    }
+
+    .mb-powered-viewport {
+      margin-inline: -1.25rem;
+    }
+
+    .mb-powered-label {
+      padding-inline: 0;
+    }
+
   }
 
   @media (prefers-reduced-motion: reduce) {
     .mb-hero-shell { animation: none; }
+    .mb-powered-viewport {
+      overflow: visible;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .mb-powered-track {
+      width: 100%;
+      animation: none;
+      will-change: auto;
+    }
+    .mb-powered-group {
+      flex-wrap: wrap;
+      gap: 1.25rem 2rem;
+      padding: 0 0 1rem;
+    }
+    .mb-powered-group[aria-hidden="true"] { display: none; }
   }
 
 `;
@@ -196,6 +370,21 @@ const PeopleFirstHomepage = () => (
             </div>
           </div>
 
+        </div>
+      </div>
+      <div className="mb-powered" aria-label="Powered by technology infrastructure">
+        <div className="mb-powered-shell">
+          <p className="mb-powered-label">Powered by</p>
+          <div className="mb-powered-viewport">
+            <div className="mb-powered-track">
+              <div className="mb-powered-group" role="list">
+                {poweredBrands.map((brand) => <PoweredBrandItem key={brand.name} brand={brand} />)}
+              </div>
+              <div className="mb-powered-group" aria-hidden="true">
+                {poweredBrands.map((brand) => <PoweredBrandItem key={`repeat-${brand.name}`} brand={brand} />)}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
