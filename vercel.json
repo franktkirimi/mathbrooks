@@ -13,6 +13,10 @@
       ]
     }
   ],
+  "rewrites": [
+    { "source": "/google9d7d44fb531c6d49.html", "destination": "/google9d7d44fb531c6d49.html" },
+    { "source": "/services/google806c6e81b99b2a3f.html", "destination": "/services/google806c6e81b99b2a3f.html" }
+  ],
   "redirects": [
     { "source": "/solutions", "destination": "/systems-architecture", "statusCode": 301 },
     { "source": "/solutions/available", "destination": "/products", "statusCode": 301 },
