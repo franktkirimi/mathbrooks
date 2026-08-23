@@ -37,7 +37,7 @@ const researchProjects = [
 const heroStyles = `
   .mb-hero {
     --hero-ink: #0f1626;
-    --hero-teal: #1f5c5c;
+    --hero-teal: #0f766e;
     position: relative;
     isolation: isolate;
     overflow: hidden;
@@ -107,7 +107,7 @@ const heroStyles = `
   }
 
   .mb-hero-primary:hover {
-    background: #184c4c !important;
+    background: #0b5f59 !important;
   }
 
   .mb-hero-secondary {
