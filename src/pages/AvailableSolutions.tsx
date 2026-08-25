@@ -32,6 +32,13 @@ const AvailableSolutions = () => {
                 Architect a Custom System <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
+            <p className="mt-5 text-sm text-black/60">
+              Not sure which product fits?{" "}
+              <Link to="/audit" className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80">
+                Run the free AI business audit
+              </Link>
+              .
+            </p>
           </AnimatedSection>
 
           <AnimatedSection delay={100} className="hidden lg:block">

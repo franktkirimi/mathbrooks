@@ -4,6 +4,8 @@ import CursorGlow from "@/components/CursorGlow";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
+import WhatsAppWidget from "@/components/site/WhatsAppWidget";
+import { useAuditActive } from "@/components/audit/AuditActiveContext";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type SiteLayoutProps = {
@@ -35,6 +37,8 @@ const RouteScroll = () => {
 };
 
 const SiteLayout = ({ children }: SiteLayoutProps) => {
+  const { active: auditActive } = useAuditActive();
+
   return (
     <div className="site-shell min-h-screen bg-background overflow-x-hidden">
       <HashScroll />
@@ -50,6 +54,9 @@ const SiteLayout = ({ children }: SiteLayoutProps) => {
       <Navbar />
       <main id="main-content">{children}</main>
       <Footer />
+      {/* Suppressed while a diagnostic is in progress (approved plan §4/§11) — every
+          competing conversion path is removed until results are reached. */}
+      {!auditActive ? <WhatsAppWidget /> : null}
     </div>
   );
 };

@@ -120,6 +120,12 @@ const Navbar = () => {
             </Link>
           ))}
           <Link
+            to="/audit"
+            className="mb-nav-link border-b border-border/10 py-3 font-display !font-medium text-[hsl(var(--nav))] hover:text-primary"
+          >
+            Audit My Business
+          </Link>
+          <Link
             to="/contact"
             className="action-button mt-3 inline-flex items-center justify-center rounded-lg px-4 py-3 font-display text-sm font-medium transition-colors duration-300 !bg-[#0f766e] hover:!bg-[#0b5f59]"
           >

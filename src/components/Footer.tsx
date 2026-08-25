@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 const buildLinks = [
   { label: "Products", href: "/products" },
   { label: "Custom Systems", href: "/services" },
+  { label: "Free AI Business Audit", href: "/audit" },
   { label: "Research", href: "/research" },
   { label: "Systems Architecture", href: "/systems-architecture" },
 ];

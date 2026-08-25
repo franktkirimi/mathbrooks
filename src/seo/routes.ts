@@ -131,6 +131,12 @@ const staticRoutes: RouteMeta[] = [
     priority: 0.9,
   }),
   route({
+    path: "/audit",
+    title: "Free AI Business Efficiency Audit | MathBrooks Zimbabwe",
+    description: "Run a free, structured AI business audit to find inefficient processes, manual work, and technology gaps — then see which MathBrooks systems could help.",
+    priority: 0.7,
+  }),
+  route({
     path: "/research",
     title: "MathBrooks Things | Advanced Technology Research Portfolio",
     description: "Explore MathBrooks research in embodied intelligence, environmental infrastructure, Zimbabwean language AI, resilient networks, and energy systems.",

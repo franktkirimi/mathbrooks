@@ -369,6 +369,12 @@ const PeopleFirstHomepage = () => (
                 <Link to="/services">Commission a custom system</Link>
               </Button>
             </div>
+            <Link
+              to="/audit"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[var(--hero-ink)]/70 underline decoration-[var(--hero-ink)]/25 underline-offset-4 transition hover:text-[var(--hero-ink)] hover:decoration-[var(--hero-ink)]/50"
+            >
+              Not sure where to start? Audit my business <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </Link>
           </div>
 
         </div>

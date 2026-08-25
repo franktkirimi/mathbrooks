@@ -477,6 +477,13 @@ const Services = () => {
                 </Link>
               </div>
             </div>
+            <p className="mt-6 text-sm font-light text-muted-foreground">
+              Not sure which of these you need?{" "}
+              <Link to="/audit" className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">
+                Run the free AI business audit
+              </Link>{" "}
+              and we'll point at the right one.
+            </p>
           </AnimatedSection>
         </div>
       </section>
