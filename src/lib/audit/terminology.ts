@@ -16,6 +16,7 @@ export interface Terminology {
 }
 
 const NONPROFIT_INDUSTRIES = new Set(["ngo_nonprofit"]);
+const GOVERNMENT_INDUSTRIES = new Set(["government_public_sector"]);
 
 const COMMERCIAL: Terminology = { org: "business", Org: "Business", audience: "customers", Audience: "Customers" };
 const NONPROFIT: Terminology = {
@@ -24,9 +25,18 @@ const NONPROFIT: Terminology = {
   audience: "the people you serve",
   Audience: "The people you serve",
 };
+const GOVERNMENT: Terminology = {
+  org: "organisation",
+  Org: "Organisation",
+  audience: "the public",
+  Audience: "The public",
+};
 
-export const resolveTerminology = (answers: Answers): Terminology =>
-  NONPROFIT_INDUSTRIES.has(answers.industry ?? "") ? NONPROFIT : COMMERCIAL;
+export const resolveTerminology = (answers: Answers): Terminology => {
+  if (NONPROFIT_INDUSTRIES.has(answers.industry ?? "")) return NONPROFIT;
+  if (GOVERNMENT_INDUSTRIES.has(answers.industry ?? "")) return GOVERNMENT;
+  return COMMERCIAL;
+};
 
 const replaceToken = (text: string, token: string, value: string): string => text.split(token).join(value);
 

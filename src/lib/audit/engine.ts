@@ -69,7 +69,7 @@ const OPTION_SCORES: Record<string, Record<string, number>> = {
   report_time: { under_2h: 70, "2_8h": 40, over_day: 15 },
   approval_process: { system_enforced: 100, email_paper: 45, informal: 10 },
   systems_integration: { automatic: 100, manual_copying: 45, re_entry: 10 },
-  website_status: { modern: 100, outdated: 45, none: 0 },
+  website_status: { modern: 100, outdated: 45, none: 15 },
   primary_customer_channel: { structured: 100, phone_email: 55, whatsapp_only: 20 },
   people_operations: { dedicated: 100, spreadsheet: 45, informal: 10 },
   delivery_visibility: { system: 100, manual: 45, informal: 10 },
@@ -278,7 +278,11 @@ const OPPORTUNITY_RULES: OpportunityRule[] = [
     id: "reporting_automation",
     category: "reporting",
     title: "Management reporting",
-    trigger: (a) => a.reporting_method !== "automated",
+    // Guarded on reporting_method being answered at all, matching the pattern
+    // used elsewhere — an unanswered question must not be read as a problem.
+    // "solo_full_visibility" means there's no one to report to and no gap.
+    trigger: (a) =>
+      Boolean(a.reporting_method) && a.reporting_method !== "automated" && a.reporting_method !== "solo_full_visibility",
     severity: (a) => (a.report_time === "over_day" ? "high" : "medium"),
     layers: {
       found: "Management reports are put together manually rather than generated automatically.",
@@ -311,7 +315,9 @@ const OPPORTUNITY_RULES: OpportunityRule[] = [
     id: "systems_integration_gap",
     category: "integration",
     title: "Disconnected systems",
-    trigger: (a) => a.systems_integration !== "automatic",
+    // Guarded on systems_integration being answered at all — matches the
+    // pattern used elsewhere (inventory_visibility, quotation_workflow, etc.).
+    trigger: (a) => Boolean(a.systems_integration) && a.systems_integration !== "automatic",
     severity: (a) => (a.systems_integration === "re_entry" ? "high" : "medium"),
     layers: {
       found: "The same information gets typed into more than one system rather than flowing between them automatically.",
@@ -339,7 +345,9 @@ const OPPORTUNITY_RULES: OpportunityRule[] = [
     id: "digital_presence",
     category: "digital",
     title: "Digital presence",
-    trigger: (a) => a.website_status !== "modern",
+    // Guarded on website_status being answered at all — matches the pattern
+    // used elsewhere (inventory_visibility, quotation_workflow, etc.).
+    trigger: (a) => Boolean(a.website_status) && a.website_status !== "modern",
     // P2 calibration refinement: having no web presence at all is a materially
     // worse gap than having one that's simply due for a refresh — not a threshold
     // tuned on traffic data, just a direct reading of the two states themselves.
@@ -515,8 +523,15 @@ export const computeLeadScore = (answers: Answers, opportunities: Opportunity[])
   const hasHighSeverity = highCount > 0;
   const hasAnyOpportunity = opportunities.length > 0;
   const urgencyHighEnough = answers.urgency === "next_quarter" || answers.urgency === "now";
-  const isDecisionMaker = answers.decision_role === "decision_maker";
-  const gatePasses = hasHighSeverity && (urgencyHighEnough || isDecisionMaker);
+  /**
+   * P1 calibration fix: being the decision-maker was previously enough to
+   * pass the gate on its own, even with no near-term urgency — a decision-
+   * maker who's "just exploring" isn't ready for same-day outreach. Urgency
+   * is now required; decision-making authority still contributes to the
+   * underlying lead score (see the weighted components above) but no longer
+   * substitutes for a real timeline signal at the gate itself.
+   */
+  const gatePasses = hasHighSeverity && urgencyHighEnough;
 
   if (score >= 70 && gatePasses) {
     return { score, tier: "hot", needsNurture: false, nextAction: NEXT_ACTION.hot };
@@ -548,9 +563,19 @@ export const computeCommercialSummary = (opportunities: Opportunity[], leadScore
   if (leadScore.tier === "hot" || highCount >= 2) potential = "high";
   else if (leadScore.tier === "warm" || opportunities.length >= 2) potential = "medium";
 
+  /**
+   * P2 calibration fix: complexity previously scaled with raw opportunity
+   * *count* alone, regardless of severity — several minor (medium-severity)
+   * gaps pushed the estimate to "high" (implying a full custom build) just
+   * as fast as one severe problem did. Backtested against an independent
+   * judge sample: gating "medium"/"high" on at least one genuinely severe
+   * opportunity (or, absent that, a wide breadth of 4+ problems) cut the
+   * over-prescription rate roughly in half with a negligible increase in
+   * under-prescription.
+   */
   let complexity: ComplexityEstimate = "low";
-  if (opportunities.length >= 4) complexity = "high";
-  else if (opportunities.length >= 2) complexity = "medium";
+  if (highCount >= 2) complexity = "high";
+  else if (highCount >= 1 || opportunities.length >= 4) complexity = "medium";
 
   const likelyScope = opportunities.slice(0, 3).map((o) => o.mathBrooksSolution.label);
 
