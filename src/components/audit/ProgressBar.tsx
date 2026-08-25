@@ -9,10 +9,10 @@ const ProgressBar = ({ answeredCount, totalCount }: ProgressBarProps) => {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-2">
-        <span className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-muted-foreground">
+        <span className="font-mono text-[0.72rem] uppercase tracking-[0.14em] text-muted-foreground">
           Question {Math.min(answeredCount + 1, totalCount)} of {totalCount}
         </span>
-        <span className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-muted-foreground">{percent}%</span>
+        <span className="font-mono text-[0.72rem] uppercase tracking-[0.14em] text-muted-foreground">{percent}%</span>
       </div>
       <div
         role="progressbar"

@@ -18,7 +18,7 @@ const OpportunityCard = ({ opportunity, companyName }: { opportunity: Opportunit
     <div className="flex flex-wrap items-center gap-3">
       <span
         className={cn(
-          "inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.1em]",
+          "inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[0.72rem] font-semibold uppercase tracking-[0.08em]",
           SEVERITY_CLASS[opportunity.severity],
         )}
       >
@@ -29,15 +29,15 @@ const OpportunityCard = ({ opportunity, companyName }: { opportunity: Opportunit
 
     <dl className="mt-4 space-y-3 text-sm leading-6 text-black/80">
       <div>
-        <dt className="font-mono text-[0.62rem] uppercase tracking-[0.12em] text-black/45">What we found</dt>
+        <dt className="font-mono text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-black/60">What we found</dt>
         <dd className="mt-1">{opportunity.layers.found}</dd>
       </div>
       <div>
-        <dt className="font-mono text-[0.62rem] uppercase tracking-[0.12em] text-black/45">Why it matters</dt>
+        <dt className="font-mono text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-black/60">Why it matters</dt>
         <dd className="mt-1">{opportunity.layers.whyItMatters}</dd>
       </div>
       <div>
-        <dt className="font-mono text-[0.62rem] uppercase tracking-[0.12em] text-black/45">What {companyName ?? "you"} could do</dt>
+        <dt className="font-mono text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-black/60">What {companyName ?? "you"} could do</dt>
         <dd className="mt-1">{opportunity.layers.whatYouCouldDo}</dd>
       </div>
     </dl>
@@ -76,7 +76,7 @@ const ResultsPanel = ({ mode, result, previewCount, companyName, onUnlock, onPro
   return (
     <div>
       <div className="rounded-3xl border border-black/12 bg-white p-8 sm:p-10">
-        <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-primary">Digital Efficiency Score</p>
+        <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-primary">Digital Efficiency Score</p>
         <div className="mt-3 flex items-baseline gap-3">
           <span className="font-display text-6xl font-semibold tracking-[-0.03em] text-black">{efficiency.score ?? "—"}</span>
           <span className="font-display text-2xl text-black/40">/100</span>
@@ -117,7 +117,7 @@ const ResultsPanel = ({ mode, result, previewCount, companyName, onUnlock, onPro
         </div>
       ) : (
         <div className="mt-10 rounded-2xl border border-black/12 bg-black p-7 text-white sm:p-9">
-          <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-[#71d7d5]">Next step</p>
+          <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#71d7d5]">Next step</p>
           <h3 className="mt-3 font-display text-2xl font-semibold tracking-[-0.02em]">
             Talk this through with MathBrooks.
           </h3>

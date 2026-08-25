@@ -51,6 +51,27 @@ describe("inventorySectionVisible — conditional section skip (P1 fix: driven d
   });
 });
 
+describe("industry_other_detail — free-text follow-up for 'Something else' (product fix)", () => {
+  it("only appears when industry is answered as 'other'", () => {
+    expect(getVisibleQuestions({ industry: "hardware" }).some((q) => q.id === "industry_other_detail")).toBe(false);
+    expect(getVisibleQuestions({ industry: "ngo_nonprofit" }).some((q) => q.id === "industry_other_detail")).toBe(false);
+    expect(getVisibleQuestions({ industry: "other" }).some((q) => q.id === "industry_other_detail")).toBe(true);
+  });
+
+  it("is a required text-input question, not a scored one", () => {
+    const question = getVisibleQuestions({ industry: "other" }).find((q) => q.id === "industry_other_detail");
+    expect(question?.inputType).toBe("text");
+    expect(question?.required).toBe(true);
+    expect(question?.category).toBe("context");
+  });
+
+  it("must be answered before the audit is considered complete when industry is 'other'", () => {
+    expect(isAuditComplete({ industry: "other" })).toBe(false);
+    expect(getNextQuestion({ industry: "other" })?.id).toBe("industry_other_detail");
+    expect(isAuditComplete({ industry: "other", industry_other_detail: "Funeral services" })).toBe(false); // other fields still missing
+  });
+});
+
 describe("getVisibleQuestions — branching", () => {
   it("does not show lost_quotes until quote_method is answered as adhoc", () => {
     const withoutAnswer = getVisibleQuestions({});

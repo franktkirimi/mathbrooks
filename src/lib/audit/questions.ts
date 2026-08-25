@@ -26,6 +26,12 @@ export interface Question {
   helpText?: string;
   options: QuestionOption[];
   required: boolean;
+  /** Defaults to "select" (option buttons). "text" renders a free-text input instead — used
+   *  for the rare question where the option list can't cover every real answer (e.g. "please
+   *  specify" after choosing "Something else"), not as a general substitute for branching. */
+  inputType?: "select" | "text";
+  /** Placeholder shown for a "text" question. Ignored for "select". */
+  inputPlaceholder?: string;
   /** When present, the question is only shown if this returns true for the answers given so far. */
   visibleWhen?: (answers: Answers) => boolean;
 }
@@ -69,9 +75,28 @@ export const QUESTIONS: Question[] = [
       { id: "manufacturing", label: "Manufacturing" },
       { id: "hospitality", label: "Hospitality" },
       { id: "agriculture", label: "Agriculture" },
+      { id: "healthcare", label: "Healthcare" },
+      { id: "education", label: "Education" },
+      { id: "ngo_nonprofit", label: "NGO / nonprofit" },
+      { id: "construction", label: "Construction" },
+      { id: "real_estate", label: "Real estate" },
+      { id: "technology", label: "Technology" },
+      { id: "logistics_transport", label: "Logistics & transport" },
       { id: "other", label: "Something else" },
     ],
     required: true,
+  },
+  {
+    id: "industry_other_detail",
+    sectionId: "context",
+    category: "context",
+    prompt: "What kind of business is it?",
+    helpText: "This is just for context — it doesn't affect your score.",
+    inputType: "text",
+    inputPlaceholder: "e.g. film production, funeral services, courier",
+    options: [],
+    required: true,
+    visibleWhen: (answers) => answers.industry === "other",
   },
   {
     id: "employee_band",
@@ -372,7 +397,7 @@ export const SECTIONS: Section[] = [
     id: "context",
     title: "About the business",
     description: "A quick picture of what we're auditing.",
-    questionIds: ["industry", "employee_band", "branch_count", "sends_quotes", "holds_physical_stock"],
+    questionIds: ["industry", "industry_other_detail", "employee_band", "branch_count", "sends_quotes", "holds_physical_stock"],
   },
   {
     id: "sales",
