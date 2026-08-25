@@ -530,8 +530,18 @@ export const computeLeadScore = (answers: Answers, opportunities: Opportunity[])
    * is now required; decision-making authority still contributes to the
    * underlying lead score (see the weighted components above) but no longer
    * substitutes for a real timeline signal at the gate itself.
+   *
+   * P2 calibration fix: the reverse gap was still open — near-term urgency
+   * from someone who isn't the decision-maker isn't ready for same-day
+   * outreach either. Scoped with a fresh, purpose-built sample targeting
+   * exactly this boundary (0/30 organizations with high severity + urgency
+   * but a non-decision-maker respondent were independently judged "Hot" —
+   * 100% false-Hot in that segment, vs. 33% true-Hot once decision-maker
+   * status was added back in). Decision-maker status is now required
+   * alongside urgency, not an alternative to it.
    */
-  const gatePasses = hasHighSeverity && urgencyHighEnough;
+  const isDecisionMaker = answers.decision_role === "decision_maker";
+  const gatePasses = hasHighSeverity && urgencyHighEnough && isDecisionMaker;
 
   if (score >= 70 && gatePasses) {
     return { score, tier: "hot", needsNurture: false, nextAction: NEXT_ACTION.hot };
