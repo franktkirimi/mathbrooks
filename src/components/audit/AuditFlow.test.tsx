@@ -60,7 +60,7 @@ describe("AuditFlow — end-to-end deterministic walkthrough", () => {
     click(/^1–5$/i);
     click(/just one/i);
     click(/yes, regularly/i); // sends_quotes
-    click(/no — a service business/i); // holds_physical_stock
+    click(/no — we.re a service business/i); // holds_physical_stock
 
     // Sales & follow-up (best-case answers — no lost_quotes branch question)
     click(/a dedicated crm or quoting system/i);
@@ -76,7 +76,7 @@ describe("AuditFlow — end-to-end deterministic walkthrough", () => {
 
     // People & delivery (best-case — solo business, not project-based)
     click(/just the owner — no other staff to manage/i);
-    click(/this business doesn't really run distinct projects or jobs/i);
+    click(/doesn.t really run distinct projects or jobs/i);
 
     // Digital presence & communication
     click(/yes, and it's up to date/i);
@@ -122,7 +122,7 @@ describe("AuditFlow — end-to-end deterministic walkthrough", () => {
     click(/^1–5$/i);
     click(/just one/i);
     click(/yes, regularly/i); // sends_quotes
-    click(/no — a service business/i); // holds_physical_stock
+    click(/no — we.re a service business/i); // holds_physical_stock
     click(/whatsapp or phone, worked out case by case/i); // reveals lost_quotes
     click(/tracked in a system, with reminders/i);
     click(/under 20/i);
@@ -131,7 +131,7 @@ describe("AuditFlow — end-to-end deterministic walkthrough", () => {
     click(/a system enforces who signs off/i);
     click(/systems already talk to each other/i);
     click(/just the owner — no other staff to manage/i);
-    click(/this business doesn't really run distinct projects or jobs/i);
+    click(/doesn.t really run distinct projects or jobs/i);
     click(/yes, and it's up to date/i);
     click(/a structured channel/i);
     click(/just exploring for now/i);
@@ -170,7 +170,7 @@ describe("AuditFlow — end-to-end deterministic walkthrough", () => {
     click(/^1–5$/i);
     click(/just one/i);
     click(/yes, regularly/i); // sends_quotes
-    click(/no — a service business/i); // holds_physical_stock
+    click(/no — we.re a service business/i); // holds_physical_stock
     click(/a dedicated crm or quoting system/i);
     click(/tracked in a system, with reminders/i);
     click(/under 20/i);
@@ -178,7 +178,7 @@ describe("AuditFlow — end-to-end deterministic walkthrough", () => {
     click(/a system enforces who signs off/i);
     click(/systems already talk to each other/i);
     click(/just the owner — no other staff to manage/i);
-    click(/this business doesn't really run distinct projects or jobs/i);
+    click(/doesn.t really run distinct projects or jobs/i);
     click(/yes, and it's up to date/i);
     click(/a structured channel/i);
     click(/just exploring for now/i);

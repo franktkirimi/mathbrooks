@@ -2,7 +2,6 @@ import { MessageCircle, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import type { AuditResult, Opportunity } from "@/lib/audit/engine";
-import { CATEGORY_LABELS } from "@/lib/audit/engine";
 import { WHATSAPP_NUMBER } from "@/lib/audit/config";
 import { trackAuditEvent } from "@/lib/audit/analytics";
 import { cn } from "@/lib/utils";
@@ -89,7 +88,7 @@ const ResultsPanel = ({ mode, result, previewCount, companyName, onUnlock, onPro
               .filter((c) => c.applicable)
               .map((c) => (
                 <div key={c.category} className="flex items-center justify-between gap-3 border-b border-black/8 pb-2">
-                  <span className="text-sm text-black/70">{CATEGORY_LABELS[c.category]}</span>
+                  <span className="text-sm text-black/70">{c.label}</span>
                   <span className="font-mono text-sm font-semibold text-black">{c.score}</span>
                 </div>
               ))}

@@ -173,6 +173,7 @@ const AuditFlow = () => {
             <QuestionCard
               key={currentQuestion.id}
               question={currentQuestion}
+              answers={answers}
               value={answers[currentQuestion.id]}
               onAnswer={(optionId) => applyAnswer(currentQuestion.id, currentQuestion.sectionId, optionId)}
               onSkip={

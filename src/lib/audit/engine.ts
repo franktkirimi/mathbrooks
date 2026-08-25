@@ -1,4 +1,5 @@
 import type { Answers, ScoredCategory } from "./questions";
+import { applyTerminology } from "./terminology";
 
 /**
  * Deterministic scoring, branching, and opportunity-mapping engine for the
@@ -29,11 +30,19 @@ export const CATEGORY_WEIGHTS: Record<ScoredCategory, number> = {
   delivery: 7,
 };
 
+/**
+ * Templates, not final copy — {{audience}} is resolved per-answer via
+ * applyTerminology() wherever a label actually reaches the visitor (see
+ * computeCategoryScores below). Kept exported under the original name so
+ * existing category-name lookups (e.g. by industry-agnostic tooling) still
+ * work; anything shown to a visitor should go through the resolved
+ * CategoryScore.label instead of this map directly.
+ */
 export const CATEGORY_LABELS: Record<ScoredCategory, string> = {
-  sales: "Sales & customer follow-up",
+  sales: "Sales & follow-up with {{audience}}",
   inventory: "Inventory & stock visibility",
   reporting: "Reporting & approvals",
-  communication: "Communication & customer service",
+  communication: "Communication with {{audience}}",
   workflow: "Workflow & approvals discipline",
   integration: "Systems integration",
   digital: "Digital presence",
@@ -129,9 +138,11 @@ const communicationSubscore = (answers: Answers): number | null => {
 
 export const computeCategoryScores = (answers: Answers): CategoryScore[] =>
   (Object.keys(CATEGORY_WEIGHTS) as ScoredCategory[]).map((category) => {
+    const label = applyTerminology(CATEGORY_LABELS[category], answers);
+
     if (category === "communication") {
       const score = communicationSubscore(answers);
-      return { category, label: CATEGORY_LABELS[category], applicable: score !== null, score };
+      return { category, label, applicable: score !== null, score };
     }
 
     const relevantScores = CATEGORY_QUESTIONS[category]
@@ -139,11 +150,11 @@ export const computeCategoryScores = (answers: Answers): CategoryScore[] =>
       .filter((value): value is number => value !== undefined);
 
     if (relevantScores.length === 0) {
-      return { category, label: CATEGORY_LABELS[category], applicable: false, score: null };
+      return { category, label, applicable: false, score: null };
     }
 
     const average = relevantScores.reduce((sum, value) => sum + value, 0) / relevantScores.length;
-    return { category, label: CATEGORY_LABELS[category], applicable: true, score: round(average) };
+    return { category, label, applicable: true, score: round(average) };
   });
 
 export type FrictionBand = "high" | "moderate" | "strong";
@@ -259,7 +270,7 @@ const OPPORTUNITY_RULES: OpportunityRule[] = [
       found: "Stock isn't visible in one place, and checking another branch's inventory means a phone call or a manual count.",
       whyItMatters:
         "This causes stockouts that could have been avoided, wasted staff time chasing information by phone, and decisions made on guesswork rather than current numbers.",
-      whatYouCouldDo: "Give every branch real-time visibility into stock levels across the whole business.",
+      whatYouCouldDo: "Give every branch real-time visibility into stock levels across the whole {{org}}.",
     },
     mathBrooksSolution: { label: "MathBrooks Inventory", href: "/products/inventory" },
   },
@@ -273,7 +284,7 @@ const OPPORTUNITY_RULES: OpportunityRule[] = [
       found: "Management reports are put together manually rather than generated automatically.",
       whyItMatters:
         "Manual reporting takes staff time away from other work, delays decisions until the report is ready, and is more prone to error than a system pulling live numbers.",
-      whatYouCouldDo: "Move recurring reports onto a live dashboard that updates as the business operates.",
+      whatYouCouldDo: "Move recurring reports onto a live dashboard that updates as the {{org}} operates.",
     },
     mathBrooksSolution: { label: "MathBrooks Analytics", href: "/products/analytics" },
   },
@@ -313,14 +324,14 @@ const OPPORTUNITY_RULES: OpportunityRule[] = [
   {
     id: "customer_communication_load",
     category: "communication",
-    title: "Customer communication load",
+    title: "Communication load",
     trigger: (a) => a.primary_customer_channel === "whatsapp_only" && a.message_volume !== "low",
     severity: (a) => (a.message_volume === "high" ? "high" : "medium"),
     layers: {
-      found: "Customer messages come through WhatsApp almost exclusively, at a volume that's hard to keep up with using an ad hoc process.",
+      found: "Messages from {{audience}} come through WhatsApp almost exclusively, at a volume that's hard to keep up with using an ad hoc process.",
       whyItMatters:
-        "High message volume through an unstructured channel tends to mean slower replies, dropped conversations, and no shared record of what customers were told.",
-      whatYouCouldDo: "Bring structure to the highest-volume channel without asking customers to change how they reach you.",
+        "High message volume through an unstructured channel tends to mean slower replies, dropped conversations, and no shared record of what {{audience}} were told.",
+      whatYouCouldDo: "Bring structure to the highest-volume channel without asking {{audience}} to change how they reach you.",
     },
     mathBrooksSolution: { label: "MathBrooks AI Assistant", href: "/products/ai-assistant" },
   },
@@ -334,10 +345,10 @@ const OPPORTUNITY_RULES: OpportunityRule[] = [
     // tuned on traffic data, just a direct reading of the two states themselves.
     severity: (a) => (a.website_status === "none" ? "high" : "medium"),
     layers: {
-      found: "The business either doesn't have a website or its current one is out of date.",
+      found: "The {{org}} either doesn't have a website or its current one is out of date.",
       whyItMatters:
-        "A weak digital presence is often the first thing a prospective customer sees, and an outdated or missing site can undercut trust before any conversation starts.",
-      whatYouCouldDo: "Bring the public-facing presence up to the standard of the business behind it.",
+        "A weak digital presence is often the first thing someone sees before they ever get in touch, and an outdated or missing site can undercut trust before any conversation starts.",
+      whatYouCouldDo: "Bring the public-facing presence up to the standard of the {{org}} behind it.",
     },
     mathBrooksSolution: { label: "Custom Software (Digital Presence)", href: "/services" },
   },
@@ -368,7 +379,7 @@ const OPPORTUNITY_RULES: OpportunityRule[] = [
     layers: {
       found: "There's no shared way to see whether projects or jobs are on schedule.",
       whyItMatters:
-        "Without shared visibility, delays are usually discovered after they've already affected a customer or deadline, rather than while there's still time to act.",
+        "Without shared visibility, delays are usually discovered after they've already affected {{audience}} or missed a deadline, rather than while there's still time to act.",
       whatYouCouldDo: "Give the team one place to see project status and deadlines as they happen.",
     },
     mathBrooksSolution: { label: "MathBrooks Projects", href: "/products/projects" },
@@ -384,7 +395,11 @@ export const computeOpportunities = (answers: Answers): Opportunity[] =>
       category: rule.category,
       severity: rule.severity(answers),
       title: rule.title,
-      layers: rule.layers,
+      layers: {
+        found: applyTerminology(rule.layers.found, answers),
+        whyItMatters: applyTerminology(rule.layers.whyItMatters, answers),
+        whatYouCouldDo: applyTerminology(rule.layers.whatYouCouldDo, answers),
+      },
       mathBrooksSolution: rule.mathBrooksSolution,
     }))
     .sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity]);

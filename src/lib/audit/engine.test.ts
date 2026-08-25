@@ -587,6 +587,56 @@ describe("P1 calibration fix — FA-5: a single well-defined problem carries mor
   });
 });
 
+describe("Product fix — report copy adapts to NGOs instead of always saying 'business'/'customers'", () => {
+  it("uses 'business'/'customers' by default when the industry isn't a nonprofit", () => {
+    const scores = computeCategoryScores({ primary_customer_channel: "structured", message_volume: "low" });
+    expect(scores.find((c) => c.category === "communication")!.label).toBe("Communication with customers");
+
+    const opportunities = computeOpportunities({ website_status: "none" });
+    expect(opportunities[0].layers.found).toContain("business");
+    expect(opportunities[0].layers.found).not.toContain("organisation");
+  });
+
+  it("swaps to 'organisation'/'the people you serve' for an NGO", () => {
+    const scores = computeCategoryScores({
+      industry: "ngo_nonprofit",
+      primary_customer_channel: "structured",
+      message_volume: "low",
+    });
+    expect(scores.find((c) => c.category === "communication")!.label).toBe(
+      "Communication with the people you serve",
+    );
+
+    const opportunities = computeOpportunities({ industry: "ngo_nonprofit", website_status: "none" });
+    expect(opportunities[0].layers.found).toContain("organisation");
+    expect(opportunities[0].layers.found).not.toContain("business");
+  });
+
+  it("never leaves a literal {{token}} unresolved in any triggered opportunity's copy", () => {
+    for (const industry of ["hardware", "ngo_nonprofit", undefined]) {
+      const opportunities = computeOpportunities({
+        industry,
+        quote_method: "adhoc",
+        followup_tracking: "memory",
+        approval_process: "informal",
+        people_operations: "informal",
+        delivery_visibility: "informal",
+        systems_integration: "re_entry",
+        website_status: "none",
+        primary_customer_channel: "whatsapp_only",
+        message_volume: "high",
+        reporting_method: "verbal",
+      });
+      expect(opportunities.length).toBeGreaterThan(0);
+      for (const opportunity of opportunities) {
+        expect(opportunity.layers.found).not.toMatch(/\{\{.*?\}\}/);
+        expect(opportunity.layers.whyItMatters).not.toMatch(/\{\{.*?\}\}/);
+        expect(opportunity.layers.whatYouCouldDo).not.toMatch(/\{\{.*?\}\}/);
+      }
+    }
+  });
+});
+
 describe("P2 calibration fix — digital presence severity distinguishes 'no website' from 'outdated'", () => {
   it("flags a missing website as HIGH severity", () => {
     const opportunities = computeOpportunities({ website_status: "none" });

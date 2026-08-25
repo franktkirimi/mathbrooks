@@ -1,18 +1,21 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
-import type { Question } from "@/lib/audit/questions";
+import type { Answers, Question } from "@/lib/audit/questions";
+import { applyTerminology } from "@/lib/audit/terminology";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 interface QuestionCardProps {
   question: Question;
+  /** Answers so far — used only to resolve {{org}}/{{audience}} tokens in this question's copy. */
+  answers: Answers;
   value?: string;
   onAnswer: (optionId: string) => void;
   onSkip?: () => void;
 }
 
-const QuestionCard = ({ question, value, onAnswer, onSkip }: QuestionCardProps) => {
+const QuestionCard = ({ question, answers, value, onAnswer, onSkip }: QuestionCardProps) => {
   const [textValue, setTextValue] = useState(value ?? "");
 
   const handleTextSubmit = (event: FormEvent) => {
@@ -21,12 +24,13 @@ const QuestionCard = ({ question, value, onAnswer, onSkip }: QuestionCardProps) 
     if (trimmed) onAnswer(trimmed);
   };
 
+  const prompt = applyTerminology(question.prompt, answers);
+  const helpText = question.helpText ? applyTerminology(question.helpText, answers) : undefined;
+
   return (
     <div>
-      <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-black sm:text-3xl">
-        {question.prompt}
-      </h2>
-      {question.helpText ? <p className="mt-2 text-sm text-black/60">{question.helpText}</p> : null}
+      <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-black sm:text-3xl">{prompt}</h2>
+      {helpText ? <p className="mt-2 text-sm text-black/60">{helpText}</p> : null}
 
       {question.inputType === "text" ? (
         <form className="mt-8" onSubmit={handleTextSubmit}>
@@ -58,7 +62,7 @@ const QuestionCard = ({ question, value, onAnswer, onSkip }: QuestionCardProps) 
                     : "border-black/15 bg-white text-black hover:border-primary/40 hover:bg-primary/5",
                 )}
               >
-                <span>{option.label}</span>
+                <span>{applyTerminology(option.label, answers)}</span>
                 {selected ? <Check className="h-4 w-4 shrink-0" aria-hidden="true" /> : null}
               </button>
             );
