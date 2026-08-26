@@ -96,7 +96,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://wa.me/263783469023"
+                  href="https://wa.me/263719592326"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
@@ -106,10 +106,10 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="tel:+263783469023"
+                  href="tel:+263719592326"
                   className="text-sm font-light text-muted-foreground hover:text-primary transition-colors duration-300"
                 >
-                  +263 78 346 9023
+                  +263 71 959 2326
                 </a>
               </li>
               <li className="pt-2 text-sm font-light text-muted-foreground">

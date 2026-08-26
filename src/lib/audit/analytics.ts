@@ -19,10 +19,19 @@ export type AuditEventName =
   | "contact_captured"
   | "contact_declined"
   | "results_viewed"
+  | "audit_results_displayed"
   | "recommendation_clicked"
+  | "proposal_cta_clicked"
+  | "proposal_form_viewed"
+  | "proposal_opportunity_selected"
   | "proposal_requested"
-  | "whatsapp_clicked"
-  | "consultation_requested";
+  | "proposal_submission_failed"
+  | "audit_whatsapp_clicked"
+  | "consultation_requested"
+  | "ai_analysis_requested"
+  | "ai_analysis_succeeded"
+  | "ai_analysis_failed"
+  | "ai_analysis_fallback_used";
 
 type AuditEventProperties = Record<string, string | number | boolean | null>;
 

@@ -117,10 +117,10 @@ const Clients = () => {
                 <p className="mt-5 font-display text-sm font-semibold text-black">Email directly</p>
                 <p className="mt-2 text-sm text-black">cto@mathbrooks.com</p>
               </a>
-              <a href="https://wa.me/263783469023" target="_blank" rel="noopener noreferrer" className="group rounded-xl border border-black bg-white p-5 transition hover:bg-[#f4fbfa]">
+              <a href="https://wa.me/263719592326" target="_blank" rel="noopener noreferrer" className="group rounded-xl border border-black bg-white p-5 transition hover:bg-[#f4fbfa]">
                 <MessageCircle className="h-5 w-5 text-primary" strokeWidth={1.5} aria-hidden="true" />
                 <p className="mt-5 font-display text-sm font-semibold text-black">Use WhatsApp</p>
-                <p className="mt-2 text-sm text-black">+263 78 346 9023</p>
+                <p className="mt-2 text-sm text-black">+263 71 959 2326</p>
               </a>
             </AnimatedSection>
 

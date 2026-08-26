@@ -311,7 +311,7 @@ const HowWeWork = () => {
         <AnimatedSection delay={400}>
           <div className="text-center mt-12 md:mt-20">
             <a
-              href="https://wa.me/263783469023?text=Hi%20MathBrooks%2C%20I%27d%20like%20to%20request%20a%20consultation."
+              href="https://wa.me/263719592326?text=Hi%20MathBrooks%2C%20I%27d%20like%20to%20request%20a%20consultation."
               target="_blank"
               rel="noopener noreferrer"
             >

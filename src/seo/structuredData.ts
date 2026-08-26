@@ -37,11 +37,11 @@ const organization: JsonLdNode = {
     { "@type": "Place", name: "Africa" },
   ],
   email: "cto@mathbrooks.com",
-  telephone: "+263783469023",
+  telephone: "+263719592326",
   contactPoint: {
     "@type": "ContactPoint",
     email: "cto@mathbrooks.com",
-    telephone: "+263783469023",
+    telephone: "+263719592326",
     contactType: "sales",
     availableLanguage: ["English"],
   },

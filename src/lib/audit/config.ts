@@ -20,4 +20,4 @@ export const previewOpportunityCount = PREVIEW_OPPORTUNITY_COUNT[CONTACT_GATE_VA
 /** Inactivity timeout before a started-but-unfinished session is treated as abandoned for analytics. */
 export const ABANDON_TIMEOUT_MS = 15 * 60 * 1000;
 
-export const WHATSAPP_NUMBER = "263783469023";
+export const WHATSAPP_NUMBER = "263719592326";

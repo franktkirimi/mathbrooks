@@ -1,3 +1,5 @@
+import { applyTerminology } from "./terminology";
+
 export type ScoredCategory =
   | "sales"
   | "inventory"
@@ -452,6 +454,22 @@ export const getOptionLabel = (questionId: string, optionId?: string): string | 
   const question = getQuestion(questionId);
   return question?.options.find((o) => o.id === optionId)?.label ?? optionId;
 };
+
+/**
+ * A complete, human-readable "prompt — answer" line per answered question,
+ * in the same terminology-resolved language the visitor actually saw. Used
+ * only in the internal proposal-request Formspree payload (production
+ * handoff milestone §6) — never rendered to the visitor.
+ */
+export const buildAnswersSummary = (answers: Answers): string =>
+  getVisibleQuestions(answers)
+    .filter((q) => Boolean(answers[q.id]))
+    .map((q) => {
+      const raw = answers[q.id];
+      const value = q.inputType === "text" ? raw : applyTerminology(getOptionLabel(q.id, raw) ?? raw, answers);
+      return `${applyTerminology(q.prompt, answers)} — ${value}`;
+    })
+    .join("\n");
 
 /** Every question currently visible given the answers so far, in a fixed, stable order. */
 export const getVisibleQuestions = (answers: Answers): Question[] => {

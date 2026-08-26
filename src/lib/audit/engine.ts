@@ -75,8 +75,10 @@ const OPTION_SCORES: Record<string, Record<string, number>> = {
   delivery_visibility: { system: 100, manual: 45, informal: 10 },
 };
 
-/** Which answered questions feed each category's base sub-score. */
-const CATEGORY_QUESTIONS: Record<ScoredCategory, string[]> = {
+/** Which answered questions feed each category's base sub-score. Exported for
+ *  the AI intelligence layer, which uses this same mapping to pull only the
+ *  audit answers relevant to a given finding's category (Phase 1.5 §10). */
+export const CATEGORY_QUESTIONS: Record<ScoredCategory, string[]> = {
   sales: ["quote_method", "followup_tracking", "lost_quotes"],
   inventory: ["stock_tracking", "cross_branch_visibility"],
   reporting: ["reporting_method", "report_time"],

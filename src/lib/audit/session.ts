@@ -1,4 +1,5 @@
 import type { Answers } from "./questions";
+import type { AIReport } from "./aiReport";
 
 const STORAGE_KEY = "mb_audit_session";
 const SESSION_VERSION = 1;
@@ -11,6 +12,13 @@ export type AuditPhase =
   | "contact_capture"
   | "full_results";
 
+export interface SessionContact {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+}
+
 export interface AuditSessionState {
   version: number;
   sessionId: string;
@@ -20,6 +28,29 @@ export interface AuditSessionState {
   phase: AuditPhase;
   contactCaptured: boolean;
   completed: boolean;
+  /**
+   * Persisted once captured so a refresh — or opening the proposal
+   * interaction later in the same session — never has to ask again for
+   * information MathBrooks already has (production handoff milestone §5,
+   * §13). Absent on sessions created before this field existed; every
+   * reader treats that the same as "not yet captured."
+   */
+  contact?: SessionContact | null;
+  /**
+   * True once a proposal request has actually been submitted — distinct
+   * from the audit lead itself (§8: AuditSession -> Lead -> ProposalRequest
+   * is a separate conversion event). Survives a refresh so the confirmation
+   * state doesn't reset.
+   */
+  proposalRequested?: boolean;
+  /**
+   * Phase 1.5 AI Intelligence Layer cache: `undefined` = never requested yet,
+   * `null` = requested but unavailable/failed (deterministic report stands
+   * as-is), an object = the validated AI-enhanced report. Persisting the
+   * outcome — success or failure — means a refresh or later return visit
+   * never triggers a repeat AI call for the same completed audit (§19).
+   */
+  aiReport?: AIReport | null;
 }
 
 const canUseStorage = (): boolean => {
@@ -46,6 +77,8 @@ export const createSession = (): AuditSessionState => {
     phase: "intro",
     contactCaptured: false,
     completed: false,
+    contact: null,
+    proposalRequested: false,
   };
 };
 

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  buildAnswersSummary,
   getNextQuestion,
   getVisibleQuestions,
   getVisibleSections,
@@ -207,5 +208,48 @@ describe("isAuditComplete / getNextQuestion", () => {
     };
     expect(isAuditComplete(answers)).toBe(false);
     expect(getNextQuestion(answers)?.id).toBe("lost_quotes");
+  });
+});
+
+describe("buildAnswersSummary — complete audit context for the proposal-request payload", () => {
+  it("renders one 'prompt — answer' line per answered question, in resolved terminology", () => {
+    const summary = buildAnswersSummary({
+      industry: "hardware",
+      employee_band: "21-50",
+      urgency: "now",
+    } as Answers);
+    expect(summary).toContain("Roughly how many people work there? — 21–50");
+    expect(summary).toContain("Needs this now");
+  });
+
+  it("skips unanswered questions rather than showing a blank value", () => {
+    const summary = buildAnswersSummary({ industry: "hardware" } as Answers);
+    expect(summary).not.toContain("undefined");
+    expect(summary.split("\n")).toHaveLength(1);
+  });
+
+  it("resolves terminology per the organisation's industry (e.g. NGO wording), not hardcoded 'business'/'customers'", () => {
+    const summary = buildAnswersSummary({
+      industry: "ngo_nonprofit",
+      primary_customer_channel: "structured",
+    } as Answers);
+    expect(summary).toContain("organisation");
+    expect(summary).not.toContain("business");
+  });
+
+  it("returns an empty string for no answers at all, never throwing", () => {
+    expect(buildAnswersSummary({} as Answers)).toBe("");
+  });
+
+  it("resolves {{org}} terminology tokens embedded in option labels, not just question prompts", () => {
+    const summary = buildAnswersSummary({
+      industry: "ngo_nonprofit",
+      holds_physical_stock: "no",
+    } as Answers);
+    expect(summary).not.toContain("{{org}}");
+    expect(summary).not.toContain("{{Org}}");
+    expect(summary).not.toContain("{{audience}}");
+    expect(summary).not.toContain("{{Audience}}");
+    expect(summary).toContain("No — we're a service organisation, or stock isn't something we manage");
   });
 });

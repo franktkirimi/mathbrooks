@@ -13,6 +13,9 @@
       ]
     }
   ],
+  "functions": {
+    "api/audit-analysis.ts": { "maxDuration": 60 }
+  },
   "redirects": [
     { "source": "/solutions", "destination": "/systems-architecture", "statusCode": 301 },
     { "source": "/solutions/available", "destination": "/products", "statusCode": 301 },

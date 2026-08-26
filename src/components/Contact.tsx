@@ -36,7 +36,7 @@ const Contact = () => {
             </Link>
 
             <a
-              href="https://wa.me/263783469023"
+              href="https://wa.me/263719592326"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto"
@@ -62,14 +62,14 @@ const Contact = () => {
               </Button>
             </a>
 
-            <a href="tel:+263783469023" className="w-full sm:w-auto">
+            <a href="tel:+263719592326" className="w-full sm:w-auto">
               <Button
                 variant="outline"
                 size="lg"
                 className="font-display text-xs tracking-[0.1em] uppercase px-8 py-5 sm:py-6 border-border/40 hover:border-foreground/20 hover:bg-foreground/5 hover:text-foreground transition-all duration-300 w-full sm:w-auto"
               >
                 <Phone className="w-4 h-4 mr-2" />
-                +263 78 346 9023
+                +263 71 959 2326
               </Button>
             </a>
           </div>

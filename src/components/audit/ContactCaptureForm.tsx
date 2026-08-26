@@ -23,6 +23,7 @@ export interface AuditSummaryForCapture {
   budgetBand: string | null;
   nextAction: string;
   sessionId: string;
+  auditReference: string;
 }
 
 export interface CapturedContact {
@@ -101,6 +102,7 @@ const ContactCaptureForm = ({ auditSummary, onSuccess, onDecline }: ContactCaptu
         nextAction: auditSummary.nextAction,
         attribution: getOrCaptureAttribution(),
         sessionId: auditSummary.sessionId,
+        auditReference: auditSummary.auditReference,
       });
 
       const response = await fetch(`https://formspree.io/f/${getFormspreeId()}`, {

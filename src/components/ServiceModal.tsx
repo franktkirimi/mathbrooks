@@ -84,7 +84,7 @@ const ServiceModal = ({
     const text = encodeURIComponent(
       `Hi MathBrooks, I'm interested in ${serviceName}.\n\nName: ${name}\nCompany: ${company}\n\n${description}`
     );
-    window.open(`https://wa.me/263783469023?text=${text}`, "_blank");
+    window.open(`https://wa.me/263719592326?text=${text}`, "_blank");
     resetForm();
     onOpenChange(false);
   };

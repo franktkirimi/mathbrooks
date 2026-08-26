@@ -14,3 +14,16 @@ export const contactCaptureSchema = z.object({
 export type ContactCaptureInput = z.infer<typeof contactCaptureSchema>;
 
 export const answersSchema = z.record(z.string(), z.string());
+
+/**
+ * Validates a proposal request before it's ever built into a Formspree
+ * payload (production handoff milestone §15). `selectedOpportunityIds`
+ * must be non-empty — a proposal request has to be about *something* — and
+ * the free-text note is capped defensively; React already escapes all
+ * interpolated text by default (nothing here is ever rendered via
+ * dangerouslySetInnerHTML), so the cap is about abuse/length, not XSS.
+ */
+export const proposalRequestSchema = z.object({
+  selectedOpportunityIds: z.array(z.string()).min(1, "Select at least one opportunity to continue"),
+  note: z.string().trim().max(1000, "Please keep this under 1000 characters").optional(),
+});

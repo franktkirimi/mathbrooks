@@ -1,17 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getNextQuestion, getOptionLabel, getVisibleQuestions, type Answers } from "@/lib/audit/questions";
+import { buildAnswersSummary, getNextQuestion, getOptionLabel, getVisibleQuestions, type Answers } from "@/lib/audit/questions";
 import { runAudit } from "@/lib/audit/engine";
 import { previewOpportunityCount } from "@/lib/audit/config";
 import { trackAuditEvent } from "@/lib/audit/analytics";
 import { clearSession, createSession, loadSession, saveSession, type AuditPhase, type AuditSessionState } from "@/lib/audit/session";
 import { getOrCaptureAttribution } from "@/lib/audit/attribution";
+import { getAuditReference } from "@/lib/audit/reference";
+import { requestAiAnalysis } from "@/lib/audit/aiClient";
 import { useAuditActive } from "./AuditActiveContext";
 import ProgressBar from "./ProgressBar";
 import QuestionCard from "./QuestionCard";
 import ResultsPanel from "./ResultsPanel";
 import ContactCaptureForm, { type CapturedContact } from "./ContactCaptureForm";
+import type { ProposalContext } from "./ProposalRequestPanel";
 
 const SUPPRESS_WIDGET_PHASES: AuditPhase[] = ["intro", "diagnostic", "processing"];
 
@@ -23,10 +26,21 @@ const PROCESSING_DELAY_MS = 1400;
  * back into a mid-question state, so there's always a clear orientation
  * point. The answers themselves are preserved, so continuing picks up at
  * the exact next unanswered question.
+ *
+ * A session that made it all the way to full results (including contact
+ * capture) is the one exception: it's restored exactly as-is, straight into
+ * `full_results`, no intro prompt. There's no diagnostic left to "continue,"
+ * and a visitor who requested — or is about to request — an implementation
+ * proposal must never lose that context on a refresh or a later return visit
+ * (production handoff milestone §13); the "start fresh after finishing"
+ * behavior below still applies to every earlier completed phase, since that
+ * default (deliberately, and covered by its own test) is otherwise unchanged.
  */
 const readResumableSession = (): AuditSessionState | null => {
   const existing = loadSession();
-  if (!existing || existing.completed) return null;
+  if (!existing) return null;
+  if (existing.completed && existing.phase === "full_results") return existing;
+  if (existing.completed) return null;
   if (Object.keys(existing.answers).length === 0) return null;
   return { ...existing, phase: "intro" };
 };
@@ -35,8 +49,9 @@ const AuditFlow = () => {
   const { setActive } = useAuditActive();
   const [session, setSession] = useState<AuditSessionState>(() => readResumableSession() ?? createSession());
   const [resumedNotice, setResumedNotice] = useState(() => Object.keys(session.answers).length > 0);
-  const [company, setCompany] = useState<string | undefined>(undefined);
   const firedMilestones = useRef<Set<25 | 50 | 75>>(new Set());
+  const auditReference = useMemo(() => getAuditReference(session.sessionId), [session.sessionId]);
+  const aiRequestedForSession = useRef<string | null>(null);
 
   // Fire the resume event exactly once, for whatever session we hydrated with above.
   useEffect(() => {
@@ -59,6 +74,31 @@ const AuditFlow = () => {
     return () => setActive(false);
   }, [session.phase, setActive]);
 
+  // Phase 1.5: kick off the AI-enhanced narrative once the visitor has
+  // committed to seeing the full report (contact capture done). Guarded by a
+  // ref (not just the `aiReport === undefined` check) because that check
+  // alone would refire on every render between "request sent" and "request
+  // resolved" — the ref remembers a request is already in flight for this
+  // sessionId, and a fresh session gets a fresh ref value so this still runs
+  // exactly once per completed audit (§19: no repeated calls on rerender).
+  useEffect(() => {
+    if (session.phase !== "full_results") return;
+    if (session.aiReport !== undefined) return;
+    if (aiRequestedForSession.current === session.sessionId) return;
+    aiRequestedForSession.current = session.sessionId;
+
+    requestAiAnalysis(session.answers, {
+      sessionReference: auditReference,
+      frictionBand: auditResult.efficiency.band,
+    }).then((outcome) => {
+      setSession((prev) => {
+        if (prev.sessionId !== session.sessionId) return prev;
+        return { ...prev, aiReport: outcome.ok ? outcome.report : null };
+      });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session.phase, session.sessionId, session.aiReport]);
+
   const answers = session.answers;
   const visibleQuestions = useMemo(() => getVisibleQuestions(answers), [answers]);
   const answeredCount = useMemo(
@@ -67,6 +107,31 @@ const AuditFlow = () => {
   );
   const currentQuestion = useMemo(() => getNextQuestion(answers), [answers]);
   const auditResult = useMemo(() => runAudit(answers), [answers]);
+
+  const proposalContext = useMemo<ProposalContext>(
+    () => ({
+      industry: getOptionLabel("industry", answers.industry),
+      employeeBand: getOptionLabel("employee_band", answers.employee_band),
+      branchCount: getOptionLabel("branch_count", answers.branch_count),
+      efficiencyScore: auditResult.efficiency.score,
+      frictionBand: auditResult.efficiency.band,
+      categoryScores: auditResult.efficiency.categoryScores
+        .filter((c) => c.applicable && c.score !== null)
+        .map((c) => ({ label: c.label, score: c.score as number })),
+      leadScore: auditResult.leadScore.score,
+      leadTier: auditResult.leadScore.tier,
+      needsNurture: auditResult.leadScore.needsNurture,
+      urgency: getOptionLabel("urgency", answers.urgency),
+      authority: answers.decision_role ?? null,
+      budgetBand: getOptionLabel("budget_band", answers.budget_band),
+      answersSummary: buildAnswersSummary(answers),
+      attribution: getOrCaptureAttribution(),
+      sessionId: session.sessionId,
+      auditReference,
+      aiReport: session.aiReport,
+    }),
+    [answers, auditResult, session.sessionId, auditReference, session.aiReport],
+  );
 
   const goToPhase = (phase: AuditPhase) => setSession((prev) => ({ ...prev, phase }));
 
@@ -136,20 +201,34 @@ const AuditFlow = () => {
   };
 
   const handleContactSuccess = (contact: CapturedContact) => {
-    setCompany(contact.company);
     trackAuditEvent("contact_captured", {
       industry: answers.industry ?? null,
       employee_band: answers.employee_band ?? null,
       friction_band: auditResult.efficiency.band,
       lead_tier: auditResult.leadScore.tier,
     });
-    setSession((prev) => ({ ...prev, phase: "full_results", contactCaptured: true }));
+    // Persisted (not just held in component state) so a refresh never has to
+    // ask again for information MathBrooks already has (production handoff
+    // milestone §5, §13) — this also feeds the proposal-request panel below.
+    setSession((prev) => ({ ...prev, phase: "full_results", contactCaptured: true, contact }));
     trackAuditEvent("results_viewed", { mode: "full" });
+    // Non-blocking AI UX milestone: marks the moment the deterministic
+    // report becomes visible, independent of whether/when AI enhancement
+    // arrives — this is the event that proves results were never gated on
+    // GPT-5.6 Luna.
+    trackAuditEvent("audit_results_displayed", {
+      friction_band: auditResult.efficiency.band,
+      opportunity_count: auditResult.opportunities.length,
+    });
   };
 
   const handleContactDecline = () => {
     trackAuditEvent("contact_declined");
     goToPhase("preview_results");
+  };
+
+  const handleProposalSubmitted = () => {
+    setSession((prev) => ({ ...prev, proposalRequested: true }));
   };
 
   const handleRestart = () => {
@@ -246,6 +325,7 @@ const AuditFlow = () => {
             budgetBand: getOptionLabel("budget_band", answers.budget_band),
             nextAction: auditResult.leadScore.nextAction,
             sessionId: session.sessionId,
+            auditReference,
           }}
           onSuccess={handleContactSuccess}
           onDecline={handleContactDecline}
@@ -253,7 +333,18 @@ const AuditFlow = () => {
       )}
 
       {session.phase === "full_results" && (
-        <ResultsPanel mode="full" result={auditResult} previewCount={previewOpportunityCount} companyName={company} />
+        <ResultsPanel
+          mode="full"
+          result={auditResult}
+          previewCount={previewOpportunityCount}
+          companyName={session.contact?.company}
+          contact={session.contact}
+          proposalContext={proposalContext}
+          proposalRequested={Boolean(session.proposalRequested)}
+          auditReference={auditReference}
+          aiReport={session.aiReport}
+          onProposalSubmitted={handleProposalSubmitted}
+        />
       )}
     </div>
   );
