@@ -3,19 +3,26 @@ import { AlertCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { buildAuditFormspreePayload, getFormspreeId, hasFormspreeConfig } from "@/lib/forms";
+import { buildAuditFormspreePayload, getFormspreeId, hasFormspreeConfig, type AuditFormspreeOpportunity } from "@/lib/forms";
 import { contactCaptureSchema } from "@/lib/audit/schema";
+import { getOrCaptureAttribution } from "@/lib/audit/attribution";
 
 export interface AuditSummaryForCapture {
+  industry: string | null;
+  employeeBand: string | null;
+  branchCount: string | null;
   efficiencyScore: number | null;
   frictionBand: string | null;
   leadScore: number;
   leadTier: string;
-  topOpportunities: string[];
+  needsNurture: boolean;
+  opportunities: AuditFormspreeOpportunity[];
   recommendedProducts: string[];
-  commercialPotential: string;
-  complexityEstimate: string;
+  urgency: string | null;
+  authority: string | null;
+  budgetBand: string | null;
   nextAction: string;
+  sessionId: string;
 }
 
 export interface CapturedContact {
@@ -39,12 +46,23 @@ const ContactCaptureForm = ({ auditSummary, onSuccess, onDecline }: ContactCaptu
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [fieldError, setFieldError] = useState<string | null>(null);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    // Guards against a rapid double-click landing a second submit before the
+    // "submitting" state has re-rendered the disabled button.
+    if (status === "submitting") return;
     setFieldError(null);
+
+    // Bots fill every field, including ones hidden from real visitors by CSS.
+    // Silently accept without sending — never tell an automated submitter it was rejected.
+    if (honeypot.trim().length > 0) {
+      onSuccess({ name, email, phone, company });
+      return;
+    }
 
     const parsed = contactCaptureSchema.safeParse({ name, email, phone, company });
     if (!parsed.success) {
@@ -67,15 +85,22 @@ const ContactCaptureForm = ({ auditSummary, onSuccess, onDecline }: ContactCaptu
     try {
       const payload = buildAuditFormspreePayload({
         ...contact,
+        industry: auditSummary.industry,
+        employeeBand: auditSummary.employeeBand,
+        branchCount: auditSummary.branchCount,
         efficiencyScore: auditSummary.efficiencyScore,
         frictionBand: auditSummary.frictionBand,
         leadScore: auditSummary.leadScore,
         leadTier: auditSummary.leadTier,
-        topOpportunities: auditSummary.topOpportunities,
+        needsNurture: auditSummary.needsNurture,
+        opportunities: auditSummary.opportunities,
         recommendedProducts: auditSummary.recommendedProducts,
-        commercialPotential: auditSummary.commercialPotential,
-        complexityEstimate: auditSummary.complexityEstimate,
+        urgency: auditSummary.urgency,
+        authority: auditSummary.authority,
+        budgetBand: auditSummary.budgetBand,
         nextAction: auditSummary.nextAction,
+        attribution: getOrCaptureAttribution(),
+        sessionId: auditSummary.sessionId,
       });
 
       const response = await fetch(`https://formspree.io/f/${getFormspreeId()}`, {
@@ -126,6 +151,18 @@ const ContactCaptureForm = ({ auditSummary, onSuccess, onDecline }: ContactCaptu
       ) : null}
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+        {/* Honeypot: hidden from real visitors (off-screen, not display:none — some
+            bots skip fields hidden that way), never focusable via tab order. */}
+        <input
+          type="text"
+          name="_gotcha"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute -left-[9999px] h-0 w-0 opacity-0"
+        />
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="audit-name">Name</Label>

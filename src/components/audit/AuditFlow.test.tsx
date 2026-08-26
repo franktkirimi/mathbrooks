@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import AuditFlow from "./AuditFlow";
 import { AuditActiveProvider, useAuditActive } from "./AuditActiveContext";
 import * as forms from "@/lib/forms";
+import { track } from "@vercel/analytics/react";
 
 vi.mock("@vercel/analytics/react", () => ({ track: vi.fn() }));
 vi.mock("@/lib/forms", async () => {
@@ -161,6 +162,22 @@ describe("AuditFlow — end-to-end deterministic walkthrough", () => {
     click(/continue my audit/i);
     // Should resume at branch_count — the next unanswered question — not restart from industry.
     expect(await screen.findByText(/how many branches or locations/i)).toBeInTheDocument();
+  });
+
+  it("fires audit_started exactly once across a resume, not once per 'Continue my audit' click (production analytics fix)", async () => {
+    const { unmount } = renderFlow();
+    click(/start the audit/i);
+    click(/professional services/i);
+    unmount();
+
+    vi.mocked(track).mockClear();
+    renderFlow();
+    click(/continue my audit/i);
+
+    const startedCalls = vi.mocked(track).mock.calls.filter(([name]) => name === "audit_started");
+    expect(startedCalls).toHaveLength(0);
+    const resumedCalls = vi.mocked(track).mock.calls.filter(([name]) => name === "audit_resumed");
+    expect(resumedCalls).toHaveLength(1);
   });
 
   it("does not resume a session that already completed the diagnostic", async () => {

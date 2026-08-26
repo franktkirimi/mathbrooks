@@ -28,6 +28,12 @@ const Privacy = () => {
               <p>
                 When you submit an inquiry through our service inquiry forms, client intake form, email us, contact us on WhatsApp, or call us directly, we may collect the information you provide such as your name, email address, company name, service interest, and project description. We use this information only to respond to your inquiry, assess fit, and discuss potential work.
               </p>
+              <p className="mt-4">
+                If you complete the free AI Business Audit, we also collect your answers to the diagnostic questions
+                (e.g. team size, tools currently in use, and operational challenges) and the resulting summary. This
+                is used only to prepare your results and, if you choose to share your contact details, to follow up
+                on that specific audit — it is never sold or used for unrelated marketing.
+              </p>
             </section>
 
             <section>

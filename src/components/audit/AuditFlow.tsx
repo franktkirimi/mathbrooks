@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getNextQuestion, getVisibleQuestions, type Answers } from "@/lib/audit/questions";
+import { getNextQuestion, getOptionLabel, getVisibleQuestions, type Answers } from "@/lib/audit/questions";
 import { runAudit } from "@/lib/audit/engine";
 import { previewOpportunityCount } from "@/lib/audit/config";
 import { trackAuditEvent } from "@/lib/audit/analytics";
 import { clearSession, createSession, loadSession, saveSession, type AuditPhase, type AuditSessionState } from "@/lib/audit/session";
+import { getOrCaptureAttribution } from "@/lib/audit/attribution";
 import { useAuditActive } from "./AuditActiveContext";
 import ProgressBar from "./ProgressBar";
 import QuestionCard from "./QuestionCard";
@@ -43,6 +44,12 @@ const AuditFlow = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Capture first-touch attribution (UTM/referrer/landing page) as early as
+  // possible in the visit — idempotent, so a resumed visit is a no-op here.
+  useEffect(() => {
+    getOrCaptureAttribution();
+  }, []);
+
   useEffect(() => {
     saveSession(session);
   }, [session]);
@@ -76,7 +83,17 @@ const AuditFlow = () => {
   };
 
   const handleStart = () => {
-    trackAuditEvent("audit_started");
+    // A resumed session already fired "audit_started" on its original visit
+    // (see the "audit_resumed" effect above) — firing it again here would
+    // double-count starts against unique sessions in the funnel.
+    if (!resumedNotice) {
+      const attribution = getOrCaptureAttribution();
+      trackAuditEvent("audit_started", {
+        utm_source: attribution.utmSource,
+        utm_medium: attribution.utmMedium,
+        utm_campaign: attribution.utmCampaign,
+      });
+    }
     goToPhase("diagnostic");
   };
 
@@ -96,11 +113,16 @@ const AuditFlow = () => {
     // ends. isAuditComplete() alone would end the flow the moment the last
     // *required* question is answered, silently skipping the optional one.
     if (getNextQuestion(nextAnswers) === null) {
-      trackAuditEvent("audit_completed");
+      const finalResult = runAudit(nextAnswers);
+      trackAuditEvent("audit_completed", {
+        industry: nextAnswers.industry ?? null,
+        employee_band: nextAnswers.employee_band ?? null,
+        friction_band: finalResult.efficiency.band,
+      });
       setSession((prev) => ({ ...prev, answers: nextAnswers, phase: "processing", completed: true }));
       window.setTimeout(() => {
         goToPhase("preview_results");
-        trackAuditEvent("results_viewed", { mode: "preview" });
+        trackAuditEvent("results_viewed", { mode: "preview", friction_band: finalResult.efficiency.band });
       }, PROCESSING_DELAY_MS);
       return;
     }
@@ -115,7 +137,12 @@ const AuditFlow = () => {
 
   const handleContactSuccess = (contact: CapturedContact) => {
     setCompany(contact.company);
-    trackAuditEvent("contact_captured");
+    trackAuditEvent("contact_captured", {
+      industry: answers.industry ?? null,
+      employee_band: answers.employee_band ?? null,
+      friction_band: auditResult.efficiency.band,
+      lead_tier: auditResult.leadScore.tier,
+    });
     setSession((prev) => ({ ...prev, phase: "full_results", contactCaptured: true }));
     trackAuditEvent("results_viewed", { mode: "full" });
   };
@@ -200,15 +227,25 @@ const AuditFlow = () => {
       {session.phase === "contact_capture" && (
         <ContactCaptureForm
           auditSummary={{
+            industry: getOptionLabel("industry", answers.industry),
+            employeeBand: getOptionLabel("employee_band", answers.employee_band),
+            branchCount: getOptionLabel("branch_count", answers.branch_count),
             efficiencyScore: auditResult.efficiency.score,
             frictionBand: auditResult.efficiency.band,
             leadScore: auditResult.leadScore.score,
             leadTier: auditResult.leadScore.tier,
-            topOpportunities: auditResult.opportunities.map((o) => o.title),
+            needsNurture: auditResult.leadScore.needsNurture,
+            opportunities: auditResult.opportunities.map((o) => ({
+              title: o.title,
+              severity: o.severity,
+              product: o.mathBrooksSolution.label,
+            })),
             recommendedProducts: auditResult.opportunities.map((o) => o.mathBrooksSolution.label),
-            commercialPotential: auditResult.commercial.potential,
-            complexityEstimate: auditResult.commercial.complexity,
+            urgency: getOptionLabel("urgency", answers.urgency),
+            authority: answers.decision_role ?? null,
+            budgetBand: getOptionLabel("budget_band", answers.budget_band),
             nextAction: auditResult.leadScore.nextAction,
+            sessionId: session.sessionId,
           }}
           onSuccess={handleContactSuccess}
           onDecline={handleContactDecline}

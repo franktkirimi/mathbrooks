@@ -124,16 +124,22 @@ const ResultsPanel = ({ mode, result, previewCount, companyName, onUnlock, onPro
             Talk this through with MathBrooks.
           </h3>
           <p className="mt-2 max-w-xl text-sm leading-6 text-white/70">
-            Commercial potential: <strong className="text-white">{result.commercial.potential}</strong> · Likely
-            scope: {result.commercial.likelyScope.join(", ") || "—"} · Complexity:{" "}
-            <strong className="text-white">{result.commercial.complexity}</strong>
+            {result.commercial.likelyScope.length > 0
+              ? `Likely scope: ${result.commercial.likelyScope.join(", ")}`
+              : "We'll help you prioritise where to start."}
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
               href={whatsAppHref(efficiency.score)}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackAuditEvent("whatsapp_clicked", { source: "audit_results" })}
+              onClick={() =>
+                trackAuditEvent("whatsapp_clicked", {
+                  source: "audit_results",
+                  friction_band: efficiency.band,
+                  lead_tier: result.leadScore.tier,
+                })
+              }
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-green-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-green-400"
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" /> Continue on WhatsApp
@@ -141,7 +147,11 @@ const ResultsPanel = ({ mode, result, previewCount, companyName, onUnlock, onPro
             <Link
               to="/contact"
               onClick={() => {
-                trackAuditEvent("proposal_requested", { source: "audit_results" });
+                trackAuditEvent("proposal_requested", {
+                  source: "audit_results",
+                  friction_band: efficiency.band,
+                  lead_tier: result.leadScore.tier,
+                });
                 onProposalClick?.();
               }}
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"

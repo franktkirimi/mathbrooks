@@ -446,6 +446,13 @@ const QUESTION_BY_ID: Record<string, Question> = Object.fromEntries(
 
 export const getQuestion = (id: string): Question | undefined => QUESTION_BY_ID[id];
 
+/** Resolves a raw answer id (e.g. "21-50") to its human-readable option label (e.g. "21–50"). */
+export const getOptionLabel = (questionId: string, optionId?: string): string | null => {
+  if (!optionId) return null;
+  const question = getQuestion(questionId);
+  return question?.options.find((o) => o.id === optionId)?.label ?? optionId;
+};
+
 /** Every question currently visible given the answers so far, in a fixed, stable order. */
 export const getVisibleQuestions = (answers: Answers): Question[] => {
   const visible: Question[] = [];
