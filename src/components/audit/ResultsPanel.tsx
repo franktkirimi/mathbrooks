@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 
 const SEVERITY_LABEL: Record<Opportunity["severity"], string> = { high: "High impact", medium: "Medium impact" };
 const SEVERITY_CLASS: Record<Opportunity["severity"], string> = {
-  high: "bg-[#fdecec] text-[#b3261e] border-[#f3c9c7]",
-  medium: "bg-[#fdf3e3] text-[#8a5a00] border-[#f0dcae]",
+  high: "border-[#f3c9c7] text-[#b3261e]",
+  medium: "border-[#f0dcae] text-[#8a5a00]",
 };
 
 const OpportunityCard = ({ opportunity, companyName }: { opportunity: Opportunity; companyName?: string }) => (
@@ -26,25 +26,25 @@ const OpportunityCard = ({ opportunity, companyName }: { opportunity: Opportunit
       <h3 className="font-display text-lg font-semibold text-black">{opportunity.title}</h3>
     </div>
 
-    <dl className="mt-4 space-y-3 text-sm leading-6 text-black/80">
+    <dl className="mt-5 space-y-5 text-sm leading-6 text-black/80">
       <div>
-        <dt className="font-mono text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-black/60">What we found</dt>
-        <dd className="mt-1">{opportunity.layers.found}</dd>
+        <dt className="font-display text-base font-semibold text-black">What we found</dt>
+        <dd className="mt-1.5">{opportunity.layers.found}</dd>
       </div>
       <div>
-        <dt className="font-mono text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-black/60">Why it matters</dt>
-        <dd className="mt-1">{opportunity.layers.whyItMatters}</dd>
+        <dt className="font-display text-base font-semibold text-black">Why it matters</dt>
+        <dd className="mt-1.5">{opportunity.layers.whyItMatters}</dd>
       </div>
       <div>
-        <dt className="font-mono text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-black/60">What {companyName ?? "you"} could do</dt>
-        <dd className="mt-1">{opportunity.layers.whatYouCouldDo}</dd>
+        <dt className="font-display text-base font-semibold text-primary">What {companyName ?? "you"} could do</dt>
+        <dd className="mt-1.5">{opportunity.layers.whatYouCouldDo}</dd>
       </div>
     </dl>
 
     <Link
       to={opportunity.mathBrooksSolution.href}
       onClick={() => trackAuditEvent("recommendation_clicked", { opportunity: opportunity.id, product: opportunity.mathBrooksSolution.label })}
-      className="mt-5 inline-flex items-center gap-2 border-t border-black/10 pt-4 font-display text-sm font-semibold text-primary hover:text-primary/80"
+      className="mt-5 flex items-center justify-center gap-2 border-t border-black/10 pt-4 text-center font-display text-sm font-semibold text-primary hover:text-primary/80"
     >
       MathBrooks can build this — {opportunity.mathBrooksSolution.label} <span aria-hidden="true">→</span>
     </Link>
@@ -75,7 +75,7 @@ const ResultsPanel = ({ mode, result, previewCount, companyName, onUnlock, onPro
   return (
     <div>
       <div className="rounded-3xl border border-black/12 bg-white p-8 sm:p-10">
-        <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-primary">Digital Efficiency Score</p>
+        <p className="font-display text-xl font-semibold text-primary">Digital Efficiency Score</p>
         <div className="mt-3 flex items-baseline gap-3">
           <span className="font-display text-6xl font-semibold tracking-[-0.03em] text-black">{efficiency.score ?? "—"}</span>
           <span className="font-display text-2xl text-black/40">/100</span>
@@ -83,15 +83,18 @@ const ResultsPanel = ({ mode, result, previewCount, companyName, onUnlock, onPro
         <p className="mt-2 text-lg font-medium text-black">{efficiency.bandLabel}</p>
 
         {mode === "full" ? (
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {efficiency.categoryScores
-              .filter((c) => c.applicable)
-              .map((c) => (
-                <div key={c.category} className="flex items-center justify-between gap-3 border-b border-black/8 pb-2">
-                  <span className="text-sm text-black/70">{c.label}</span>
-                  <span className="font-mono text-sm font-semibold text-black">{c.score}</span>
-                </div>
-              ))}
+          <div className="mt-8 border-t border-black/10 pt-6">
+            <p className="font-display text-base font-semibold text-black">Score by category</p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {efficiency.categoryScores
+                .filter((c) => c.applicable)
+                .map((c) => (
+                  <div key={c.category} className="flex items-center justify-between gap-3 border-b border-black/8 pb-2">
+                    <span className="text-sm text-black/70">{c.label}</span>
+                    <span className="font-mono text-sm font-semibold text-black">{c.score}</span>
+                  </div>
+                ))}
+            </div>
           </div>
         ) : null}
       </div>

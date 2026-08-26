@@ -131,7 +131,7 @@ export const QUESTIONS: Question[] = [
     sectionId: "context",
     category: "context",
     prompt: "Does the {{org}} typically send quotes or estimates beforehand?",
-    helpText: "Some organisations — walk-in shops, clinics, schools, NGOs — don't really quote. That's fine, we'll skip ahead.",
+    helpText: "Some organisations — walk-in shops, clinics, schools, NGOs — don't really quote. If that's you, pick \"Not really\" below and we'll skip ahead.",
     options: [
       { id: "yes", label: "Yes, regularly" },
       { id: "no", label: "Not really — {{audience}} usually don't need a formal quote, or we don't send one" },
