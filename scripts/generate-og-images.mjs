@@ -51,7 +51,9 @@ for (const [index, entry] of socialImageEntries.entries()) {
   const lines = wrapTitle(entry.title);
   const fontSize = entry.title.length > 62 ? 54 : lines.length === 1 ? 76 : lines.length === 2 ? 70 : 60;
   const lineHeight = Math.round(fontSize * 1.02);
-  const titleY = lines.length === 1 ? 330 : lines.length === 2 ? 290 : 250;
+  const titleY = entry.eyebrow
+    ? (lines.length === 1 ? 330 : lines.length === 2 ? 290 : 250)
+    : (lines.length === 1 ? 300 : lines.length === 2 ? 260 : 220);
   const titleSpans = lines
     .map((line, lineIndex) => `<tspan x="88" y="${titleY + lineIndex * lineHeight}">${escapeXml(line)}</tspan>`)
     .join("");
@@ -89,7 +91,7 @@ for (const [index, entry] of socialImageEntries.entries()) {
       <rect x="0" y="0" width="830" height="630" fill="#FCFCFB"/>
       ${mark(88, 66)}
       <text x="182" y="111" fill="#0F1626" font-size="28" font-weight="600" letter-spacing="1.4">MATHBROOKS</text>
-      <text x="88" y="196" fill="#1F5C5C" font-size="17" font-weight="600" letter-spacing="3.2">${escapeXml(entry.eyebrow.toUpperCase())}</text>
+      ${entry.eyebrow ? `<text x="88" y="196" fill="#1F5C5C" font-size="17" font-weight="600" letter-spacing="3.2">${escapeXml(entry.eyebrow.toUpperCase())}</text>` : ""}
       <text fill="#0F1626" font-size="${fontSize}" font-weight="600" letter-spacing="-2.2">${titleSpans}</text>
       <line x1="88" y1="552" x2="760" y2="552" stroke="#D9DEE2" stroke-width="1"/>
       <text x="88" y="590" fill="#5A6570" font-size="${entry.path.length > 48 ? 14 : 18}" font-weight="600" letter-spacing="1">mathbrooks.com${escapeXml(entry.path)}</text>

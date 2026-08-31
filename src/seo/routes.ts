@@ -135,6 +135,7 @@ const staticRoutes: RouteMeta[] = [
     title: "Free AI Business Efficiency Audit | MathBrooks Zimbabwe",
     description: "Run a free, structured AI business audit to find inefficient processes, manual work, and technology gaps — then see which MathBrooks systems could help.",
     priority: 0.7,
+    ogImage: "/og/audit.png",
   }),
   route({
     path: "/research",
