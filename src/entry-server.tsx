@@ -42,7 +42,7 @@ export const socialImageEntries = [
   {
     path: "/audit",
     output: "audit.png",
-    title: "Free AI Business Efficiency Audit",
+    title: "Efficiency Audit",
   },
 ];
 
