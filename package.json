@@ -9,7 +9,7 @@
     "vercel-build": "npm run sync:api-lib && npm run build",
     "build:client": "vite build",
     "build:server": "vite build --config vite.ssr.config.ts",
-    "generate:og": "node scripts/generate-og-images.mjs",
+    "generate:og": "node scripts/generate-og-images.mjs && node scripts/generate-audit-og.mjs",
     "verify:build": "node scripts/verify-build.mjs",
     "prerender": "node scripts/prerender.mjs",
     "build:dev": "vite build --mode development",

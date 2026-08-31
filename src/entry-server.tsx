@@ -39,11 +39,6 @@ export const socialImageEntries = [
     eyebrow: "MathBrooks insight",
     title: post.title,
   })),
-  {
-    path: "/audit",
-    output: "audit.png",
-    title: "Free AI\nEfficiency Audit",
-  },
 ];
 
 export const publishedProductPriceByPath = Object.fromEntries(
