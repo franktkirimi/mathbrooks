@@ -19,19 +19,21 @@ const escapeXml = (value) =>
 
 const wrapTitle = (title) => {
   const limit = title.length > 62 ? 33 : title.length > 40 ? 29 : 31;
-  const words = title.split(/\s+/);
   const lines = [];
-  let current = "";
-  for (const word of words) {
-    const candidate = current ? `${current} ${word}` : word;
-    if (candidate.length > limit && current) {
-      lines.push(current);
-      current = word;
-    } else {
-      current = candidate;
+  for (const forcedLine of title.split("\n")) {
+    const words = forcedLine.split(/\s+/);
+    let current = "";
+    for (const word of words) {
+      const candidate = current ? `${current} ${word}` : word;
+      if (candidate.length > limit && current) {
+        lines.push(current);
+        current = word;
+      } else {
+        current = candidate;
+      }
     }
+    if (current) lines.push(current);
   }
-  if (current) lines.push(current);
   if (lines.length <= 3) return lines;
   return [lines[0], lines[1], `${lines.slice(2).join(" ").slice(0, limit - 1).trim()}…`];
 };
